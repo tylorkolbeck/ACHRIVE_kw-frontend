@@ -30,6 +30,8 @@ const Article = ({ article, categories }) => {
       </div>
       <div className='uk-section'>
         <div className='uk-container uk-container-small'>
+          <ReactMarkdown source={article.teaserText} escapeHtml={false} />
+
           <ReactMarkdown source={article.content} escapeHtml={false} />
           <hr className='uk-divider-small' />
           <div className='uk-grid-small uk-flex-left' data-uk-grid='true'>
@@ -74,13 +76,14 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const articles = await fetchAPI(
-    `/articles?slug=${params.slug}&status=published`
-  )
+  const article = await fetchAPI(`/articles/${params.slug}`)
   const categories = await fetchAPI('/categories')
 
   return {
-    props: { article: articles[0], categories },
+    props: {
+      article,
+      categories
+    },
     revalidate: 1
   }
 }
