@@ -16,6 +16,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { registerUser } from "../lib/auth";
 import AppContext from "../context/AppContext";
+import { sendEmailConf } from "../lib/auth";
 
 function Copyright() {
   return (
@@ -55,6 +56,7 @@ const Signup = () => {
   const [data, setData] = useState({ firstName: "", lastName: "", email: "", username: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const appContext = useContext(AppContext);
 
   return (
@@ -81,6 +83,7 @@ const Signup = () => {
               </div>
             );
           })}
+        {!confirmationSent && 
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -183,13 +186,12 @@ const Signup = () => {
               setLoading(true);
               registerUser(data.firstName, data.lastName, data.username, data.email, data.password)
                 .then((res) => {
-                  console.log("res ", res)
+                  setConfirmationSent(true);
                   // set authed user in global context object
                   appContext.setUser(res.data.user);
                   setLoading(false);
                 })
                 .catch((error) => {
-                  console.log("error ", error)
                   setError(error?.response?.data);
                   setLoading(false);
                 });
@@ -204,7 +206,21 @@ const Signup = () => {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </form>}
+        {confirmationSent && 
+          <Grid container>
+            <Grid item>
+              Thanks, check your email for confirmation link!
+            </Grid>
+            <Grid item>
+              <Link 
+              href="#" 
+              variant="body2"
+              onClick={()=>{sendEmailConf(data.email)}}>
+              {"Didn't get an email? Click to resend."}
+              </Link>
+            </Grid> 
+          </Grid>}
       </div>
       <Box mt={5}>
         <Copyright />

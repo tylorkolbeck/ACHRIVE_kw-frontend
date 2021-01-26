@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from 'next/router';
 import { 
   Button, 
   TextField, 
@@ -11,7 +12,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { forgotPassword } from "../lib/auth";
+import { resetPassword } from "../lib/auth";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,11 +38,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = (props) => {
+  const router = useRouter();
+  const { code } = router.query;
   const classes = useStyles();
-  const [data, updateData] = useState({ email: "" });
+  const [data, updateData] = useState({ code: code, password: "", passwordConfirmation: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
+  const [passwordReset, setPasswordReset] = useState(false);
 
   function onChange(event) {
     updateData({ ...data, [event.target.name]: event.target.value });
@@ -55,7 +58,7 @@ const Login = (props) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Forgot Password
+            Reset Password
           </Typography>
           {Object.entries(error).length !== 0 &&
             error.constructor === Object &&
@@ -71,18 +74,30 @@ const Login = (props) => {
                 </div>
               );
             })}
-          {!emailSent && 
+          {!passwordReset && 
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              name="password"
+              label="New Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(event) => onChange(event)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="passwordConfirmation"
+              label="Confirm Password"
+              type="password"
+              id="passwordConfirmation"
+              autoComplete="current-password"
               onChange={(event) => onChange(event)}
             />
             <Button
@@ -92,10 +107,11 @@ const Login = (props) => {
               color="primary"
               className={classes.submit}
               onClick={() => {
+                alert(data.password);
                 setLoading(true);
-                forgotPassword(data.email)
+                resetPassword(data.code, data.password, data.passwordConfirmation)
                 .then((res) => {
-                  setEmailSent(true);
+                    setPasswordReset(true);
                     setLoading(false);
                   })
                   .catch((error) => {
@@ -104,31 +120,23 @@ const Login = (props) => {
                   });
               }}
             >
-              {loading ? "Loading... " : "Send Reset Link"}
+              {loading ? "Loading... " : "Reset Password"}
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </form>}
 
-          {emailSent && 
-          <Grid container>
-          <Grid item>
-            Thanks, check your email for a link to reset your password!
+          {passwordReset && 
+          <>
+          <Grid>
+            You have successfully reset your password
           </Grid>
-          <Grid item>
+          <Grid>
             <Link 
-            href="/forgot-password" 
+            href="/login" 
             variant="body2">
-            {"Didn't get an email?"}
+            {"Click here to login"}
             </Link>
             </Grid> 
-            </Grid> 
-            }
+            </>}
         </div>
       </Container>
     )
