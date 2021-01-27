@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  thankYou: {
-    fontSize: '21px'
+  successMessage: {
+    fontSize: '18px'
   }
 }));
 
@@ -41,14 +41,28 @@ const Login = (props) => {
   const router = useRouter();
   const { code } = router.query;
   const classes = useStyles();
-  const [data, updateData] = useState({ code: code, password: "", passwordConfirmation: "" });
+  const [data, setData] = useState({ code: code, password: "", passwordConfirmation: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [passwordReset, setPasswordReset] = useState(false);
+  const [passwordReset, setPasswordReset] = useState(true);
 
-  function onChange(event) {
-    updateData({ ...data, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   }  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    resetPassword(data.code, data.password, data.passwordConfirmation)
+    .then((res) => {
+        setPasswordReset(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error?.response?.data);
+        setLoading(false);
+      });
+  }
   
     return (
       <Container component="main" maxWidth="xs">
@@ -75,7 +89,7 @@ const Login = (props) => {
               );
             })}
           {!passwordReset && 
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -86,7 +100,7 @@ const Login = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(event) => onChange(event)}
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -98,7 +112,7 @@ const Login = (props) => {
               type="password"
               id="passwordConfirmation"
               autoComplete="current-password"
-              onChange={(event) => onChange(event)}
+              onChange={handleChange}
             />
             <Button
               type="submit"
@@ -106,37 +120,28 @@ const Login = (props) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => {
-                alert(data.password);
-                setLoading(true);
-                resetPassword(data.code, data.password, data.passwordConfirmation)
-                .then((res) => {
-                    setPasswordReset(true);
-                    setLoading(false);
-                  })
-                  .catch((error) => {
-                    setError(error?.response?.data);
-                    setLoading(false);
-                  });
-              }}
+              onClick={handleFormSubmit}
             >
               {loading ? "Loading... " : "Reset Password"}
             </Button>
           </form>}
 
           {passwordReset && 
-          <>
-          <Grid>
-            You have successfully reset your password
-          </Grid>
-          <Grid>
-            <Link 
-            href="/login" 
-            variant="body2">
-            {"Click here to login"}
-            </Link>
-            </Grid> 
-            </>}
+          <Grid 
+          container 
+          justify="center"
+          className={classes.successMessage}>
+            <Grid item>
+              Your password has been successfully reset. 
+            </Grid>
+            <Grid item>
+              <Link 
+              href="/login" 
+              variant="body2">
+              {"Click here to login"}
+              </Link>
+              </Grid> 
+            </Grid> }
         </div>
       </Container>
     )

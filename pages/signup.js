@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  successMessage: {
+    fontSize: '18px'
+  }
 }));
 
 const Signup = () => {
@@ -58,6 +61,30 @@ const Signup = () => {
   const [error, setError] = useState({});
   const [confirmationSent, setConfirmationSent] = useState(false);
   const appContext = useContext(AppContext);
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  }  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    registerUser(data.firstName, data.lastName, data.username, data.email, data.password)
+      .then((res) => {
+        setConfirmationSent(true);
+        // set authed user in global context object
+        appContext.setUser(res.data.user);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error?.response?.data);
+        setLoading(false);
+      });
+  }
+
+  const handleResendClick = () => {
+    sendEmailConf(data.email);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -84,7 +111,7 @@ const Signup = () => {
             );
           })}
         {!confirmationSent && 
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -98,9 +125,7 @@ const Signup = () => {
                 autoFocus
                 value={data.firstName}
                 disabled={loading}
-                onChange={(e) =>
-                  setData({ ...data, firstName: e.target.value })
-                }
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -114,9 +139,7 @@ const Signup = () => {
                 autoComplete="lname"
                 value={data.lastName}
                 disabled={loading}
-                onChange={(e) =>
-                  setData({ ...data, lastName: e.target.value })
-                }
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,9 +153,7 @@ const Signup = () => {
                 autoComplete="username"
                 value={data.username}
                 disabled={loading}
-                onChange={(e) =>
-                  setData({ ...data, username: e.target.value })
-                }
+                onChange={handleChange}
               />
               </Grid>
               <Grid item xs={12}>
@@ -146,9 +167,7 @@ const Signup = () => {
                 autoComplete="email"
                 value={data.email}
                 disabled={loading}
-                onChange={(e) =>
-                  setData({ ...data, email: e.target.value })
-                }
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -163,9 +182,7 @@ const Signup = () => {
                 autoComplete="current-password"
                 value={data.password}
                 disabled={loading}
-                onChange={(e) =>
-                  setData({ ...data, password: e.target.value })
-                }
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -182,41 +199,31 @@ const Signup = () => {
             color="primary"
             disabled={loading}
             className={classes.submit}
-            onClick={() => {
-              setLoading(true);
-              registerUser(data.firstName, data.lastName, data.username, data.email, data.password)
-                .then((res) => {
-                  setConfirmationSent(true);
-                  // set authed user in global context object
-                  appContext.setUser(res.data.user);
-                  setLoading(false);
-                })
-                .catch((error) => {
-                  setError(error?.response?.data);
-                  setLoading(false);
-                });
-            }}
+            onClick={handleFormSubmit}
           >
             {loading ? "Loading.." : "Signup"}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
-                Already have an account? Sign in
+                Already have an account? Login
               </Link>
             </Grid>
           </Grid>
         </form>}
         {confirmationSent && 
-          <Grid container>
+          <Grid 
+          container
+          justify="center"
+          className={classes.successMessage}>
             <Grid item>
-              Thanks, check your email for confirmation link!
+              Thanks, check your email for a confirmation link!
             </Grid>
             <Grid item>
               <Link 
               href="#" 
               variant="body2"
-              onClick={()=>{sendEmailConf(data.email)}}>
+              onClick={handleResendClick}>
               {"Didn't get an email? Click to resend."}
               </Link>
             </Grid> 

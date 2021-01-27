@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
   thankYou: {
     fontSize: '21px'
+  },
+  successMessage: {
+    fontSize: '18px'
   }
 }));
 
@@ -43,9 +46,23 @@ const Login = (props) => {
   const [error, setError] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
-  function onChange(event) {
-    updateData({ ...data, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    updateData({ ...data, [e.target.name]: e.target.value });
   }  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    forgotPassword(data.email)
+    .then((res) => {
+      setEmailSent(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error?.response?.data);
+        setLoading(false);
+      });
+  }
   
     return (
       <Container component="main" maxWidth="xs">
@@ -72,7 +89,7 @@ const Login = (props) => {
               );
             })}
           {!emailSent && 
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -83,7 +100,7 @@ const Login = (props) => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(event) => onChange(event)}
+              onChange={handleChange}
             />
             <Button
               type="submit"
@@ -91,18 +108,7 @@ const Login = (props) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => {
-                setLoading(true);
-                forgotPassword(data.email)
-                .then((res) => {
-                  setEmailSent(true);
-                    setLoading(false);
-                  })
-                  .catch((error) => {
-                    setError(error?.response?.data);
-                    setLoading(false);
-                  });
-              }}
+              onClick={handleFormSubmit}
             >
               {loading ? "Loading... " : "Send Reset Link"}
             </Button>
@@ -116,17 +122,20 @@ const Login = (props) => {
           </form>}
 
           {emailSent && 
-          <Grid container>
-          <Grid item>
-            Thanks, check your email for a link to reset your password!
-          </Grid>
-          <Grid item>
-            <Link 
-            href="/forgot-password" 
-            variant="body2">
-            {"Didn't get an email?"}
-            </Link>
-            </Grid> 
+          <Grid 
+          container
+          justify="center"
+          className={classes.successMessage}>
+            <Grid item>
+              Thanks, check your email for a link to reset your password!
+            </Grid>
+            <Grid item>
+                <Link 
+                href="/forgot-password" 
+                variant="body2">
+                {"Didn't get an email?"}
+                </Link>
+              </Grid> 
             </Grid> 
             }
         </div>

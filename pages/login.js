@@ -65,9 +65,24 @@ const Login = (props) => {
     }
   }, [appContext.isAuthenticated]);
 
-  function onChange(event) {
-    updateData({ ...data, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    updateData({ ...data, [e.target.name]: e.target.value });
   }  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    login(data.identifier, data.password)
+      .then((res) => {
+        setLoading(false);
+        // set authed User in global context to update header/app state
+        appContext.setUser(res.data.user);
+      })
+      .catch((error) => {
+        setError(error?.response?.data);
+        setLoading(false);
+      });
+  };
   
     return (
       <Container component="main" maxWidth="xs">
@@ -77,7 +92,7 @@ const Login = (props) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
           {Object.entries(error).length !== 0 &&
             error.constructor === Object &&
@@ -93,7 +108,7 @@ const Login = (props) => {
                 </div>
               );
             })}
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -104,7 +119,7 @@ const Login = (props) => {
               name="identifier"
               autoComplete="email"
               autoFocus
-              onChange={(event) => onChange(event)}
+              onChange={(event) => handleChange(event)}
             />
             <TextField
               variant="outlined"
@@ -116,7 +131,7 @@ const Login = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(event) => onChange(event)}
+              onChange={(event) => handleChange(event)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -128,21 +143,9 @@ const Login = (props) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => {
-                setLoading(true);
-                login(data.identifier, data.password)
-                  .then((res) => {
-                    setLoading(false);
-                    // set authed User in global context to update header/app state
-                    appContext.setUser(res.data.user);
-                  })
-                  .catch((error) => {
-                    setError(error?.response?.data);
-                    setLoading(false);
-                  });
-              }}
+              onClick={handleFormSubmit}
             >
-              {loading ? "Loading... " : "Sign in"}
+              {loading ? "Loading... " : "Login"}
             </Button>
             <Grid container>
               <Grid item xs>
