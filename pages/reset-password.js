@@ -53,6 +53,7 @@ const Login = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setError({});
     resetPassword(data.code, data.password, data.passwordConfirmation)
     .then((res) => {
         setPasswordReset(true);

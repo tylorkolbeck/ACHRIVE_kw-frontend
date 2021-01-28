@@ -69,6 +69,7 @@ const Signup = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setError({});
     registerUser(data.firstName, data.lastName, data.username, data.email, data.password)
       .then((res) => {
         setConfirmationSent(true);

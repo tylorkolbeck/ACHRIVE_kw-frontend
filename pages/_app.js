@@ -17,6 +17,13 @@ const MyApp = ({ Component, pageProps }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+      window.addEventListener('beforeunload', Cookie.remove('user'));
+    return () => {
+      window.removeEventListener('beforeunload', Cookie.remove('user'));
+    };
+  }, [])
+
+  useEffect(() => {
     // grab token value from cookie
     const token = Cookie.get("token");
 

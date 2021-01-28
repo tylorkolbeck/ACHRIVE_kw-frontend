@@ -44,7 +44,7 @@ const Nav = ({ categories }) => {
               </Link>
             ) : (
               <Link href="/login">
-                <a className="nav-link">Sign in</a>
+                <a className="nav-link">Login</a>
               </Link>
             )}
             </li>

@@ -53,6 +53,7 @@ const Login = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setError({});
     forgotPassword(data.email)
     .then((res) => {
       setEmailSent(true);

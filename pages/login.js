@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const classes = useStyles();
-  const [data, updateData] = useState({ identifier: "", password: "" });
+  const [data, updateData] = useState({ identifier: "", password: "", rememberMe: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const router = useRouter();
@@ -72,7 +72,8 @@ const Login = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    login(data.identifier, data.password)
+    setError({});
+    login(data.identifier, data.password, data.rememberMe)
       .then((res) => {
         setLoading(false);
         // set authed User in global context to update header/app state
@@ -136,6 +137,8 @@ const Login = (props) => {
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
+              name="rememberMe"
+              onChange={(event) => handleChange(event)}
             />
             <Button
               type="submit"
