@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
+import { logout } from "../../lib/auth";
+import AppContext from "../../context/AppContext";
 
 const Nav = ({ categories }) => {
+  const { user, setUser } = useContext(AppContext);
+
   return (
     <div>
       <nav className='uk-navbar-container' data-uk-navbar>
@@ -25,6 +29,25 @@ const Nav = ({ categories }) => {
                 </li>
               )
             })}
+            <li>
+            {user ? (
+              <Link href="/">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    logout();
+                    setUser(null);
+                  }}
+                >
+                  Logout
+                </a>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <a className="nav-link">Login</a>
+              </Link>
+            )}
+            </li>
           </ul>
         </div>
       </nav>
