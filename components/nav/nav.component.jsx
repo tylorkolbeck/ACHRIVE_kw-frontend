@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
-import { logout } from "../../lib/auth";
-import AppContext from "../../context/AppContext";
+import { logout } from '../../lib/auth'
+import AppContext from '../../context/AppContext'
 
 const Nav = ({ categories }) => {
-  const { user, setUser } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext)
 
   return (
     <div>
@@ -13,7 +13,7 @@ const Nav = ({ categories }) => {
           <ul className='uk-navbar-nav'>
             <li>
               <Link href='/'>
-                <a>Strapi Blog</a>
+                <a>Killer Whale Crypto</a>
               </Link>
             </li>
           </ul>
@@ -30,23 +30,23 @@ const Nav = ({ categories }) => {
               )
             })}
             <li>
-            {user ? (
-              <Link href="/">
-                <a
-                  className="nav-link"
-                  onClick={() => {
-                    logout();
-                    setUser(null);
-                  }}
-                >
-                  Logout
-                </a>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <a className="nav-link">Login</a>
-              </Link>
-            )}
+              {user ? (
+                <Link href='/'>
+                  <a
+                    className='nav-link'
+                    onClick={() => {
+                      logout()
+                      setUser(null)
+                    }}
+                  >
+                    Logout
+                  </a>
+                </Link>
+              ) : (
+                <Link href='/login'>
+                  <a className='nav-link'>Login</a>
+                </Link>
+              )}
             </li>
           </ul>
         </div>
