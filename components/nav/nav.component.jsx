@@ -1,50 +1,39 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { logout } from '../../lib/auth'
-import AppContext from '../../context/AppContext'
+import { userContext } from '../../context/UserContext'
 
-const Nav = ({ categories }) => {
-  const { user, setUser } = useContext(AppContext)
+const Nav = () => {
+  const { userState, setUserState } = userContext()
 
   return (
     <div>
-      <nav className='uk-navbar-container' data-uk-navbar>
-        <div className='uk-navbar-left'>
-          <ul className='uk-navbar-nav'>
+      <nav className="uk-navbar-container" data-uk-navbar>
+        <div className="uk-navbar-left">
+          <ul className="uk-navbar-nav">
             <li>
-              <Link href='/'>
+              <Link href="/">
                 <a>Killer Whale Crypto</a>
               </Link>
             </li>
           </ul>
         </div>
-        <div className='uk-navbar-right'>
-          <ul className='uk-navbar-nav'>
-            {categories.map((category) => {
-              return (
-                <li key={category.id}>
-                  <Link as={`/category/${category.slug}`} href='/category/[id]'>
-                    <a className='uk-link-reset'>{category.name}</a>
-                  </Link>
-                </li>
-              )
-            })}
+        <div className="uk-navbar-right">
+          <ul className="uk-navbar-nav">
             <li>
-              {user ? (
-                <Link href='/'>
+              {userState.user ? (
+                <Link href="/">
                   <a
-                    className='nav-link'
+                    className="nav-link"
                     onClick={() => {
-                      logout()
-                      setUser(null)
+                      setUserState({ type: 'LOGOUT' })
                     }}
                   >
                     Logout
                   </a>
                 </Link>
               ) : (
-                <Link href='/login'>
-                  <a className='nav-link'>Login</a>
+                <Link href="/login">
+                  <a className="nav-link">Login</a>
                 </Link>
               )}
             </li>
