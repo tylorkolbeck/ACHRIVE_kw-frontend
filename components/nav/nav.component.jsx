@@ -1,9 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
 import { userContext } from '../../context/UserContext'
+import { logout } from '../../lib/auth'
 
 const Nav = () => {
   const { userState, setUserState } = userContext()
+
+  function logoutHandler() {
+    setUserState({ type: 'LOGOUT' })
+    logout()
+  }
 
   return (
     <div>
@@ -22,12 +28,7 @@ const Nav = () => {
             <li>
               {userState.user ? (
                 <Link href="/">
-                  <a
-                    className="nav-link"
-                    onClick={() => {
-                      setUserState({ type: 'LOGOUT' })
-                    }}
-                  >
+                  <a className="nav-link" onClick={logoutHandler}>
                     Logout
                   </a>
                 </Link>

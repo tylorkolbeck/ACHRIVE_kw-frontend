@@ -18,11 +18,13 @@ const Seo = ({ seo, global }) => {
     shareImage: getStrapiMedia(seoDefaults.shareImage)
   }
 
+  console.log('>>>', fullSeo)
+
   return (
     <Head>
       {fullSeo.metaTitle && (
         <>
-          <title>{fullSeo.metaTitle}</title>
+          <title>{fullSeo.seo.metaTitle}</title>
           <meta property="og:title" content={fullSeo.metaTitle} />
           <meta name="twitter:title" content={fullSeo.metaTitle} />
         </>

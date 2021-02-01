@@ -2,6 +2,7 @@ import ArticleLayout from '../../components/ArticleLayout/article.layout'
 import { getAllPostsIds, getPostData } from '../../lib/posts'
 import ReactMarkdown from 'react-markdown'
 import Seo from '../../components/seo/seo.component'
+import { Typography } from '@material-ui/core'
 
 export default function Article({ postData }) {
   const seo = {
@@ -14,7 +15,7 @@ export default function Article({ postData }) {
   return (
     <ArticleLayout>
       <Seo seo={seo} />
-      {postData.title}
+      <Typography variant="h2">{postData.title}</Typography>
       <br />
       <br />
       <ReactMarkdown source={postData.content} escapeHtml={false} />
