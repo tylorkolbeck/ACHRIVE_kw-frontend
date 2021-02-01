@@ -4,14 +4,8 @@ import Seo from '../../components/seo/seo.component'
 import { Typography, Grid, Chip, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
-import Avatar from '@material-ui/core/Avatar'
-import { getStrapiMedia } from '../../lib/media'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import TelegramIcon from '@material-ui/icons/Telegram'
 import { DateTime } from 'luxon'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
-
-const IMAGE_PATH = process.env.NODE_ENV === 'development' ? '127.0.0.1' : 'test'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -41,13 +35,10 @@ export default function Article({ postData }) {
   const {
     title,
     category,
-    content,
     published_at,
-    teaserText,
     updated_at,
     image,
-    description,
-    author
+    description
   } = postData
 
   const publishedDate = DateTime.fromISO(published_at).toLocaleString(

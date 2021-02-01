@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from '../image/image.component'
 import { Typography, Grid } from '@material-ui/core'
-import Link from 'next/link'
 import AuthorInfo from '../AuthorInfo/AuthorInfo.component'
 
 const MainArticle = ({ article }) => {

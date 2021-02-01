@@ -113,6 +113,11 @@ export default function Nav() {
   const drawer = (
     <div>
       <List className={classes.DrawerLinks}>
+        <ListItem button onClick={toggleMobileMenu}>
+          <Link href="/">
+            <ListItemText primary="Home" />
+          </Link>
+        </ListItem>
         {appLinks.map(({ label, url }) => (
           <ListItem button key={label} onClick={toggleMobileMenu}>
             <Link href={url}>
