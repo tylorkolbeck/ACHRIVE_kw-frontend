@@ -13,21 +13,23 @@ const useStyles = makeStyles(() => ({
 const CategoryCard = ({ article }) => {
   const classes = useStyles()
 
-  return ( 
+  return (
     <>
-      <Link href={`/article/${article.slug}`}  color='inherit'>
+      <Link href={`/article/${article.slug}`} color="inherit">
         <a>
-        <Grid container spacing={3}>
+          <Grid container spacing={3}>
             <Grid item xs={7}>
-              <Typography className={classes.cardTitle}>{article.title}</Typography>
+              <Typography className={classes.cardTitle}>
+                {article.title}
+              </Typography>
               <Typography>{article.created_at}</Typography>
               <Typography noWrap>{article.description}</Typography>
             </Grid>
           </Grid>
           <Grid item>
-              <Divider />
-              </Grid>
-            </a>
+            <Divider />
+          </Grid>
+        </a>
       </Link>
     </>
   )
