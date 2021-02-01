@@ -20,12 +20,13 @@ const CategoryCard = ({ article }) => {
         <Grid container spacing={3}>
             <Grid item xs={7}>
               <Typography className={classes.cardTitle}>{article.title}</Typography>
-              <Typography>{article.author.name}</Typography>
+              <Typography>{article.created_at}</Typography>
+              <Typography noWrap>{article.description}</Typography>
             </Grid>
-            {/* <Grid item xs={12}> */}
-            {/* </Grid> */}
           </Grid>
+          <Grid item>
               <Divider />
+              </Grid>
             </a>
       </Link>
     </>

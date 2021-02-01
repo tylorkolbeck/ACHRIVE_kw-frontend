@@ -6,23 +6,22 @@ import { Typography } from '@material-ui/core'
 import CategoryCard from '../categoryCard/categoryCard.component'
 
 const Articles = ({ articles, categories }) => {
- 
- const latestArticle = articles[0]
- const lastFourArticles = articles.slice(1, 5)
 
-const categoryMap = {}
-const categoryEl = []
+  const latestArticle = articles[0]
+  const lastFourArticles = articles.slice(1, 5)
+  const categoryMap = {}
+  const categoryEl = []
+
+  // Create a CategoryCard for each article in each category
  categories.forEach((category) => {
   if (category.articles.length > 0) {
-     
     categoryMap[category.name] = category.articles.map((article) => {
-        
-       return <ArticleCard article={article} key={`article__link__${article.slug}`} />
-   
+       return <CategoryCard article={article} key={`article__link__${article.slug}`} />
       })
     }
   })
-  console.log(categoryMap);
+
+  // Create a category title for each category
   for(const category in categoryMap) {
     categoryEl.push(
       <>
