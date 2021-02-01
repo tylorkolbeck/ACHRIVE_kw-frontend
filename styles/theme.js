@@ -13,6 +13,12 @@ const theme = createMuiTheme({
       dark: '#002071',
       contrastText: '#fff'
     }
+  },
+  custom: {
+    screen: {
+      maxWidth: '800px',
+      bodyPadding: '2rem'
+    }
   }
 })
 

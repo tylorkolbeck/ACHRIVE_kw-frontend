@@ -2,28 +2,76 @@ import React from 'react'
 import { userContext } from '../../context/UserContext'
 import { logout } from '../../lib/auth'
 import Link from 'next/link'
+import { appLinks } from '../../lib/app.links'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import { List } from '@material-ui/core'
+import {
+  List,
+  Drawer,
+  IconButton,
+  ListItem,
+  ListItemText,
+  Divider
+} from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
+import MenuIcon from '@material-ui/icons/Menu'
+
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
   },
+  menuLinks: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
+
   menuButton: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
+  },
+  menuButtonLink: {
     marginRight: theme.spacing(2)
   },
+  menuButtonUser: {
+    marginLeft: theme.spacing(4)
+  },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.palette.secondary.light
+    }
+  },
+  closeMenuButton: {
+    marginRight: 'auto',
+    marginLeft: 0
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
+  },
+  logoutLoginDrawerWrapper: {
+    padding: '8px 16px',
+
+    '& button': {
+      marginLeft: '0px !important'
+    }
   }
 }))
 
 export default function Nav() {
   const classes = useStyles()
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
   const { userState, setUserState } = userContext()
 
@@ -32,107 +80,123 @@ export default function Nav() {
     logout()
   }
 
+  const logoutLogin = (
+    <>
+      {userState.user ? (
+        <Link href="/">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={logoutHandler}
+            className={classes.menuButtonUser}
+            onClick={toggleMobileMenu}
+          >
+            Logout
+          </Button>
+        </Link>
+      ) : (
+        <Link href="/login">
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.menuButtonUser}
+            onClick={toggleMobileMenu}
+          >
+            Login
+          </Button>
+        </Link>
+      )}
+    </>
+  )
+
+  const drawer = (
+    <div>
+      <List className={classes.DrawerLinks}>
+        {appLinks.map(({ label, url }) => (
+          <ListItem button key={label} onClick={toggleMobileMenu}>
+            <Link href={url}>
+              <ListItemText primary={label} />
+            </Link>
+          </ListItem>
+        ))}
+        <Divider />
+        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
+      </List>
+    </div>
+  )
+
+  function toggleMobileMenu() {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
   return (
     <div className={classes.root}>
+      <Drawer
+        variant="temporary"
+        anchor="right"
+        open={mobileMenuOpen}
+        onClose={toggleMobileMenu}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        ModalProps={{
+          keepMounted: true // Better open performance on mobile.
+        }}
+      >
+        <IconButton
+          onClick={toggleMobileMenu}
+          className={classes.closeMenuButton}
+        >
+          <CloseIcon />
+        </IconButton>
+        {drawer}
+      </Drawer>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
+          <Link href="/">
+            <Typography variant="h6" className={classes.title}>
+              Killer Whale
+              <span
+                style={{
+                  color: '#6270c3',
+                  fontSize: '12px',
+                  marginLeft: '10px'
+                }}
+              >
+                Beta v1.0
+              </span>
+            </Typography>
+          </Link>
+
+          <List
+            component="nav"
+            aria-labelledby="main navigation"
+            className={classes.menuLinks}
+          >
+            {appLinks.map(({ label, url }) => {
+              return (
+                <Link href={url} key={label}>
+                  <a className={classes.menuButtonLink}>
+                    {label.toUpperCase()}
+                  </a>
+                </Link>
+              )
+            })}
+
+            {logoutLogin}
+          </List>
+
+          <IconButton
             color="inherit"
-            aria-label="menu"
+            aria-label="Open drawer"
+            edge="start"
+            onClick={toggleMobileMenu}
+            className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            Killer Whale
-          </Typography>
-
-          <List component="nav" aria-labelledby="main navigation">
-            <Link href="/articles">
-              <a className={classes.menuButton}>ARTICLES</a>
-            </Link>
-            <Link href="/premium">
-              <a className={classes.menuButton}>PREMIUM</a>
-            </Link>
-            <Link href="/products">
-              <a className={classes.menuButton}>PRODUCTS</a>
-            </Link>
-            <Link href="/our-story">
-              <a className={classes.menuButton}>OUR STORY</a>
-            </Link>
-            <Link href="/faq">
-              <a className={classes.menuButton}>FAQ</a>
-            </Link>
-          </List>
-          {userState.user ? (
-            <Link href="/">
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={logoutHandler}
-              >
-                Logout
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/login">
-              <Button variant="contained" color="secondary">
-                Login
-              </Button>
-            </Link>
-          )}
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
   )
 }
-
-// import React from 'react'
-// import Link from 'next/link'
-// import { userContext } from '../../context/UserContext'
-// import { logout } from '../../lib/auth'
-
-// const Nav = () => {
-//   const { userState, setUserState } = userContext()
-
-//   function logoutHandler() {
-//     setUserState({ type: 'LOGOUT' })
-//     logout()
-//   }
-
-//   return (
-//     <div>
-//       <nav className="uk-navbar-container" data-uk-navbar>
-//         <div className="uk-navbar-left">
-//           <ul className="uk-navbar-nav">
-//             <li>
-//               <Link href="/">
-//                 <a>Killer Whale Crypto</a>
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//         <div className="uk-navbar-right">
-//           <ul className="uk-navbar-nav">
-//             <li>
-//               {userState.user ? (
-//                 <Link href="/">
-//                   <a className="nav-link" onClick={logoutHandler}>
-//                     Logout
-//                   </a>
-//                 </Link>
-//               ) : (
-//                 <Link href="/login">
-//                   <a className="nav-link">Login</a>
-//                 </Link>
-//               )}
-//             </li>
-//           </ul>
-//         </div>
-//       </nav>
-//     </div>
-//   )
-// }
-
-// export default Nav
