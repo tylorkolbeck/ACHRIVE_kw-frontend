@@ -1,36 +1,35 @@
+import Link from 'next/link'
 import React from 'react'
-import Article from '../components/article/article.component'
-import Layout from '../components/layout/layout.component'
 import Seo from '../components/seo/seo.component'
+import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import BlogFeed from '../containers/blogfeed/blogfeed'
 
-const Home = ({ articles, categories, homepage }) => {
+const Home = ({ allPostsData, homepage, global }) => {
   return (
-    <Layout categories={categories}>
-      <Seo seo={homepage.seo} />
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <h1>{homepage?.hero?.title}</h1>
-          <BlogFeed articles={articles} categories={categories} />
-        </div>
-      </div>
-    </Layout>
+    <>
+      <Seo seo={homepage.seo} global={global} />
+      <BlogFeed articles={articles} categories={categories} />
+    </>
   )
 }
 
 export async function getStaticProps() {
+  const allPostsData = await getSortedPostsData()
+
+  const global = await fetchAPI('/global')
+  const homepage = await fetchAPI('/homepage')
+
   // Run API calls in parallel
 
-  const [articles, categories, homepage] = await Promise.all([
-    fetchAPI('/articles'),
-    fetchAPI('/categories'),
-    fetchAPI('/homepage')
-  ])
+  // const [articles, categories, homepage] = await Promise.all([
+  //   fetchAPI('/articles'),
+  //   fetchAPI('/categories'),
+  //   fetchAPI('/homepage')
+  // ])
 
   return {
-    props: { articles, categories, homepage },
-    revalidate: 1
+    props: { allPostsData, homepage, global }
   }
 }
 
