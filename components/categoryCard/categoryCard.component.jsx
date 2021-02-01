@@ -10,19 +10,15 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const ArticleCard = ({ article }) => {
+const CategoryCard = ({ article }) => {
   const classes = useStyles()
-  const imgStyles = {maxWidth: '100%', objectFit: 'cover'}
-  return (
+
+  return ( 
     <>
       <Link href={`/article/${article.slug}`}  color='inherit'>
         <a>
         <Grid container spacing={3}>
-            <Grid item xs={5}>
-                <Image style={imgStyles} image={article.image} />
-            </Grid>
             <Grid item xs={7}>
-              <Typography>{article.category.name}</Typography>
               <Typography className={classes.cardTitle}>{article.title}</Typography>
               <Typography>{article.author.name}</Typography>
             </Grid>
@@ -36,4 +32,4 @@ const ArticleCard = ({ article }) => {
   )
 }
 
-export default ArticleCard
+export default CategoryCard

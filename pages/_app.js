@@ -3,7 +3,9 @@ import { UserContextProvider } from '../context/UserContext'
 import Layout from '../components/layout/layout.component'
 import Head from 'next/head'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
 import '../styles/globals.css'
+import theme from '../styles/theme'
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -35,10 +37,12 @@ export default function App({ Component, pageProps }) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js" /> */}
       </Head>
       <UserContextProvider>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </UserContextProvider>
     </>
   )
