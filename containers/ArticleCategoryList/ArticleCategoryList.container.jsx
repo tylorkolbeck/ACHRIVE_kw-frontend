@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Link from 'next/link'
 import { Typography, Grid, Divider } from '@material-ui/core'
 import ArticleCard from '../../components/card/articleCard.component'
 
@@ -35,11 +36,15 @@ export default function ArticleCategoryList({ categories, limit, authors }) {
   // Create a category title for each category
   for (const category in categoryMap) {
     categoryEl.push(
-      <Grid item xs={4} key={category}>
+      <Grid item xs={4} key={category} style={{ minWidth: '360px' }}>
         <div>
-          <Typography variant="h6" color="secondary">
-            {category.toUpperCase()}
-          </Typography>
+          <Link href={`/category/${category}`}>
+            <a>
+              <Typography variant="h6" color="secondary">
+                {category.toUpperCase()}
+              </Typography>
+            </a>
+          </Link>
           {categoryMap[category]}
         </div>
       </Grid>

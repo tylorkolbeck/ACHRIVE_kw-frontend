@@ -5,6 +5,7 @@ import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
 import HomepageBlogHeader from '../containers/HomepageBlogHeader/HomepageBlogHeader.container'
 import ArticleCategoryList from '../containers/ArticleCategoryList/ArticleCategoryList.container'
+import { Divider } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,7 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
     <div className={classes.root}>
       <Seo seo={homepage.seo} global={global} />
       <HomepageBlogHeader articles={allPostsData} />
+      <Divider style={{ margin: '20px' }} />
       <div style={{ marginTop: '50px' }}>
         <ArticleCategoryList categories={categories} authors={authors} />
       </div>

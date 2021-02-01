@@ -27,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ArticleCard = ({ article, last, authorName, category, strip }) => {
+const ArticleCard = ({
+  article,
+  last,
+  authorName,
+  category,
+  strip,
+  description
+}) => {
   const classes = useStyles()
   const imgStyles = { maxWidth: '100%', objectFit: 'cover' }
   return (
@@ -46,18 +53,19 @@ const ArticleCard = ({ article, last, authorName, category, strip }) => {
               style={{ height: '100%' }}
               alignItems="flex-start"
             >
-              {article.category && !strip && (
-                <Chip
-                  color="secondary"
-                  variant="outlined"
-                  size="small"
-                  component="a"
-                  href={`/categories/${article.category.name}`}
-                  label={category}
-                  // label={article.category.name}
-                  clickable
-                  className={classes.categoryChip}
-                />
+              {category && !strip && (
+                <Link href={`/category/${category}`}>
+                  <Chip
+                    color="secondary"
+                    variant="outlined"
+                    size="small"
+                    component="a"
+                    href={`/categories/${article.category.name}`}
+                    label={category}
+                    clickable
+                    className={classes.categoryChip}
+                  />
+                </Link>
               )}
               <Link href={`/article/${article.slug}`} color="inherit">
                 <a>
@@ -66,6 +74,9 @@ const ArticleCard = ({ article, last, authorName, category, strip }) => {
                   </Typography>
                 </a>
               </Link>
+              {description && (
+                <Typography variant="body1">{description}</Typography>
+              )}
 
               <Typography variant="caption" className={classes.author}>
                 {authorName} &#8226;{' '}
