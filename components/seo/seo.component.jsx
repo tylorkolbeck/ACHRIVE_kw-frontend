@@ -18,8 +18,6 @@ const Seo = ({ seo, global }) => {
     shareImage: getStrapiMedia(seoDefaults.shareImage)
   }
 
-  console.log('>>>', fullSeo)
-
   return (
     <Head>
       {fullSeo.metaTitle && (
