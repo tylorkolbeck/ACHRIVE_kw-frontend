@@ -17,6 +17,7 @@ const theme = createMuiTheme({
   custom: {
     screen: {
       maxWidth: '800px',
+      maxWidthHome: '1200px',
       bodyPadding: '2rem'
     }
   }

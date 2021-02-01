@@ -1,4 +1,3 @@
-import ArticleLayout from '../../components/ArticleLayout/article.layout'
 import { getAllPostsIds, getPostData } from '../../lib/posts'
 import ReactMarkdown from 'react-markdown'
 import Seo from '../../components/seo/seo.component'
@@ -10,6 +9,7 @@ import { getStrapiMedia } from '../../lib/media'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import TelegramIcon from '@material-ui/icons/Telegram'
 import { DateTime } from 'luxon'
+import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 
 const IMAGE_PATH = process.env.NODE_ENV === 'development' ? '127.0.0.1' : 'test'
 
@@ -49,7 +49,6 @@ export default function Article({ postData }) {
     description,
     author
   } = postData
-  console.log(postData)
 
   const publishedDate = DateTime.fromISO(published_at).toLocaleString(
     DateTime.DATETIME_FULL
@@ -89,35 +88,13 @@ export default function Article({ postData }) {
         </Grid>
         <Image image={image} style={{ maxWidth: '100%' }}></Image>
       </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Divider className={classes.divider} color="secondary" />
-          </Grid>
-          <Grid item>
-            <Avatar alt={author.name} src={getStrapiMedia(author.picture)} />
-          </Grid>
-          <Grid item>
-            <Grid container direction="column">
-              <Grid item>
-                <Typography variant="subtitle2" className={classes.authorText}>
-                  {author.name}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <TwitterIcon fontSize="small" color="secondary" />
-                <TelegramIcon fontSize="small" color="secondary" />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="caption">
-            {publishedDate} <span className={classes.wingDing}>&#8226;</span>{' '}
-            Updated {updatedDate}
-          </Typography>
-        </Grid>
-      </Grid>
+      <AuthorInfo
+        author={postData.author}
+        published={postData.updated_at}
+        updated={postData.updated_at}
+        divider
+      />
+
       <Seo seo={seo} />
       <ReactMarkdown source={postData.content} escapeHtml={false} />
     </Grid>

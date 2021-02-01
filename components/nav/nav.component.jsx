@@ -78,6 +78,7 @@ export default function Nav() {
   function logoutHandler() {
     setUserState({ type: 'LOGOUT' })
     logout()
+    setMobileMenuOpen(false)
   }
 
   const logoutLogin = (
@@ -89,7 +90,7 @@ export default function Nav() {
             color="secondary"
             onClick={logoutHandler}
             className={classes.menuButtonUser}
-            onClick={toggleMobileMenu}
+            onClick={logoutHandler}
           >
             Logout
           </Button>
@@ -100,7 +101,7 @@ export default function Nav() {
             variant="contained"
             color="secondary"
             className={classes.menuButtonUser}
-            onClick={toggleMobileMenu}
+            onClick={logoutHandler}
           >
             Login
           </Button>

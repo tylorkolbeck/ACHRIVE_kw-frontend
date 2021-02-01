@@ -1,45 +1,51 @@
-import Link from 'next/link'
 import React from 'react'
 import Seo from '../components/seo/seo.component'
 import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
+import { makeStyles } from '@material-ui/core/styles'
+import HomepageBlogHeader from '../containers/HomepageBlogHeader/HomepageBlogHeader.container'
+import ArticleCategoryList from '../containers/ArticleCategoryList/ArticleCategoryList.container'
 
-const Home = ({ allPostsData, homepage, global }) => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: theme.custom.screen.maxWidthHome,
+    margin: '20px auto',
+    padding: theme.spacing(2)
+  }
+}))
+
+const Home = ({ allPostsData, homepage, global, categories, authors }) => {
+  const classes = useStyles()
+
   return (
-    <>
+    <div className={classes.root}>
       <Seo seo={homepage.seo} global={global} />
-      <h1>Home</h1>
-      <ul>
-        {allPostsData.map(({ id, title, publishedAt, slug }) => {
-          return (
-            <li key={id}>
-              <Link href={`/article/${slug}`}>{title}</Link>
-              <br />
-              <small>{publishedAt}</small>
-            </li>
-          )
-        })}
-      </ul>
-    </>
+      <HomepageBlogHeader articles={allPostsData} />
+      <div style={{ marginTop: '50px' }}>
+        <ArticleCategoryList categories={categories} authors={authors} />
+      </div>
+    </div>
   )
 }
 
 export async function getStaticProps() {
-  const allPostsData = await getSortedPostsData()
-
-  const global = await fetchAPI('/global')
-  const homepage = await fetchAPI('/homepage')
-
   // Run API calls in parallel
-
-  // const [articles, categories, homepage] = await Promise.all([
-  //   fetchAPI('/articles'),
-  //   fetchAPI('/categories'),
-  //   fetchAPI('/homepage')
-  // ])
+  const [
+    allPostsData,
+    global,
+    homepage,
+    categories,
+    authors
+  ] = await Promise.all([
+    getSortedPostsData(),
+    fetchAPI('/global'),
+    fetchAPI('/homepage'),
+    fetchAPI('/categories'),
+    fetchAPI('/writers')
+  ])
 
   return {
-    props: { allPostsData, homepage, global }
+    props: { allPostsData, homepage, global, categories, authors }
   }
 }
 
