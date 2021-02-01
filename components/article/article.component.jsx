@@ -10,14 +10,13 @@ const Articles = ({ articles, categories }) => {
  const natureArticles = categories.filter((category) => {
   return category.name === 'nature'
 })
-console.log(natureArticles);
 
   return (
-    <>
-       <Grid item sm={12} md={8}>
-        <MainArticle latestArticle={ latestArticle }/>
+    <Grid container spacing={3}>
+       <Grid item sm={12} md={7}>
+        <MainArticle latestArticle={ latestArticle }/>  
       </Grid>
-      <Grid item sm={12} md={4}>
+      <Grid item sm={12} md={5}>
       {lastFourArticles.map((article, i) => {
             return (
               <Card article={article} key={`article__link__${article.slug}`} />
@@ -32,7 +31,7 @@ console.log(natureArticles);
             )
           })}
       </Grid>
-    </>
+      </Grid>
   )
 }
 

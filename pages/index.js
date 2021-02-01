@@ -3,33 +3,28 @@ import React from 'react'
 import Seo from '../components/seo/seo.component'
 import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
-import BlogFeed from '../containers/blogfeed/blogfeed'
+import BlogFeed from '../containers/blogfeed/blogfeed.container'
 
-const Home = ({ allPostsData, homepage, global }) => {
+const Home = ({ allPostsData, homepage, global, categories }) => {
   return (
     <>
       <Seo seo={homepage.seo} global={global} />
-      <BlogFeed articles={articles} categories={categories} />
+      <BlogFeed articles={allPostsData} categories={categories} />
     </>
   )
 }
 
 export async function getStaticProps() {
-  const allPostsData = await getSortedPostsData()
-
-  const global = await fetchAPI('/global')
-  const homepage = await fetchAPI('/homepage')
-
   // Run API calls in parallel
-
-  // const [articles, categories, homepage] = await Promise.all([
-  //   fetchAPI('/articles'),
-  //   fetchAPI('/categories'),
-  //   fetchAPI('/homepage')
-  // ])
+  const [allPostsData, global, homepage, categories] = await Promise.all([
+    getSortedPostsData(),
+    fetchAPI('/global'),
+    fetchAPI('/homepage'),
+    fetchAPI('/categories')
+  ])
 
   return {
-    props: { allPostsData, homepage, global }
+    props: { allPostsData, homepage, global, categories }
   }
 }
 
