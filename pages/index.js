@@ -3,15 +3,16 @@ import Article from '../components/article/article.component'
 import Layout from '../components/layout/layout.component'
 import Seo from '../components/seo/seo.component'
 import { fetchAPI } from '../lib/api'
+import BlogFeed from '../containers/blogfeed/blogfeed'
 
 const Home = ({ articles, categories, homepage }) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
-      <div className='uk-section'>
-        <div className='uk-container uk-container-large'>
+      <div className="uk-section">
+        <div className="uk-container uk-container-large">
           <h1>{homepage?.hero?.title}</h1>
-          <Article articles={articles} />
+          <BlogFeed articles={articles} categories={categories} />
         </div>
       </div>
     </Layout>
