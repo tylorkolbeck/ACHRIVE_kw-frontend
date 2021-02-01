@@ -1,5 +1,5 @@
 import React from 'react'
-import ArticleCard from '../card/card.component'
+import ArticleCard from '../card/articleCard.component'
 import Grid from '@material-ui/core/Grid'
 import MainArticle from '../mainArticle/mainArticle.component'
 import { Typography } from '@material-ui/core'
@@ -9,9 +9,7 @@ const Articles = ({ articles, categories }) => {
  
  const latestArticle = articles[0]
  const lastFourArticles = articles.slice(1, 5)
- const natureArticles = categories.filter((category) => {
-  return category.name === 'nature'
-})
+
 const categoryMap = {}
 const categoryEl = []
  categories.forEach((category) => {
