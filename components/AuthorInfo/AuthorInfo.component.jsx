@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AuthorInfo({ author, published, updated, divider }) {
   const classes = useStyles()
+
+  const authorName = author.name ? author.name : ''
   return (
     <Grid item xs={12}>
       <Grid container spacing={2}>
@@ -23,13 +25,13 @@ export default function AuthorInfo({ author, published, updated, divider }) {
           {divider && <Divider className={classes.divider} color="secondary" />}
         </Grid>
         <Grid item>
-          <Avatar alt={author.name} src={getStrapiMedia(author.picture)} />
+          <Avatar alt={authorName} src={getStrapiMedia(author.picture)} />
         </Grid>
         <Grid item>
           <Grid container direction="column">
             <Grid item>
               <Typography variant="subtitle2" className={classes.authorText}>
-                {author.name}
+                {authorName}
               </Typography>
             </Grid>
             <Grid item>
