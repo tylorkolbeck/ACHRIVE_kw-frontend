@@ -47,7 +47,8 @@ export async function getStaticProps() {
   ])
 
   return {
-    props: { allPostsData, homepage, global, categories, authors }
+    props: { allPostsData, homepage, global, categories, authors },
+    revalidate: 60
   }
 }
 
