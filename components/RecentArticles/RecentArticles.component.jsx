@@ -11,9 +11,9 @@ export default function RecentArticles({ articles }) {
           return (
             <ArticleCard
               article={article}
-              authorName={article.author.name}
+              authorName={article?.author?.name}
               key={`article__link__${article.slug}`}
-              category={article.category.name}
+              category={article?.category?.name}
               last={i === 3}
             />
           )

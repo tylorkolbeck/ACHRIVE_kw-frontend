@@ -41,8 +41,6 @@ export default function Article({ postData }) {
     description
   } = postData
 
-  category ? category : null
-
   const seo = {
     metaTitle: postData.title,
     metaDescription: postData.description,
@@ -54,14 +52,14 @@ export default function Article({ postData }) {
     <Grid container className={classes.root}>
       <Grid item container>
         <Grid item xs={12} className={classes.marginBottomSm}>
-          {category && (
+          {category?.name && (
             <Chip
               color="secondary"
               variant="outlined"
               size="small"
               component="a"
-              href={`/categories/${category.name}`}
-              label={category.name}
+              href={`/categories/${category?.name}`}
+              label={category?.name}
               clickable
             />
           )}
