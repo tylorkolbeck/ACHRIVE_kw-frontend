@@ -1,15 +1,25 @@
 import { getStrapiMedia } from '../../lib/media'
 
 const Image = ({ image, style }) => {
-  const imageUrl = getStrapiMedia(image)
+  let imageUrl
+  let imageObj = image ? image : {}
+
+  if (imageObj.url) {
+    imageUrl = getStrapiMedia(imageObj)
+  }
 
   return (
     <img
       src={imageUrl}
-      alt={image.alternativeText || image.name}
+      alt={imageObj.alternativeText || imageObj.name}
       style={style}
     />
   )
+}
+
+Image.defaultProps = {
+  image: null,
+  style: {}
 }
 
 export default Image

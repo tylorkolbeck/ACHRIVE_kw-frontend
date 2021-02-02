@@ -56,3 +56,10 @@ export default function AuthorInfo({ author, published, updated, divider }) {
     </Grid>
   )
 }
+
+AuthorInfo.defaultProps = {
+  author: '',
+  published: '',
+  updated: '',
+  divder: null
+}

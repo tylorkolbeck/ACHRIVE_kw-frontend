@@ -26,24 +26,25 @@ export default function Category({ categoryData, authors }) {
     <div className={classes.root}>
       <Grid container>
         <Typography variant="h2" className={classes.title}>
-          {name.toUpperCase()}
+          {name && name.toUpperCase()}
         </Typography>
 
         <Grid container direction="column">
-          {articles.map((article) => {
-            const author = authors.find(
-              (author) => author.id === article.author
-            )
-            return (
-              <Grid item xs={12} key={article.title}>
-                <ArticleCard
-                  article={article}
-                  authorName={author.name}
-                  description={article.description.slice(0, 100) + '...'}
-                />
-              </Grid>
-            )
-          })}
+          {articles &&
+            articles.map((article) => {
+              const author = authors.find(
+                (author) => author.id === article.author
+              )
+              return (
+                <Grid item xs={12} key={article.title}>
+                  <ArticleCard
+                    article={article}
+                    authorName={author.name}
+                    description={article.description.slice(0, 100) + '...'}
+                  />
+                </Grid>
+              )
+            })}
         </Grid>
       </Grid>
     </div>
@@ -55,7 +56,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 
@@ -68,4 +69,9 @@ export async function getStaticProps({ params }) {
       authors: authors
     }
   }
+}
+
+Category.defaultProps = {
+  categoryData: {},
+  authors: []
 }
