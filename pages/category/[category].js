@@ -66,7 +66,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       categoryData: categoryArticles,
-      authors: authors
+      authors: authors,
+      revalidate: 10
     }
   }
 }
