@@ -39,7 +39,7 @@ export async function getStaticProps() {
     categories,
     authors
   ] = await Promise.all([
-    getSortedPostsData(),
+    getSortedPostsData(5),
     fetchAPI('/global'),
     fetchAPI('/homepage'),
     fetchAPI('/categories'),
