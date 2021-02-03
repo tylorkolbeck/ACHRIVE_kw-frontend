@@ -90,12 +90,17 @@ export default function ChangeLog({ changeLogData }) {
   )
 }
 
+ChangeLog.defaultProps = {
+  changeLogData: []
+}
+
 export async function getStaticProps() {
   const changeLogData = await fetchAPI('/change-logs')
 
   return {
     props: {
       changeLogData
-    }
+    },
+    revalidate: 10
   }
 }
