@@ -51,7 +51,7 @@ export default function ChangeLog({ changeLogData }) {
   }
   return (
     <div className={classes.root}>
-      {changeLogData &&
+      {changeLogData?.length > 1 &&
         changeLogData.map((change) => {
           return (
             <List>
