@@ -26,15 +26,14 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     // background: fade(theme.palette.secondary.main, 0.1),
-    background: fade(theme.palette.secondary.dark, 0.8),
+    background: fade(theme.palette.secondary.dark, 0.1),
     // background: '#14c07b',
     // color: 'white',
     height: '150px',
     '&:hover': {
       cursor: 'pointer',
       background: theme.palette.secondary.light
-    },
-    color: 'white'
+    }
   }
 }))
 
@@ -62,12 +61,12 @@ function CarouselElement({ cardData, width }) {
           <Grid container className={classes.root} spacing={5}>
             <Grid item xs>
               <Paper className={classes.paper}>
-                <Typography variant="h5">Custom Message</Typography>
+                {/* <Typography variant="h5">Custom Message</Typography> */}
               </Paper>
             </Grid>
             <Grid item xs>
               <Paper className={classes.paper}>
-                <Typography variant="h5">Custom Message</Typography>
+                {/* <Typography variant="h5">Custom Message</Typography> */}
               </Paper>
             </Grid>
           </Grid>
@@ -79,17 +78,17 @@ function CarouselElement({ cardData, width }) {
           <Grid container className={classes.root} spacing={5}>
             <Grid item xs>
               <Paper className={classes.paper}>
-                <Typography variant="h5">Custom Message</Typography>
+                {/* <Typography variant="h5">Custom Message</Typography> */}
               </Paper>
             </Grid>
             <Grid item xs>
               <Paper className={classes.paper}>
-                <Typography variant="h5">Custom Message</Typography>
+                {/* <Typography variant="h5">Custom Message</Typography> */}
               </Paper>
             </Grid>
             <Grid item xs className={classes.smHidden}>
               <Paper className={classes.paper}>
-                <Typography variant="h5">Custom Message</Typography>
+                {/* <Typography variant="h5">Custom Message</Typography> */}
               </Paper>
             </Grid>
           </Grid>

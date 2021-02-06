@@ -6,6 +6,8 @@ import ArticleCard from '../components/card/articleCard.component'
 import Link from 'next/link'
 import Footer from '../components/Footer/Footer.component'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
+import PageHeader from '../components/PageHeader/PageHeader.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +86,7 @@ export default function Articles({ articles }) {
   // }
   return (
     <div>
+      <PageHeader title={'Articles'} />
       <Grid container className={classes.root} justify="center" wrap="nowrap">
         {/* <Grid item className={classes.categoryLinks}>
           {categoryState.map((cat) => (
@@ -97,6 +100,9 @@ export default function Articles({ articles }) {
           ))}
         </Grid> */}
         <Grid item style={{ flexGrow: 1 }}>
+          <Grid item style={{ margin: '20px auto' }}>
+            <NewsLetterSignup />
+          </Grid>
           {/* <Grid item className={classes.searchWrapper}>
             <Autocomplete
               freeSolo
@@ -118,7 +124,28 @@ export default function Articles({ articles }) {
           </Grid> */}
           <Grid item>
             <Grid container>
-              {categoryState.map((cat) => {
+              <div className={classes.articleCardWrapper}>
+                {articleState.map((article, index) => {
+                  return (
+                    <>
+                      <ArticleCard
+                        key={article.id}
+                        article={article}
+                        noCategory
+                        category={article?.category}
+                        // image={article?.image}
+                        description={article.description}
+                        authorName={
+                          article?.author?.name
+                            ? article?.author?.name
+                            : 'Faceless Man'
+                        }
+                      />
+                    </>
+                  )
+                })}
+              </div>
+              {/* {categoryState.map((cat) => {
                 return (
                   <Grid
                     item
@@ -126,7 +153,7 @@ export default function Articles({ articles }) {
                     className={classes.articleCategoryList}
                     key={`category_header_${cat}`}
                   >
-                    {/* <Link href={`/category/${cat}`}>
+                    <Link href={`/category/${cat}`}>
                       <a>
                         <div className={classes.categoryLinkWrapper}>
                           <Typography variant="caption" id={cat}>
@@ -134,32 +161,10 @@ export default function Articles({ articles }) {
                           </Typography>
                         </div>
                       </a>
-                    </Link> */}
-
-                    <div className={classes.articleCardWrapper}>
-                      {articleState.map((article) => {
-                        if (article.category === cat) {
-                          return (
-                            <ArticleCard
-                              key={article.id}
-                              article={article}
-                              noCategory
-                              category={cat}
-                              // image={article?.image}
-                              description={article.description}
-                              authorName={
-                                article?.author?.name
-                                  ? article?.author?.name
-                                  : 'Faceless Man'
-                              }
-                            />
-                          )
-                        }
-                      })}
-                    </div>
+                    </Link>
                   </Grid>
                 )
-              })}
+              })} */}
             </Grid>
           </Grid>
         </Grid>

@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
 import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import capitalizeFirstLetter from '../lib/utils'
+import PageHeader from '../components/PageHeader/PageHeader.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,106 +104,111 @@ export default function Faq({ faqs }) {
   }
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h2">FAQs</Typography>
-      {/* Search field */}
-      <ScrollToTopButton />
-      <Grid item className={classes.inputWrapper}>
-        <Autocomplete
-          freeSolo
-          options={faqState}
-          getOptionLabel={(option) => option.question}
-          onChange={(e, value) => scrollToQuestion(value.id)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search FAQs..."
-              margin="normal"
-              variant="outlined"
-            />
-          )}
-        />
-      </Grid>
-      {/* Categories and Questions list */}
-      {faqCategories.map((faqCat) => (
-        <div style={{ marginBottom: '30px' }}>
-          <Typography
-            variant="body1"
-            className={classes.catTitle}
-            onClick={(e) => scrollToCategory(e, faqCat)}
-          >
-            {capitalizeFirstLetter(faqCat)}
-          </Typography>
-          <Grid container>
-            {faqState.map((faq) => {
-              if (faq.category === faqCat) {
-                return (
-                  <Grid item key={faq.id} className={classes.questionLink}>
-                    <Typography
-                      className={classes.question}
-                      onClick={(e) => scrollToQuestion(faq.id)}
-                    >
-                      {faq.question}
-                    </Typography>
-                  </Grid>
-                )
-              }
-            })}
-          </Grid>
-        </div>
-      ))}
-      {/* Category, Questions and collapsable Answers */}
-      <List>
+    <>
+      <PageHeader title="FAQs"></PageHeader>
+
+      <div className={classes.root}>
+        {/* <Typography variant="h2">FAQs</Typography> */}
+        {/* Search field */}
+        <ScrollToTopButton />
+        <Grid item className={classes.inputWrapper}>
+          <Autocomplete
+            freeSolo
+            options={faqState}
+            getOptionLabel={(option) => option.question}
+            onChange={(e, value) => scrollToQuestion(value.id)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search FAQs..."
+                margin="normal"
+                variant="outlined"
+              />
+            )}
+          />
+        </Grid>
+        {/* Categories and Questions list */}
         {faqCategories.map((faqCat) => (
-          <div>
+          <div style={{ marginBottom: '30px' }}>
             <Typography
+              variant="body1"
               className={classes.catTitle}
               onClick={(e) => scrollToCategory(e, faqCat)}
-              variant="body1"
-              id={`category_${faqCat}`}
             >
-              {/* {capitalizeFirstLetter(faqCat)} */}
+              {capitalizeFirstLetter(faqCat)}
             </Typography>
-            {faqState &&
-              faqState.map((q) => {
-                if (q.category === faqCat)
+
+            <Grid item xs>
+              {faqState.map((faq) => {
+                if (faq.category === faqCat) {
                   return (
-                    <div key={q.id}>
-                      <ListItem
-                        button
-                        onClick={() => toggleFaqOpen(q.id)}
-                        id={`question_${q.id}`}
-                        key={q.id}
+                    <Grid item key={faq.id} className={classes.questionLink}>
+                      <Typography
+                        className={classes.question}
+                        onClick={(e) => scrollToQuestion(faq.id)}
                       >
-                        <ListItemText
-                          primary={
-                            <Typography
-                              variant="h5"
-                              className={classes.questionListItem}
-                            >
-                              {q.question}
-                            </Typography>
-                          }
-                        />
-                        {q.expanded ? (
-                          <ExpandLess className={classes.expand} />
-                        ) : (
-                          <ExpandMore className={classes.expand} />
-                        )}
-                      </ListItem>
-                      <Collapse in={q.expanded} timeout="auto" unmountOnExit>
-                        {/* look into the opposite of unmountOnExit */}
-                        <ListItem button>
-                          <ListItemText primary={q.answer} />
-                        </ListItem>
-                      </Collapse>
-                    </div>
+                        {faq.question}
+                      </Typography>
+                    </Grid>
                   )
+                }
               })}
+            </Grid>
           </div>
         ))}
-      </List>
-    </div>
+        {/* Category, Questions and collapsable Answers */}
+        <List>
+          {faqCategories.map((faqCat) => (
+            <div>
+              <Typography
+                className={classes.catTitle}
+                onClick={(e) => scrollToCategory(e, faqCat)}
+                variant="body1"
+                id={`category_${faqCat}`}
+              >
+                {/* {capitalizeFirstLetter(faqCat)} */}
+              </Typography>
+              {faqState &&
+                faqState.map((q) => {
+                  if (q.category === faqCat)
+                    return (
+                      <div key={q.id}>
+                        <ListItem
+                          button
+                          onClick={() => toggleFaqOpen(q.id)}
+                          id={`question_${q.id}`}
+                          key={q.id}
+                        >
+                          <ListItemText
+                            primary={
+                              <Typography
+                                variant="h5"
+                                className={classes.questionListItem}
+                              >
+                                {q.question}
+                              </Typography>
+                            }
+                          />
+                          {q.expanded ? (
+                            <ExpandLess className={classes.expand} />
+                          ) : (
+                            <ExpandMore className={classes.expand} />
+                          )}
+                        </ListItem>
+                        <Collapse in={q.expanded} timeout="auto" unmountOnExit>
+                          {/* look into the opposite of unmountOnExit */}
+                          <ListItem button>
+                            <ListItemText primary={q.answer} />
+                          </ListItem>
+                        </Collapse>
+                      </div>
+                    )
+                })}
+            </div>
+          ))}
+        </List>
+      </div>
+    </>
   )
 }
 

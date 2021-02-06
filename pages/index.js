@@ -4,8 +4,6 @@ import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
-import HomepageBlogHeader from '../containers/HomepageBlogHeader/HomepageBlogHeader.container'
-import ArticleCategoryList from '../containers/ArticleCategoryList/ArticleCategoryList.container'
 
 import HomepageHero from '../components/HomepageHero/HomepageHero.component'
 import Carousel from '../components/Carousel/Carousel.component'
@@ -24,7 +22,8 @@ const useStyles = makeStyles((theme) => {
 
   return {
     root: {
-      flexGrow: 1
+      flexGrow: 1,
+      overflowX: 'hidden'
     },
     content: {
       maxWidth: theme.custom.screen.maxWidthHome,
@@ -32,10 +31,20 @@ const useStyles = makeStyles((theme) => {
       // background: 'white'
     },
     Hero: {
-      padding: contentPadding
+      padding: contentPadding,
+      paddingTop: '50px',
+      paddingBottom: '50px',
+      // background: theme.palette.secondary.main,
+      backgroundImage:
+        'linear-gradient(to right top, #0d46a0, #0a3c94, #073388, #03297d, #002071)',
+      color: 'white',
+      borderBottom: '5px solid #52c4ed'
     },
     Carousel: {
-      padding: contentPadding
+      // marginTop: '30px'
+      padding: contentPadding,
+      marginTop: '30px',
+      marginBottom: '30px'
     },
     RecentArticles: {
       padding: contentPadding
@@ -57,10 +66,11 @@ const useStyles = makeStyles((theme) => {
       borderBottom: `2px solid ${theme.palette.secondary.main}`
     },
     newsletterWrapper: {
-      border: `2px solid ${theme.custom.color.green}`,
-      padding: '20px',
-      marginBottom: theme.spacing(3),
-      borderRadius: '4px'
+      // padding: contentPadding
+      // border: `2px solid ${theme.custom.color.green}`,
+      // padding: '20px',
+      // marginBottom: theme.spacing(3),
+      // borderRadius: '4px'
       // paddingTop: theme.spacing(2),
       // marginTop: theme.spacing(5)
       // border: '2px solid blue'
@@ -75,10 +85,12 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
   return (
     <Grid container className={classes.root} direction="column">
       <Seo seo={homepage.seo} global={global} />
-
+      <Grid container className={classes.Hero}>
+        <HomepageHero />
+      </Grid>
       <Grid item className={classes.content}>
-        <Grid container className={classes.Hero}>
-          <HomepageHero />
+        <Grid item className={classes.Carousel}>
+          <Carousel />
         </Grid>
 
         <Grid item className={classes.RecentArticles}>
@@ -88,6 +100,9 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
                 Latest Article
               </Typography>
               <FeaturedArticle article={allPostsData[0]} />
+              <Grid item style={{ marginTop: '20px' }}>
+                <NewsLetterSignup />
+              </Grid>
             </Grid>
             <Grid item xs={12} sm={5}>
               <Typography variant="h4" className={classes.ContentHeader}>
@@ -97,14 +112,10 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
             </Grid>
           </Grid>
         </Grid>
-
+        {/* 
         <Grid item className={classes.newsletterWrapper}>
           <NewsLetterSignup />
-        </Grid>
-
-        <Grid item className={classes.Carousel}>
-          <Carousel />
-        </Grid>
+        </Grid> */}
 
         {/* BOTTOM SECTION MARKETING */}
         <Grid item className={classes.Marketing}>

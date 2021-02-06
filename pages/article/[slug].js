@@ -5,10 +5,12 @@ import { Typography, Grid, Chip, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
+import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
+      flexGrow: 1,
       maxWidth: theme.custom.screen.maxWidth,
       margin: '0px auto',
       padding: theme.custom.screen.bodyPadding
@@ -80,6 +82,9 @@ export default function Article({ postData }) {
 
       <Seo seo={seo} />
       <ReactMarkdown source={postData.content} escapeHtml={false} />
+      <Grid item>
+        <NewsLetterSignup />
+      </Grid>
     </Grid>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Divider, Grid, Typography } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 // import BG from '../../public/bg.jpg'
 
 const useStyles = makeStyles((theme) => {
@@ -16,16 +16,22 @@ const useStyles = makeStyles((theme) => {
       fontFamily: 'archiveFont',
       lineHeight: 1,
       [theme.breakpoints.down('xs')]: {
-        fontSize: '4rem'
+        fontSize: '2rem'
       }
     },
     heroSubTitle: {
       fontStyle: 'italic',
       fontSize: '24px',
-      paddingTop: 0
+      paddingTop: 0,
+      fontWeight: '400',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '1rem',
+        marginTop: '10px'
+      }
     },
     CTA: {
       marginTop: theme.spacing(2),
+      color: '#14c07b',
       '& button': {
         background: '#14c07b',
         color: 'white'
@@ -54,14 +60,19 @@ export default function HomepageHero() {
         </Grid>
       </Grid>
       <Grid item xs={12} sm={4}>
-        <Grid container direction="column">
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          style={{ height: '100%' }}
+        >
           <Grid item>
             <Grid container>
               <Grid item>
-                <Typography variant="body1">
+                {/* <Typography variant="body1">
                   <b>Powerful Trading Products</b>
-                </Typography>
-                <Typography variant="caption">
+                </Typography> */}
+                <Typography variant="body1">
                   Strategies and signals to improve your trading, powered by our
                   AI and expert chart analysis.
                 </Typography>
@@ -75,6 +86,75 @@ export default function HomepageHero() {
           </Grid>
         </Grid>
       </Grid>
+      {/* <Grid item style={{ flexGrow: 1 }}>
+        <Grid
+          container
+          style={{ flexGrow: 1 }}
+          spacing={5}
+          direction="row"
+          justify="center"
+          alignItems="stretch"
+        >
+          <Grid item xs>
+            <Grid
+              container
+              direction="column"
+              justify="space-between"
+              style={{ height: '100%' }}
+            >
+              <Typography variant="h6">Premium Content</Typography>
+              <Typography variant="caption">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Reiciendis
+              </Typography>
+              <Grid item>
+                <Button
+                  xs={12}
+                  className={classes.CTA}
+                  style={{ marginTop: 'auto' }}
+                >
+                  Join Premium
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs>
+            <Grid
+              container
+              direction="column"
+              justify="space-between"
+              style={{ height: '100%' }}
+            >
+              <Typography variant="h6">Powerful Strategies</Typography>
+              <Typography variant="caption">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Reiciendis, quaerat!
+              </Typography>
+              <Grid item>
+                <Button className={classes.CTA}>View Stratigies</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs>
+            <Grid
+              container
+              direction="column"
+              justify="space-between"
+              style={{ height: '100%' }}
+            >
+              <Typography variant="h6">Expert Chart Analysis</Typography>
+              <Typography variant="caption">
+                Lorem ipsum dolor sit amet consectetur Reiciendis, quaerat!
+              </Typography>
+
+              <Grid item>
+                <Button className={classes.CTA}>View Analysis</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid> */}
     </Grid>
   )
 }
