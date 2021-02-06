@@ -4,93 +4,104 @@ import { Grid, Typography, Divider, Chip } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { DateTime } from 'luxon'
+import { getStrapiMedia } from '../../lib/media'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: theme.spacing(0.5)
-  },
-  cardTitle: {
-    fontWeight: 'bold'
-  },
-  articleImgWrapper: {
-    '& img': {
-      width: '125px',
-      height: '75px'
+    flexGrow: 1,
+    marginBottom: theme.spacing(1),
+
+    '& a': {
+      color: theme.palette.secondary.dark,
+      '&:hover': {
+        cursor: 'pointer',
+        color: 'black'
+      }
     }
   },
-  author: {
-    marginTop: 'auto',
-    color: theme.palette.primary.light
+  authorFooter: {
+    display: 'flex',
+    justifyContent: 'space-between'
   },
-  categoryChip: {
-    marginBottom: theme.spacing(1)
+  title: {
+    fontWeight: '400'
+  },
+  chip: {
+    borderRadius: '2px',
+    background: theme.palette.secondary.main,
+    color: 'white'
+  },
+  image: {
+    height: '200px',
+
+    width: '250px',
+    marginRight: theme.spacing(2),
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
   }
 }))
 
 const ArticleCard = ({
   article,
-  last,
+  image,
   authorName,
   category,
-  strip,
+  noCategory,
   description
 }) => {
   const classes = useStyles()
-  const imgStyles = { maxWidth: '100%', objectFit: 'cover' }
-  return (
-    <Grid container spacing={2} className={classes.root}>
-      <Grid item xs={12}>
-        <Grid container spacing={1}>
-          {!strip && (
-            <Grid item className={classes.articleImgWrapper}>
-              <Image style={imgStyles} image={article.image} />
-            </Grid>
-          )}
-          <Grid item xs={7}>
-            <Grid
-              container
-              direction="column"
-              style={{ height: '100%' }}
-              alignItems="flex-start"
-            >
-              {category && !strip && (
-                <Link href={`/category/${category}`}>
-                  <Chip
-                    color="secondary"
-                    variant="outlined"
-                    size="small"
-                    component="a"
-                    href={`/categories/${article.category.name}`}
-                    label={category}
-                    clickable
-                    className={classes.categoryChip}
-                  />
-                </Link>
-              )}
-              <Link href={`/article/${article.slug}`} color="inherit">
-                <a>
-                  <Typography className={classes.cardTitle}>
-                    {article.title}
-                  </Typography>
-                </a>
-              </Link>
-              {description && (
-                <Typography variant="body1">{description}</Typography>
-              )}
 
-              <Typography variant="caption" className={classes.author}>
-                {authorName} &#8226;{' '}
-                {DateTime.fromISO(article.published_at).toLocaleString(
-                  DateTime.DATETIME_MED
-                )}
-              </Typography>
-            </Grid>
-          </Grid>
-          {/* <Grid item xs={12}> */}
-          {/* </Grid> */}
-        </Grid>
+  return (
+    <Grid container className={classes.root}>
+      {image && (
+        <Grid
+          item
+          className={classes.image}
+          style={{ backgroundImage: `url(${getStrapiMedia(image)})` }}
+        ></Grid>
+      )}
+      <Grid item>
+        <Link href={`/article/${article.slug}`}>
+          <a>
+            <Typography
+              variant="h6"
+              className={classes.title}
+              style={{ marginBottom: '5px' }}
+            >
+              {article.title}
+            </Typography>
+          </a>
+        </Link>
+        <Typography variant="body2" style={{ marginBottom: '10px' }}>
+          {description}
+        </Typography>
+        {!!noCategory && (
+          <Typography variant="caption">
+            {authorName} &#8226;{' '}
+            {DateTime.fromISO(article?.published_at).toLocaleString(
+              DateTime.DATE_MED
+            )}
+          </Typography>
+        )}
       </Grid>
-      <Divider />
+      <Grid item xs={12} className={classes.authorFooter}>
+        {!noCategory && category && (
+          <Link href={`/category/${category}`}>
+            <Chip label={category} size="small" className={classes.chip} />
+          </Link>
+        )}
+        {!noCategory && (
+          <Typography variant="caption">
+            {authorName} &#8226;{' '}
+            {DateTime.fromISO(article?.published_at).toLocaleString(
+              DateTime.DATE_MED
+            )}
+          </Typography>
+        )}
+      </Grid>
+      <Grid item xs={12} style={{ marginTop: '20px' }}>
+        <Divider />
+      </Grid>
     </Grid>
   )
 }

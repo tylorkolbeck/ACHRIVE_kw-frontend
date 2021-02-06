@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    position: 'relative',
     '&:hover': {
       cursor: 'pointer'
     }
@@ -156,24 +157,30 @@ export default function Nav() {
         </IconButton>
         {drawer}
       </Drawer>
-      <AppBar position="static">
+      <AppBar position="relative">
         <Toolbar>
-          <Link href="/">
-            <Typography variant="h6" className={classes.title}>
-              Killer Whale
+          <div className={classes.title}>
+            <Link href="/">
+              <img
+                src="/KW_logo.png"
+                width="75px"
+                style={{ position: 'absolute', top: '-20px' }}
+              />
+            </Link>
+            {/* <Typography variant="h6" className={classes.title}>
               <Link href="/change-log">
                 <span
                   style={{
                     color: '#6270c3',
                     fontSize: '12px',
-                    marginLeft: '10px'
+                    marginLeft: '100px'
                   }}
                 >
                   Beta 1.1
                 </span>
               </Link>
-            </Typography>
-          </Link>
+            </Typography> */}
+          </div>
 
           <List
             component="nav"

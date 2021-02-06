@@ -3,30 +3,171 @@ import Seo from '../components/seo/seo.component'
 import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
+import { Grid, Typography } from '@material-ui/core'
 import HomepageBlogHeader from '../containers/HomepageBlogHeader/HomepageBlogHeader.container'
 import ArticleCategoryList from '../containers/ArticleCategoryList/ArticleCategoryList.container'
-import { Divider } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: theme.custom.screen.maxWidthHome,
-    margin: '20px auto',
-    padding: theme.spacing(2)
+import HomepageHero from '../components/HomepageHero/HomepageHero.component'
+import Carousel from '../components/Carousel/Carousel.component'
+import FeaturedArticle from '../components/FeaturedArticle/FeaturedArticle.component'
+import RecentArticles from '../components/RecentArticles/RecentArticles.component'
+import ProductInfo from '../components/ProductInfo/ProductInfo.component'
+import PremiumCommunityInfo from '../components/PremiumCommunityInfo/PremiumCommunityInfo.component'
+import Reviews from '../components/Review/Review.component'
+import Videos from '../components/Videos/Video.component'
+import Footer from '../components/Footer/Footer.component'
+import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
+
+const useStyles = makeStyles((theme) => {
+  const contentPadding = theme.spacing(3)
+  const contentHeaderMargin = theme.spacing(2)
+
+  return {
+    root: {
+      flexGrow: 1
+    },
+    content: {
+      maxWidth: theme.custom.screen.maxWidthHome,
+      margin: '0px auto'
+      // background: 'white'
+    },
+    Hero: {
+      padding: contentPadding
+    },
+    Carousel: {
+      padding: contentPadding
+    },
+    RecentArticles: {
+      padding: contentPadding
+    },
+    Marketing: {
+      padding: contentPadding
+    },
+    ContentHeader: {
+      marginBottom: contentHeaderMargin
+      // color: contentHeaderColor
+    },
+    ContentSubHeader: {
+      marginTop: '-10px',
+      marginBottom: contentHeaderMargin * 2
+    },
+    section: {
+      marginBottom: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
+      borderBottom: `2px solid ${theme.palette.secondary.main}`
+    }
   }
-}))
+})
 
 const Home = ({ allPostsData, homepage, global, categories, authors }) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
+    <Grid container className={classes.root} direction="column">
       <Seo seo={homepage.seo} global={global} />
+
+      <Grid item className={classes.content}>
+        <Grid container className={classes.Hero}>
+          <HomepageHero />
+        </Grid>
+
+        <Grid item className={classes.Carousel}>
+          <Carousel />
+        </Grid>
+
+        <Grid item className={classes.RecentArticles}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} sm={7}>
+              <Typography variant="h4" className={classes.ContentHeader}>
+                Latest Article
+              </Typography>
+              <FeaturedArticle article={allPostsData[0]} />
+              <NewsLetterSignup />
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <Typography variant="h4" className={classes.ContentHeader}>
+                Recent Articles
+              </Typography>
+              <RecentArticles articles={allPostsData.slice(0, 5)} />
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* BOTTOM SECTION MARKETING */}
+        <Grid item className={classes.Marketing}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} sm={7}>
+              <Typography variant="h4" className={classes.ContentHeader}>
+                Videos
+              </Typography>
+              <Videos />
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              {/* TRADING PRODUCTS */}
+              <Grid item className={classes.section}>
+                <Typography
+                  variant="h4"
+                  component="h4"
+                  className={classes.ContentHeader}
+                >
+                  Trading Products
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  component="p"
+                  className={classes.ContentSubHeader}
+                >
+                  Swing, Breakout, HODL, Scalp
+                </Typography>
+                <ProductInfo />
+              </Grid>
+              {/* END TRADING PRODUCTS */}
+
+              {/* PREMIUM COMMUNITY */}
+              <Grid container direction="column" className={classes.section}>
+                <Typography variant="h4" className={classes.ContentHeader}>
+                  Premium Community
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  component="p"
+                  className={classes.ContentSubHeader}
+                >
+                  Be a part of the active Killer Whale Pod!
+                </Typography>
+                <PremiumCommunityInfo />
+              </Grid>
+              {/* END PREMIUM COMMUNITY */}
+
+              {/* REVIEWS */}
+              <Grid container direction="column" className={classes.section}>
+                <Typography variant="h4" className={classes.ContentHeader}>
+                  Reviews
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  component="p"
+                  className={classes.ContentSubHeader}
+                >
+                  Hear from the Killer Whale Pod!
+                </Typography>
+                <Reviews />
+              </Grid>
+              {/* END REVIEWS */}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Footer />
+
+      {/* <Seo seo={homepage.seo} global={global} />
       <HomepageBlogHeader articles={allPostsData} />
       <Divider style={{ margin: '20px' }} />
       <div style={{ marginTop: '50px' }}>
         <ArticleCategoryList categories={categories} authors={authors} />
-      </div>
-    </div>
+      </div> */}
+    </Grid>
   )
 }
 
