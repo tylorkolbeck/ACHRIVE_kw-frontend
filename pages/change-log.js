@@ -95,7 +95,7 @@ ChangeLog.defaultProps = {
 }
 
 export async function getStaticProps() {
-  const changeLogData = await fetchAPI('/change-logs')
+  const changeLogData = await fetchAPI('/change-logs?_sort=published_at:DESC')
 
   return {
     props: {
