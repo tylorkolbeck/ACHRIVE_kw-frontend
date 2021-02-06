@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: theme.custom.screen.maxWidth,
     margin: '20px auto',
     padding: theme.spacing(2),
-    position: 'relative'
+    position: 'relative',
+    marginBottom: '700px'
   },
   catTitle: {
     cursor: 'pointer',
