@@ -52,9 +52,9 @@ export default function ChangeLog({ changeLogData }) {
   return (
     <div className={classes.root}>
       {changeLogData?.length > 0 &&
-        changeLogData.map((change) => {
+        changeLogData.map((change, index) => {
           return (
-            <List>
+            <List key={index}>
               <ListItem alignItems="flex-start">
                 <ListItemText
                   primary={
@@ -76,7 +76,7 @@ export default function ChangeLog({ changeLogData }) {
                   secondary={change.changeDescription
                     .split('\n')
                     .map((entry, index) => (
-                      <Grid container spacing={3}>
+                      <Grid container spacing={3} key={index}>
                         {' '}
                         {formatChange(entry)}
                       </Grid>

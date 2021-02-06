@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Faq({ faqs, categories }) {
+export default function Faq({ faqs }) {
   const classes = useStyles()
   const router = useRouter()
   const [faqState, setFaqState] = React.useState([])
@@ -196,9 +196,9 @@ export default function Faq({ faqs, categories }) {
 
 export async function getStaticProps() {
   const faqs = await fetchAPI('/fa-qs')
-  const categories = await fetchAPI('/categories')
+
   return {
-    props: { faqs, categories },
+    props: { faqs },
     revalidate: 10
   }
 }

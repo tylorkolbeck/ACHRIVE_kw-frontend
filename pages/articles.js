@@ -9,16 +9,16 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: theme.custom.screen.maxWidthHome,
-    margin: '0px auto',
+    maxWidth: '800px',
+    margin: '20px auto',
     padding: theme.spacing(3)
   },
   articleCategoryList: {
-    paddingBottom: theme.spacing(5)
+    paddingBottom: theme.spacing(2)
   },
   articleCardWrapper: {
-    marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(1)
+    marginLeft: theme.spacing(1)
+    // marginTop: theme.spacing(1)
   },
   categoryLinks: {
     marginRight: theme.spacing(5),
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   categoryLinkWrapper: {
-    background: '#0d46a0',
+    // background: '#0d46a0',
     display: 'inline-block',
-    color: 'white',
+    color: theme.palette.secondary.light,
     padding: '4px 6px',
     borderRadius: '4px',
     '&:hover': {
@@ -85,7 +85,7 @@ export default function Articles({ articles }) {
   return (
     <div>
       <Grid container className={classes.root} justify="center" wrap="nowrap">
-        <Grid item className={classes.categoryLinks}>
+        {/* <Grid item className={classes.categoryLinks}>
           {categoryState.map((cat) => (
             <Link href={`#${cat}`} key={`category_link_${cat}`}>
               <a>
@@ -95,7 +95,7 @@ export default function Articles({ articles }) {
               </a>
             </Link>
           ))}
-        </Grid>
+        </Grid> */}
         <Grid item style={{ flexGrow: 1 }}>
           {/* <Grid item className={classes.searchWrapper}>
             <Autocomplete
@@ -126,7 +126,7 @@ export default function Articles({ articles }) {
                     className={classes.articleCategoryList}
                     key={`category_header_${cat}`}
                   >
-                    <Link href={`/category/${cat}`}>
+                    {/* <Link href={`/category/${cat}`}>
                       <a>
                         <div className={classes.categoryLinkWrapper}>
                           <Typography variant="caption" id={cat}>
@@ -134,7 +134,7 @@ export default function Articles({ articles }) {
                           </Typography>
                         </div>
                       </a>
-                    </Link>
+                    </Link> */}
 
                     <div className={classes.articleCardWrapper}>
                       {articleState.map((article) => {

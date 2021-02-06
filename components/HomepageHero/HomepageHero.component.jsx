@@ -1,8 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import styles from './index.module.css'
 import { Button, Divider, Grid, Typography } from '@material-ui/core'
-import { blueGrey } from '@material-ui/core/colors'
 // import BG from '../../public/bg.jpg'
 
 const useStyles = makeStyles((theme) => {
@@ -27,7 +25,11 @@ const useStyles = makeStyles((theme) => {
       paddingTop: 0
     },
     CTA: {
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
+      '& button': {
+        background: '#14c07b',
+        color: 'white'
+      }
     }
   }
 })
@@ -65,8 +67,8 @@ export default function HomepageHero() {
                 </Typography>
               </Grid>
               <Grid item className={classes.CTA}>
-                <Button variant="contained" color="secondary" xs={12}>
-                  Products
+                <Button variant="contained" xs={12}>
+                  View Stratigies
                 </Button>
               </Grid>
             </Grid>

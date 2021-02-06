@@ -164,10 +164,10 @@ export default function Nav() {
               <img
                 src="/KW_logo.png"
                 width="75px"
-                style={{ position: 'absolute', top: '-20px' }}
+                style={{ position: 'absolute', top: '0px' }}
               />
             </Link>
-            {/* <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" className={classes.title}>
               <Link href="/change-log">
                 <span
                   style={{
@@ -176,10 +176,10 @@ export default function Nav() {
                     marginLeft: '100px'
                   }}
                 >
-                  Beta 1.1
+                  Beta 1.2
                 </span>
               </Link>
-            </Typography> */}
+            </Typography>
           </div>
 
           <List

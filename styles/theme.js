@@ -15,6 +15,9 @@ const theme = createMuiTheme({
     }
   },
   custom: {
+    color: {
+      green: '#14c07b'
+    },
     screen: {
       maxWidth: '800px',
       maxWidthHome: '1200px',

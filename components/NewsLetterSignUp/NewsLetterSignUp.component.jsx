@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderTop: `2px solid ${theme.palette.secondary.main}`,
-    paddingTop: theme.spacing(2),
-    marginTop: theme.spacing(5)
+    // borderTop: `2px solid ${theme.palette.secondary.main}`,
+    // paddingTop: theme.spacing(2),
+    // marginTop: theme.spacing(5)
     // marginBottom: theme.spacing(3)
   },
   inputLabel: {
@@ -22,8 +22,8 @@ export default function NewsLetterSignUp() {
     <div className={classes.root}>
       <Grid container direction="column">
         <Grid item>
-          <Typography variant="h6" className={classes.inputLabel}>
-            Subscribe to Killer Whale for the lates news and trading updates
+          <Typography variant="h5" className={classes.inputLabel}>
+            Subscribe to Killer Whale for the latest news and trading updates
           </Typography>
         </Grid>
         <Grid item xs={12}>

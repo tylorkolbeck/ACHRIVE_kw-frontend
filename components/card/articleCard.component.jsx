@@ -1,6 +1,5 @@
 import React from 'react'
-import Image from '../image/image.component'
-import { Grid, Typography, Divider, Chip } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { DateTime } from 'luxon'
@@ -9,7 +8,7 @@ import { getStrapiMedia } from '../../lib/media'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(3),
 
     '& a': {
       color: theme.palette.secondary.dark,
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   title: {
-    fontWeight: '400'
+    fontWeight: '600'
   },
   chip: {
     borderRadius: '2px',
@@ -33,11 +32,17 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     height: '200px',
-
     width: '250px',
     marginRight: theme.spacing(2),
     backgroundPosition: 'center',
     backgroundSize: 'cover'
+  },
+  description: {
+    color: '405379',
+    fontWeight: '400'
+  },
+  categoryName: {
+    color: theme.palette.secondary.light
   }
 }))
 
@@ -52,7 +57,7 @@ const ArticleCard = ({
   const classes = useStyles()
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} direction="column">
       {image && (
         <Grid
           item
@@ -61,10 +66,19 @@ const ArticleCard = ({
         ></Grid>
       )}
       <Grid item>
+        <Link href={`/category/${category}`}>
+          <a>
+            <Typography variant="caption" className={classes.categoryName}>
+              {category && category.toUpperCase()}
+            </Typography>
+          </a>
+        </Link>
+      </Grid>
+      <Grid item>
         <Link href={`/article/${article.slug}`}>
           <a>
             <Typography
-              variant="h6"
+              variant="h5"
               className={classes.title}
               style={{ marginBottom: '5px' }}
             >
@@ -72,11 +86,15 @@ const ArticleCard = ({
             </Typography>
           </a>
         </Link>
-        <Typography variant="body2" style={{ marginBottom: '10px' }}>
+        <Typography
+          variant="body2"
+          className={classes.description}
+          style={{ marginBottom: '10px' }}
+        >
           {description}
         </Typography>
         {!!noCategory && (
-          <Typography variant="caption">
+          <Typography variant="caption" style={{ fontWeight: 'bold' }}>
             {authorName} &#8226;{' '}
             {DateTime.fromISO(article?.published_at).toLocaleString(
               DateTime.DATE_MED
@@ -85,13 +103,13 @@ const ArticleCard = ({
         )}
       </Grid>
       <Grid item xs={12} className={classes.authorFooter}>
-        {!noCategory && category && (
+        {/* {!noCategory && category && (
           <Link href={`/category/${category}`}>
             <Chip label={category} size="small" className={classes.chip} />
           </Link>
-        )}
+        )} */}
         {!noCategory && (
-          <Typography variant="caption">
+          <Typography variant="caption" style={{ fontWeight: 'bold' }}>
             {authorName} &#8226;{' '}
             {DateTime.fromISO(article?.published_at).toLocaleString(
               DateTime.DATE_MED
@@ -99,9 +117,9 @@ const ArticleCard = ({
           </Typography>
         )}
       </Grid>
-      <Grid item xs={12} style={{ marginTop: '20px' }}>
+      {/* <Grid item xs={12} style={{ marginTop: '20px' }}>
         <Divider />
-      </Grid>
+      </Grid> */}
     </Grid>
   )
 }

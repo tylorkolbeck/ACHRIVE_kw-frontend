@@ -55,6 +55,16 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(5),
       paddingBottom: theme.spacing(5),
       borderBottom: `2px solid ${theme.palette.secondary.main}`
+    },
+    newsletterWrapper: {
+      border: `2px solid ${theme.custom.color.green}`,
+      padding: '20px',
+      marginBottom: theme.spacing(3),
+      borderRadius: '4px'
+      // paddingTop: theme.spacing(2),
+      // marginTop: theme.spacing(5)
+      // border: '2px solid blue'
+      // background: theme.custom.color.green
     }
   }
 })
@@ -71,10 +81,6 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
           <HomepageHero />
         </Grid>
 
-        <Grid item className={classes.Carousel}>
-          <Carousel />
-        </Grid>
-
         <Grid item className={classes.RecentArticles}>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={7}>
@@ -82,7 +88,6 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
                 Latest Article
               </Typography>
               <FeaturedArticle article={allPostsData[0]} />
-              <NewsLetterSignup />
             </Grid>
             <Grid item xs={12} sm={5}>
               <Typography variant="h4" className={classes.ContentHeader}>
@@ -91,6 +96,14 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
               <RecentArticles articles={allPostsData.slice(0, 5)} />
             </Grid>
           </Grid>
+        </Grid>
+
+        <Grid item className={classes.newsletterWrapper}>
+          <NewsLetterSignup />
+        </Grid>
+
+        <Grid item className={classes.Carousel}>
+          <Carousel />
         </Grid>
 
         {/* BOTTOM SECTION MARKETING */}
