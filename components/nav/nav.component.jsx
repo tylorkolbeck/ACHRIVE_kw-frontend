@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     '&:hover': {
-      cursor: 'pointer',
-      color: theme.palette.secondary.light
+      cursor: 'pointer'
     }
   },
   closeMenuButton: {
@@ -162,15 +161,17 @@ export default function Nav() {
           <Link href="/">
             <Typography variant="h6" className={classes.title}>
               Killer Whale
-              <span
-                style={{
-                  color: '#6270c3',
-                  fontSize: '12px',
-                  marginLeft: '10px'
-                }}
-              >
-                Beta v1.0
-              </span>
+              <Link href="/change-log">
+                <span
+                  style={{
+                    color: '#6270c3',
+                    fontSize: '12px',
+                    marginLeft: '10px'
+                  }}
+                >
+                  Beta 1.1
+                </span>
+              </Link>
             </Typography>
           </Link>
 

@@ -4,7 +4,6 @@ import Seo from '../../components/seo/seo.component'
 import { Typography, Grid, Chip, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
-import { DateTime } from 'luxon'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 
 const useStyles = makeStyles((theme) => {
