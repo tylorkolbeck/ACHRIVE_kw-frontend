@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   catTitle: {
     cursor: 'pointer',
-    fontSize: '24px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: theme.spacing(1)
   },
   question: {
     cursor: 'pointer',
@@ -35,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
   expand: {
     color: theme.palette.secondary.main
+  },
+  questionLink: {
+    marginBottom: theme.spacing(1)
+  },
+  inputWrapper: {
+    marginBottom: theme.spacing(3)
   }
 }))
 
@@ -97,26 +103,30 @@ export default function Faq({ faqs }) {
 
   return (
     <div className={classes.root}>
+      <Typography variant="h2">FAQs</Typography>
       {/* Search field */}
       <ScrollToTopButton />
-      <Autocomplete
-        freeSolo
-        options={faqState}
-        getOptionLabel={(option) => option.question}
-        onChange={(e, value) => scrollToQuestion(value.id)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search FAQs..."
-            margin="normal"
-            variant="outlined"
-          />
-        )}
-      />
+      <Grid item className={classes.inputWrapper}>
+        <Autocomplete
+          freeSolo
+          options={faqState}
+          getOptionLabel={(option) => option.question}
+          onChange={(e, value) => scrollToQuestion(value.id)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search FAQs..."
+              margin="normal"
+              variant="outlined"
+            />
+          )}
+        />
+      </Grid>
       {/* Categories and Questions list */}
       {faqCategories.map((faqCat) => (
-        <>
+        <div style={{ marginBottom: '30px' }}>
           <Typography
+            variant="body1"
             className={classes.catTitle}
             onClick={(e) => scrollToCategory(e, faqCat)}
           >
@@ -126,7 +136,7 @@ export default function Faq({ faqs }) {
             {faqState.map((faq) => {
               if (faq.category === faqCat) {
                 return (
-                  <Grid xs={12} sm={6} item key={faq.id}>
+                  <Grid item key={faq.id} className={classes.questionLink}>
                     <Typography
                       className={classes.question}
                       onClick={(e) => scrollToQuestion(faq.id)}
@@ -138,18 +148,19 @@ export default function Faq({ faqs }) {
               }
             })}
           </Grid>
-        </>
+        </div>
       ))}
       {/* Category, Questions and collapsable Answers */}
       <List>
         {faqCategories.map((faqCat) => (
-          <>
+          <div>
             <Typography
               className={classes.catTitle}
               onClick={(e) => scrollToCategory(e, faqCat)}
+              variant="body1"
               id={`category_${faqCat}`}
             >
-              {capitalizeFirstLetter(faqCat)}
+              {/* {capitalizeFirstLetter(faqCat)} */}
             </Typography>
             {faqState &&
               faqState.map((q) => {
@@ -187,7 +198,7 @@ export default function Faq({ faqs }) {
                     </div>
                   )
               })}
-          </>
+          </div>
         ))}
       </List>
     </div>
