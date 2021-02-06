@@ -2,5 +2,11 @@
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
   "scssFormatter.singleQuote": true,
-  "javascript.preferences.quoteStyle": "single"
+  "javascript.preferences.quoteStyle": "single",
+  "extensions.ignoreRecommendations": true,
+  "files.autoSave": "off",
+  "typescript.tsc.autoDetect": "off",
+  "npm.autoDetect": "off",
+  "debug.allowBreakpointsEverywhere": true,
+  "html.autoClosingTags": false
 }
