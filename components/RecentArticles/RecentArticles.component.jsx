@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import ArticleCard from '../../components/card/articleCard.component'
+import Link from 'next/link'
 
 export default function RecentArticles({ articles }) {
   return (
@@ -17,6 +18,11 @@ export default function RecentArticles({ articles }) {
           />
         )
       })}
+      <Link href="/articles">
+        <Button variant="contained" color="secondary">
+          View All Articles
+        </Button>
+      </Link>
     </Grid>
   )
 }

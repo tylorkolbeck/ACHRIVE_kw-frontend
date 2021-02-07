@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => {
       backgroundImage:
         'linear-gradient(to right top, #0d46a0, #0a3c94, #073388, #03297d, #002071)',
       color: 'white',
-      borderBottom: '5px solid #52c4ed'
+      borderBottom: `5px solid ${theme.custom.color.teal}`
     },
     Carousel: {
       // marginTop: '30px'
@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme) => {
       padding: contentPadding
     },
     ContentHeader: {
-      marginBottom: contentHeaderMargin
+      marginBottom: contentHeaderMargin,
+      fontWeight: 'bold'
       // color: contentHeaderColor
     },
     ContentSubHeader: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => {
     section: {
       marginBottom: theme.spacing(5),
       paddingBottom: theme.spacing(5),
-      borderBottom: `2px solid ${theme.palette.secondary.main}`
+      borderBottom: `2px solid ${theme.custom.color.teal}`
     },
     newsletterWrapper: {
       // padding: contentPadding
@@ -95,38 +96,25 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
 
         <Grid item className={classes.RecentArticles}>
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={7}>
-              <Typography variant="h4" className={classes.ContentHeader}>
+            <Grid item xs={12} sm={6} md={8}>
+              {/* <Typography variant="h4" className={classes.ContentHeader}>
                 Latest Article
-              </Typography>
+              </Typography> */}
               <FeaturedArticle article={allPostsData[0]} />
-              <Grid item style={{ marginTop: '20px' }}>
+              <Grid item style={{ marginTop: '50px', marginBottom: '50px' }}>
                 <NewsLetterSignup />
               </Grid>
-            </Grid>
-            <Grid item xs={12} sm={5}>
-              <Typography variant="h4" className={classes.ContentHeader}>
-                Recent Articles
-              </Typography>
-              <RecentArticles articles={allPostsData.slice(0, 5)} />
-            </Grid>
-          </Grid>
-        </Grid>
-        {/* 
-        <Grid item className={classes.newsletterWrapper}>
-          <NewsLetterSignup />
-        </Grid> */}
-
-        {/* BOTTOM SECTION MARKETING */}
-        <Grid item className={classes.Marketing}>
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={7}>
-              <Typography variant="h4" className={classes.ContentHeader}>
-                Videos
-              </Typography>
               <Videos />
             </Grid>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} sm={6} md={4}>
+              {/* <Typography variant="h4" className={classes.ContentHeader}>
+                Recent Articles
+              </Typography> */}
+              <Grid item className={classes.section}>
+                <RecentArticles articles={allPostsData.slice(0, 4)} />
+              </Grid>
+              {/* -------- */}
+
               {/* TRADING PRODUCTS */}
               <Grid item className={classes.section}>
                 <Typography
@@ -179,7 +167,25 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
                 <Reviews />
               </Grid>
               {/* END REVIEWS */}
+
+              {/* -------------- */}
             </Grid>
+          </Grid>
+        </Grid>
+        {/* 
+        <Grid item className={classes.newsletterWrapper}>
+          <NewsLetterSignup />
+        </Grid> */}
+
+        {/* BOTTOM SECTION MARKETING */}
+        <Grid item className={classes.Marketing}>
+          <Grid container spacing={5}>
+            {/* <Grid item xs={12} sm={7}>
+              <Typography variant="h4" className={classes.ContentHeader}>
+                Videos
+              </Typography>
+              <Videos />
+            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

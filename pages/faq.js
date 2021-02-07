@@ -16,12 +16,14 @@ import { useRouter } from 'next/router'
 import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import capitalizeFirstLetter from '../lib/utils'
 import PageHeader from '../components/PageHeader/PageHeader.component'
+import Footer from '../components/Footer/Footer.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: theme.custom.screen.maxWidth,
-    margin: '20px auto',
-    padding: theme.spacing(2),
+    margin: '0px auto',
+    padding: theme.spacing(3),
+    paddingTop: '0',
     position: 'relative',
     marginBottom: '700px'
   },
@@ -43,8 +45,16 @@ const useStyles = makeStyles((theme) => ({
   },
   inputWrapper: {
     marginBottom: theme.spacing(3)
+  },
+  qAndA: {
+    marginBottom: '20px',
+    '& h6': {
+      marginBottom: '10px'
+    }
   }
 }))
+
+// SEARCH THE ANSWERS AS WELL
 
 export default function Faq({ faqs }) {
   const classes = useStyles()
@@ -129,7 +139,7 @@ export default function Faq({ faqs }) {
         </Grid>
         {/* Categories and Questions list */}
         {faqCategories.map((faqCat) => (
-          <div style={{ marginBottom: '30px' }}>
+          <div style={{ marginBottom: '30px' }} key={faqCat}>
             <Typography
               variant="body1"
               className={classes.catTitle}
@@ -159,7 +169,7 @@ export default function Faq({ faqs }) {
         {/* Category, Questions and collapsable Answers */}
         <List>
           {faqCategories.map((faqCat) => (
-            <div>
+            <div key={faqCat}>
               <Typography
                 className={classes.catTitle}
                 onClick={(e) => scrollToCategory(e, faqCat)}
@@ -172,42 +182,52 @@ export default function Faq({ faqs }) {
                 faqState.map((q) => {
                   if (q.category === faqCat)
                     return (
-                      <div key={q.id}>
-                        <ListItem
-                          button
-                          onClick={() => toggleFaqOpen(q.id)}
-                          id={`question_${q.id}`}
-                          key={q.id}
-                        >
-                          <ListItemText
-                            primary={
-                              <Typography
-                                variant="h5"
-                                className={classes.questionListItem}
-                              >
-                                {q.question}
-                              </Typography>
-                            }
-                          />
-                          {q.expanded ? (
-                            <ExpandLess className={classes.expand} />
-                          ) : (
-                            <ExpandMore className={classes.expand} />
-                          )}
-                        </ListItem>
-                        <Collapse in={q.expanded} timeout="auto" unmountOnExit>
-                          {/* look into the opposite of unmountOnExit */}
-                          <ListItem button>
-                            <ListItemText primary={q.answer} />
-                          </ListItem>
-                        </Collapse>
+                      <div
+                        key={q.id}
+                        className={classes.qAndA}
+                        id={`question_${q.id}`}
+                      >
+                        <Typography variant="h6">{q.question}</Typography>
+                        <Typography variant="body1">{q.answer}</Typography>
                       </div>
                     )
+                  // return (
+                  //   <div key={q.id}>
+                  //     <ListItem
+                  //       button
+                  //       onClick={() => toggleFaqOpen(q.id)}
+                  //       id={`question_${q.id}`}
+                  //       key={q.id}
+                  //     >
+                  //       <ListItemText
+                  //         primary={
+                  //           <Typography
+                  //             variant="h5"
+                  //             className={classes.questionListItem}
+                  //           >
+                  //             {q.question}
+                  //           </Typography>
+                  //         }
+                  //       />
+                  //       {q.expanded ? (
+                  //         <ExpandLess className={classes.expand} />
+                  //       ) : (
+                  //         <ExpandMore className={classes.expand} />
+                  //       )}
+                  //     </ListItem>
+                  //     <Collapse in={q.expanded} timeout="auto" unmountOnExit>
+                  //       <ListItem button>
+                  //         <ListItemText primary={q.answer} />
+                  //       </ListItem>
+                  //     </Collapse>
+                  //   </div>
+                  // )
                 })}
             </div>
           ))}
         </List>
       </div>
+      <Footer />
     </>
   )
 }

@@ -11,15 +11,38 @@ const useStyles = makeStyles((theme) => ({
     // borderLeft: `4px solid ${theme.custom.color.green}`,
     borderLeft: `4px solid ${theme.palette.secondary.light}`,
     padding: '10px',
-    paddingLeft: '20px'
+    paddingBottom: '20px',
+    // paddingLeft: '20px',
+    // background: theme.palette.secondary.light,
+    // color: 'white',
+    // borderRadius: '4px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    '& h6': {
+      margin: '0px'
+      // marginBottom: '20px'
+      // padding: '0px'
+    },
+    '& button': {
+      background: theme.custom.color.green,
+      marginLeft: '20px',
+      color: 'white'
+    }
     // marginBottom: theme.spacing(3)
     // borderRadius: '4px'
   },
   inputLabel: {
-    marginBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2)
   },
   emailInput: {
-    width: '100%'
+    width: '100%',
+    '& input': {
+      background: 'white',
+      borderRadius: '4px'
+    }
+  },
+  privacyPolicy: {
+    color: theme.palette.secondary.light
   }
 }))
 export default function NewsLetterSignUp() {
@@ -29,7 +52,7 @@ export default function NewsLetterSignUp() {
       <Grid container direction="column">
         <Grid item>
           <Typography variant="h6" className={classes.inputLabel}>
-            Subscribe to Killer Whale for the latest news and trading updates
+            Subscribe to Killer Whale for the Latest News and Trading Updates
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -39,15 +62,19 @@ export default function NewsLetterSignUp() {
               placeholder="Email Address"
               variant="outlined"
               className={classes.emailInput}
-              // helperText="Dont worry, we will not spam. You will only get trade insights from our experts and weekly trade predictions."
+              helperText={
+                <Typography variant="caption">
+                  Dont worry, we will not spam. You will only get trade insights
+                  from our experts and weekly trade predictions.
+                  <a href="#" className={classes.privacyPolicy}>
+                    Privacy Policy
+                  </a>
+                </Typography>
+              }
             />
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ marginLeft: '20px' }}
-            >
-              Signup
-            </Button>
+            <Grid item>
+              <Button variant="contained">Signup</Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

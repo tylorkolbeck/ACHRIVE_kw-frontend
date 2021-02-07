@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function AuthorInfo({ author, published, updated, divider }) {
+export default function AuthorInfo({ author, published, divider }) {
   const classes = useStyles()
 
   return (
@@ -46,12 +46,12 @@ export default function AuthorInfo({ author, published, updated, divider }) {
             DateTime.fromISO(published).toLocaleString(
               DateTime.DATETIME_FULL
             )}{' '}
-          {updated && (
+          {/* {updated && (
             <>
               <span className={classes.wingDing}>&#8226;</span> Updated{' '}
               {DateTime.fromISO(updated).toLocaleString(DateTime.DATETIME_FULL)}
             </>
-          )}
+          )} */}
         </Typography>
       </Grid>
     </Grid>

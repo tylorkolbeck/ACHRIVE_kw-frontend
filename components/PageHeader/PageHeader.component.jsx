@@ -4,14 +4,15 @@ import { Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.secondary.main,
-    color: 'white',
-    boxShadow: '1px 3px 15px rgba(0,0,0,0.2)'
+    // backgroundColor: theme.palette.secondary.main,
+    // color: 'white',
+    // boxShadow: '1px 3px 15px rgba(0,0,0,0.2)'
   },
   content: {
     maxWidth: theme.custom.screen.maxWidth,
     margin: '0 auto',
-    padding: theme.spacing(2)
+    padding: theme.spacing(3),
+    paddingTop: theme.spacing(3)
   }
 }))
 

@@ -8,6 +8,10 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="stylesheet" href="/fonts/fonts.css"></link>
+          {/* <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
+          /> */}
         </Head>
         <body>
           <Main />

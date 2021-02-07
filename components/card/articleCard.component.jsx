@@ -11,10 +11,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
 
     '& a': {
-      color: theme.palette.secondary.dark,
       '&:hover': {
         cursor: 'pointer',
-        color: 'black'
+        color: theme.palette.secondary.main
       }
     }
   },
@@ -35,7 +34,11 @@ const useStyles = makeStyles((theme) => ({
     width: '250px',
     marginRight: theme.spacing(2),
     backgroundPosition: 'center',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      display: 'none'
+    }
   },
   description: {
     color: '405379',
@@ -57,7 +60,7 @@ const ArticleCard = ({
   const classes = useStyles()
 
   return (
-    <Grid container className={classes.root} direction="column">
+    <Grid container className={classes.root} direction="row">
       {image && (
         <Grid
           item
@@ -65,42 +68,46 @@ const ArticleCard = ({
           style={{ backgroundImage: `url(${getStrapiMedia(image)})` }}
         ></Grid>
       )}
-      <Grid item>
-        <Link href={`/category/${category}`}>
-          <a>
-            <Typography variant="caption" className={classes.categoryName}>
-              {category && category.toUpperCase()}
-            </Typography>
-          </a>
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link href={`/article/${article.slug}`}>
-          <a>
-            <Typography
-              variant="h5"
-              className={classes.title}
-              style={{ marginBottom: '5px' }}
-            >
-              {article.title}
-            </Typography>
-          </a>
-        </Link>
-        <Typography
-          variant="body2"
-          className={classes.description}
-          style={{ marginBottom: '10px' }}
-        >
-          {description}
-        </Typography>
-        {!!noCategory && (
-          <Typography variant="caption" style={{ fontWeight: 'bold' }}>
-            {authorName} &#8226;{' '}
-            {DateTime.fromISO(article?.published_at).toLocaleString(
-              DateTime.DATE_MED
-            )}
+
+      <Grid item xs>
+        <Grid container direction="column">
+          <Grid item>
+            <Link href={`/category/${category}`}>
+              <a>
+                <Typography variant="caption" className={classes.categoryName}>
+                  {category && category.toUpperCase()}
+                </Typography>
+              </a>
+            </Link>
+          </Grid>
+          <Link href={`/article/${article.slug}`}>
+            <a>
+              <Typography
+                variant="h5"
+                className={classes.title}
+                style={{ marginBottom: '5px' }}
+              >
+                {article.title}
+              </Typography>
+            </a>
+          </Link>
+          <Typography
+            variant="body2"
+            className={classes.description}
+            style={{ marginBottom: '10px' }}
+          >
+            {description.slice(0, 250)}
           </Typography>
-        )}
+
+          {!!noCategory && (
+            <Typography variant="caption" style={{ fontWeight: 'bold' }}>
+              {authorName} &#8226;{' '}
+              {DateTime.fromISO(article?.published_at).toLocaleString(
+                DateTime.DATE_MED
+              )}
+            </Typography>
+          )}
+        </Grid>
       </Grid>
       <Grid item xs={12} className={classes.authorFooter}>
         {/* {!noCategory && category && (

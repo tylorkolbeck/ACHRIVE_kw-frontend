@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: (article) => {
       return `url(${getStrapiMedia(article.image)})`
     },
+    [theme.breakpoints.down('sm')]: {
+      height: '60vw'
+    },
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'

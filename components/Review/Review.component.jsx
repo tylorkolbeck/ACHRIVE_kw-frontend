@@ -18,17 +18,19 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(2)
     },
     reviewAuthor: {
-      color: theme.palette.secondary.light
+      // color: theme.palette.secondary.light,
+      marginLeft: '0px',
+      fontWeight: 'bold'
     },
     IconRound: {
-      background: theme.palette.secondary.light,
+      background: theme.custom.color.green,
       borderRadius: '50%',
       height: '50px',
       width: '50px',
       padding: '10px',
       color: 'white',
       marginRight: '20px',
-      boxShadow: '2px 3px 15px rgba(0,0,0,0.3)',
+      // boxShadow: '2px 3px 15px rgba(0,0,0,0.3)',
       float: 'left'
     }
   }
@@ -63,9 +65,8 @@ export default function Review() {
         <div className={classes.review} key={review.id}>
           <Typography variant="body2" className={classes.reviewText}>
             <FormatQuoteIcon className={classes.IconRound} />
-            {review.text}
+            {review.text.slice(0, 300)}...
           </Typography>
-
           <Typography variant="caption" className={classes.reviewAuthor}>
             {review.author}
           </Typography>

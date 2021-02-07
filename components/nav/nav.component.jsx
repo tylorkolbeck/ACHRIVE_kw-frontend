@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   menuButtonLink: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    display: 'inline-block'
   },
   menuButtonUser: {
     marginLeft: theme.spacing(4)
@@ -190,14 +191,14 @@ export default function Nav() {
             {appLinks.map(({ label, url }) => {
               return (
                 <Link href={url} key={label}>
-                  <a className={classes.menuButtonLink}>
-                    {label.toUpperCase()}
-                  </a>
+                  <Typography className={classes.menuButtonLink}>
+                    <a>{label.toUpperCase()}</a>
+                  </Typography>
                 </Link>
               )
             })}
 
-            {logoutLogin}
+            {/* {logoutLogin} */}
           </List>
 
           <IconButton

@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => {
       width: '50px',
       padding: '10px',
       color: 'white',
-      marginRight: '20px',
-      boxShadow: '2px 3px 15px rgba(0,0,0,0.3)'
+      marginRight: '20px'
+      // boxShadow: '0px 3px 15px rgba(0,0,0,0.2)'
     },
     Info: {
       marginBottom: theme.spacing(2)
@@ -46,8 +46,7 @@ export default function ProductInfo() {
               <Grid item>
                 <Typography variant="body2" component="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor quisquam sint tempore nobis quae dicta
-                  ullam cupiditate!
+                  numquam fugit dolor
                 </Typography>
               </Grid>
             </Grid>
@@ -68,8 +67,7 @@ export default function ProductInfo() {
               <Grid item>
                 <Typography variant="body2" component="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor quisquam sint tempore nobis quae dicta
-                  ullam cupiditate!
+                  numquam fugit dolor
                 </Typography>
               </Grid>
             </Grid>
@@ -90,8 +88,7 @@ export default function ProductInfo() {
               <Grid item>
                 <Typography variant="body2" component="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor quisquam sint tempore nobis quae dicta
-                  ullam cupiditate!
+                  numquam fugit
                 </Typography>
               </Grid>
             </Grid>

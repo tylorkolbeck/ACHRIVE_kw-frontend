@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 const theme = createMuiTheme({
   palette: {
+    // type: 'dark',
     primary: {
       light: '#484848',
       main: '#212121',
@@ -16,7 +17,8 @@ const theme = createMuiTheme({
   },
   custom: {
     color: {
-      green: '#14c07b'
+      green: '#14c07b',
+      teal: '#52c4ed'
     },
     screen: {
       maxWidth: '800px',

@@ -6,11 +6,16 @@ import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
+import BackButton from '../../components/BackButton/BackButton.component'
+import CategoryChip from '../../components/CategoryChip/CategoryChip.component'
+import Footer from '../../components/Footer/Footer.component'
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      flexGrow: 1,
+      flexGrow: 1
+    },
+    content: {
       maxWidth: theme.custom.screen.maxWidth,
       margin: '0px auto',
       padding: theme.custom.screen.bodyPadding
@@ -22,25 +27,35 @@ const useStyles = makeStyles((theme) => {
     authorText: {
       fontWeight: 'bold'
     },
-    marginBottomSm: {
-      marginBottom: theme.spacing(2)
+    articleTitle: {
+      marginBottom: theme.spacing(2),
+      fontWeight: 'bold',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '3rem'
+      }
     },
     marginBottomMd: {
       marginBottom: theme.spacing(3)
+    },
+    postBody: {
+      marginBottom: theme.spacing(5),
+      '& img': {
+        display: 'block',
+        margin: '20px auto'
+      }
+    },
+    imageWrapper: {
+      '& img': {
+        maxWidth: '100%',
+        width: '100%'
+      }
     }
   }
 })
 
 export default function Article({ postData }) {
   const classes = useStyles()
-  const {
-    title,
-    category,
-    published_at,
-    updated_at,
-    image,
-    description
-  } = postData
+  const { title, category, image, description } = postData
 
   const seo = {
     metaTitle: postData.title,
@@ -51,40 +66,36 @@ export default function Article({ postData }) {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item container>
-        <Grid item xs={12} className={classes.marginBottomSm}>
-          {category?.name && (
-            <Chip
-              color="secondary"
-              variant="outlined"
-              size="small"
-              component="a"
-              href={`/categories/${category?.name}`}
-              label={category?.name}
-              clickable
-            />
-          )}
+      <Grid item className={classes.content}>
+        <BackButton />
+        <Grid item container>
+          <Grid item className={classes.marginBottomMd}>
+            <Typography variant="h2" className={classes.articleTitle}>
+              {title}
+            </Typography>
+            <Grid item xs={12} className={classes.marginBottomSm}>
+              <CategoryChip label={category?.name} />
+            </Grid>
+            <Typography variant="caption">{description}</Typography>
+          </Grid>
+          <Grid item className={classes.imageWrapper}>
+            <Image image={image} style={{ maxWidth: '100%' }}></Image>
+          </Grid>
         </Grid>
-        <Grid item className={classes.marginBottomMd}>
-          <Typography variant="h2" className={classes.marginBottomSm}>
-            {title}
-          </Typography>
-          <Typography variant="caption">{description}</Typography>
+        <AuthorInfo
+          author={postData?.author}
+          published={postData?.updated_at}
+          divider
+        />
+        <Seo seo={seo} />
+        <div className={classes.postBody}>
+          <ReactMarkdown source={postData.content} escapeHtml={false} />
+        </div>
+        <Grid container>
+          <NewsLetterSignup />
         </Grid>
-        <Image image={image} style={{ maxWidth: '100%' }}></Image>
       </Grid>
-      <AuthorInfo
-        author={postData?.author}
-        published={postData?.updated_at}
-        updated={postData?.updated_at}
-        divider
-      />
-
-      <Seo seo={seo} />
-      <ReactMarkdown source={postData.content} escapeHtml={false} />
-      <Grid item>
-        <NewsLetterSignup />
-      </Grid>
+      <Footer />
     </Grid>
   )
 }

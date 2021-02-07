@@ -1,6 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
+import { FaPlay } from 'react-icons/fa'
+import Link from 'next/link'
 
 const videos = [
   {
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       // background: 'lightgrey',
-      height: '20vw'
+      height: '25vw'
     },
     [theme.breakpoints.down('sm')]: {
       // background: 'lightgrey',
@@ -74,69 +76,89 @@ const useStyles = makeStyles((theme) => ({
         opacity: '0.3'
       }
     },
-    '&:after': {
-      content: "''",
-      position: 'absolute',
-      top: '0px',
-      bottom: '0px',
-      left: '0px',
-      right: '0px',
-
-      zIndex: '100'
-    },
+    // '&:after': {
+    //   content: "''",
+    //   position: 'absolute',
+    //   height: '100px',
+    //   width: '100px',
+    //   bottom: '0px',
+    //   right: '0px',
+    //   background: theme.palette.secondary.main,
+    //   zIndex: '100'
+    // },
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     height: '100%',
     width: '100%'
+  },
+  playButton: {
+    padding: '20px',
+    paddingBottom: '15px',
+    background: theme.palette.secondary.main,
+    color: 'white',
+    position: 'absolute',
+    right: '0px',
+    bottom: '0px',
+    fontSize: '20px',
+    textAlign: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+      background: theme.palette.secondary.light
+    }
   }
 }))
 
 export default function Videos() {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
-      {videos.map((video) => (
-        <Grid
-          container
-          direction="column"
-          className={classes.videoCard}
-          key={video.id}
-        >
-          <Grid item className={classes.videoImage}>
-            <div
-              className={classes.videoBackground}
-              style={{
-                backgroundImage: `url(${video.image})`
-              }}
-            ></div>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="h5"
-              component="h3"
-              className={classes.videoTitle}
-            >
-              {video.title}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="flex-end"
-            >
-              <Typography variant="body2" className={classes.videoAuthor}>
-                {video.author}
-              </Typography>
-              <Typography variant="caption" className={classes.date}>
-                {video.date}
+    <Link href={`video/video-slug`}>
+      <div className={classes.root}>
+        {videos.map((video) => (
+          <Grid
+            container
+            direction="column"
+            className={classes.videoCard}
+            key={video.id}
+          >
+            <Grid item className={classes.videoImage}>
+              <div
+                className={classes.videoBackground}
+                style={{
+                  backgroundImage: `url(${video.image})`
+                }}
+              ></div>
+              <div className={classes.playButton}>
+                <FaPlay />
+              </div>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="h5"
+                component="h3"
+                className={classes.videoTitle}
+              >
+                {video.title}
               </Typography>
             </Grid>
+            <Grid item>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-end"
+              >
+                <Typography variant="body2" className={classes.videoAuthor}>
+                  {video.author}
+                </Typography>
+                <Typography variant="caption" className={classes.date}>
+                  {video.date}
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Link>
   )
 }

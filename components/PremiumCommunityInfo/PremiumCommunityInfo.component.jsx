@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(2)
     },
     wingding: {
-      color: theme.palette.secondary.light
+      color: theme.custom.color.green
     },
     CTAWrapper: {
       marginTop: theme.spacing(3)
@@ -52,11 +52,11 @@ export default function PremiumCommunityInfo() {
           <span className={classes.wingding}>&#9679;</span> Premium Analysis
         </Grid>
       </Grid>
-      <div className={classes.CTAWrapper}>
+      <Grid container className={classes.CTAWrapper}>
         <Button variant="contained" color="secondary">
           Join The Community
         </Button>
-      </div>
+      </Grid>
     </div>
   )
 }

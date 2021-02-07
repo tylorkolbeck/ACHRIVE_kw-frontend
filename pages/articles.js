@@ -12,15 +12,15 @@ import PageHeader from '../components/PageHeader/PageHeader.component'
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '800px',
-    margin: '20px auto',
-    padding: theme.spacing(3)
+    margin: '0px auto',
+    padding: theme.spacing(3),
+    paddingTop: '0'
   },
   articleCategoryList: {
     paddingBottom: theme.spacing(2)
   },
   articleCardWrapper: {
     marginLeft: theme.spacing(1)
-    // marginTop: theme.spacing(1)
   },
   categoryLinks: {
     marginRight: theme.spacing(5),
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   categoryLinkWrapper: {
-    // background: '#0d46a0',
     display: 'inline-block',
     color: theme.palette.secondary.light,
     padding: '4px 6px',
@@ -69,71 +68,22 @@ export default function Articles({ articles }) {
     setArticlesState(articleData)
     setCategoryState(categoryData)
   }, [articles])
-
-  // function handleSearchSelect(event, value) {
-  //   // setArticlesState(value)
-  // }
-
-  // function filterArticlesHandler(event, value) {
-  //   const valueLower = value ? value.toLowerCase() : ''
-  //   const filteredArticles = articles.filter((article) => {
-  //     return (
-  //       article.title.toLowerCase().includes(valueLower) ||
-  //       article.description.toLowerCase().includes(valueLower)
-  //     )
-  //   })
-  //   setArticlesState(filteredArticles)
-  // }
   return (
     <div>
       <PageHeader title={'Articles'} />
       <Grid container className={classes.root} justify="center" wrap="nowrap">
-        {/* <Grid item className={classes.categoryLinks}>
-          {categoryState.map((cat) => (
-            <Link href={`#${cat}`} key={`category_link_${cat}`}>
-              <a>
-                <Typography variant="h6" color="secondary">
-                  {cat && cat.toUpperCase()}
-                </Typography>
-              </a>
-            </Link>
-          ))}
-        </Grid> */}
         <Grid item style={{ flexGrow: 1 }}>
-          <Grid item style={{ margin: '20px auto' }}>
-            <NewsLetterSignup />
-          </Grid>
-          {/* <Grid item className={classes.searchWrapper}>
-            <Autocomplete
-              freeSolo
-              disableClearable
-              options={articleState}
-              getOptionLabel={(option) => option.title}
-              onChange={handleSearchSelect}
-              // onInputChange={filterArticlesHandler}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Search Articles..."
-                  margin="normal"
-                  variant="outlined"
-                  InputProps={{ ...params.InputProps, type: 'search' }}
-                />
-              )}
-            />
-          </Grid> */}
           <Grid item>
             <Grid container>
               <div className={classes.articleCardWrapper}>
                 {articleState.map((article, index) => {
                   return (
-                    <>
+                    <React.Fragment key={article.id}>
                       <ArticleCard
-                        key={article.id}
                         article={article}
                         noCategory
                         category={article?.category}
-                        // image={article?.image}
+                        image={article?.image}
                         description={article.description}
                         authorName={
                           article?.author?.name
@@ -141,30 +91,15 @@ export default function Articles({ articles }) {
                             : 'Faceless Man'
                         }
                       />
-                    </>
+                      {index === 4 && (
+                        <Grid item style={{ margin: '50px auto' }}>
+                          <NewsLetterSignup />
+                        </Grid>
+                      )}
+                    </React.Fragment>
                   )
                 })}
               </div>
-              {/* {categoryState.map((cat) => {
-                return (
-                  <Grid
-                    item
-                    xs={12}
-                    className={classes.articleCategoryList}
-                    key={`category_header_${cat}`}
-                  >
-                    <Link href={`/category/${cat}`}>
-                      <a>
-                        <div className={classes.categoryLinkWrapper}>
-                          <Typography variant="caption" id={cat}>
-                            {cat && cat.toUpperCase()}
-                          </Typography>
-                        </div>
-                      </a>
-                    </Link>
-                  </Grid>
-                )
-              })} */}
             </Grid>
           </Grid>
         </Grid>
