@@ -80,7 +80,15 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-const Home = ({ allPostsData, homepage, global, categories, authors }) => {
+const Home = ({
+  allPostsData,
+  homepage,
+  global,
+  categories,
+  authors,
+  carouselData,
+  carouselTimer
+}) => {
   const classes = useStyles()
 
   return (
@@ -91,7 +99,7 @@ const Home = ({ allPostsData, homepage, global, categories, authors }) => {
       </Grid>
       <Grid item className={classes.content}>
         <Grid item className={classes.Carousel}>
-          <Carousel />
+          <Carousel data={carouselData} interval={carouselTimer} />
         </Grid>
 
         <Grid item className={classes.RecentArticles}>
@@ -208,17 +216,29 @@ export async function getStaticProps() {
     global,
     homepage,
     categories,
-    authors
+    authors,
+    carouselData,
+    carouselTimer
   ] = await Promise.all([
     getSortedPostsData(5),
     fetchAPI('/global'),
     fetchAPI('/homepage'),
     fetchAPI('/categories'),
-    fetchAPI('/writers')
+    fetchAPI('/writers'),
+    fetchAPI('/carousels'),
+    fetchAPI('/carousel-timer')
   ])
 
   return {
-    props: { allPostsData, homepage, global, categories, authors },
+    props: {
+      allPostsData,
+      homepage,
+      global,
+      categories,
+      authors,
+      carouselData,
+      carouselTimer
+    },
     revalidate: 10
   }
 }

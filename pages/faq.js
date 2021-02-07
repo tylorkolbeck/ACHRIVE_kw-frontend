@@ -181,47 +181,47 @@ export default function Faq({ faqs }) {
               {faqState &&
                 faqState.map((q) => {
                   if (q.category === faqCat)
+                    // return (
+                    //   <div
+                    //     key={q.id}
+                    //     className={classes.qAndA}
+                    //     id={`question_${q.id}`}
+                    //   >
+                    //     <Typography variant="h6">{q.question}</Typography>
+                    //     <Typography variant="body1">{q.answer}</Typography>
+                    //   </div>
+                    // )
                     return (
-                      <div
-                        key={q.id}
-                        className={classes.qAndA}
-                        id={`question_${q.id}`}
-                      >
-                        <Typography variant="h6">{q.question}</Typography>
-                        <Typography variant="body1">{q.answer}</Typography>
+                      <div key={q.id}>
+                        <ListItem
+                          button
+                          onClick={() => toggleFaqOpen(q.id)}
+                          id={`question_${q.id}`}
+                          key={q.id}
+                        >
+                          <ListItemText
+                            primary={
+                              <Typography
+                                variant="h5"
+                                className={classes.questionListItem}
+                              >
+                                {q.question}
+                              </Typography>
+                            }
+                          />
+                          {q.expanded ? (
+                            <ExpandLess className={classes.expand} />
+                          ) : (
+                            <ExpandMore className={classes.expand} />
+                          )}
+                        </ListItem>
+                        <Collapse in={q.expanded} timeout="auto" unmountOnExit>
+                          <ListItem button>
+                            <ListItemText primary={q.answer} />
+                          </ListItem>
+                        </Collapse>
                       </div>
                     )
-                  // return (
-                  //   <div key={q.id}>
-                  //     <ListItem
-                  //       button
-                  //       onClick={() => toggleFaqOpen(q.id)}
-                  //       id={`question_${q.id}`}
-                  //       key={q.id}
-                  //     >
-                  //       <ListItemText
-                  //         primary={
-                  //           <Typography
-                  //             variant="h5"
-                  //             className={classes.questionListItem}
-                  //           >
-                  //             {q.question}
-                  //           </Typography>
-                  //         }
-                  //       />
-                  //       {q.expanded ? (
-                  //         <ExpandLess className={classes.expand} />
-                  //       ) : (
-                  //         <ExpandMore className={classes.expand} />
-                  //       )}
-                  //     </ListItem>
-                  //     <Collapse in={q.expanded} timeout="auto" unmountOnExit>
-                  //       <ListItem button>
-                  //         <ListItemText primary={q.answer} />
-                  //       </ListItem>
-                  //     </Collapse>
-                  //   </div>
-                  // )
                 })}
             </div>
           ))}

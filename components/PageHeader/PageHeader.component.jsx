@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     maxWidth: theme.custom.screen.maxWidth,
-    margin: '0 auto',
+    margin: '20px auto',
     padding: theme.spacing(3),
     paddingTop: theme.spacing(3)
   }

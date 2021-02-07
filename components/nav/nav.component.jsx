@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButtonLink: {
     marginRight: theme.spacing(2),
-    display: 'inline-block'
+    display: 'inline-block',
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.custom.color.teal
+    }
   },
   menuButtonUser: {
     marginLeft: theme.spacing(4)
@@ -177,7 +181,7 @@ export default function Nav() {
                     marginLeft: '100px'
                   }}
                 >
-                  Beta 1.2
+                  Beta 1.3
                 </span>
               </Link>
             </Typography>
