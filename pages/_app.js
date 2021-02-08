@@ -1,13 +1,24 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { UserContextProvider } from '../context/UserContext'
 import Layout from '../components/layout/layout.component'
 import Head from 'next/head'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import '../styles/globals.css'
-import theme from '../styles/theme'
+import theme, { setTheme } from '../styles/theme'
 
 export default function App({ Component, pageProps }) {
+  const [colorMode, setColorMode] = useState('light')
+  const [themeState, setThemeState] = useState(theme)
+
+  useEffect(() => {
+    setThemeState(setTheme(colorMode))
+  }, [colorMode])
+
+  function toggleDarkMode() {
+    setColorMode(colorMode === 'dark' ? 'light' : 'dark')
+  }
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
@@ -28,18 +39,11 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Staatliches"
         />
-        {/* <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css"
-        /> */}
-        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js" />
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js" /> */}
       </Head>
       <UserContextProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={themeState}>
           <CssBaseline />
-          <Layout>
+          <Layout toggleDarkMode={toggleDarkMode}>
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>

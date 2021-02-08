@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
+import { CgDarkMode } from 'react-icons/cg'
 import {
   List,
   Drawer,
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Nav() {
+export default function Nav({ toggleDarkMode }) {
   const classes = useStyles()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
@@ -130,6 +131,7 @@ export default function Nav() {
             </Link>
           </ListItem>
         ))}
+
         <Divider />
         <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
       </List>
@@ -201,6 +203,12 @@ export default function Nav() {
                 </Link>
               )
             })}
+
+            <Typography className={classes.menuButtonLink}>
+              <h3 onClick={toggleDarkMode}>
+                <CgDarkMode style={{ marginBottom: '-3px' }} />
+              </h3>
+            </Typography>
 
             {/* {logoutLogin} */}
           </List>

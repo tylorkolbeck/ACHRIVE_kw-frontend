@@ -1,7 +1,5 @@
 import React from 'react'
-import Image from '../image/image.component'
 import { Typography, Grid } from '@material-ui/core'
-import AuthorInfo from '../AuthorInfo/AuthorInfo.component'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
 import { getStrapiMedia } from '../../lib/media'
@@ -9,12 +7,9 @@ import { DateTime } from 'luxon'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // padding: theme.spacing(3)
     '& a': {
-      color: theme.palette.secondary.dark,
       '&:hover': {
-        cursor: 'pointer',
-        color: 'black'
+        cursor: 'pointer'
       }
     }
   },

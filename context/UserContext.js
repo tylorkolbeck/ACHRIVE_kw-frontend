@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 import Cookie from 'js-cookie'
+import theme, { setTheme } from '../styles/theme'
 
 const API_URL =
   process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'

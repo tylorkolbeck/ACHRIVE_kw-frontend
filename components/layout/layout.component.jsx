@@ -1,8 +1,8 @@
 import Nav from '../nav/nav.component'
 
-const Layout = ({ children, seo }) => (
+const Layout = ({ children, seo, toggleDarkMode }) => (
   <>
-    <Nav />
+    <Nav toggleDarkMode={toggleDarkMode} />
     {children}
   </>
 )
