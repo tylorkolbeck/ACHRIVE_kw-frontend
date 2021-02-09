@@ -5,24 +5,32 @@ import Link from 'next/link'
 
 export default function RecentArticles({ articles }) {
   return (
-    <Grid container>
+    <Grid container style={{ flexGrow: 1 }}>
       {articles.map((article, i) => {
         return (
-          <ArticleCard
-            article={article}
-            authorName={article?.author?.name}
-            key={`article__link__${article.slug}`}
-            category={article?.category?.name}
-            last={i === 3}
-            description={article?.description?.slice(0, 100)}
-          />
+          <div style={{ marginBottom: '20px' }}>
+            <ArticleCard
+              article={article}
+              authorName={article?.author?.name}
+              key={`article__link__${article.slug}`}
+              category={article?.category?.name}
+              last={i === 3}
+              description={article?.description?.slice(0, 100)}
+            />
+          </div>
         )
       })}
-      <Link href="/articles">
-        <Button variant="contained" color="secondary">
-          View All Articles
-        </Button>
-      </Link>
+      <Grid item xs={12} style={{ marginTop: '10px' }}>
+        <Link href="/articles">
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ width: '100%' }}
+          >
+            View All Articles
+          </Button>
+        </Link>
+      </Grid>
     </Grid>
   )
 }

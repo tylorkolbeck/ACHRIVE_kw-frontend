@@ -1,20 +1,20 @@
-import { Grid, Typography, TextField } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
 import ArticleCard from '../components/card/articleCard.component'
-import Link from 'next/link'
 import Footer from '../components/Footer/Footer.component'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import PageHeader from '../components/PageHeader/PageHeader.component'
+import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '800px',
+    maxWidth: theme.custom.screen.maxWidth,
     margin: '0px auto',
     padding: theme.spacing(3),
-    paddingTop: '0'
+    paddingTop: theme.custom.screen.navBarHeight
   },
   articleCategoryList: {
     paddingBottom: theme.spacing(2)
@@ -22,21 +22,9 @@ const useStyles = makeStyles((theme) => ({
   articleCardWrapper: {
     marginLeft: theme.spacing(1)
   },
-  categoryLinks: {
-    marginRight: theme.spacing(5),
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
-    }
-  },
-  categoryLinkWrapper: {
-    display: 'inline-block',
+  categoryLink: {
     color: theme.palette.secondary.light,
-    padding: '4px 6px',
-    borderRadius: '4px',
-    '&:hover': {
-      cursor: 'pointer',
-      background: theme.palette.secondary.light
-    }
+    marginBottom: theme.spacing(1)
   },
 
   searchWrapper: {
@@ -69,43 +57,70 @@ export default function Articles({ articles }) {
     setCategoryState(categoryData)
   }, [articles])
   return (
-    <div>
-      <PageHeader title={'Articles'} />
-      <Grid container className={classes.root} justify="center" wrap="nowrap">
-        <Grid item style={{ flexGrow: 1 }}>
+    <>
+      <div className={classes.root}>
+        <ScrollToTopButton />
+        <PageHeader title={'Articles'} />
+        <Grid container direction="row" wrap="nowrap" spacing={3}>
+          <Grid item xs>
+            <Typography variant="h5" style={{ marginBottom: '20px' }}>
+              Categories
+            </Typography>
+            {categoryState.map((category) => (
+              <Link href={`/category/${category}`}>
+                <a>
+                  <Typography className={classes.categoryLink}>
+                    {category.toUpperCase()}
+                  </Typography>
+                </a>
+              </Link>
+            ))}
+          </Grid>
           <Grid item>
-            <Grid container>
-              <div className={classes.articleCardWrapper}>
-                {articleState.map((article, index) => {
-                  return (
-                    <React.Fragment key={article.id}>
-                      <ArticleCard
-                        article={article}
-                        noCategory
-                        category={article?.category}
-                        image={article?.image}
-                        description={article.description}
-                        authorName={
-                          article?.author?.name
-                            ? article?.author?.name
-                            : 'Faceless Man'
-                        }
-                      />
-                      {index === 4 && (
-                        <Grid item style={{ margin: '50px auto' }}>
-                          <NewsLetterSignup />
-                        </Grid>
-                      )}
-                    </React.Fragment>
-                  )
-                })}
-              </div>
+            <Grid container justify="center" wrap="nowrap">
+              <Grid item style={{ flexGrow: 1 }}>
+                <Grid item>
+                  <Grid container>
+                    <div className={classes.articleCardWrapper}>
+                      {articleState.map((article, index) => {
+                        return (
+                          <>
+                            <Paper
+                              style={{ padding: '20px', marginBottom: '20px' }}
+                              elevation={1}
+                              key={article.card}
+                            >
+                              <ArticleCard
+                                article={article}
+                                noCategory
+                                category={article?.category}
+                                image={article?.image}
+                                description={article.description}
+                                authorName={
+                                  article?.author?.name
+                                    ? article?.author?.name
+                                    : 'Faceless Man'
+                                }
+                              />
+                            </Paper>
+                            {index === 4 && (
+                              <Grid item style={{ margin: '50px auto' }}>
+                                <NewsLetterSignup />
+                              </Grid>
+                            )}
+                          </>
+                        )
+                      })}
+                    </div>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </div>
       <Footer />
-    </div>
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Grid, TextField, Button } from '@material-ui/core'
+import { Typography, Grid, TextField, Button, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '4px'
     }
   },
+
   privacyPolicy: {
     color: theme.palette.secondary.light
   }
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NewsLetterSignUp() {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
+    <Paper elevation={1} className={classes.root}>
       <Grid container direction="column">
         <Grid item>
           <Typography variant="h6" className={classes.inputLabel}>
@@ -73,11 +74,13 @@ export default function NewsLetterSignUp() {
               }
             />
             <Grid item>
-              <Button variant="contained">Signup</Button>
+              <Button variant="contained" className={classes.signupButton}>
+                Signup
+              </Button>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   )
 }

@@ -8,7 +8,6 @@ import { getStrapiMedia } from '../../lib/media'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: theme.spacing(3),
 
     '& a': {
       '&:hover': {
@@ -30,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   },
   image: {
+    borderRadius: '4px',
     height: '200px',
     width: '250px',
     marginRight: theme.spacing(2),

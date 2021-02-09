@@ -1,7 +1,7 @@
 import { getAllPostsIds, getPostData } from '../../lib/posts'
 import ReactMarkdown from 'react-markdown'
 import Seo from '../../components/seo/seo.component'
-import { Typography, Grid, Chip, Divider } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
@@ -13,7 +13,8 @@ import Footer from '../../components/Footer/Footer.component'
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      flexGrow: 1
+      flexGrow: 1,
+      paddingTop: theme.custom.screen.navBarHeight
     },
     content: {
       maxWidth: theme.custom.screen.maxWidth,
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => {
       }
     },
     imageWrapper: {
+      borderRadius: '4px',
       '& img': {
         maxWidth: '100%',
         width: '100%'

@@ -12,10 +12,21 @@ export default function App({ Component, pageProps }) {
   const [themeState, setThemeState] = useState(theme)
 
   useEffect(() => {
-    setThemeState(setTheme(colorMode))
+    if (typeof window !== 'undefined') {
+      const storageTheme = localStorage.getItem('theme')
+      if (!storageTheme) {
+        localStorage.setItem('theme', 'light')
+        setThemeState(setTheme(colorMode))
+      } else {
+        setThemeState(setTheme(storageTheme))
+      }
+    }
   }, [colorMode])
 
   function toggleDarkMode() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', colorMode === 'dark' ? 'light' : 'dark')
+    }
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')
   }
 

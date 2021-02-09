@@ -62,12 +62,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   videoAuthor: {
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.light
   },
   date: {
     marginLeft: theme.spacing(2)
   },
   videoBackground: {
+    borderRadius: '4px',
     '&:hover': {
       cursor: 'pointer',
       '&:after': {
@@ -148,9 +149,13 @@ export default function Videos() {
                 justify="flex-start"
                 alignItems="flex-end"
               >
-                <Typography variant="body2" className={classes.videoAuthor}>
-                  {video.author}
-                </Typography>
+                <Link href="">
+                  <a>
+                    <Typography variant="body2" className={classes.videoAuthor}>
+                      {video.author}
+                    </Typography>
+                  </a>
+                </Link>
                 <Typography variant="caption" className={classes.date}>
                   {video.date}
                 </Typography>

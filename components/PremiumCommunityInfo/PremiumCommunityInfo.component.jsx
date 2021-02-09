@@ -16,7 +16,11 @@ const useStyles = makeStyles((theme) => {
       color: theme.custom.color.green
     },
     CTAWrapper: {
-      marginTop: theme.spacing(3)
+      width: '100%',
+      marginTop: theme.spacing(3),
+      '& button': {
+        width: '100%'
+      }
     }
   }
 })
@@ -52,7 +56,7 @@ export default function PremiumCommunityInfo() {
           <span className={classes.wingding}>&#9679;</span> Premium Analysis
         </Grid>
       </Grid>
-      <Grid container className={classes.CTAWrapper}>
+      <Grid item className={classes.CTAWrapper}>
         <Button variant="contained" color="secondary">
           Join The Community
         </Button>

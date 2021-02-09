@@ -23,9 +23,10 @@ export function setTheme(darkMode) {
         teal: '#52c4ed'
       },
       screen: {
-        maxWidth: '800px',
+        maxWidth: '1200px',
         maxWidthHome: '1200px',
-        bodyPadding: '2rem'
+        bodyPadding: '2rem',
+        navBarHeight: '80px'
       }
     }
   })

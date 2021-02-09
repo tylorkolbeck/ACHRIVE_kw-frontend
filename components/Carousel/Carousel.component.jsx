@@ -101,7 +101,7 @@ function CarouselElement({ data, width, interval }) {
       <Grid container className={classes.root} spacing={5}>
         {items.map((item) => {
           return (
-            <Grid item xs>
+            <Grid item xs key={item.id}>
               <Paper
                 className={classes.paper}
                 style={{

@@ -95,11 +95,14 @@ export default function ProductInfo() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item className={classes.CTAWrapper}>
+      <Button variant="contained" color="secondary">
+        View Products
+      </Button>
+      {/* <Grid item className={classes.CTAWrapper}>
         <Button variant="contained" color="secondary">
           View Products
         </Button>
-      </Grid>
+      </Grid> */}
     </Grid>
   )
 }

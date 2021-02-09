@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '24vw',
     width: '100%',
+    borderRadius: '4px',
     backgroundImage: (article) => {
       return `url(${getStrapiMedia(article.image)})`
     },

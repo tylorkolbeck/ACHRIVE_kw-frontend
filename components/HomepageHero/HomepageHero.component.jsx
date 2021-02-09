@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme) => {
     heroTitle: {
       fontFamily: 'archiveFont',
       lineHeight: 1,
+      // color: theme.palette.secondary.main,
       [theme.breakpoints.down('xs')]: {
-        fontSize: '2rem'
+        fontSize: '4rem'
       }
     },
     heroSubTitle: {
@@ -33,9 +34,13 @@ const useStyles = makeStyles((theme) => {
       marginTop: theme.spacing(2),
       color: '#14c07b',
       '& button': {
-        background: '#14c07b',
+        background: theme.custom.color.teal,
         color: 'white'
+        // color: theme.palette.secondary.dark
       }
+    },
+    blueText: {
+      color: theme.custom.color.teal
     }
   }
 })
@@ -47,8 +52,8 @@ export default function HomepageHero() {
       <Grid item xs={12} sm={8}>
         <Grid container direction="column">
           <Grid item>
-            <Typography variant="h2" className={classes.heroTitle}>
-              Change The Way You Trade
+            <Typography variant="h1" className={classes.heroTitle}>
+              <span className={classes.blueText}>Change</span> The Way You Trade
             </Typography>
           </Grid>
           <Grid item>
@@ -69,9 +74,9 @@ export default function HomepageHero() {
           <Grid item>
             <Grid container>
               <Grid item>
-                {/* <Typography variant="body1">
+                <Typography variant="h5">
                   <b>Powerful Trading Products</b>
-                </Typography> */}
+                </Typography>
                 <Typography variant="body1">
                   Strategies and signals to improve your trading, powered by our
                   AI and expert chart analysis.

@@ -15,8 +15,7 @@ import {
   Drawer,
   IconButton,
   ListItem,
-  ListItemText,
-  Divider
+  ListItemText
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -125,15 +124,19 @@ export default function Nav({ toggleDarkMode }) {
           </Link>
         </ListItem>
         {appLinks.map(({ label, url }) => (
-          <ListItem button key={label} onClick={toggleMobileMenu}>
+          <ListItem button key={label} onClick={toggleMobileMenu} key={label}>
             <Link href={url}>
               <ListItemText primary={label} />
             </Link>
           </ListItem>
         ))}
 
-        <Divider />
-        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
+        <ListItem button onClick={toggleDarkMode}>
+          <ListItemText primary="Toggle Dark Mode" />
+        </ListItem>
+
+        {/* <Divider />
+        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div> */}
       </List>
     </div>
   )
@@ -164,14 +167,21 @@ export default function Nav({ toggleDarkMode }) {
         </IconButton>
         {drawer}
       </Drawer>
-      <AppBar position="relative">
+      <AppBar
+        position="relative"
+        style={{
+          // boxShadow: 'none',
+          // background: 'transparent',
+          position: 'fixed'
+        }}
+      >
         <Toolbar>
           <div className={classes.title}>
             <Link href="/">
               <img
                 src="/KW_logo.png"
-                width="75px"
-                style={{ position: 'absolute', top: '0px' }}
+                width="100px"
+                style={{ position: 'absolute', top: '0px', left: '20px' }}
               />
             </Link>
             <Typography variant="h6" className={classes.title}>
@@ -180,7 +190,7 @@ export default function Nav({ toggleDarkMode }) {
                   style={{
                     color: '#6270c3',
                     fontSize: '12px',
-                    marginLeft: '100px'
+                    marginLeft: '150px'
                   }}
                 >
                   Beta 1.3
@@ -196,18 +206,20 @@ export default function Nav({ toggleDarkMode }) {
           >
             {appLinks.map(({ label, url }) => {
               return (
-                <Link href={url} key={label}>
-                  <Typography className={classes.menuButtonLink}>
+                <Link href={url} key={`drawer_${label}`}>
+                  <Typography variant="h6" className={classes.menuButtonLink}>
                     <a>{label.toUpperCase()}</a>
                   </Typography>
                 </Link>
               )
             })}
 
-            <Typography className={classes.menuButtonLink}>
-              <h3 onClick={toggleDarkMode}>
-                <CgDarkMode style={{ marginBottom: '-3px' }} />
-              </h3>
+            <Typography
+              onClick={toggleDarkMode}
+              className={classes.menuButtonLink}
+              variant="h6"
+            >
+              <CgDarkMode style={{ marginBottom: '-3px' }} />
             </Typography>
 
             {/* {logoutLogin} */}

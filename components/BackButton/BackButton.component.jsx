@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.light,
     cursor: 'pointer',
     margin: '20px 0px'
   },

@@ -5,11 +5,9 @@ import {
   ListItem,
   ListItemText,
   Collapse,
-  TextField,
   Typography,
   Grid
 } from '@material-ui/core'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
@@ -17,15 +15,16 @@ import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton
 import capitalizeFirstLetter from '../lib/utils'
 import PageHeader from '../components/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
+import Fuse from 'fuse.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: theme.custom.screen.maxWidth,
     margin: '0px auto',
     padding: theme.spacing(3),
-    paddingTop: '0',
     position: 'relative',
-    marginBottom: '700px'
+    marginBottom: '500px',
+    paddingTop: theme.custom.screen.navBarHeight
   },
   catTitle: {
     cursor: 'pointer',
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.light
   },
   expand: {
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.light
   },
   questionLink: {
     marginBottom: theme.spacing(1)
@@ -61,6 +60,13 @@ export default function Faq({ faqs }) {
   const router = useRouter()
   const [faqState, setFaqState] = React.useState([])
   const [faqCategories, setFaqCategories] = React.useState([])
+
+  const [searchInput, setSearchInput] = React.useState('')
+  const [searchResults, setSearchResults] = React.useState([])
+
+  const fuse = new Fuse(faqs, {
+    keys: ['question', 'answer', 'category.name']
+  })
 
   React.useEffect(() => {
     const cats = []
@@ -113,30 +119,29 @@ export default function Faq({ faqs }) {
     router.push(`#question_${faqID}`)
   }
 
+  function searchInputHandler(e) {
+    const input = e.target.value
+    console.log(fuse.search(input))
+    setSearchResults(fuse.search(input))
+    setSearchInput(input)
+  }
+
   return (
     <>
-      <PageHeader title="FAQs"></PageHeader>
-
       <div className={classes.root}>
-        {/* <Typography variant="h2">FAQs</Typography> */}
-        {/* Search field */}
+        <PageHeader title="FAQs" />
         <ScrollToTopButton />
-        <Grid item className={classes.inputWrapper}>
-          <Autocomplete
-            freeSolo
-            options={faqState}
-            getOptionLabel={(option) => option.question}
-            onChange={(e, value) => scrollToQuestion(value.id)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Search FAQs..."
-                margin="normal"
-                variant="outlined"
-              />
-            )}
-          />
+
+        <Grid item>
+          <input value={searchInput} onChange={searchInputHandler}></input>
+          <div>
+            {searchResults &&
+              searchResults.map((result) => (
+                <div key={result.item.id}>{result.item.question}</div>
+              ))}
+          </div>
         </Grid>
+
         {/* Categories and Questions list */}
         {faqCategories.map((faqCat) => (
           <div style={{ marginBottom: '30px' }} key={faqCat}>
