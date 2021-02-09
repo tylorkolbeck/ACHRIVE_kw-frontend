@@ -149,7 +149,7 @@ export default function Videos() {
                 justify="flex-start"
                 alignItems="flex-end"
               >
-                <Link href="">
+                <Link href="/">
                   <a>
                     <Typography variant="body2" className={classes.videoAuthor}>
                       {video.author}

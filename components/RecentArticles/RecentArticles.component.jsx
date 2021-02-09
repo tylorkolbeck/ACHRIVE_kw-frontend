@@ -8,7 +8,7 @@ export default function RecentArticles({ articles }) {
     <Grid container style={{ flexGrow: 1 }}>
       {articles.map((article, i) => {
         return (
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px' }} key={article.id}>
             <ArticleCard
               article={article}
               authorName={article?.author?.name}
