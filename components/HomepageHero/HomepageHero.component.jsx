@@ -81,9 +81,11 @@ export default function HomepageHero() {
               </Grid>
               <Grid item className={classes.CTA}>
                 <Link href="/products">
-                  <TextLink icon color="#52c4ed">
-                    View Strategies
-                  </TextLink>
+                  <div>
+                    <TextLink icon color="#52c4ed">
+                      View Strategies
+                    </TextLink>
+                  </div>
                 </Link>
               </Grid>
             </Grid>

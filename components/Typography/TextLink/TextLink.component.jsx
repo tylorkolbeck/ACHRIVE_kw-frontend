@@ -42,13 +42,13 @@ export default function BodyText({
 }) {
   const classes = useStyles({ color })
   return (
-    <a onClick={onClick} onMouseDown={onMouseDown}>
+    <div onClick={onClick} onMouseDown={onMouseDown}>
       <Typography variant="body1" className={classes.root}>
         {iconLeft && <FaArrowLeft className={classes.icon} />}
 
         {children}
         {icon && <FaArrowRight className={classes.icon} />}
       </Typography>
-    </a>
+    </div>
   )
 }

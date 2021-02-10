@@ -63,9 +63,7 @@ export default function PremiumCommunityInfo() {
         </Grid>
       </Grid>
       <Grid item className={classes.CTAWrapper}>
-        <a>
-          <TextLink icon>Join The Community</TextLink>
-        </a>
+        <TextLink icon>Join The Community</TextLink>
       </Grid>
     </div>
   )

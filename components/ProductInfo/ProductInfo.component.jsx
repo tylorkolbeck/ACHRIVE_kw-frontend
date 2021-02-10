@@ -101,9 +101,8 @@ export default function ProductInfo() {
           </Grid>
         </Grid>
       </Grid>
-      <a>
-        <TextLink icon>View All Products</TextLink>
-      </a>
+
+      <TextLink icon>View All Products</TextLink>
     </Grid>
   )
 }

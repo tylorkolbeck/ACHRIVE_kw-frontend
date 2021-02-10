@@ -51,12 +51,7 @@ const MainArticle = ({ article }) => {
       </Grid>
 
       <Grid item>
-        <BodyText>
-          {article.description.slice(100)}...
-          <Link href={`/article/${article.slug}`}>
-            <a>Read More</a>
-          </Link>
-        </BodyText>
+        <BodyText>{article.description.slice(100)}...</BodyText>
         <CaptionText>
           {article?.author?.name} &#8226;{' '}
           {DateTime.fromISO(article.published_at).toLocaleString(

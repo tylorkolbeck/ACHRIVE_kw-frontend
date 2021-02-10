@@ -12,7 +12,7 @@ const useStyles = makeStyles(({ palette, props }) => ({
       }
     },
     marginBottom: '10px',
-    fontSize: '18px'
+    fontSize: '20px'
   }
 }))
 

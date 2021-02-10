@@ -142,11 +142,6 @@ const Home = ({
             </Grid>
           </Grid>
         </Grid>
-
-        {/* BOTTOM SECTION MARKETING */}
-        <Grid item className={classes.Marketing}>
-          <Grid container spacing={5}></Grid>
-        </Grid>
       </Grid>
       <Footer />
     </Grid>

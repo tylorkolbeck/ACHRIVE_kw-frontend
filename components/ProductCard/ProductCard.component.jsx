@@ -91,14 +91,16 @@ export default function ProductCard({
                 {description?.slice(0, 120)}...
               </Typography>
               <Link href="/">
-                <TextLink>Get Started</TextLink>
+                <a>
+                  <TextLink>Get Started</TextLink>
+                </a>
               </Link>
             </CardContent>
           </Grid>
         </Grid>
         <Grid container alignContent="center" justify="space-around">
           <Divider style={{ width: '100%', marginTop: '10px' }} />
-          <Grid item xs={3} className={classes.info}>
+          <Grid item xs={4} sm={3} className={classes.info}>
             <Typography
               className={classes.infoData}
               style={{ color: '#4caf50' }}
@@ -107,7 +109,7 @@ export default function ProductCard({
             </Typography>
             <span className={classes.infoLabel}>Frequency</span>
           </Grid>
-          <Grid item xs={3} className={classes.info}>
+          <Grid item xs={4} sm={3} className={classes.info}>
             <Typography
               className={classes.infoData}
               style={{ color: '#ff9800' }}
@@ -116,7 +118,7 @@ export default function ProductCard({
             </Typography>
             <span className={classes.infoLabel}>Holding/Hours</span>
           </Grid>
-          <Grid item xs={3} className={classes.info}>
+          <Grid item xs={12} sm={3} className={classes.info}>
             <Typography
               className={classes.infoData}
               style={{ color: '#4caf50' }}

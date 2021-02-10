@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import React, { useState } from 'react'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
 
   searchWrapper: {
     marginBottom: theme.spacing(2)
+  },
+  leftNav: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   }
 }))
 
@@ -68,16 +73,19 @@ export default function Articles({ articles }) {
         <ScrollToTopButton />
 
         <Grid container direction="row" spacing={3}>
-          <Grid item xs={12} sm={12} md={2}>
+          <Grid item xs={12} sm={12} md={2} className={classes.leftNav}>
             <SectionHeader>Categories</SectionHeader>
             {categoryState.map((category) => (
-              <div className={classes.categoryLink}>
+              <div className={classes.categoryLink} key={category}>
                 <Link href={`/category/${category}`}>
-                  <TextLink>{category.toUpperCase()}</TextLink>
+                  <div>
+                    <TextLink>{category.toUpperCase()}</TextLink>
+                  </div>
                 </Link>
               </div>
             ))}
           </Grid>
+
           <Grid item xs={12} sm={12} md={10}>
             <Grid container justify="center" wrap="nowrap">
               <Grid item style={{ flexGrow: 1 }}>
@@ -88,6 +96,7 @@ export default function Articles({ articles }) {
                         return (
                           <div
                             style={{ marginBottom: '20px', padding: '10px' }}
+                            key={article.id}
                           >
                             <ArticleCard
                               article={article}

@@ -161,7 +161,14 @@ export default function Faq({ faqs }) {
         {/* Categories and Questions list */}
         <Grid container spacing={3}>
           {faqCategories.map((faqCat) => (
-            <Grid item xs={6} style={{ marginBottom: '30px' }} key={faqCat}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              style={{ marginBottom: '30px' }}
+              key={faqCat}
+            >
               <SectionHeader>{capitalizeFirstLetter(faqCat)}</SectionHeader>
 
               <Grid item xs>

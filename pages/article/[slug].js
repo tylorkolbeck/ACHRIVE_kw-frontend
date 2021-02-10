@@ -45,7 +45,9 @@ const useStyles = makeStyles((theme) => {
       '& img': {
         display: 'block',
         margin: '20px auto'
-      }
+      },
+      fontSize: '20px',
+      color: theme.palette.type === 'light' ? 'rgba(0,0,0,.8)' : 'white'
     },
     imageWrapper: {
       borderRadius: '4px',
@@ -89,9 +91,7 @@ export default function Article({ postData }) {
         />
         <Seo seo={seo} />
         <div className={classes.postBody}>
-          <BodyText>
-            <ReactMarkdown source={postData.content} escapeHtml={false} />
-          </BodyText>
+          <ReactMarkdown source={postData.content} escapeHtml={false} />
         </div>
         <Grid container>
           <NewsLetterSignup />

@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { CgDarkMode } from 'react-icons/cg'
+import { useRouter } from 'next/router'
 import {
   List,
   Drawer,
@@ -86,6 +87,7 @@ export default function Nav({ toggleDarkMode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   const [logoHeight, setLogoHeight] = React.useState(75)
   const classes = useStyles({ logoHeight })
+  const router = useRouter()
 
   const { userState, setUserState } = userContext()
 
@@ -234,7 +236,11 @@ export default function Nav({ toggleDarkMode }) {
             {appLinks.map(({ label, url }) => {
               return (
                 <Link href={url} key={`drawer_${label}`}>
-                  <Typography variant="h6" className={classes.menuButtonLink}>
+                  <Typography
+                    variant="h6"
+                    className={classes.menuButtonLink}
+                    style={{ color: router.pathname === url ? '#52c4ed' : '' }}
+                  >
                     <a>{label.toUpperCase()}</a>
                   </Typography>
                 </Link>

@@ -110,7 +110,9 @@ export default function GettingStarted() {
                     <Grid item xs={12} sm={12} md={9}>
                       <BodyText>{step.description}</BodyText>
                       <Link href={step?.link?.url}>
-                        <TextLink icon>{step?.link?.label}</TextLink>
+                        <div>
+                          <TextLink icon>{step?.link?.label}</TextLink>
+                        </div>
                       </Link>
                     </Grid>
                   </Grid>

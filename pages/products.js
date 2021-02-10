@@ -3,7 +3,7 @@ import ProductFilter from '../components/ProductFilter/ProductFilter.component'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
-const useStyles = makeStyles(({ spacing, custom, palette }) => ({
+const useStyles = makeStyles(({ spacing, custom }) => ({
   root: {
     maxWidth: custom.screen.maxWidth,
     margin: '0px auto',

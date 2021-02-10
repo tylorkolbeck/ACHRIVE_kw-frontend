@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { Grid, Typography } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
+import BodyText from '../../components/Typography/BodyText/BodyText.component'
+import TextLink from '../../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -31,11 +33,9 @@ export default function Footer() {
           <Grid container>
             {appLinks.map((link) => (
               <Link href={link.url} key={link.label}>
-                <a>
-                  <Typography variant="body1" className={classes.link}>
-                    {link.label}
-                  </Typography>
-                </a>
+                <div className={classes.link} key={link.label}>
+                  <TextLink>{link.label}</TextLink>
+                </div>
               </Link>
             ))}
           </Grid>

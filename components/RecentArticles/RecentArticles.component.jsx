@@ -27,7 +27,9 @@ export default function RecentArticles({ articles }) {
       })}
       <Grid item xs={12} style={{ marginTop: '10px' }}>
         <Link href="/articles">
-          <TextLink icon>View All Articles</TextLink>
+          <a>
+            <TextLink icon>View All Articles</TextLink>
+          </a>
         </Link>
       </Grid>
     </Grid>
