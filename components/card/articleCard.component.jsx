@@ -4,6 +4,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { DateTime } from 'luxon'
 import { getStrapiMedia } from '../../lib/media'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import CategoryChip from '../Typography/CategoryChip/CategoryChip.component'
+import CaptionText from '../Typography/CaptionText/CaptionText.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,14 +53,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ArticleCard = ({
-  article,
-  image,
-  authorName,
-  category,
-  noCategory,
-  description
-}) => {
+const ArticleCard = ({ article, image, authorName, category, description }) => {
   const classes = useStyles()
 
   return (
@@ -72,61 +69,28 @@ const ArticleCard = ({
       <Grid item xs>
         <Grid container direction="column">
           <Grid item>
-            <Link href={`/category/${category}`}>
-              <a>
-                <Typography variant="caption" className={classes.categoryName}>
-                  {category && category.toUpperCase()}
-                </Typography>
-              </a>
-            </Link>
+            {category && (
+              <Link href={`/category/${category}`}>
+                <a>
+                  <CategoryChip>{category}</CategoryChip>
+                </a>
+              </Link>
+            )}
           </Grid>
           <Link href={`/article/${article.slug}`}>
             <a>
-              <Typography
-                variant="h5"
-                className={classes.title}
-                style={{ marginBottom: '5px' }}
-              >
-                {article.title}
-              </Typography>
+              <SectionHeader>{article.title}</SectionHeader>
             </a>
           </Link>
-          <Typography
-            variant="body2"
-            className={classes.description}
-            style={{ marginBottom: '10px' }}
-          >
-            {description.slice(0, 250)}
-          </Typography>
-
-          {!!noCategory && (
-            <Typography variant="caption" style={{ fontWeight: 'bold' }}>
-              {authorName} &#8226;{' '}
-              {DateTime.fromISO(article?.published_at).toLocaleString(
-                DateTime.DATE_MED
-              )}
-            </Typography>
-          )}
-        </Grid>
-      </Grid>
-      <Grid item xs={12} className={classes.authorFooter}>
-        {/* {!noCategory && category && (
-          <Link href={`/category/${category}`}>
-            <Chip label={category} size="small" className={classes.chip} />
-          </Link>
-        )} */}
-        {!noCategory && (
-          <Typography variant="caption" style={{ fontWeight: 'bold' }}>
+          <BodyText>{description.slice(0, 250)}</BodyText>
+          <CaptionText>
             {authorName} &#8226;{' '}
             {DateTime.fromISO(article?.published_at).toLocaleString(
               DateTime.DATE_MED
             )}
-          </Typography>
-        )}
+          </CaptionText>
+        </Grid>
       </Grid>
-      {/* <Grid item xs={12} style={{ marginTop: '20px' }}>
-        <Divider />
-      </Grid> */}
     </Grid>
   )
 }

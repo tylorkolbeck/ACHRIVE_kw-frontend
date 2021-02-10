@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import CachedIcon from '@material-ui/icons/Cached'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import { Button, Grid, Typography } from '@material-ui/core'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import TextLink from '../Typography/TextLink/TextLink.component'
 
 import CreateIcon from '@material-ui/icons/Create'
 
@@ -33,6 +36,9 @@ export default function ProductInfo() {
   const classes = useStyles()
   return (
     <Grid container direction="column" className={classes.root}>
+      <SectionHeader subTitle="Swing, Breakout, HODL, Scalp">
+        Trading Strategies
+      </SectionHeader>
       <Grid item className={classes.Info}>
         <Grid container direction="row" wrap="nowrap">
           <Grid item>
@@ -44,10 +50,10 @@ export default function ProductInfo() {
                 <Typography variant="h6">Continually Updated</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" component="p">
+                <BodyText>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
                   numquam fugit dolor
-                </Typography>
+                </BodyText>
               </Grid>
             </Grid>
           </Grid>
@@ -65,10 +71,10 @@ export default function ProductInfo() {
                 <Typography variant="h6">Free And Premium</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" component="p">
+                <BodyText>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
                   numquam fugit dolor
-                </Typography>
+                </BodyText>
               </Grid>
             </Grid>
           </Grid>
@@ -86,26 +92,18 @@ export default function ProductInfo() {
                 <Typography variant="h6">Fully Customizable</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" component="p">
+                <BodyText>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit
-                </Typography>
+                  numquam fugit dolor
+                </BodyText>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <a>
-        <Typography color="secondary">View All Products</Typography>
+        <TextLink icon>View All Products</TextLink>
       </a>
-      {/* <Button variant="contained" color="secondary">
-        View Products
-      </Button> */}
-      {/* <Grid item className={classes.CTAWrapper}>
-        <Button variant="contained" color="secondary">
-          View Products
-        </Button>
-      </Grid> */}
     </Grid>
   )
 }

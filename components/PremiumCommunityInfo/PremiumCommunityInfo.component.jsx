@@ -1,6 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import TextLink from '../Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -29,17 +32,20 @@ export default function PremiumCommunityInfo() {
   const classes = useStyles()
   return (
     <div className={classes.root}>
+      <SectionHeader subTitle="Be a part of the active Killer Whale Pod!">
+        Premium Community
+      </SectionHeader>
       <div className={classes.info}>
-        <Typography variant="body2" component="p">
+        <BodyText>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore,
           laborum!
-        </Typography>
-        <Typography variant="body2" component="p">
+        </BodyText>
+        <BodyText>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus
           maiores quas neque minima ea ipsa. Mollitia tempora eum optio nisi!
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
           maiores?
-        </Typography>
+        </BodyText>
       </div>
       <Grid container spacing={1}>
         <Grid item xs={6}>
@@ -58,11 +64,8 @@ export default function PremiumCommunityInfo() {
       </Grid>
       <Grid item className={classes.CTAWrapper}>
         <a>
-          <Typography color="secondary">Join The Community</Typography>
+          <TextLink icon>Join The Community</TextLink>
         </a>
-        {/* <Button variant="contained" color="secondary">
-          Join The Community
-        </Button> */}
       </Grid>
     </div>
   )

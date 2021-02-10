@@ -2,6 +2,9 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography } from '@material-ui/core'
 import Link from 'next/link'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import TextLink from '../Typography/TextLink/TextLink.component'
 // import BG from '../../public/bg.jpg'
 
 const useStyles = makeStyles((theme) => {
@@ -70,97 +73,23 @@ export default function HomepageHero() {
           <Grid item>
             <Grid container>
               <Grid item>
-                <Typography variant="h5">
-                  <b>Powerful Trading Products</b>
-                </Typography>
-                <Typography variant="body1">
+                <SectionHeader>Powerful Trading Products</SectionHeader>
+                <BodyText color="white">
                   Strategies and signals to improve your trading, powered by our
                   AI and expert chart analysis.
-                </Typography>
+                </BodyText>
               </Grid>
               <Grid item className={classes.CTA}>
                 <Link href="/products">
-                  <a>
-                    <Typography>View Stratigies</Typography>
-                  </a>
+                  <TextLink icon color="#52c4ed">
+                    View Strategies
+                  </TextLink>
                 </Link>
-                {/* <Button variant="contained" xs={12}>
-                  View Stratigies
-                </Button> */}
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      {/* <Grid item style={{ flexGrow: 1 }}>
-        <Grid
-          container
-          style={{ flexGrow: 1 }}
-          spacing={5}
-          direction="row"
-          justify="center"
-          alignItems="stretch"
-        >
-          <Grid item xs>
-            <Grid
-              container
-              direction="column"
-              justify="space-between"
-              style={{ height: '100%' }}
-            >
-              <Typography variant="h6">Premium Content</Typography>
-              <Typography variant="caption">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis
-              </Typography>
-              <Grid item>
-                <Button
-                  xs={12}
-                  className={classes.CTA}
-                  style={{ marginTop: 'auto' }}
-                >
-                  Join Premium
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item xs>
-            <Grid
-              container
-              direction="column"
-              justify="space-between"
-              style={{ height: '100%' }}
-            >
-              <Typography variant="h6">Powerful Strategies</Typography>
-              <Typography variant="caption">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis, quaerat!
-              </Typography>
-              <Grid item>
-                <Button className={classes.CTA}>View Stratigies</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs>
-            <Grid
-              container
-              direction="column"
-              justify="space-between"
-              style={{ height: '100%' }}
-            >
-              <Typography variant="h6">Expert Chart Analysis</Typography>
-              <Typography variant="caption">
-                Lorem ipsum dolor sit amet consectetur Reiciendis, quaerat!
-              </Typography>
-
-              <Grid item>
-                <Button className={classes.CTA}>View Analysis</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid> */}
     </Grid>
   )
 }

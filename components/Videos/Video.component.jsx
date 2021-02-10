@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
 import { FaPlay } from 'react-icons/fa'
 import Link from 'next/link'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import CaptionText from '../Typography/CaptionText/CaptionText.component'
 
 const videos = [
   {
@@ -46,18 +48,14 @@ const useStyles = makeStyles((theme) => ({
   videoCard: {
     marginBottom: theme.spacing(4)
   },
-  videoTitle: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(1)
-  },
+
   videoImage: {
     position: 'relative',
+    marginBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      // background: 'lightgrey',
       height: '25vw'
     },
     [theme.breakpoints.down('sm')]: {
-      // background: 'lightgrey',
       height: '50vw'
     }
   },
@@ -77,16 +75,6 @@ const useStyles = makeStyles((theme) => ({
         opacity: '0.3'
       }
     },
-    // '&:after': {
-    //   content: "''",
-    //   position: 'absolute',
-    //   height: '100px',
-    //   width: '100px',
-    //   bottom: '0px',
-    //   right: '0px',
-    //   background: theme.palette.secondary.main,
-    //   zIndex: '100'
-    // },
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -134,13 +122,7 @@ export default function Videos() {
               </div>
             </Grid>
             <Grid item>
-              <Typography
-                variant="h5"
-                component="h3"
-                className={classes.videoTitle}
-              >
-                {video.title}
-              </Typography>
+              <SectionHeader>{video.title}</SectionHeader>
             </Grid>
             <Grid item>
               <Grid
@@ -151,9 +133,7 @@ export default function Videos() {
               >
                 <Link href="/">
                   <a>
-                    <Typography variant="body2" className={classes.videoAuthor}>
-                      {video.author}
-                    </Typography>
+                    <CaptionText>{video.author}</CaptionText>
                   </a>
                 </Link>
                 <Typography variant="caption" className={classes.date}>

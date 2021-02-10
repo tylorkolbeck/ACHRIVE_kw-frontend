@@ -26,7 +26,7 @@ export function setTheme(darkMode) {
         maxWidth: '1400px',
         maxWidthHome: '1400px',
         bodyPadding: '2rem',
-        navBarHeight: '80px'
+        navBarHeight: '64px'
       }
     }
   })

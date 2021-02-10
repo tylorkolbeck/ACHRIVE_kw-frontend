@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import withWidth from '@material-ui/core/withWidth'
+import Button from '../../components/UI/Button.component'
 
 const startingBalance = [
   {
@@ -57,84 +59,110 @@ const managed = [
   }
 ]
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   label: {
-    marginBottom: '10px'
+    marginBottom: '20px',
+    fontWeight: 'bold'
+  },
+  column: {
+    [theme.breakpoints.up('md')]: {
+      marginRight: theme.spacing(5)
+    }
+  },
+  input: {
+    [theme.breakpoints.down('md')]: {
+      marginBottom: theme.spacing(5)
+    }
   }
 }))
 
-export default function ProductFinder() {
+function ProductFinder({ width }) {
   const classes = useStyles()
+
+  const showLabelsRow = ['md', 'lg', 'xl']
+
   return (
     <Grid container>
-      <Typography
-        variant="h5"
-        style={{ fontWeight: 'bold', marginBottom: '20px' }}
-      >
-        Find The Right Product
-      </Typography>
-      <Grid container spacing={5}>
-        <Grid item xs={12} sm={4}>
-          <label>
+      {showLabelsRow.includes(width) && (
+        <Grid container wrap="nowrap">
+          <Grid item xs={12} sm={12} md={3} className={classes.column}>
             <Typography className={classes.label}>Starting Balance</Typography>
-            <TextField
-              style={{ width: '100%' }}
-              id="outlined-select-currency"
-              select
-              value={startingBalance}
-              // helperText="Choose your starting balance"
-              variant="outlined"
-            >
-              {startingBalance.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </label>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <label>
+          </Grid>
+          <Grid item xs={12} sm={12} md={3} className={classes.column}>
             <Typography className={classes.label}>Risk Comfort</Typography>
-
-            <TextField
-              style={{ width: '100%' }}
-              id="outlined-select-currency"
-              select
-              value={riskComfort}
-              // helperText="How much risk are you willing to take"
-              variant="outlined"
-            >
-              {riskComfort.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </label>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <label>
+          </Grid>
+          <Grid item xs={12} sm={12} md={3} className={classes.column}>
             <Typography className={classes.label}>
               Self Managed or Automated
             </Typography>
-            <TextField
-              style={{ width: '100%' }}
-              id="outlined-select-currency"
-              select
-              value={managed}
-              // helperText="Do you want trading automated or manual"
-              variant="outlined"
-            >
-              {managed.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </label>
+          </Grid>
+          {/* <Grid item xs={12} sm={12} md={3} className={classes.column}></Grid> */}
         </Grid>
+      )}
+
+      <Grid container>
+        <Grid item xs={12} sm={12} md={3} className={classes.column}>
+          {!showLabelsRow.includes(width) && (
+            <Typography className={classes.label}>Starting Balance</Typography>
+          )}
+          <TextField
+            style={{ width: '100%' }}
+            select
+            value={startingBalance}
+            variant="outlined"
+            className={classes.input}
+          >
+            {startingBalance.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12} sm={12} md={3} className={classes.column}>
+          {!showLabelsRow.includes(width) && (
+            <Typography className={classes.label}>Risk Comfort</Typography>
+          )}
+          <TextField
+            style={{ width: '100%' }}
+            select
+            value={riskComfort}
+            variant="outlined"
+            className={classes.input}
+          >
+            {riskComfort.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12} sm={12} md={3} className={classes.column}>
+          {!showLabelsRow.includes(width) && (
+            <Typography className={classes.label}>
+              Manual Or Auto Trading
+            </Typography>
+          )}
+          <TextField
+            style={{ width: '100%' }}
+            select
+            value={managed}
+            variant="outlined"
+            className={classes.input}
+          >
+            {managed.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        {/* <Grid item xs={12} sm={12} md={3} className={classes.column}>
+          <Button>Search Strategies</Button>
+        </Grid> */}
       </Grid>
     </Grid>
   )
 }
+
+export default withWidth()(ProductFinder)

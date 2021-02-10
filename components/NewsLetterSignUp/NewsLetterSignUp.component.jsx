@@ -1,6 +1,9 @@
 import React from 'react'
-import { Typography, Grid, TextField, Button, Paper } from '@material-ui/core'
+import { Typography, Grid, TextField, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import CaptionText from '../Typography/CaptionText/CaptionText.component'
+import Button from '../UI/Button.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
       // padding: '0px'
     },
     '& button': {
-      background: theme.custom.color.green,
-      marginLeft: '20px',
-      color: 'white'
+      // background: theme.custom.color.green,
+      marginLeft: '20px'
+      // color: 'white'
     }
     // marginBottom: theme.spacing(3)
     // borderRadius: '4px'
@@ -52,34 +55,34 @@ export default function NewsLetterSignUp() {
     <Paper elevation={1} className={classes.root}>
       <Grid container direction="column">
         <Grid item>
-          <Typography variant="h6" className={classes.inputLabel}>
+          <SectionHeader>
             Subscribe to Killer Whale for the Latest News and Trading Updates
-          </Typography>
+          </SectionHeader>
         </Grid>
         <Grid item xs={12}>
-          <Grid container direction="row" wrap="nowrap">
+          <Grid container direction="row" wrap="nowrap" alignItems="center">
             <TextField
               size="small"
               placeholder="Email Address"
               variant="outlined"
               className={classes.emailInput}
-              helperText={
-                <Typography variant="caption">
-                  Dont worry, we will not spam. You will only get trade insights
-                  from our experts and weekly trade predictions.
-                  <a href="#" className={classes.privacyPolicy}>
-                    Privacy Policy
-                  </a>
-                </Typography>
-              }
             />
+
             <Grid item>
-              <Button variant="contained" className={classes.signupButton}>
+              <Button
+                variant="contained"
+                size="large"
+                className={classes.signupButton}
+              >
                 Signup
               </Button>
             </Grid>
           </Grid>
         </Grid>
+        <CaptionText>
+          We do not spam. You only recieve trade insights and predictions from
+          our expert chart analysis.
+        </CaptionText>
       </Grid>
     </Paper>
   )

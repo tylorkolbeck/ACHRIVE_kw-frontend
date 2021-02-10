@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
 import { getStrapiMedia } from '../../lib/media'
 import { DateTime } from 'luxon'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import CaptionText from '../Typography/CaptionText/CaptionText.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   imageContainer: {
-    flexGrow: 1,
     width: 'auto',
     flexGrow: 1,
+    marginBottom: '20px',
     height: '24vw',
     width: '100%',
     borderRadius: '4px',
@@ -37,48 +40,29 @@ const MainArticle = ({ article }) => {
 
   return (
     <Grid container direction="column" className={classes.root}>
-      {/* <Grid item>
-        <Typography variant="h5" style={{ marginBottom: '20px' }}>
-          Latest Article
-        </Typography>
-      </Grid> */}
       <Grid item>
         <Grid container className={classes.imageContainer}></Grid>
 
         <Link href={`/article/${article.slug}`}>
           <a>
-            <Typography
-              variant="h4"
-              component="h2"
-              style={{ marginBottom: '5px', marginTop: '20px' }}
-            >
-              {article.title}
-            </Typography>
+            <SectionHeader>{article.title}</SectionHeader>
           </a>
         </Link>
-        {/* <AuthorInfo
-          published={article.published_at}
-          updated={article.updated_at}
-          author={article.author}
-        /> */}
-      </Grid>
-      <Grid item style={{ marginBottom: '20px' }}>
-        <Typography variant="caption">{article?.author?.name} </Typography>
-        <Typography variant="caption" style={{ color: 'grey' }}>
-          &#8226;{' '}
-          {DateTime.fromISO(article.published_at).toLocaleString(
-            DateTime.DATE_MED
-          )}
-        </Typography>
       </Grid>
 
       <Grid item>
-        <Typography variant="body1" color="initial">
+        <BodyText>
           {article.description.slice(100)}...
           <Link href={`/article/${article.slug}`}>
             <a>Read More</a>
           </Link>
-        </Typography>
+        </BodyText>
+        <CaptionText>
+          {article?.author?.name} &#8226;{' '}
+          {DateTime.fromISO(article.published_at).toLocaleString(
+            DateTime.DATE_MED
+          )}
+        </CaptionText>
       </Grid>
     </Grid>
   )

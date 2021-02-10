@@ -7,8 +7,10 @@ import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import BackButton from '../../components/BackButton/BackButton.component'
-import CategoryChip from '../../components/CategoryChip/CategoryChip.component'
 import Footer from '../../components/Footer/Footer.component'
+import CategoryChip from '../../components/Typography/CategoryChip/CategoryChip.component'
+import BodyText from '../../components/Typography/BodyText/BodyText.component'
+import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -71,14 +73,10 @@ export default function Article({ postData }) {
       <Grid item className={classes.content}>
         <BackButton />
         <Grid item container>
+          <CategoryChip>{category?.name}</CategoryChip>
           <Grid item className={classes.marginBottomMd}>
-            <Typography variant="h2" className={classes.articleTitle}>
-              {title}
-            </Typography>
-            <Grid item xs={12} className={classes.marginBottomSm}>
-              <CategoryChip label={category?.name} />
-            </Grid>
-            <Typography variant="caption">{description}</Typography>
+            <SectionHeader>{title}</SectionHeader>
+            <BodyText>{description}</BodyText>
           </Grid>
           <Grid item className={classes.imageWrapper}>
             <Image image={image} style={{ maxWidth: '100%' }}></Image>
@@ -91,7 +89,9 @@ export default function Article({ postData }) {
         />
         <Seo seo={seo} />
         <div className={classes.postBody}>
-          <ReactMarkdown source={postData.content} escapeHtml={false} />
+          <BodyText>
+            <ReactMarkdown source={postData.content} escapeHtml={false} />
+          </BodyText>
         </div>
         <Grid container>
           <NewsLetterSignup />

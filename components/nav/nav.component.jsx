@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { userContext } from '../../context/UserContext'
 import { logout } from '../../lib/auth'
 import Link from 'next/link'
@@ -72,14 +72,40 @@ const useStyles = makeStyles((theme) => ({
     '& button': {
       marginLeft: '0px !important'
     }
+  },
+  navLogo: {
+    position: 'absolute',
+    top: '0px',
+    left: '20px',
+    height: ({ logoHeight }) => logoHeight,
+    width: 'auto'
   }
 }))
 
 export default function Nav({ toggleDarkMode }) {
-  const classes = useStyles()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [logoHeight, setLogoHeight] = React.useState(75)
+  const classes = useStyles({ logoHeight })
 
   const { userState, setUserState } = userContext()
+
+  useEffect(() => {
+    if (typeof 'window' !== 'undefined') {
+      window.addEventListener('scroll', handleScroll)
+    }
+
+    ;() => {
+      window.removeEventListener('scoll', handleScroll)
+    }
+  }, [])
+
+  function handleScroll() {
+    let scrollTop = window.scrollY,
+      minHeight = 75,
+      logoHeight = Math.max(minHeight, 100 - scrollTop)
+
+    setLogoHeight(logoHeight)
+  }
 
   function logoutHandler() {
     setUserState({ type: 'LOGOUT' })
@@ -182,7 +208,7 @@ export default function Nav({ toggleDarkMode }) {
               <img
                 src="/KW_logo.png"
                 width="100px"
-                style={{ position: 'absolute', top: '0px', left: '20px' }}
+                className={classes.navLogo}
               />
             </Link>
             <Typography variant="h6" className={classes.title}>

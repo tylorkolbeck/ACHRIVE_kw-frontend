@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { getAllCategoryNames, getArticlesByCategory } from '../../lib/category'
 import ArticleCard from '../../components/card/articleCard.component'
 import { fetchAPI } from '../../lib/api'
-import PageHeader from '../../components/PageHeader/PageHeader.component'
+import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
 import BackButton from '../../components/BackButton/BackButton.component'
 import ScrollToTop from '../../components/ScrollToTopButton/ScrollToTopButton.component'
 
@@ -18,55 +18,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Category({ categoryData, authors }) {
+export default function Category({ categoryData, authors, categories }) {
   const classes = useStyles()
   const { name, articles } = categoryData
 
   return (
-    <div className={classes.root}>
-      <PageHeader title={name?.toUpperCase()} />
-      <ScrollToTop />
-      <BackButton />
-      {/* <Link href="/articles">
-        <a>
-          <Typography variant="body1">All Categories</Typography>
-        </a>
-      </Link> */}
+    <div>
+      <PageHeader
+        title={name?.toUpperCase()}
+        subTitle={`Browse articles related to ${name}`}
+      />
+      <div className={classes.root}>
+        <ScrollToTop />
+        <BackButton />
 
-      <Grid container direction="column">
-        {articles &&
-          articles.map((article) => {
-            const author = authors.find(
-              (author) => author.id === article.author
-            )
-            return (
-              <Grid item xs={12} key={article.title}>
-                {/* <ArticleCard
-                    article={article}
-                    authorName={author.name}
-                    description={article.description.slice(0, 100) + '...'}
-                  /> */}
-                <Paper
-                  style={{ padding: '20px', marginBottom: '20px' }}
-                  elevation={1}
-                >
-                  <ArticleCard
-                    article={article}
-                    noCategory
-                    // category={article?.category}
-                    image={article?.image}
-                    description={article.description}
-                    authorName={
-                      article?.author?.name
-                        ? article?.author?.name
-                        : 'Faceless Man'
-                    }
-                  />
-                </Paper>
-              </Grid>
-            )
-          })}
-      </Grid>
+        <Grid container direction="column">
+          {articles &&
+            articles.map((article) => {
+              const author = authors.find(
+                (author) => author.id === article.author
+              )
+
+              const category = categories.find(
+                (cat) => cat.id === article.category
+              )
+              return (
+                <Grid item xs={12} key={article.title}>
+                  <Paper
+                    style={{ padding: '20px', marginBottom: '20px' }}
+                    elevation={1}
+                  >
+                    <ArticleCard
+                      article={article}
+                      noCategory
+                      category={category?.name}
+                      image={article?.image}
+                      description={article.description}
+                      authorName={author?.name ? author?.name : 'Faceless Man'}
+                    />
+                  </Paper>
+                </Grid>
+              )
+            })}
+        </Grid>
+      </div>
     </div>
   )
 }
@@ -83,10 +78,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const categoryArticles = await getArticlesByCategory(params.category)
   const authors = await fetchAPI('/writers')
+  const categories = await fetchAPI('/categories')
+
   return {
     props: {
       categoryData: categoryArticles,
-      authors: authors
+      authors: authors,
+      categories: categories
     },
     revalidate: 10
   }

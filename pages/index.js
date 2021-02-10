@@ -3,7 +3,7 @@ import Seo from '../components/seo/seo.component'
 import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Paper } from '@material-ui/core'
+import { Grid, Typography, Paper, Divider } from '@material-ui/core'
 
 import HomepageHero from '../components/HomepageHero/HomepageHero.component'
 import Carousel from '../components/Carousel/Carousel.component'
@@ -69,8 +69,6 @@ const Home = ({
   allPostsData,
   homepage,
   global,
-  categories,
-  authors,
   carouselData,
   carouselTimer
 }) => {
@@ -91,65 +89,28 @@ const Home = ({
         <Grid item className={classes.RecentArticles}>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6} md={8}>
-              {/* <Typography variant="h4" className={classes.ContentHeader}>
-                Latest Article
-              </Typography> */}
-              {/* <Paper
-                elevation={1}
-                style={{ padding: '20px', marginBottom: '20px' }}
-              > */}
               <FeaturedArticle article={allPostsData[0]} />
-              {/* </Paper> */}
               <Grid item style={{ marginTop: '50px', marginBottom: '50px' }}>
                 <NewsLetterSignup />
               </Grid>
-              {/* <Paper
-                elevation={1}
-                style={{ padding: '20px', marginBottom: '20px' }}
-              > */}
               <Videos />
-              {/* </Paper> */}
             </Grid>
 
             <Grid item xs={12} sm={6} md={4}>
-              {/* <Typography variant="h4" className={classes.ContentHeader}>
-                Recent Articles
-              </Typography> */}
-              {/* <Paper
-                elevation={1}
-                style={{ padding: '20px', marginBottom: '20px' }}
-              > */}
-              <Grid item>
-                <RecentArticles articles={allPostsData.slice(0, 4)} />
+              <Grid item style={{ marginBottom: '50px' }}>
+                <RecentArticles articles={allPostsData.slice(0, 3)} />
               </Grid>
-              {/* </Paper> */}
-              {/* -------- */}
 
               {/* TRADING PRODUCTS */}
               <Paper
                 elevation={1}
                 style={{
                   padding: '20px',
-                  marginBottom: '20px',
+                  marginBottom: '40px',
                   marginTop: '20px'
                 }}
               >
                 <Grid item className={classes.section}>
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={classes.ContentHeader}
-                  >
-                    Trading Products
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    component="p"
-                    className={classes.ContentSubHeader}
-                  >
-                    Swing, Breakout, HODL, Scalp
-                  </Typography>
                   <ProductInfo />
                 </Grid>
               </Paper>
@@ -158,19 +119,9 @@ const Home = ({
               {/* PREMIUM COMMUNITY */}
               <Paper
                 elevation={1}
-                style={{ padding: '20px', marginBottom: '20px' }}
+                style={{ padding: '20px', marginBottom: '40px' }}
               >
                 <Grid container direction="column" className={classes.section}>
-                  <Typography variant="h4" className={classes.ContentHeader}>
-                    Premium Community
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    component="p"
-                    className={classes.ContentSubHeader}
-                  >
-                    Be a part of the active Killer Whale Pod!
-                  </Typography>
                   <PremiumCommunityInfo />
                 </Grid>
               </Paper>
@@ -182,16 +133,6 @@ const Home = ({
                 style={{ padding: '20px', marginBottom: '20px' }}
               >
                 <Grid container direction="column" className={classes.section}>
-                  <Typography variant="h4" className={classes.ContentHeader}>
-                    Reviews
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    component="p"
-                    className={classes.ContentSubHeader}
-                  >
-                    Hear from the Killer Whale Pod!
-                  </Typography>
                   <Reviews />
                 </Grid>
               </Paper>
@@ -201,31 +142,13 @@ const Home = ({
             </Grid>
           </Grid>
         </Grid>
-        {/* 
-        <Grid item className={classes.newsletterWrapper}>
-          <NewsLetterSignup />
-        </Grid> */}
 
         {/* BOTTOM SECTION MARKETING */}
         <Grid item className={classes.Marketing}>
-          <Grid container spacing={5}>
-            {/* <Grid item xs={12} sm={7}>
-              <Typography variant="h4" className={classes.ContentHeader}>
-                Videos
-              </Typography>
-              <Videos />
-            </Grid> */}
-          </Grid>
+          <Grid container spacing={5}></Grid>
         </Grid>
       </Grid>
       <Footer />
-
-      {/* <Seo seo={homepage.seo} global={global} />
-      <HomepageBlogHeader articles={allPostsData} />
-      <Divider style={{ margin: '20px' }} />
-      <div style={{ marginTop: '50px' }}>
-        <ArticleCategoryList categories={categories} authors={authors} />
-      </div> */}
     </Grid>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Card, CardContent, Divider } from '@material-ui/core'
 import Link from 'next/link'
+import TextLink from '../Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   productCard: {
@@ -90,7 +91,7 @@ export default function ProductCard({
                 {description?.slice(0, 120)}...
               </Typography>
               <Link href="/">
-                <a className={classes.learnMoreLink}>Learn More</a>
+                <TextLink>Get Started</TextLink>
               </Link>
             </CardContent>
           </Grid>

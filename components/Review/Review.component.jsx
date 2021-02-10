@@ -1,7 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote'
+import BodyText from '../Typography/BodyText/BodyText.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import CaptionText from '../Typography/CaptionText/CaptionText.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -17,11 +19,6 @@ const useStyles = makeStyles((theme) => {
     reviewText: {
       marginBottom: theme.spacing(2)
     },
-    reviewAuthor: {
-      // color: theme.palette.secondary.light,
-      marginLeft: '0px',
-      fontWeight: 'bold'
-    },
     IconRound: {
       background: theme.custom.color.green,
       borderRadius: '50%',
@@ -30,7 +27,6 @@ const useStyles = makeStyles((theme) => {
       padding: '10px',
       color: 'white',
       marginRight: '20px',
-      // boxShadow: '2px 3px 15px rgba(0,0,0,0.3)',
       float: 'left'
     }
   }
@@ -61,15 +57,14 @@ export default function Review() {
   ]
   return (
     <div className={classes.root}>
+      <SectionHeader subTitle="Hear from our pod">Pulse</SectionHeader>
       {reviewData.map((review) => (
         <div className={classes.review} key={review.id}>
-          <Typography variant="body2" className={classes.reviewText}>
+          <BodyText>
             <FormatQuoteIcon className={classes.IconRound} />
             {review.text.slice(0, 300)}...
-          </Typography>
-          <Typography variant="caption" className={classes.reviewAuthor}>
-            {review.author}
-          </Typography>
+          </BodyText>
+          <CaptionText>{review.author}</CaptionText>
         </div>
       ))}
     </div>

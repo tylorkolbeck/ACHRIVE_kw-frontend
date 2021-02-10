@@ -5,9 +5,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import ArticleCard from '../components/card/articleCard.component'
 import Footer from '../components/Footer/Footer.component'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
-import PageHeader from '../components/PageHeader/PageHeader.component'
+import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import Link from 'next/link'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
+import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   categoryLink: {
     color: theme.palette.secondary.light,
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(2)
   },
 
   searchWrapper: {
@@ -57,27 +59,26 @@ export default function Articles({ articles }) {
     setCategoryState(categoryData)
   }, [articles])
   return (
-    <>
+    <div>
+      <PageHeader
+        title="Articles"
+        subTitle="Browse articles for insight from our expert chart analysis and predictions"
+      />
       <div className={classes.root}>
         <ScrollToTopButton />
-        <PageHeader title={'Articles'} />
 
-        <Grid container direction="row" wrap="nowrap" spacing={3}>
-          <Grid item xs>
-            <Typography variant="h5" style={{ marginBottom: '20px' }}>
-              Categories
-            </Typography>
+        <Grid container direction="row" spacing={3}>
+          <Grid item xs={12} sm={12} md={2}>
+            <SectionHeader>Categories</SectionHeader>
             {categoryState.map((category) => (
-              <Link href={`/category/${category}`}>
-                <a>
-                  <Typography className={classes.categoryLink}>
-                    {category.toUpperCase()}
-                  </Typography>
-                </a>
-              </Link>
+              <div className={classes.categoryLink}>
+                <Link href={`/category/${category}`}>
+                  <TextLink>{category.toUpperCase()}</TextLink>
+                </Link>
+              </div>
             ))}
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={12} md={10}>
             <Grid container justify="center" wrap="nowrap">
               <Grid item style={{ flexGrow: 1 }}>
                 <Grid item>
@@ -88,11 +89,6 @@ export default function Articles({ articles }) {
                           <div
                             style={{ marginBottom: '20px', padding: '10px' }}
                           >
-                            {/* <Paper
-                              style={{ padding: '20px', marginBottom: '20px' }}
-                              elevation={1}
-                              key={article.card}
-                            > */}
                             <ArticleCard
                               article={article}
                               noCategory
@@ -105,7 +101,6 @@ export default function Articles({ articles }) {
                                   : 'Faceless Man'
                               }
                             />
-                            {/* </Paper> */}
                             {index === 4 && (
                               <Grid item style={{ margin: '50px auto' }}>
                                 <NewsLetterSignup />
@@ -123,7 +118,7 @@ export default function Articles({ articles }) {
         </Grid>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

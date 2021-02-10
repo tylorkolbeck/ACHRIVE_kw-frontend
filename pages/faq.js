@@ -1,6 +1,5 @@
 import React from 'react'
 import { fetchAPI } from '../lib/api'
-
 import {
   List,
   ListItem,
@@ -14,10 +13,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
 import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import capitalizeFirstLetter from '../lib/utils'
-import PageHeader from '../components/PageHeader/PageHeader.component'
+import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
 import Fuse from 'fuse.js'
 import SearchField from '../components/SearchField/SearchField.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
+import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
+import BodyText from '../components/Typography/BodyText/BodyText.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '500px',
     paddingTop: theme.custom.screen.navBarHeight
   },
-  catTitle: {
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    marginBottom: theme.spacing(1)
-  },
   question: {
     cursor: 'pointer',
     marginLeft: theme.spacing(1),
@@ -42,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.light
   },
   questionLink: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(3)
   },
   inputWrapper: {
     marginBottom: theme.spacing(3)
@@ -137,9 +135,12 @@ export default function Faq({ faqs }) {
   }
 
   return (
-    <>
+    <div>
+      <PageHeader
+        title="FAQs"
+        subTitle="Browse our list of the most commonly asked questions by our community"
+      />
       <div className={classes.root}>
-        <PageHeader title="FAQs" />
         <ScrollToTopButton />
 
         <Grid item className={classes.searchInputWrapper}>
@@ -147,47 +148,38 @@ export default function Faq({ faqs }) {
             {searchResults &&
               searchResults.map((result) => (
                 <div key={result.item.id} style={{ marginBottom: '8px' }}>
-                  <Typography
-                    variant="body1"
+                  <TextLink
                     onMouseDown={(e) => scrollToQuestion(result.item.id)}
-                    className={classes.dropdownLink}
                   >
                     {result.item.question}
-                  </Typography>
+                  </TextLink>
                 </div>
               ))}
           </SearchField>
         </Grid>
 
         {/* Categories and Questions list */}
-        {faqCategories.map((faqCat) => (
-          <div style={{ marginBottom: '30px' }} key={faqCat}>
-            <Typography
-              variant="body1"
-              className={classes.catTitle}
-              onClick={(e) => scrollToCategory(e, faqCat)}
-            >
-              {capitalizeFirstLetter(faqCat)}
-            </Typography>
+        <Grid container spacing={3}>
+          {faqCategories.map((faqCat) => (
+            <Grid item xs={6} style={{ marginBottom: '30px' }} key={faqCat}>
+              <SectionHeader>{capitalizeFirstLetter(faqCat)}</SectionHeader>
 
-            <Grid item xs>
-              {faqState.map((faq) => {
-                if (faq.category === faqCat) {
-                  return (
-                    <Grid item key={faq.id} className={classes.questionLink}>
-                      <Typography
-                        className={classes.question}
-                        onClick={(e) => scrollToQuestion(faq.id)}
-                      >
-                        {faq.question}
-                      </Typography>
-                    </Grid>
-                  )
-                }
-              })}
+              <Grid item xs>
+                {faqState.map((faq) => {
+                  if (faq.category === faqCat) {
+                    return (
+                      <Grid item key={faq.id} className={classes.questionLink}>
+                        <TextLink onClick={(e) => scrollToQuestion(faq.id)}>
+                          {faq.question}
+                        </TextLink>
+                      </Grid>
+                    )
+                  }
+                })}
+              </Grid>
             </Grid>
-          </div>
-        ))}
+          ))}
+        </Grid>
         {/* Category, Questions and collapsable Answers */}
         <List>
           {faqCategories.map((faqCat) => (
@@ -209,12 +201,13 @@ export default function Faq({ faqs }) {
                           button
                           onClick={() => toggleFaqOpen(q.id)}
                           key={q.id}
-                          style={{ position: 'relative' }}
+                          style={{ position: 'relative', paddingLeft: '0' }}
                         >
                           <span
                             id={`question_${q.id}`}
                             className={classes.scrollLink}
                           ></span>
+
                           <ListItemText
                             primary={
                               <Typography
@@ -233,7 +226,7 @@ export default function Faq({ faqs }) {
                         </ListItem>
                         <Collapse in={q.expanded} timeout="auto" unmountOnExit>
                           <ListItem button>
-                            <ListItemText primary={q.answer} />
+                            <BodyText>{q.answer}</BodyText>
                           </ListItem>
                         </Collapse>
                       </div>
@@ -244,7 +237,7 @@ export default function Faq({ faqs }) {
         </List>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -1,8 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
-import { IoMdArrowRoundBack } from 'react-icons/io'
-import { Typography } from '@material-ui/core'
+import TextLink from '../Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,12 +26,7 @@ export default function BackButton() {
         Router.back()
       }}
     >
-      <IoMdArrowRoundBack />
-
-      <Typography variant="body1" className={classes.buttonText}>
-        {' '}
-        BACK
-      </Typography>
+      <TextLink iconLeft>Back</TextLink>
     </div>
   )
 }
