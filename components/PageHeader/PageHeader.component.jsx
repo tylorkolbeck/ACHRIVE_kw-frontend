@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: theme.palette.secondary.main,
     // color: 'white',
     // boxShadow: '1px 3px 15px rgba(0,0,0,0.2)'
+    paddingBottom: '20px'
   },
   content: {
     maxWidth: theme.custom.screen.maxWidth,

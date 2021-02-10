@@ -22,13 +22,16 @@ export default function RecentArticles({ articles }) {
       })}
       <Grid item xs={12} style={{ marginTop: '10px' }}>
         <Link href="/articles">
-          <Button
+          <a>
+            <Typography color="secondary">View All Articles</Typography>
+          </a>
+          {/* <Button
             variant="contained"
             color="secondary"
             style={{ width: '100%' }}
           >
             View All Articles
-          </Button>
+          </Button> */}
         </Link>
       </Grid>
     </Grid>

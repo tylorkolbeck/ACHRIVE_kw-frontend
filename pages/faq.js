@@ -1,5 +1,6 @@
 import React from 'react'
 import { fetchAPI } from '../lib/api'
+
 import {
   List,
   ListItem,
@@ -16,6 +17,7 @@ import capitalizeFirstLetter from '../lib/utils'
 import PageHeader from '../components/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
 import Fuse from 'fuse.js'
+import SearchField from '../components/SearchField/SearchField.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,11 +47,18 @@ const useStyles = makeStyles((theme) => ({
   inputWrapper: {
     marginBottom: theme.spacing(3)
   },
-  qAndA: {
-    marginBottom: '20px',
-    '& h6': {
-      marginBottom: '10px'
+  scrollLink: {
+    position: 'absolute',
+    top: '-80px'
+  },
+  dropdownLink: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: theme.palette.secondary.light
     }
+  },
+  searchInputWrapper: {
+    marginBottom: theme.spacing(5)
   }
 }))
 
@@ -60,12 +69,12 @@ export default function Faq({ faqs }) {
   const router = useRouter()
   const [faqState, setFaqState] = React.useState([])
   const [faqCategories, setFaqCategories] = React.useState([])
-
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResults, setSearchResults] = React.useState([])
 
   const fuse = new Fuse(faqs, {
-    keys: ['question', 'answer', 'category.name']
+    keys: ['question', 'answer', 'category.name'],
+    includeMatches: true
   })
 
   React.useEffect(() => {
@@ -119,10 +128,11 @@ export default function Faq({ faqs }) {
     router.push(`#question_${faqID}`)
   }
 
-  function searchInputHandler(e) {
+  async function searchInputHandler(e) {
     const input = e.target.value
-    console.log(fuse.search(input))
-    setSearchResults(fuse.search(input))
+    const results = await fuse.search(input)
+
+    setSearchResults(results)
     setSearchInput(input)
   }
 
@@ -132,14 +142,21 @@ export default function Faq({ faqs }) {
         <PageHeader title="FAQs" />
         <ScrollToTopButton />
 
-        <Grid item>
-          <input value={searchInput} onChange={searchInputHandler}></input>
-          <div>
+        <Grid item className={classes.searchInputWrapper}>
+          <SearchField onChange={searchInputHandler} value={searchInput}>
             {searchResults &&
               searchResults.map((result) => (
-                <div key={result.item.id}>{result.item.question}</div>
+                <div key={result.item.id} style={{ marginBottom: '8px' }}>
+                  <Typography
+                    variant="body1"
+                    onMouseDown={(e) => scrollToQuestion(result.item.id)}
+                    className={classes.dropdownLink}
+                  >
+                    {result.item.question}
+                  </Typography>
+                </div>
               ))}
-          </div>
+          </SearchField>
         </Grid>
 
         {/* Categories and Questions list */}
@@ -186,24 +203,18 @@ export default function Faq({ faqs }) {
               {faqState &&
                 faqState.map((q) => {
                   if (q.category === faqCat)
-                    // return (
-                    //   <div
-                    //     key={q.id}
-                    //     className={classes.qAndA}
-                    //     id={`question_${q.id}`}
-                    //   >
-                    //     <Typography variant="h6">{q.question}</Typography>
-                    //     <Typography variant="body1">{q.answer}</Typography>
-                    //   </div>
-                    // )
                     return (
                       <div key={q.id}>
                         <ListItem
                           button
                           onClick={() => toggleFaqOpen(q.id)}
-                          id={`question_${q.id}`}
                           key={q.id}
+                          style={{ position: 'relative' }}
                         >
+                          <span
+                            id={`question_${q.id}`}
+                            className={classes.scrollLink}
+                          ></span>
                           <ListItemText
                             primary={
                               <Typography

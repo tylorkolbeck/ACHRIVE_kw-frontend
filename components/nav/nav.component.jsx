@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   menuButtonLink: {
     marginRight: theme.spacing(2),
     display: 'inline-block',
+    fontSize: '18px',
     '&:hover': {
       cursor: 'pointer',
       color: theme.custom.color.teal
