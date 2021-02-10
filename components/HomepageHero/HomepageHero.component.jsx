@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography } from '@material-ui/core'
+import Link from 'next/link'
 // import BG from '../../public/bg.jpg'
 
 const useStyles = makeStyles((theme) => {
@@ -32,12 +33,7 @@ const useStyles = makeStyles((theme) => {
     },
     CTA: {
       marginTop: theme.spacing(2),
-      color: '#14c07b',
-      '& button': {
-        background: theme.custom.color.teal,
-        color: 'white'
-        // color: theme.palette.secondary.dark
-      }
+      color: theme.custom.color.teal
     },
     blueText: {
       color: theme.custom.color.teal
@@ -83,9 +79,14 @@ export default function HomepageHero() {
                 </Typography>
               </Grid>
               <Grid item className={classes.CTA}>
-                <Button variant="contained" xs={12}>
+                <Link href="/products">
+                  <a>
+                    <Typography>View Stratigies</Typography>
+                  </a>
+                </Link>
+                {/* <Button variant="contained" xs={12}>
                   View Stratigies
-                </Button>
+                </Button> */}
               </Grid>
             </Grid>
           </Grid>

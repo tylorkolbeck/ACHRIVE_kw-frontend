@@ -95,9 +95,12 @@ export default function ProductInfo() {
           </Grid>
         </Grid>
       </Grid>
-      <Button variant="contained" color="secondary">
+      <a>
+        <Typography color="secondary">View All Products</Typography>
+      </a>
+      {/* <Button variant="contained" color="secondary">
         View Products
-      </Button>
+      </Button> */}
       {/* <Grid item className={classes.CTAWrapper}>
         <Button variant="contained" color="secondary">
           View Products

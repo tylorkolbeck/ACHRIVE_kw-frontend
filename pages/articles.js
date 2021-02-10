@@ -61,6 +61,7 @@ export default function Articles({ articles }) {
       <div className={classes.root}>
         <ScrollToTopButton />
         <PageHeader title={'Articles'} />
+
         <Grid container direction="row" wrap="nowrap" spacing={3}>
           <Grid item xs>
             <Typography variant="h5" style={{ marginBottom: '20px' }}>
@@ -84,31 +85,33 @@ export default function Articles({ articles }) {
                     <div className={classes.articleCardWrapper}>
                       {articleState.map((article, index) => {
                         return (
-                          <>
-                            <Paper
+                          <div
+                            style={{ marginBottom: '20px', padding: '10px' }}
+                          >
+                            {/* <Paper
                               style={{ padding: '20px', marginBottom: '20px' }}
                               elevation={1}
                               key={article.card}
-                            >
-                              <ArticleCard
-                                article={article}
-                                noCategory
-                                category={article?.category}
-                                image={article?.image}
-                                description={article.description}
-                                authorName={
-                                  article?.author?.name
-                                    ? article?.author?.name
-                                    : 'Faceless Man'
-                                }
-                              />
-                            </Paper>
+                            > */}
+                            <ArticleCard
+                              article={article}
+                              noCategory
+                              category={article?.category}
+                              image={article?.image}
+                              description={article.description}
+                              authorName={
+                                article?.author?.name
+                                  ? article?.author?.name
+                                  : 'Faceless Man'
+                              }
+                            />
+                            {/* </Paper> */}
                             {index === 4 && (
                               <Grid item style={{ margin: '50px auto' }}>
                                 <NewsLetterSignup />
                               </Grid>
                             )}
-                          </>
+                          </div>
                         )
                       })}
                     </div>

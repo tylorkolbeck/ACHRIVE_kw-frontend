@@ -57,9 +57,12 @@ export default function PremiumCommunityInfo() {
         </Grid>
       </Grid>
       <Grid item className={classes.CTAWrapper}>
-        <Button variant="contained" color="secondary">
+        <a>
+          <Typography color="secondary">Join The Community</Typography>
+        </a>
+        {/* <Button variant="contained" color="secondary">
           Join The Community
-        </Button>
+        </Button> */}
       </Grid>
     </div>
   )

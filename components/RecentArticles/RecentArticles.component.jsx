@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import ArticleCard from '../../components/card/articleCard.component'
 import Link from 'next/link'
 
@@ -22,13 +22,16 @@ export default function RecentArticles({ articles }) {
       })}
       <Grid item xs={12} style={{ marginTop: '10px' }}>
         <Link href="/articles">
-          <Button
+          <a>
+            <Typography color="secondary">View All Articles</Typography>
+          </a>
+          {/* <Button
             variant="contained"
             color="secondary"
             style={{ width: '100%' }}
           >
             View All Articles
-          </Button>
+          </Button> */}
         </Link>
       </Grid>
     </Grid>
