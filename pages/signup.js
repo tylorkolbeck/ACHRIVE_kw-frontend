@@ -69,7 +69,6 @@ const Signup = () => {
   }
 
   const handleFormSubmit = (e) => {
-    console.log(data)
     e.preventDefault()
     setLoading(true)
     setError({})
@@ -82,7 +81,7 @@ const Signup = () => {
       registerUser(
         data.firstName,
         data.lastName,
-        // data.username,
+        data.email,
         data.email,
         data.password
       )
@@ -93,7 +92,6 @@ const Signup = () => {
           setLoading(false)
         })
         .catch((error) => {
-          console.log(error.response.data)
           setError(error?.response?.data)
           setLoading(false)
         })
@@ -178,9 +176,9 @@ const Signup = () => {
                     label="Discord Username"
                     name="discordUsername"
                     helperText="(You can always add this later)"
-                    value={data.discordUsername}
+                    // value={data.discordUsername}
                     disabled={loading}
-                    onChange={handleChange}
+                    // onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
