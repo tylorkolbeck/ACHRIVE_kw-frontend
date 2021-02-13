@@ -100,10 +100,9 @@ export default function NewsLetterSignUp() {
                 variant="contained"
                 size="large"
                 disabled={loading}
-                className={classes.signupButton}
-                clickFunction={handleFormSubmit}
+                onClick={handleFormSubmit}
               >
-                Signup
+                Sign up
               </Button>
             </Grid>
           </Grid>

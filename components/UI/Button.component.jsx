@@ -12,15 +12,16 @@ const useStyles = makeStyles(({ palette }) => ({
     color: 'white',
     '&:hover': {
       background: palette.secondary.light
-    }
+    },
+    whiteSpace: 'nowrap'
   }
 }))
 
-export default function BodyText({ children, size, clickFunction }) {
+export default function BodyText({ children, size, onClick }) {
   const classes = useStyles()
   const buttonSize = size ? size : 'large'
   return (
-    <Button variant="contained" size={buttonSize} className={classes.root} onClick={clickFunction}>
+    <Button variant="contained" size={buttonSize} className={classes.root} onClick={onClick}>
       {children}
     </Button>
   )
