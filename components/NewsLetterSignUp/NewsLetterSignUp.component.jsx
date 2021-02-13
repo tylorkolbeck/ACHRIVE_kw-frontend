@@ -8,32 +8,17 @@ import { submitNewsletterEmail } from '../../lib/newsletter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // borderTop: `2px solid ${theme.palette.secondary.main}`,
-    // paddingTop: theme.spacing(2),
-    // marginTop: theme.spacing(5)
-    // marginBottom: theme.spacing(3)
-    // borderLeft: `4px solid ${theme.custom.color.green}`,
-    borderLeft: `4px solid ${theme.palette.secondary.light}`,
+    borderLeft: `4px solid ${theme.palette.secondary.dark}`,
     padding: '10px',
     paddingBottom: '20px',
-    // paddingLeft: '20px',
-    // background: theme.palette.secondary.light,
-    // color: 'white',
-    // borderRadius: '4px',
     paddingLeft: '20px',
     paddingRight: '20px',
     '& h6': {
       margin: '0px'
-      // marginBottom: '20px'
-      // padding: '0px'
     },
     '& button': {
-      // background: theme.custom.color.green,
       marginLeft: '20px'
-      // color: 'white'
     }
-    // marginBottom: theme.spacing(3)
-    // borderRadius: '4px'
   },
   inputLabel: {
     paddingBottom: theme.spacing(2)

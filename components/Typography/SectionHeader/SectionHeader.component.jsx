@@ -6,6 +6,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
     '& h4': {
       fontWeight: 'bold',
+      fontSize: '1.8rem',
 
       marginBottom: (props) => {
         if (props.subTitle) return spacing(0)
