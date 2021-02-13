@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: 'bold'
   }
 }))

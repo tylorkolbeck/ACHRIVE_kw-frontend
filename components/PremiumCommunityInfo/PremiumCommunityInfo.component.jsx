@@ -1,9 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import BodyText from '../Typography/BodyText/BodyText.component'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
-import TextLink from '../Typography/TextLink/TextLink.component'
+import BulletItem from '../Typography/BulletItem/BulletItem.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -14,9 +14,6 @@ const useStyles = makeStyles((theme) => {
     },
     info: {
       marginBottom: theme.spacing(2)
-    },
-    wingding: {
-      color: theme.custom.color.green
     },
     CTAWrapper: {
       width: '100%',
@@ -48,22 +45,16 @@ export default function PremiumCommunityInfo() {
         </BodyText>
       </div>
       <Grid container spacing={1}>
-        <Grid item xs={6}>
-          <span className={classes.wingding}>&#9679;</span> Members Only Chat
-        </Grid>
-        <Grid item xs={6}>
-          <span className={classes.wingding}>&#9679;</span> Training and
-          Education
-        </Grid>
-        <Grid item xs={6}>
-          <span className={classes.wingding}>&#9679;</span> Premium Support
-        </Grid>
-        <Grid item xs={6}>
-          <span className={classes.wingding}>&#9679;</span> Premium Analysis
-        </Grid>
-      </Grid>
-      <Grid item className={classes.CTAWrapper}>
-        <TextLink icon>Join The Community</TextLink>
+        {[
+          'Members Only Chat',
+          'Training and Education',
+          'PremiumSupport',
+          'Analysis Insights'
+        ].map((text) => (
+          <Grid item xs={6}>
+            <BulletItem key={text}>{text}</BulletItem>
+          </Grid>
+        ))}
       </Grid>
     </div>
   )
