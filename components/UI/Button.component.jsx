@@ -16,11 +16,11 @@ const useStyles = makeStyles(({ palette }) => ({
   }
 }))
 
-export default function BodyText({ children, size }) {
+export default function BodyText({ children, size, clickFunction }) {
   const classes = useStyles()
   const buttonSize = size ? size : 'large'
   return (
-    <Button variant="contained" size={buttonSize} className={classes.root}>
+    <Button variant="contained" size={buttonSize} className={classes.root} onClick={clickFunction}>
       {children}
     </Button>
   )

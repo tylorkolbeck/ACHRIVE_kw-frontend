@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => {
       padding: theme.spacing(3)
     },
     link: {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(2),
+      color: theme.custom.color.teal
     },
     caption: {
       marginTop: theme.spacing(10)
@@ -33,9 +34,9 @@ export default function Footer() {
           <Grid container>
             {appLinks.map((link) => (
               <Link href={link.url} key={link.label}>
-                <div className={classes.link} key={link.label}>
-                  <TextLink>{link.label}</TextLink>
-                </div>
+                <a className={classes.link} key={link.label}>
+                  {link.label}
+                </a>
               </Link>
             ))}
           </Grid>

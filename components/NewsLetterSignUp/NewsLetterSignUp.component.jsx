@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Typography, Grid, TextField, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import CaptionText from '../Typography/CaptionText/CaptionText.component'
 import Button from '../UI/Button.component'
+import { submitNewsletterEmail } from '../../lib/newsletter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& input': {
       background: 'white',
-      borderRadius: '4px'
+      borderRadius: '4px',
+      color: '#212121'
     }
   },
 
@@ -51,6 +53,27 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function NewsLetterSignUp() {
   const classes = useStyles()
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [successMsg, setSuccessMsg] = useState(false)
+
+  const handleChange = (e) => {
+    setEmail(e.target.value)
+    setSuccessMsg(false)
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    setLoading(true)
+    submitNewsletterEmail(email).then((res) => {
+      setEmail('')
+      setLoading(false)
+      setSuccessMsg(true)
+    }).catch((error) => {
+      setLoading(false)
+    })
+  }
+
   return (
     <Paper elevation={1} className={classes.root}>
       <Grid container direction="column">
@@ -59,6 +82,7 @@ export default function NewsLetterSignUp() {
             Subscribe to Killer Whale for the Latest News and Trading Updates
           </SectionHeader>
         </Grid>
+        <form>
         <Grid item xs={12}>
           <Grid container direction="row" wrap="nowrap" alignItems="center">
             <TextField
@@ -66,22 +90,27 @@ export default function NewsLetterSignUp() {
               placeholder="Email Address"
               variant="outlined"
               className={classes.emailInput}
+              value={email}
+              disabled={loading}
+              onChange={(event) => handleChange(event)}
             />
-
             <Grid item>
               <Button
+                type="submit"
                 variant="contained"
                 size="large"
+                disabled={loading}
                 className={classes.signupButton}
+                clickFunction={handleFormSubmit}
               >
                 Signup
               </Button>
             </Grid>
           </Grid>
         </Grid>
+        </form>
         <CaptionText>
-          We do not spam. You only recieve trade insights and predictions from
-          our expert chart analysis.
+          {successMsg ? "Thanks for signing up!": "We do not spam. You only receive trade insights and predictions from our expert chart analysis."}
         </CaptionText>
       </Grid>
     </Paper>

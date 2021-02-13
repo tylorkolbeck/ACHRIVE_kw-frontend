@@ -7,14 +7,15 @@ import {
   CssBaseline,
   Avatar,
   Typography,
-  Grid,
-  Link
+  Grid
 } from '@material-ui/core'
+import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { resetPassword } from '../lib/auth'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -141,7 +142,9 @@ const Login = (props) => {
               <Grid item>Your password has been successfully reset.</Grid>
               <Grid item>
                 <Link href="/login" variant="body2">
-                  {'Click here to login'}
+                  <a>
+                    <TextLink>Click here to login</TextLink>
+                  </a>
                 </Link>
               </Grid>
             </Grid>

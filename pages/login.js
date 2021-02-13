@@ -19,6 +19,7 @@ import { login } from '../lib/auth'
 import { userContext } from '../context/UserContext'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -145,12 +146,16 @@ const Login = (props) => {
             <Grid container>
               <Grid item xs>
                 <Link href="/forgot-password" variant="body2">
-                  Forgot password?
+                  <a>
+                    <TextLink>Forgot password?</TextLink>
+                  </a>
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  <a>
+                    <TextLink>Don't have an account? Sign Up</TextLink>
+                  </a>
                 </Link>
               </Grid>
             </Grid>

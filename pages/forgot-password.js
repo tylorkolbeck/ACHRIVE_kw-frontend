@@ -6,14 +6,15 @@ import {
   CssBaseline,
   Avatar,
   Typography,
-  Grid,
-  Link
+  Grid
 } from '@material-ui/core'
+import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { forgotPassword } from '../lib/auth'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -117,7 +118,9 @@ const ForgotMyPassword = (props) => {
               <Grid container>
                 <Grid item>
                   <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    <a>
+                      <TextLink>Don't have an account? Sign Up</TextLink>
+                    </a>
                   </Link>
                 </Grid>
               </Grid>
@@ -131,7 +134,9 @@ const ForgotMyPassword = (props) => {
               </Grid>
               <Grid item>
                 <Link href="/forgot-password" variant="body2">
-                  {"Didn't get an email?"}
+                  <a>
+                    <TextLink>Didn't get an email?</TextLink>
+                  </a>
                 </Link>
               </Grid>
             </Grid>
