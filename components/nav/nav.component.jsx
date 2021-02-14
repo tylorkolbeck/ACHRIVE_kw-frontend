@@ -75,17 +75,15 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   navLogo: {
-    position: 'absolute',
-    top: '0px',
-    left: '20px',
     height: ({ logoHeight }) => logoHeight,
-    width: 'auto'
+    width: 'auto',
+    maxHeight: '60px'
   }
 }))
 
 export default function Nav({ toggleDarkMode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [logoHeight, setLogoHeight] = React.useState(75)
+  const [logoHeight, setLogoHeight] = React.useState(50)
   const classes = useStyles({ logoHeight })
   const router = useRouter()
 
@@ -103,7 +101,7 @@ export default function Nav({ toggleDarkMode }) {
 
   function handleScroll() {
     let scrollTop = window.scrollY,
-      minHeight = 75,
+      minHeight = 50,
       logoHeight = Math.max(minHeight, 100 - scrollTop)
 
     setLogoHeight(logoHeight)
@@ -199,21 +197,44 @@ export default function Nav({ toggleDarkMode }) {
       <AppBar
         position="relative"
         style={{
-          // boxShadow: 'none',
-          // background: 'transparent',
           position: 'fixed'
         }}
       >
         <Toolbar>
           <div className={classes.title}>
-            <Link href="/">
-              <img
-                src="/KW_logo.png"
-                width="100px"
-                className={classes.navLogo}
-              />
-            </Link>
-            <Typography variant="h6" className={classes.title}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'nowrap',
+                alignItems: 'center'
+              }}
+            >
+              <Link href="/">
+                <div style={{ padding: '10px' }}>
+                  <img
+                    src="/kw_logo_teal.png"
+                    width="100px"
+                    className={classes.navLogo}
+                  />
+                </div>
+              </Link>
+              <Link href="/">
+                <div>
+                  <span
+                    style={{
+                      fontWeight: 'bold',
+                      marginLeft: '10px',
+                      fontSize: '34px'
+                    }}
+                  >
+                    Killer
+                  </span>
+                  <span style={{ fontSize: '30px' }}>whale</span>
+                </div>
+              </Link>
+            </div>
+
+            {/* <Typography variant="h6" className={classes.title}>
               <Link href="/change-log">
                 <span
                   style={{
@@ -225,7 +246,7 @@ export default function Nav({ toggleDarkMode }) {
                   Beta 1.3
                 </span>
               </Link>
-            </Typography>
+            </Typography> */}
           </div>
 
           <List
