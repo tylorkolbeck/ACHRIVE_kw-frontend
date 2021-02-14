@@ -71,8 +71,10 @@ export default function Product({ productData }) {
     recommendedBalance,
     riskLevel,
     automated,
-    cryptoHopperLink
-  } = productData
+    cryptoHopperLink,
+    features,
+    requirements
+  } = productData || {}
 
   const classes = useStyles()
   return (
@@ -87,7 +89,7 @@ export default function Product({ productData }) {
         <Grid container className={classes.productCard}>
           <ProductCard
             name={name}
-            description={description.slice(0, 250)}
+            description={description?.slice(0, 250)}
             productType={productType}
             price={price}
             recommendedBalance={recommendedBalance}
@@ -99,7 +101,7 @@ export default function Product({ productData }) {
         </Grid>
         <Grid container direction="row">
           {/* PRODUCT FEATURES */}
-          {productData.features && (
+          {features && (
             <Grid container className={classes.section}>
               <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
                 <SectionHeader>Features</SectionHeader>
@@ -107,16 +109,13 @@ export default function Product({ productData }) {
 
               <Grid item xs={12} sm={12} md={9}>
                 <div className={classes.markdownStyling}>
-                  <ReactMarkdown
-                    source={productData.features}
-                    escapeHtml={false}
-                  />
+                  <ReactMarkdown source={features} escapeHtml={false} />
                 </div>
               </Grid>
             </Grid>
           )}
           {/* PRODUCT REQUIREMENTS */}
-          {productData.requirements && (
+          {productData?.requirements && (
             <Grid container className={classes.section}>
               <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
                 <SectionHeader>Requirements</SectionHeader>
@@ -125,7 +124,7 @@ export default function Product({ productData }) {
               <Grid item xs={12} sm={12} md={9}>
                 <div className={classes.markdownStyling}>
                   <ReactMarkdown
-                    source={productData.requirements}
+                    source={productData?.requirements}
                     escapeHtml={false}
                   />
                 </div>
@@ -133,7 +132,7 @@ export default function Product({ productData }) {
             </Grid>
           )}
           {/* PRODUCT SETUP */}
-          {productData.setup && (
+          {productData?.setup && (
             <Grid container className={classes.section}>
               <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
                 <SectionHeader>Setup</SectionHeader>
@@ -142,7 +141,7 @@ export default function Product({ productData }) {
               <Grid item xs={12} sm={12} md={9}>
                 <div className={classes.markdownStyling}>
                   <ReactMarkdown
-                    source={productData.setup}
+                    source={productData?.setup}
                     escapeHtml={false}
                   />
                 </div>

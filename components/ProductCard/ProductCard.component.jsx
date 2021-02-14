@@ -139,7 +139,7 @@ export default function ProductCard({
             <Grid item className={classes.productImage_footer}>
               <Grid item>{name}</Grid>
               <Grid item style={{ fontSize: '14px' }}>
-                {productType.toUpperCase()}
+                {productType?.toUpperCase()}
               </Grid>
             </Grid>
           </Grid>
