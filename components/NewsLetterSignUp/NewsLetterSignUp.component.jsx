@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import { Typography, Grid, TextField, Paper } from '@material-ui/core'
+import { Grid, TextField, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import CaptionText from '../Typography/CaptionText/CaptionText.component'
 import Button from '../UI/Button.component'
-import { submitNewsletterEmail } from '../../lib/newsletter'
+import { postNewsletterEmail, alreadySubscribed } from '../../lib/newsletter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,25 +39,53 @@ const useStyles = makeStyles((theme) => ({
 export default function NewsLetterSignUp() {
   const classes = useStyles()
   const [email, setEmail] = useState('')
+  const [error, setError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const [successMsg, setSuccessMsg] = useState(false)
 
   const handleChange = (e) => {
     setEmail(e.target.value)
     setSuccessMsg(false)
+    setError(false)
+    setErrorMsg('')
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
+    setError(false)
+    setErrorMsg('')
     setLoading(true)
-    submitNewsletterEmail(email).then((res) => {
-      setEmail('')
-      setLoading(false)
-      setSuccessMsg(true)
-    }).catch((error) => {
-      setLoading(false)
-    })
+    if (validateEmail(email)) {
+      alreadySubscribed(email).then((res) => {
+        setLoading(false)
+        setError(true)
+        setErrorMsg(res)
+      }).catch((error) => {
+        postNewsletterEmail(email).then((res) => {
+          setEmail('')
+          setLoading(false)
+          setSuccessMsg(true)
+        }).catch((error) => {
+          setLoading(false)
+          setError(true)
+          setErrorMsg('Something went wrong')
+        })
+      })
+    }
   }
+
+  const validateEmail = (email) =>
+{
+ if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+  {
+    return (true)
+  }
+    setLoading(false)
+    setError(true)
+    setErrorMsg('Invalid email')
+    return (false)
+}
 
   return (
     <Paper elevation={1} className={classes.root}>
@@ -77,7 +105,9 @@ export default function NewsLetterSignUp() {
               className={classes.emailInput}
               value={email}
               disabled={loading}
+              error={error}
               onChange={(event) => handleChange(event)}
+              helperText={errorMsg && errorMsg}
             />
             <Grid item>
               <Button
@@ -94,7 +124,7 @@ export default function NewsLetterSignUp() {
         </Grid>
         </form>
         <CaptionText>
-          {successMsg ? "Thanks for signing up!": "We do not spam. You only receive trade insights and predictions from our expert chart analysis."}
+          {successMsg ? "Thanks for signing up!": "*We do not spam. You only receive trade insights and predictions from our expert chart analysis."}
         </CaptionText>
       </Grid>
     </Paper>
