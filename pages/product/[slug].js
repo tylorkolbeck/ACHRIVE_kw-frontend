@@ -1,6 +1,5 @@
 import React from 'react'
 import { getProductIds, getProductData } from '../../lib/products'
-import ReactMarkdown from 'react-markdown'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
@@ -8,6 +7,8 @@ import Footer from '../../components/Footer/Footer.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
+import BodyText from '../../components/Typography/BodyText/BodyText.component'
+import Markdown from '../../components/Markdown/Markdown.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -27,37 +28,6 @@ const useStyles = makeStyles((theme) => {
     },
     productCard: {
       marginBottom: theme.spacing(5)
-    },
-    markdownStyling: {
-      fontSize: '1rem',
-      color: 'rgba(0,0,0,.7)',
-      '& img': {
-        maxWidth: '100%'
-      },
-
-      '& span': {
-        width: '100%',
-        display: 'block',
-        textAlign: 'center'
-      },
-      '& iframe': {
-        margin: '0 auto',
-        textAlign: 'center',
-        background: 'lightgrey',
-        marginBottom: '30px'
-      },
-
-      '& p': {
-        lineHeight: '1.8rem',
-        marginTop: '0px',
-        marginBottom: '1.5rem'
-      },
-      '& a': {
-        color: theme.palette.secondary.dark,
-        '&:hover': {
-          color: theme.palette.secondary.light
-        }
-      }
     }
   }
 })
@@ -73,10 +43,25 @@ export default function Product({ productData }) {
     automated,
     cryptoHopperLink,
     features,
-    requirements
+    requirements,
+    setup
   } = productData || {}
 
   const classes = useStyles()
+
+  const renderers = {
+    paragraph: ({ children }) => {
+      return <BodyText>{children}</BodyText>
+    },
+    link: ({ href, children }) => {
+      return (
+        <a href={href} style={{ color: 'dodgerblue' }}>
+          {children}
+        </a>
+      )
+    }
+  }
+
   return (
     <div>
       <PageHeader
@@ -108,9 +93,7 @@ export default function Product({ productData }) {
               </Grid>
 
               <Grid item xs={12} sm={12} md={9}>
-                <div className={classes.markdownStyling}>
-                  <ReactMarkdown source={features} escapeHtml={false} />
-                </div>
+                <Markdown source={features} />
               </Grid>
             </Grid>
           )}
@@ -122,12 +105,7 @@ export default function Product({ productData }) {
               </Grid>
 
               <Grid item xs={12} sm={12} md={9}>
-                <div className={classes.markdownStyling}>
-                  <ReactMarkdown
-                    source={productData?.requirements}
-                    escapeHtml={false}
-                  />
-                </div>
+                <Markdown source={requirements} />
               </Grid>
             </Grid>
           )}
@@ -139,12 +117,7 @@ export default function Product({ productData }) {
               </Grid>
 
               <Grid item xs={12} sm={12} md={9}>
-                <div className={classes.markdownStyling}>
-                  <ReactMarkdown
-                    source={productData?.setup}
-                    escapeHtml={false}
-                  />
-                </div>
+                <Markdown source={setup} />
               </Grid>
             </Grid>
           )}
