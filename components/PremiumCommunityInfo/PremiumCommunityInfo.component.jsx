@@ -51,7 +51,7 @@ export default function PremiumCommunityInfo() {
           'PremiumSupport',
           'Analysis Insights'
         ].map((text) => (
-          <Grid item xs={6}>
+          <Grid item xs={6} key={text}>
             <BulletItem key={text}>{text}</BulletItem>
           </Grid>
         ))}

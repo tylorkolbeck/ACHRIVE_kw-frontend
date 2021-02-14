@@ -2,12 +2,13 @@ import React from 'react'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import Footer from '../components/Footer/Footer.component'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Link from 'next/link'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 import BodyText from '../components/Typography/BodyText/BodyText.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
 import ProductFilter from '../components/ProductFilter/ProductFilter.component'
+import { fetchAPI } from '../lib/api'
 
 const stepData = [
   {
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function GettingStarted() {
+export default function GettingStarted({ productData }) {
   const classes = useStyles()
   return (
     <>
@@ -77,19 +78,6 @@ export default function GettingStarted() {
       />
       <div className={classes.root}>
         <Grid container direction="row" spacing={3}>
-          <Grid container>
-            {/* <Grid item xs={12}>
-              <img
-                src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/143893990/original/98762e8ce8bb51f8fbfb1184a7b06a3ee1a79e1e/design-how-it-works-flat-illustration-or-flat-icons-for-your-website.jpg"
-                alt="how it works"
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  maxheight: '800px'
-                }}
-              />
-            </Grid> */}
-          </Grid>
           {stepData &&
             stepData.map((step) => {
               return (
@@ -127,7 +115,7 @@ export default function GettingStarted() {
               </SectionHeader>
             </Grid>
             <Grid item xs={12} sm={12} md={9}>
-              <ProductFilter />
+              <ProductFilter products={productData} />
             </Grid>
           </Grid>
         </Grid>
@@ -135,4 +123,16 @@ export default function GettingStarted() {
       <Footer />
     </>
   )
+}
+
+export async function getStaticProps() {
+  // Run API calls in parallel
+  const [productData] = await Promise.all([fetchAPI('/products')])
+
+  return {
+    props: {
+      productData
+    },
+    revalidate: 10
+  }
 }

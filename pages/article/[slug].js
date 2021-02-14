@@ -1,7 +1,7 @@
 import { getAllPostsIds, getPostData } from '../../lib/posts'
 import ReactMarkdown from 'react-markdown'
 import Seo from '../../components/seo/seo.component'
-import { Typography, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
