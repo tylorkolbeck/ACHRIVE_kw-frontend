@@ -6,19 +6,23 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   wingding: {
     '& span': {
-      color: theme.palette.secondary.dark,
+      color:
+        theme.palette.type === 'light'
+          ? theme.palette.secondary.dark
+          : theme.custom.color.teal,
       paddingRight: '6px'
     }
   },
   text: {
-    fontSize: '1rem'
+    fontSize: '1rem',
+    listStyleType: 'none'
   }
 }))
 
-export default function BulletItem({ children }) {
+export default function BulletItem({ children, style }) {
   const classes = useStyles()
   return (
-    <Grid container wrap="nowrap" className={classes.root}>
+    <Grid container wrap="nowrap" className={classes.root} style={style}>
       <Grid item className={classes.wingding}>
         <span>&#9679;</span>
       </Grid>

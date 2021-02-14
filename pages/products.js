@@ -3,6 +3,8 @@ import ProductFilter from '../components/ProductFilter/ProductFilter.component'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
+import { fetchAPI } from '../lib/api'
+
 const useStyles = makeStyles(({ spacing, custom }) => ({
   root: {
     maxWidth: custom.screen.maxWidth,
@@ -12,7 +14,7 @@ const useStyles = makeStyles(({ spacing, custom }) => ({
   }
 }))
 
-export default function Products() {
+export default function Products({ productData }) {
   const classes = useStyles()
   return (
     <div>
@@ -22,10 +24,22 @@ export default function Products() {
       />
       <div className={classes.root}>
         <div style={{ marginBottom: '50px' }}>
-          <SectionHeader>Strategy Filter</SectionHeader>
+          <SectionHeader>Find the Right Product</SectionHeader>
         </div>
-        <ProductFilter />
+        <ProductFilter products={productData} />
       </div>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  // Run API calls in parallel
+  const [productData] = await Promise.all([fetchAPI('/products')])
+
+  return {
+    props: {
+      productData: productData ? productData : []
+    },
+    revalidate: 10
+  }
 }

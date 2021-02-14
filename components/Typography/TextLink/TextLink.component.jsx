@@ -40,13 +40,13 @@ export default function BodyText({
 }) {
   const classes = useStyles({ color })
   return (
-    <div onClick={onClick} onMouseDown={onMouseDown}>
-      <Typography variant="body1" className={classes.root}>
+    <span onClick={onClick} onMouseDown={onMouseDown}>
+      <Typography variant="body1" component="span" className={classes.root}>
         {iconLeft && <FaArrowLeft className={classes.icon} />}
 
         {children}
         {icon && <FaArrowRight className={classes.icon} />}
       </Typography>
-    </div>
+    </span>
   )
 }

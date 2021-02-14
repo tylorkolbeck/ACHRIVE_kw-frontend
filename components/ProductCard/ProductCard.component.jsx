@@ -1,134 +1,228 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Card, CardContent, Divider } from '@material-ui/core'
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import { Grid, Paper } from '@material-ui/core'
+
 import Link from 'next/link'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import BodyText from '../Typography/BodyText/BodyText.component'
 import TextLink from '../Typography/TextLink/TextLink.component'
 
-const useStyles = makeStyles((theme) => ({
-  productCard: {
-    padding: '16px'
-  },
-  productCard_image: {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    width: '200px',
-    minWidth: '200px',
-    maxWidth: '200px',
-    height: '200px',
-    backgroundImage: 'url(/iconExample2.png)',
-    borderRadius: '20px',
-    [theme.breakpoints.down('sm')]: {
-      margin: '0 auto 20px auto'
-    }
-  },
-  productCard_category: {
-    color: 'grey',
-    paddingBottom: '10px'
-  },
-  productCard_name: {
-    marginBottom: '10px',
-    fontWeight: 'bold'
-  },
-  productCard_description: {
-    marginBottom: '10px',
-    color: theme.palette.type === 'light' ? 'rgba(0,0,0,.7)' : 'white'
-  },
-  productCard_info: {
-    display: 'flex',
-    color: theme.palette.type === 'light' ? 'rgba(0,0,0,.7)' : 'white',
-    '& p': {
-      fontSize: '14px'
-    }
-  },
-  infoLabel: {
-    textTransform: 'uppercase',
-    display: 'block',
-    color: '#585858',
-    color: theme.palette.type === 'light' ? '#585858' : 'white'
-  },
-  info: {
-    textAlign: 'center'
-  },
-  infoData: {
-    fontSize: '34px',
-    margin: '20px auto',
-    marginBottom: '0px',
-    fontWeight: 'bold'
-  },
-  learnMoreLink: {
-    color:
-      theme.palette.type === 'light'
-        ? theme.palette.secondary.main
-        : theme.palette.secondary.light
+const useStyles = makeStyles(({ spacing, breakpoints }) => {
+  const cardImageBackgrounds = {
+    strategy: '#005079',
+    signal: '#415A63',
+    trend: '#4683A3',
+    template: '#53C4ED'
   }
-}))
+  return {
+    root: {
+      padding: spacing(3),
+      margin: '0 auto'
+    },
+    productImage_wrapper: {
+      position: 'relative',
+      width: '200px',
+      height: '200px',
+      minWidth: '200px',
+      minHeight: '200px',
+      maxWidth: '200px',
+      maxHeigt: '200px',
+      background: '#53C4ED',
+      background: ({ props }) => {
+        const productType = props?.productType?.toLowerCase()
+        return cardImageBackgrounds[productType]
+      },
+      borderRadius: '20px',
+      [breakpoints.down('md')]: {
+        margin: '0 auto',
+        marginBottom: spacing(2)
+      }
+    },
+
+    productImage_backgroundWhale: {
+      position: 'absolute',
+      zIndex: '100',
+      top: -20,
+      bottom: 0,
+      right: 0,
+      left: -40,
+      opacity: '.2',
+      background: 'url(/images/whale_white.png)'
+    },
+    productImage: {
+      borderRadius: '20px',
+      height: '100%'
+    },
+    productImage_header: {
+      background: 'black',
+      color: 'white',
+      borderRadius: '20px 20px 0px 0px',
+      padding: spacing(1),
+      paddingLeft: spacing(2),
+      fontSize: '18px'
+    },
+    productImage_footer: {
+      padding: spacing(1),
+      color: 'white',
+      fontSize: '24px',
+      fontWeight: 'bold'
+    },
+    bold: {
+      fontWeight: 'bold'
+    },
+    price: {
+      fontWeight: 'bold',
+      fontSize: '20px'
+    },
+    productInfo: {
+      width: '100%',
+      paddingLeft: spacing(2),
+      [breakpoints.down('sm')]: {
+        // padding: 0,
+        // margin: '0 auto',
+        marginBottom: spacing(2)
+      }
+    },
+    infoWrapper: {
+      marginTop: spacing(2),
+      marginBottom: spacing(1)
+    },
+    infoLabel: {
+      fontSize: '.8rem',
+      color: 'rgba(0,0,0,.5)',
+      marginRight: spacing(2),
+      fontWeight: 'bold'
+    },
+    infoLabelValue: {
+      fontWeight: 'bold',
+      fontSize: '1rem',
+      marginRight: spacing(5)
+    }
+  }
+})
 export default function ProductCard({
   name,
   description,
   slug,
-  tradeFreq,
-  holdingTime,
-  profit,
-  category
+  productType,
+  price,
+  recommendedBalance,
+  riskLevel,
+  automated,
+  full,
+  learnMore,
+  cryptoHopperLink
 }) {
-  const classes = useStyles()
-  return (
-    <Grid item xs={12} sm={12} md={6}>
-      <Card className={classes.productCard}>
-        <Grid container direction="row">
-          <Grid item className={classes.productCard_image}></Grid>
-          <Grid item xs style={{ minWidth: '250px' }}>
-            <CardContent style={{ paddingTop: '0px' }}>
-              <Typography
-                variant="h5"
-                component="h5"
-                className={classes.productCard_name}
-              >
-                {name}
-              </Typography>
+  const classes = useStyles({
+    props: {
+      productType
+    }
+  })
 
-              <Typography className={classes.productCard_description}>
-                {description?.slice(0, 120)}...
-              </Typography>
-              <Link href="/">
-                <a>
-                  <TextLink>Get Started</TextLink>
-                </a>
-              </Link>
-            </CardContent>
+  return (
+    <Paper className={classes.root}>
+      <Grid container>
+        <Grid item xs={12} sm={12} md className={classes.productImage_wrapper}>
+          <Grid
+            container
+            direction="column"
+            justify="space-between"
+            className={classes.productImage}
+          >
+            <Grid item className={classes.productImage_header}>
+              <span className={classes.bold}>Killer</span>
+              <span>whale</span>
+            </Grid>
+            <Grid item>
+              <div className={classes.productImage_backgroundWhale}></div>
+            </Grid>
+            <Grid item className={classes.productImage_footer}>
+              <Grid item>{name}</Grid>
+              <Grid item style={{ fontSize: '14px' }}>
+                {productType?.toUpperCase()}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid container alignContent="center" justify="space-around">
-          <Divider style={{ width: '100%', marginTop: '10px' }} />
-          <Grid item xs={4} sm={3} className={classes.info}>
-            <Typography
-              className={classes.infoData}
-              style={{ color: '#4caf50' }}
-            >
-              {tradeFreq}
-            </Typography>
-            <span className={classes.infoLabel}>Frequency</span>
+
+        <Grid item xs={12} sm={12} md className={classes.productInfo}>
+          <Grid container justify="space-between">
+            <SectionHeader>{name} </SectionHeader>
+
+            <Grid item>
+              {price && <span className={classes.price}>${price}</span>}
+            </Grid>
           </Grid>
-          <Grid item xs={4} sm={3} className={classes.info}>
-            <Typography
-              className={classes.infoData}
-              style={{ color: '#ff9800' }}
-            >
-              {holdingTime}
-            </Typography>
-            <span className={classes.infoLabel}>Holding/Hours</span>
-          </Grid>
-          <Grid item xs={12} sm={3} className={classes.info}>
-            <Typography
-              className={classes.infoData}
-              style={{ color: '#4caf50' }}
-            >
-              {profit}
-            </Typography>
-            <span className={classes.infoLabel}>Profit</span>
-          </Grid>
+
+          <BodyText>{description}...</BodyText>
+          {full && (
+            <Grid container className={classes.infoWrapper}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                style={{ marginBottom: '20px' }}
+              >
+                <Grid container>
+                  <Grid item className={classes.infoLabelValue}>
+                    {recommendedBalance}
+                  </Grid>
+                  <Grid item xs={12} className={classes.infoLabel}>
+                    STARTING BALANCE
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                style={{ marginBottom: '20px' }}
+              >
+                <Grid container>
+                  <Grid item className={classes.infoLabelValue}>
+                    {riskLevel}
+                  </Grid>
+                  <Grid item xs={12} className={classes.infoLabel}>
+                    RISK LEVEL
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                style={{ marginBottom: '20px' }}
+              >
+                <Grid container className={classes.infoLabelValue}>
+                  {automated ? 'Automated' : 'Self'}
+                </Grid>
+                <Grid item xs={12} className={classes.infoLabel}>
+                  AUTOMATED
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+          {learnMore && (
+            <Link href={`/product/${slug}`}>
+              <a>
+                <TextLink icon>Learn More</TextLink>
+              </a>
+            </Link>
+          )}
+
+          {cryptoHopperLink && (
+            <Link href={`/product/${slug}`}>
+              <a>
+                <TextLink icon>Install Product</TextLink>
+              </a>
+            </Link>
+          )}
         </Grid>
-      </Card>
-    </Grid>
+      </Grid>
+    </Paper>
   )
 }

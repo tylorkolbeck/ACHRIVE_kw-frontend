@@ -1,7 +1,7 @@
 import { getAllPostsIds, getPostData } from '../../lib/posts'
-import ReactMarkdown from 'react-markdown'
+
 import Seo from '../../components/seo/seo.component'
-import { Typography, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer.component'
 import CategoryChip from '../../components/Typography/CategoryChip/CategoryChip.component'
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
+import Markdown from '../../components/Markdown/Markdown.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -91,7 +92,7 @@ export default function Article({ postData }) {
         />
         <Seo seo={seo} />
         <div className={classes.postBody}>
-          <ReactMarkdown source={postData.content} escapeHtml={false} />
+          <Markdown source={postData?.content} />
         </div>
         <Grid container>
           <NewsLetterSignup />
