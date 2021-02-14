@@ -78,6 +78,12 @@ const useStyles = makeStyles((theme) => ({
     height: ({ logoHeight }) => logoHeight,
     width: 'auto',
     maxHeight: '60px'
+  },
+  logoText: {
+    fontSize: '32px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '24px'
+    }
   }
 }))
 
@@ -219,17 +225,16 @@ export default function Nav({ toggleDarkMode }) {
                 </div>
               </Link>
               <Link href="/">
-                <div>
+                <div className={classes.logoText}>
                   <span
                     style={{
                       fontWeight: 'bold',
-                      marginLeft: '10px',
-                      fontSize: '34px'
+                      marginLeft: '10px'
                     }}
                   >
                     Killer
                   </span>
-                  <span style={{ fontSize: '30px' }}>whale</span>
+                  <span style={{ fontWeight: '400' }}>whale</span>
                 </div>
               </Link>
             </div>
