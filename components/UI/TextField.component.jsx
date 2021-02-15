@@ -19,52 +19,14 @@ const useStyles = makeStyles(({ palette }) => ({
 }))
 
 export default function BodyText({
-  variant, 
-  value,
-  placeholder,
-  className,
-  style,
-  select,
-  margin, 
-  size,
-  required, 
-  fullWidth, 
-  id, 
-  label, 
-  name, 
-  autoComplete, 
-  autoFocus,
-  onFocus, 
-  error,
-  helperText,
-  onChange,
-  ref,
-  children
+  children,
+  ...props
 }) {
   const classes = useStyles()
   return (
     <div className={classes.root}>
     <TextField 
-    variant={variant} 
-    value={value}
-    placeholder={placeholder}
-    className={className}
-    style={style}
-    select={select}
-    margin={margin} 
-    size={size}
-    required={required} 
-    fullWidth={fullWidth} 
-    id={id} 
-    label={label} 
-    name={name} 
-    autoComplete={autoComplete} 
-    autoFocus={autoFocus} 
-    onFocus={onFocus}
-    error={error}
-    helperText={helperText}
-    onChange={onChange} 
-    ref={ref}
+    {...props}
     >
       {children}
     </TextField>
