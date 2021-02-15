@@ -6,12 +6,15 @@ import {
   CssBaseline,
   Avatar,
   Typography,
-  Grid,
-  Link
+  Grid
 } from '@material-ui/core'
+import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { forgotPassword } from '../lib/auth'
+import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
+import Footer from '../components/Footer/Footer.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  container: {
+    marginBottom: '4rem'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -66,74 +72,79 @@ const ForgotMyPassword = (props) => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Forgot Password
-        </Typography>
-        {Object.entries(error).length !== 0 &&
-          error.constructor === Object &&
-          error.message.map((error) => {
-            return (
-              <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
-                <small style={{ color: 'red' }}>
-                  {error.messages[0].message}
-                </small>
-              </div>
-            )
-          })}
-        {!emailSent && (
-          <form className={classes.form}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleFormSubmit}
-            >
-              {loading ? 'Loading... ' : 'Send Reset Link'}
-            </Button>
-            <Grid container>
+    <div>
+      <PageHeader title="Forgot Password" subTitle="Enter your email below" />
+      <Container component="main" maxWidth="xs" className={classes.container}>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          {Object.entries(error).length !== 0 &&
+            error.constructor === Object &&
+            error.message.map((error) => {
+              return (
+                <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
+                  <small style={{ color: 'red' }}>
+                    {error.messages[0].message}
+                  </small>
+                </div>
+              )
+            })}
+          {!emailSent && (
+            <form className={classes.form}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={handleChange}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleFormSubmit}
+              >
+                {loading ? 'Loading... ' : 'Send Reset Link'}
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    <a>
+                      <TextLink>Don't have an account? Sign Up</TextLink>
+                    </a>
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          )}
+
+          {emailSent && (
+            <Grid container justify="center" className={classes.successMessage}>
               <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                Thanks, check your email for a link to reset your password!
+              </Grid>
+              <Grid item>
+                <Link href="/forgot-password" variant="body2">
+                  <a>
+                    <TextLink>Didn't get an email?</TextLink>
+                  </a>
                 </Link>
               </Grid>
             </Grid>
-          </form>
-        )}
-
-        {emailSent && (
-          <Grid container justify="center" className={classes.successMessage}>
-            <Grid item>
-              Thanks, check your email for a link to reset your password!
-            </Grid>
-            <Grid item>
-              <Link href="/forgot-password" variant="body2">
-                {"Didn't get an email?"}
-              </Link>
-            </Grid>
-          </Grid>
-        )}
-      </div>
-    </Container>
+          )}
+        </div>
+      </Container>
+      <Footer />
+    </div>
   )
 }
 

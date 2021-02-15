@@ -17,8 +17,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { login } from '../lib/auth'
 import { userContext } from '../context/UserContext'
-
-import Copyright from '../components/Copyright'
+import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
+import Footer from '../components/Footer/Footer.component'
+import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  container: {
+    marginBottom: '4rem'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -79,85 +83,87 @@ const Login = (props) => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
-        {Object.entries(error).length !== 0 &&
-          error.constructor === Object &&
-          error.message.map((error) => {
-            return (
-              <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
-                <small style={{ color: 'red' }}>
-                  {error.messages[0].message}
-                </small>
-              </div>
-            )
-          })}
-        <form className={classes.form}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Username or Email"
-            name="identifier"
-            autoComplete="email"
-            autoFocus
-            onChange={(event) => handleChange(event)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(event) => handleChange(event)}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-            name="rememberMe"
-            onChange={(event) => handleChange(event)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleFormSubmit}
-          >
-            {loading ? 'Loading... ' : 'Login'}
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/forgot-password" variant="body2">
-                Forgot password?
-              </Link>
+    <div>
+      <PageHeader title="Log in" subTitle="Log in with your email below" />
+      <Container component="main" maxWidth="xs" className={classes.container}>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          {Object.entries(error).length !== 0 &&
+            error.constructor === Object &&
+            error.message.map((error) => {
+              return (
+                <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
+                  <small style={{ color: 'red' }}>
+                    {error.messages[0].message}
+                  </small>
+                </div>
+              )
+            })}
+          <form className={classes.form}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="identifier"
+              autoComplete="email"
+              autoFocus
+              onChange={(event) => handleChange(event)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(event) => handleChange(event)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+              name="rememberMe"
+              onChange={(event) => handleChange(event)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleFormSubmit}
+            >
+              {loading ? 'Loading... ' : 'Login'}
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="/forgot-password" variant="body2">
+                  <a>
+                    <TextLink>Forgot password?</TextLink>
+                  </a>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  <a>
+                    <TextLink>Don't have an account? Sign Up</TextLink>
+                  </a>
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+      </Container>
+      <Footer />
+    </div>
   )
 }
 

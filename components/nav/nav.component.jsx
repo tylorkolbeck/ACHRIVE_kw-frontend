@@ -3,12 +3,7 @@ import { userContext } from '../../context/UserContext'
 import { logout } from '../../lib/auth'
 import Link from 'next/link'
 import { appLinks } from '../../lib/app.links'
-
 import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import { CgDarkMode } from 'react-icons/cg'
 import { useRouter } from 'next/router'
 import {
@@ -16,7 +11,12 @@ import {
   Drawer,
   IconButton,
   ListItem,
-  ListItemText
+  ListItemText,
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  Button, 
+  Divider
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -128,7 +128,6 @@ export default function Nav({ toggleDarkMode }) {
             color="secondary"
             onClick={logoutHandler}
             className={classes.menuButtonUser}
-            onClick={logoutHandler}
           >
             Logout
           </Button>
@@ -139,7 +138,6 @@ export default function Nav({ toggleDarkMode }) {
             variant="contained"
             color="secondary"
             className={classes.menuButtonUser}
-            onClick={logoutHandler}
           >
             Login
           </Button>
@@ -168,8 +166,8 @@ export default function Nav({ toggleDarkMode }) {
           <ListItemText primary="Toggle Dark Mode" />
         </ListItem>
 
-        {/* <Divider />
-        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div> */}
+        <Divider />
+        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
       </List>
     </div>
   )
@@ -281,7 +279,7 @@ export default function Nav({ toggleDarkMode }) {
               <CgDarkMode style={{ marginBottom: '-3px' }} />
             </Typography>
 
-            {/* {logoutLogin} */}
+            {logoutLogin}
           </List>
 
           <IconButton

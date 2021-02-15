@@ -14,10 +14,8 @@ const useStyles = makeStyles(({ palette, custom }) => ({
           : custom.color.teal
       }
     },
-    // color:
-    //   palette.type === 'light' ? palette.secondary.dark : custom.color.teal,
     fontWeight: 'bold',
-    fontSize: '20px',
+    fontSize: '16px',
     '&:hover': {
       cursor: 'pointer',
 
