@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import CaptionText from '../Typography/CaptionText/CaptionText.component'
 import Button from '../UI/Button.component'
-import { postNewsletterEmail, alreadySubscribed } from '../../lib/newsletter'
+import { postNewsletterEmail} from '../../lib/newsletter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,38 +39,29 @@ const useStyles = makeStyles((theme) => ({
 export default function NewsLetterSignUp() {
   const classes = useStyles()
   const [email, setEmail] = useState('')
-  const [error, setError] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState(null)
   const [loading, setLoading] = useState(false)
   const [successMsg, setSuccessMsg] = useState(false)
+  const [hidden, setHidden] = useState(false)
 
   const handleChange = (e) => {
     setEmail(e.target.value)
-    setSuccessMsg(false)
-    setError(false)
-    setErrorMsg('')
+    setErrorMsg(null)
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    setError(false)
-    setErrorMsg('')
+    setErrorMsg(null)
     setLoading(true)
     if (validateEmail(email)) {
-      alreadySubscribed(email).then((res) => {
+      postNewsletterEmail(email).then((res) => {
+        setEmail('')
         setLoading(false)
-        setError(true)
-        setErrorMsg(res)
+        setSuccessMsg(true)
+        setHidden(true)
       }).catch((error) => {
-        postNewsletterEmail(email).then((res) => {
-          setEmail('')
-          setLoading(false)
-          setSuccessMsg(true)
-        }).catch((error) => {
-          setLoading(false)
-          setError(true)
-          setErrorMsg('Something went wrong')
-        })
+        setLoading(false)
+        setErrorMsg(error.message)
       })
     }
   }
@@ -82,7 +73,6 @@ export default function NewsLetterSignUp() {
     return (true)
   }
     setLoading(false)
-    setError(true)
     setErrorMsg('Invalid email')
     return (false)
 }
@@ -95,23 +85,25 @@ export default function NewsLetterSignUp() {
             Subscribe to Killer Whale for the Latest News and Trading Updates
           </SectionHeader>
         </Grid>
-        <form>
+        {!hidden && <form onSubmit={handleFormSubmit}>
         <Grid item xs={12}>
           <Grid container direction="row" wrap="nowrap" alignItems="center">
             <TextField
               size="small"
               placeholder="Email Address"
+              type="email"
               variant="outlined"
+              required
               className={classes.emailInput}
               value={email}
               disabled={loading}
-              error={error}
+              error={errorMsg ? true : false}
               onChange={(event) => handleChange(event)}
               helperText={errorMsg && errorMsg}
             />
             <Grid item>
               <Button
-                type="submit"
+                type="button"
                 variant="contained"
                 size="large"
                 disabled={loading}
@@ -122,7 +114,7 @@ export default function NewsLetterSignUp() {
             </Grid>
           </Grid>
         </Grid>
-        </form>
+        </form>}
         <CaptionText>
           {successMsg ? "Thanks for signing up!": "*We do not spam. You only receive trade insights and predictions from our expert chart analysis."}
         </CaptionText>
