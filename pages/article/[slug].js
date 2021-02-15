@@ -7,7 +7,6 @@ import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import BackButton from '../../components/BackButton/BackButton.component'
-import Footer from '../../components/Footer/Footer.component'
 import CategoryChip from '../../components/Typography/CategoryChip/CategoryChip.component'
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
@@ -98,7 +97,6 @@ export default function Article({ postData }) {
           <NewsLetterSignup />
         </Grid>
       </Grid>
-      <Footer />
     </Grid>
   )
 }

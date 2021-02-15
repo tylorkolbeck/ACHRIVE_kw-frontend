@@ -3,7 +3,6 @@ import { getProductIds, getProductData } from '../../lib/products'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../../components/Footer/Footer.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
@@ -109,7 +108,6 @@ export default function Product({ productData }) {
           )}
         </Grid>
       </div>
-      <Footer />
     </div>
   )
 }

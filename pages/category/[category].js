@@ -6,15 +6,13 @@ import ArticleCard from '../../components/card/articleCard.component'
 import { fetchAPI } from '../../lib/api'
 import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
 import BackButton from '../../components/BackButton/BackButton.component'
-import ScrollToTop from '../../components/ScrollToTopButton/ScrollToTopButton.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: theme.custom.screen.maxWidth,
     margin: '0 auto',
-    padding: theme.spacing(3),
-    paddingTop: theme.custom.screen.navBarHeight
+    padding: theme.spacing(3)
   }
 }))
 
@@ -29,7 +27,6 @@ export default function Category({ categoryData, authors, categories }) {
         subTitle={`Browse articles related to ${name}`}
       />
       <div className={classes.root}>
-        <ScrollToTop />
         <BackButton />
 
         <Grid container direction="column">

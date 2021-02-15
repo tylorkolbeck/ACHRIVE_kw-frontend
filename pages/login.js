@@ -6,19 +6,16 @@ import {
   Container,
   CssBaseline,
   Avatar,
-  Typography,
   FormControlLabel,
   Checkbox,
   Grid,
-  Link,
-  Box
+  Link
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { login } from '../lib/auth'
 import { userContext } from '../context/UserContext'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../components/Footer/Footer.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
@@ -162,7 +159,6 @@ const Login = (props) => {
           </form>
         </div>
       </Container>
-      <Footer />
     </div>
   )
 }

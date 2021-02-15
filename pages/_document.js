@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           /> */}
         </Head>
-        <body>
+        <body style={{ height: '100%', position: 'relative' }}>
           <Main />
           <NextScript />
         </body>

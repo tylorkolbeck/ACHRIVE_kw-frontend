@@ -1,6 +1,5 @@
 import React from 'react'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../components/Footer/Footer.component'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import Link from 'next/link'
@@ -120,7 +119,6 @@ export default function GettingStarted({ productData }) {
           </Grid>
         </Grid>
       </div>
-      <Footer />
     </>
   )
 }

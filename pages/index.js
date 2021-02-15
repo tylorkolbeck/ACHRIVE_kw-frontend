@@ -3,7 +3,7 @@ import Seo from '../components/seo/seo.component'
 import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Paper, Divider } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 
 import HomepageHero from '../components/HomepageHero/HomepageHero.component'
 import Carousel from '../components/Carousel/Carousel.component'
@@ -13,9 +13,7 @@ import ProductInfo from '../components/ProductInfo/ProductInfo.component'
 import PremiumCommunityInfo from '../components/PremiumCommunityInfo/PremiumCommunityInfo.component'
 import Reviews from '../components/Review/Review.component'
 import Videos from '../components/Videos/Video.component'
-import Footer from '../components/Footer/Footer.component'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
-import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 
 const useStyles = makeStyles((theme) => {
   const contentPadding = theme.spacing(3)
@@ -76,7 +74,6 @@ const Home = ({
 
   return (
     <Grid container className={classes.root} direction="column">
-      <ScrollToTopButton />
       <Seo seo={homepage.seo} global={global} />
       <Grid container className={classes.Hero}>
         <HomepageHero />
@@ -143,7 +140,6 @@ const Home = ({
           </Grid>
         </Grid>
       </Grid>
-      <Footer />
     </Grid>
   )
 }

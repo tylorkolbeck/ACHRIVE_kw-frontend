@@ -13,7 +13,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { forgotPassword } from '../lib/auth'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../components/Footer/Footer.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
@@ -143,7 +142,6 @@ const ForgotMyPassword = (props) => {
           )}
         </div>
       </Container>
-      <Footer />
     </div>
   )
 }

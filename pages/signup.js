@@ -12,11 +12,9 @@ import {
 import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import { registerUser } from '../lib/auth'
 import { userContext } from '../context/UserContext'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../components/Footer/Footer.component'
-import { sendEmailConf } from '../lib/auth'
+import { sendEmailConf, registerUser } from '../lib/auth'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => ({
@@ -48,11 +46,9 @@ const useStyles = makeStyles((theme) => ({
 const Signup = () => {
   const classes = useStyles()
   const [data, setData] = useState({
-    firstName: 'tylor',
-    lastName: 'kolbeck',
-    email: 'tylor@mail.com',
-    password: 'password',
-    passwordConfirmation: 'password',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
     subscribedToNewsletter: true
   })
   const [loading, setLoading] = useState(false)
@@ -122,35 +118,6 @@ const Signup = () => {
             {!confirmationSent && (
               <form className={classes.form}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      autoComplete="fname"
-                      name="firstName"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="firstName"
-                      label="First Name"
-                      autoFocus
-                      value={data.firstName}
-                      disabled={loading}
-                      onChange={handleChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="lname"
-                      value={data.lastName}
-                      disabled={loading}
-                      onChange={handleChange}
-                    />
-                  </Grid>
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
@@ -257,7 +224,6 @@ const Signup = () => {
           </div>
         </Container>
       </div>
-      <Footer />
     </div>
   )
 }

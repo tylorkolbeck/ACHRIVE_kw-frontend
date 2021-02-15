@@ -1,10 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button, Grid, Typography } from '@material-ui/core'
-import { fade } from '@material-ui/core/styles/colorManipulator'
+import { Paper, Grid, Typography } from '@material-ui/core'
 import withWidth from '@material-ui/core/withWidth'
-import { getStrapiMedia } from '../../lib/media'
+import Link from 'next/link'
 
 const breakpoints = {
   xs: 'xs',
@@ -102,33 +101,39 @@ function CarouselElement({ data, width, interval }) {
         {items.map((item) => {
           return (
             <Grid item xs key={item.id}>
-              <Paper
-                className={classes.paper}
-                style={{
-                  background: `url(${item?.cardImage[0]?.formats?.small?.url})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div
-                  style={{
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <div>
-                    <Typography variant="h5">{item?.cardTitle}</Typography>
-                    <Typography variant="body2">{item?.cardContent}</Typography>
-                  </div>
+              <Link href={item.cardLink ? item.cardLink : ''}>
+                <a>
+                  <Paper
+                    className={classes.paper}
+                    style={{
+                      background: `url(${item?.cardImage[0]?.formats?.small?.url})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <div>
+                        <Typography variant="h5">{item?.cardTitle}</Typography>
+                        <Typography variant="body2">
+                          {item?.cardContent}
+                        </Typography>
+                      </div>
 
-                  <Typography variant="caption" className={classes.link}>
-                    LEARN MORE
-                  </Typography>
-                </div>
-              </Paper>
+                      <Typography variant="caption" className={classes.link}>
+                        LEARN MORE
+                      </Typography>
+                    </div>
+                  </Paper>
+                </a>
+              </Link>
             </Grid>
           )
         })}

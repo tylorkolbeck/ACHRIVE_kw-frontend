@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
 import ArticleCard from '../components/card/articleCard.component'
-import Footer from '../components/Footer/Footer.component'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import Link from 'next/link'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
@@ -70,8 +68,6 @@ export default function Articles({ articles }) {
         subTitle="Browse articles for insight from our expert chart analysis and predictions"
       />
       <div className={classes.root}>
-        <ScrollToTopButton />
-
         <Grid container direction="row" spacing={3}>
           <Grid item xs={12} sm={12} md={2} className={classes.leftNav}>
             <SectionHeader>Categories</SectionHeader>
@@ -126,7 +122,6 @@ export default function Articles({ articles }) {
           </Grid>
         </Grid>
       </div>
-      <Footer />
     </div>
   )
 }

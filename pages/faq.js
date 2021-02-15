@@ -11,10 +11,8 @@ import {
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { useRouter } from 'next/router'
-import ScrollToTopButton from '../components/ScrollToTopButton/ScrollToTopButton.component'
 import capitalizeFirstLetter from '../lib/utils'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
-import Footer from '../components/Footer/Footer.component'
 import Fuse from 'fuse.js'
 import SearchField from '../components/SearchField/SearchField.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
@@ -141,8 +139,6 @@ export default function Faq({ faqs }) {
         subTitle="Browse our list of the most commonly asked questions by our community"
       />
       <div className={classes.root}>
-        <ScrollToTopButton />
-
         <Grid item className={classes.searchInputWrapper}>
           <SearchField onChange={searchInputHandler} value={searchInput}>
             {searchResults &&
@@ -243,7 +239,6 @@ export default function Faq({ faqs }) {
           ))}
         </List>
       </div>
-      <Footer />
     </div>
   )
 }
