@@ -1,20 +1,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import {
-  Button,
-  TextField,
-  Container,
-  CssBaseline,
-  Avatar,
-  Typography,
-  Grid
-} from '@material-ui/core'
+import { Button, Container, CssBaseline, Avatar, Grid } from '@material-ui/core'
 import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import { resetPassword } from '../lib/auth'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
+import TextField from '../components/UI/TextField.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {

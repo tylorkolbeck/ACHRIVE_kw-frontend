@@ -1,10 +1,11 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import Button from '../../components/UI/Button.component'
+import TextField from '../UI/TextField.component'
 
 const startingBalance = [
   {
