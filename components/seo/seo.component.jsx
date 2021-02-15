@@ -6,11 +6,14 @@ const Seo = ({ seo, global }) => {
     seo: seo ? seo : global
   }
 
+  console.log(seoDefaults.seo.metaDescription)
+
   const fullSeo = {
     ...seoDefaults,
 
     // Add title suffix
     metaTitle: `${seoDefaults.seo.metaTitle}`,
+    metaDescription: seoDefaults.seo.metaDescription,
 
     // Get full image URL
     shareImage: getStrapiMedia(seo.shareImage)

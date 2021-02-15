@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => {
 export default function Article({ postData }) {
   const classes = useStyles()
   const { title, category, image, description } = postData
-  console.log('>Q!>!>!', title)
 
   const seo = {
     metaTitle: postData.title,
@@ -77,8 +76,10 @@ export default function Article({ postData }) {
 
       <Grid item className={classes.content}>
         <BackButton />
-        <Grid item container>
+        <div>
           <CategoryChip>{category?.name}</CategoryChip>
+        </div>
+        <Grid item container>
           <Grid item className={classes.marginBottomMd}>
             <SectionHeader>{title}</SectionHeader>
             <BodyText>{description}</BodyText>
