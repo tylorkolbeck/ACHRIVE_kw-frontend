@@ -7,7 +7,7 @@ import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import BodyText from '../Typography/BodyText/BodyText.component'
 import TextLink from '../Typography/TextLink/TextLink.component'
 
-const useStyles = makeStyles(({ spacing, breakpoints }) => {
+const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
   const cardImageBackgrounds = {
     strategy: '#005079',
     signal: '#415A63',
@@ -54,7 +54,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => {
       height: '100%'
     },
     productImage_header: {
-      background: 'black',
+      background: palette.grey[900],
       color: 'white',
       borderRadius: '20px 20px 0px 0px',
       padding: spacing(1),
@@ -78,19 +78,19 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => {
       width: '100%',
       paddingLeft: spacing(2),
       [breakpoints.down('sm')]: {
-        // padding: 0,
-        // margin: '0 auto',
         marginBottom: spacing(2)
       }
     },
     infoWrapper: {
       marginTop: spacing(2),
-      marginBottom: spacing(1)
+      marginBottom: spacing(1),
+      [breakpoints.up('sm')]: {
+        marginTop: spacing(4)
+      }
     },
     infoLabel: {
       fontSize: '.8rem',
-      color: 'rgba(0,0,0,.5)',
-      marginRight: spacing(2),
+      color: palette.type === 'light' ? 'rgba(0,0,0,.5)' : palette.grey[400],
       fontWeight: 'bold'
     },
     infoLabelValue: {
@@ -159,12 +159,12 @@ export default function ProductCard({
             <Grid container className={classes.infoWrapper}>
               <Grid
                 item
-                xs={12}
-                sm={12}
-                md={3}
-                style={{ marginBottom: '20px' }}
+                xs
+                style={{
+                  display: 'flex'
+                }}
               >
-                <Grid container>
+                <Grid item style={{ marginBottom: '20px' }}>
                   <Grid item className={classes.infoLabelValue}>
                     {recommendedBalance}
                   </Grid>
@@ -172,15 +172,7 @@ export default function ProductCard({
                     STARTING BALANCE
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={3}
-                style={{ marginBottom: '20px' }}
-              >
-                <Grid container>
+                <Grid item style={{ marginBottom: '20px' }}>
                   <Grid item className={classes.infoLabelValue}>
                     {riskLevel}
                   </Grid>
@@ -188,36 +180,30 @@ export default function ProductCard({
                     RISK LEVEL
                   </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={3}
-                style={{ marginBottom: '20px' }}
-              >
-                <Grid container className={classes.infoLabelValue}>
-                  {automated ? 'Automated' : 'Self'}
+                <Grid item style={{ marginBottom: '20px' }}>
+                  <Grid item className={classes.infoLabelValue}>
+                    {automated ? 'Automated' : 'Self'}
+                  </Grid>
+                  <Grid item xs={12} className={classes.infoLabel}>
+                    AUTOMATED
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} className={classes.infoLabel}>
-                  AUTOMATED
-                </Grid>
+              </Grid>
+              <Grid item>
+                {cryptoHopperLink && (
+                  <a href={cryptoHopperLink} target="_blank">
+                    <TextLink icon>Install Product</TextLink>
+                  </a>
+                )}
               </Grid>
             </Grid>
           )}
+
           {learnMore && (
             <Link href={`/product/${slug}`}>
               <a>
                 <TextLink icon>Learn More</TextLink>
-              </a>
-            </Link>
-          )}
-
-          {cryptoHopperLink && (
-            <Link href={`/product/${slug}`}>
-              <a>
-                <TextLink icon>Install Product</TextLink>
               </a>
             </Link>
           )}

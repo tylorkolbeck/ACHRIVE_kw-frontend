@@ -54,8 +54,10 @@ export default function Markdown({ source }) {
     },
     list: ({ ordered, children }) => {
       if (!ordered) {
-        return children.map((item) => (
-          <BulletItem style={{ paddingLeft: '20px' }}>{item}</BulletItem>
+        return children.map((item, index) => (
+          <BulletItem style={{ paddingLeft: '20px' }} key={index}>
+            {item}
+          </BulletItem>
         ))
       } else {
         return <ol className={classes.orderedList}>{children}</ol>

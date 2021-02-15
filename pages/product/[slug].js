@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => {
       margin: '0px auto',
       padding: theme.spacing(3),
       position: 'relative',
-      marginBottom: '500px',
-      paddingTop: theme.custom.screen.navBarHeight
+      marginBottom: '500px'
     },
     section: {
       marginBottom: theme.spacing(5),
@@ -48,19 +47,6 @@ export default function Product({ productData }) {
   } = productData || {}
 
   const classes = useStyles()
-
-  const renderers = {
-    paragraph: ({ children }) => {
-      return <BodyText>{children}</BodyText>
-    },
-    link: ({ href, children }) => {
-      return (
-        <a href={href} style={{ color: 'dodgerblue' }}>
-          {children}
-        </a>
-      )
-    }
-  }
 
   return (
     <div>
