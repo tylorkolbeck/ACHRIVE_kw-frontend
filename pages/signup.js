@@ -48,16 +48,17 @@ const useStyles = makeStyles((theme) => ({
 const Signup = () => {
   const classes = useStyles()
   const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConfirmation: ''
+    firstName: 'tylor',
+    lastName: 'kolbeck',
+    email: 'tylor@mail.com',
+    password: 'password',
+    passwordConfirmation: 'password',
+    subscribedToNewsletter: true
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
   const [confirmationSent, setConfirmationSent] = useState(false)
-  const { userState, setUserState } = userContext()
+  const { setUserState } = userContext()
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
@@ -79,13 +80,7 @@ const Signup = () => {
       })
       setLoading(false)
     } else {
-      registerUser(
-        data.firstName,
-        data.lastName,
-        data.email,
-        data.email, // (passing email twice to use it as the username)
-        data.password
-      )
+      registerUser(data)
         .then((res) => {
           setConfirmationSent(true)
           // set authed user in global context object
@@ -203,7 +198,17 @@ const Signup = () => {
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={
-                        <Checkbox value="allowExtraEmails" color="primary" />
+                        <Checkbox
+                          checked={data.subscribedToNewsletter}
+                          name="subscribedToNewsletter"
+                          onChange={(e) =>
+                            setData({
+                              ...data,
+                              subscribedToNewsletter: e.target.checked
+                            })
+                          }
+                          color="primary"
+                        />
                       }
                       label="Allow Killer Whale to slide in your DMs"
                     />
