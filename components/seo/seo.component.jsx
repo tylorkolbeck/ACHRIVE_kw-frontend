@@ -5,17 +5,15 @@ const Seo = ({ seo, global }) => {
   const seoDefaults = {
     seo: seo ? seo : global
   }
-  // const { defaultSeo, siteName } = useContext(GlobalContext)
-  // const seoWithDefaults = {
-  //   ...global.defaultSeo,
-  //   ...seo
-  // }
+
   const fullSeo = {
     ...seoDefaults,
+
     // Add title suffix
-    metaTitle: `${seoDefaults.metaTitle}`,
+    metaTitle: `${seoDefaults.seo.metaTitle}`,
+
     // Get full image URL
-    shareImage: getStrapiMedia(seoDefaults.shareImage)
+    shareImage: getStrapiMedia(seo.shareImage)
   }
 
   return (
@@ -25,6 +23,7 @@ const Seo = ({ seo, global }) => {
           <title>{fullSeo.seo.metaTitle}</title>
           <meta property="og:title" content={fullSeo.metaTitle} />
           <meta name="twitter:title" content={fullSeo.metaTitle} />
+          <meta propert="og:type" content="website" />
         </>
       )}
       {fullSeo.metaDescription && (

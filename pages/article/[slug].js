@@ -62,16 +62,19 @@ const useStyles = makeStyles((theme) => {
 export default function Article({ postData }) {
   const classes = useStyles()
   const { title, category, image, description } = postData
+  console.log('>Q!>!>!', title)
 
   const seo = {
     metaTitle: postData.title,
-    metaDescription: postData.description,
-    shareImage: postData.image,
+    metaDescription: description,
+    shareImage: image,
     article: true
   }
 
   return (
     <Grid container className={classes.root}>
+      <Seo seo={seo} />
+
       <Grid item className={classes.content}>
         <BackButton />
         <Grid item container>
@@ -89,7 +92,6 @@ export default function Article({ postData }) {
           published={postData?.updated_at}
           divider
         />
-        <Seo seo={seo} />
         <div className={classes.postBody}>
           <Markdown source={postData?.content} />
         </div>
