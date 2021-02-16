@@ -1,7 +1,8 @@
 import React from 'react'
-import { TextField, Paper } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import useClickOutside from './clickOutside'
 import { makeStyles } from '@material-ui/core/styles'
+import TextField from '../UI/TextField.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -33,7 +34,7 @@ export default function SearchField({ value, onChange, children }) {
         style={{ width: '100%' }}
         onFocus={() => setIsVisible(true)}
         ref={ref}
-      ></TextField>
+      />
       {isVisible && children.length > 0 && (
         <Paper className={classes.resultsWrapper}>{children}</Paper>
       )}
