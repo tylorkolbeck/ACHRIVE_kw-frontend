@@ -4,7 +4,7 @@ import { getSortedPostsData } from '../lib/posts'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper } from '@material-ui/core'
-
+import { userContext } from '../context/UserContext'
 import HomepageHero from '../components/HomepageHero/HomepageHero.component'
 import Carousel from '../components/Carousel/Carousel.component'
 import FeaturedArticle from '../components/FeaturedArticle/FeaturedArticle.component'
@@ -71,6 +71,7 @@ const Home = ({
   carouselTimer
 }) => {
   const classes = useStyles()
+  const { userState, setUserState } = userContext()
 
   return (
     <Grid container className={classes.root} direction="column">
@@ -87,9 +88,12 @@ const Home = ({
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6} md={8}>
               <FeaturedArticle article={allPostsData[0]} />
-              <Grid item style={{ marginTop: '50px', marginBottom: '50px' }}>
-                <NewsLetterSignup />
-              </Grid>
+              {/* Hide newsletter when user is logged in */}
+              {!userState.user && (
+                <Grid item style={{ marginTop: '50px', marginBottom: '50px' }}>
+                  <NewsLetterSignup />
+                </Grid>
+              )}
               <Videos />
             </Grid>
 
