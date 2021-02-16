@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import {
   Button,
-  TextField,
   Container,
   CssBaseline,
   Avatar,
@@ -17,6 +16,7 @@ import { login } from '../lib/auth'
 import { userContext } from '../context/UserContext'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
+import TextField from '../components/UI/TextField.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {

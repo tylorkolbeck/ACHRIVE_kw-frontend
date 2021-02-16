@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
   Button,
-  TextField,
   Container,
   CssBaseline,
   Avatar,
@@ -16,6 +15,7 @@ import { userContext } from '../context/UserContext'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import { sendEmailConf, registerUser } from '../lib/auth'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
+import TextField from '../components/UI/TextField.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
