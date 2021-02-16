@@ -6,8 +6,6 @@ const Seo = ({ seo, global }) => {
     seo: seo ? seo : global
   }
 
-  console.log(seoDefaults.seo.metaDescription)
-
   const fullSeo = {
     ...seoDefaults,
 
