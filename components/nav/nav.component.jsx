@@ -12,10 +12,10 @@ import {
   IconButton,
   ListItem,
   ListItemText,
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  Button, 
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
   Divider
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
@@ -166,8 +166,8 @@ export default function Nav({ toggleDarkMode }) {
           <ListItemText primary="Toggle Dark Mode" />
         </ListItem>
 
-        <Divider />
-        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
+        {/* <Divider />
+        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div> */}
       </List>
     </div>
   )
@@ -279,7 +279,7 @@ export default function Nav({ toggleDarkMode }) {
               <CgDarkMode style={{ marginBottom: '-3px' }} />
             </Typography>
 
-            {logoutLogin}
+            {/* {logoutLogin} */}
           </List>
 
           <IconButton
