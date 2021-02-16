@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { forgotPassword } from '../lib/auth'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
-import TextField from '../components/TextField/TextField.component'
+import TextField from '../components/UI/TextField.component'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
