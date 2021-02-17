@@ -4,6 +4,7 @@ import Carousel from 'react-material-ui-carousel'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import withWidth from '@material-ui/core/withWidth'
 import Link from 'next/link'
+import Button from '../UI/Button.component'
 
 const breakpoints = {
   xs: 'xs',
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(1),
       fontWeight: 'bold'
     },
-    height: '150px',
+    height: '180px',
 
     '&:hover': {
       cursor: 'pointer',
@@ -121,15 +122,36 @@ function CarouselElement({ data, width, interval }) {
                       }}
                     >
                       <div>
-                        <Typography variant="h5">{item?.cardTitle}</Typography>
-                        <Typography variant="body2">
+                        <Typography
+                          variant="h5"
+                          style={{ textShadow: '1px 1px #363636' }}
+                        >
+                          {item?.cardTitle}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          style={{
+                            textShadow: '1px 1px #363636',
+                            fontWeight: 'bold',
+                            fontSize: '16px'
+                          }}
+                        >
                           {item?.cardContent}
                         </Typography>
                       </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          marginTop: '20px'
 
-                      <Typography variant="caption" className={classes.link}>
+                          // justifyContent: 'flex-end'
+                        }}
+                      >
+                        <Button>LEARN MORE</Button>
+                      </div>
+                      {/* <Typography variant="caption" className={classes.link}>
                         LEARN MORE
-                      </Typography>
+                      </Typography> */}
                     </div>
                   </Paper>
                 </a>

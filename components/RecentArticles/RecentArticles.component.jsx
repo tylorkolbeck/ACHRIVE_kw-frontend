@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import ArticleCard from '../../components/card/articleCard.component'
 import Link from 'next/link'
 import TextLink from '../Typography/TextLink/TextLink.component'
@@ -14,7 +14,7 @@ export default function RecentArticles({ articles }) {
     >
       {articles.map((article, i) => {
         return (
-          <div style={{ marginBottom: '20px' }} key={article.id}>
+          <Grid item xs={12} style={{ marginBottom: '20px' }} key={article.id}>
             <ArticleCard
               article={article}
               authorName={article?.author?.name}
@@ -22,7 +22,7 @@ export default function RecentArticles({ articles }) {
               category={article?.category?.name}
               description={`${article?.description?.slice(0, 100)}...`}
             />
-          </div>
+          </Grid>
         )
       })}
       <Grid item xs={12} style={{ marginTop: '10px' }}>

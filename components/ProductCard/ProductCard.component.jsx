@@ -91,7 +91,8 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
     infoLabel: {
       fontSize: '.8rem',
       color: palette.type === 'light' ? 'rgba(0,0,0,.5)' : palette.grey[400],
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      marginRight: spacing(5)
     },
     infoLabelValue: {
       fontWeight: 'bold',

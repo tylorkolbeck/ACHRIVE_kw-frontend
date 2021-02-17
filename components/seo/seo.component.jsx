@@ -14,7 +14,7 @@ const Seo = ({ seo, global }) => {
     metaDescription: seoDefaults.seo.metaDescription,
 
     // Get full image URL
-    shareImage: getStrapiMedia(seo.shareImage)
+    shareImage: seo?.shareImage?.formats?.thumbnail?.url
   }
 
   return (
