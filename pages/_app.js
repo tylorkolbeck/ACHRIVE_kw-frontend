@@ -25,7 +25,15 @@ export default function App({ Component, pageProps }) {
 
   function toggleDarkMode() {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', colorMode === 'dark' ? 'light' : 'dark')
+      const storageTheme = localStorage.getItem('theme')
+      if (storageTheme) {
+        localStorage.setItem(
+          'theme',
+          storageTheme === 'dark' ? 'light' : 'dark'
+        )
+      } else {
+        localStorage.setItem('theme', colorMode === 'dark' ? 'light' : 'dark')
+      }
     }
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')
   }
