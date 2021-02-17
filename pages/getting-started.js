@@ -164,6 +164,6 @@ export async function getStaticProps() {
       productData,
       stepData
     },
-    revalidate: 10
+    revalidate: 1
   }
 }

@@ -83,7 +83,7 @@ export async function getStaticProps({ params }) {
       authors: authors,
       categories: categories
     },
-    revalidate: 10
+    revalidate: 1
   }
 }
 

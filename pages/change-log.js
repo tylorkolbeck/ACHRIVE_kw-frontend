@@ -101,6 +101,6 @@ export async function getStaticProps() {
     props: {
       changeLogData
     },
-    revalidate: 10
+    revalidate: 1
   }
 }

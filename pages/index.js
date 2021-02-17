@@ -178,7 +178,7 @@ export async function getStaticProps() {
       carouselData,
       carouselTimer
     },
-    revalidate: 10
+    revalidate: 1
   }
 }
 
