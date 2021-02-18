@@ -85,7 +85,7 @@ const ArticleCard = ({ article, image, authorName, category, description }) => {
           <BodyText>{description.slice(0, 250)}</BodyText>
           <CaptionText>
             {authorName} &#8226;{' '}
-            {DateTime.fromISO(article?.published_at).toLocaleString(
+            {DateTime.fromISO(article?.publishedAt).toLocaleString(
               DateTime.DATE_MED
             )}
           </CaptionText>

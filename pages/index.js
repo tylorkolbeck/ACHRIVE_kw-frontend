@@ -71,7 +71,7 @@ const Home = ({
   carouselTimer
 }) => {
   const classes = useStyles()
-  const { userState, setUserState } = userContext()
+  const { userState } = userContext()
 
   return (
     <Grid container className={classes.root} direction="column">
@@ -99,7 +99,7 @@ const Home = ({
 
             <Grid item xs={12} sm={6} md={4}>
               <Grid item style={{ marginBottom: '50px' }}>
-                <RecentArticles articles={allPostsData.slice(0, 3)} />
+                <RecentArticles articles={allPostsData.slice(1, 5)} />
               </Grid>
 
               {/* TRADING PRODUCTS */}

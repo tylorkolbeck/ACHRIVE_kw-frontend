@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: '20px',
     height: '24vw',
+    maxHeight: '500px',
     width: '100%',
     borderRadius: '4px',
     backgroundImage: (article) => {
@@ -51,10 +52,10 @@ const MainArticle = ({ article }) => {
       </Grid>
 
       <Grid item>
-        <BodyText>{article.description.slice(100)}...</BodyText>
+        <BodyText>{article.description.slice(0, 500)}...</BodyText>
         <CaptionText>
           {article?.author?.name} &#8226;{' '}
-          {DateTime.fromISO(article.published_at).toLocaleString(
+          {DateTime.fromISO(article.publishedAt).toLocaleString(
             DateTime.DATE_MED
           )}
         </CaptionText>

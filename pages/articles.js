@@ -129,9 +129,7 @@ export default function Articles({ articles }) {
 export async function getStaticProps() {
   // Run API calls in parallel
 
-  const articles = await fetchAPI(
-    '/articles?_sort=published_at:DESC&_limit=100'
-  )
+  const articles = await fetchAPI('/articles?_sort=publishedAt')
   const authors = await fetchAPI('/writers')
 
   return {
