@@ -48,7 +48,7 @@ export default function Markdown({ source }) {
   const renderers = {
     paragraph: ({ children }) => {
       return (
-        <BodyText fontSize="20px" lineHeight="30px">
+        <BodyText fontSize="18px" lineHeight="30px">
           {children}
         </BodyText>
       )

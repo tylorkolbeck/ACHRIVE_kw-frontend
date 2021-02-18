@@ -100,7 +100,7 @@ export default function Article({ postData }) {
           divider
         />
         <Grid item style={{ marginTop: '20px' }}>
-          <BodyText fontSize="22px" color="grey">
+          <BodyText fontSize="20px" color="grey">
             {description}
           </BodyText>
         </Grid>
