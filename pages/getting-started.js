@@ -155,7 +155,7 @@ export async function getStaticProps() {
   // Run API calls in parallel
   const [productData, stepData] = await Promise.all([
     fetchAPI('/products'),
-    fetchAPI('/getting-started-steps')
+    fetchAPI('/getting-started-steps?_sort=order:ASC')
   ])
 
   return {
