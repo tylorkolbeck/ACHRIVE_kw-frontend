@@ -157,47 +157,48 @@ export default function ProductCard({
 
           <BodyText>{description}...</BodyText>
           {full && (
-            <Grid container className={classes.infoWrapper}>
-              <Grid
-                item
-                xs
-                style={{
-                  display: 'flex'
-                }}
-              >
-                <Grid item style={{ marginBottom: '20px' }}>
-                  <Grid item className={classes.infoLabelValue}>
-                    {recommendedBalance}
-                  </Grid>
-                  <Grid item xs={12} className={classes.infoLabel}>
-                    STARTING BALANCE
-                  </Grid>
+            <Grid
+              container
+              alignItems="flex-end"
+              justify="flex-start"
+              className={classes.infoWrapper}
+            >
+              <Grid item style={{ marginBottom: '20px' }}>
+                <Grid item className={classes.infoLabelValue}>
+                  {recommendedBalance}
                 </Grid>
-                <Grid item style={{ marginBottom: '20px' }}>
-                  <Grid item className={classes.infoLabelValue}>
-                    {riskLevel}
-                  </Grid>
-                  <Grid item xs={12} className={classes.infoLabel}>
-                    RISK LEVEL
-                  </Grid>
+                <Grid item xs={12} className={classes.infoLabel}>
+                  STARTING BALANCE
                 </Grid>
+              </Grid>
 
-                <Grid item style={{ marginBottom: '20px' }}>
-                  <Grid item className={classes.infoLabelValue}>
-                    {automated ? 'Automated' : 'Self'}
-                  </Grid>
-                  <Grid item xs={12} className={classes.infoLabel}>
-                    AUTOMATED
-                  </Grid>
+              <Grid item style={{ marginBottom: '20px' }}>
+                <Grid item className={classes.infoLabelValue}>
+                  {riskLevel}
+                </Grid>
+                <Grid item xs={12} className={classes.infoLabel}>
+                  RISK LEVEL
                 </Grid>
               </Grid>
-              <Grid item>
-                {cryptoHopperLink && (
-                  <a href={cryptoHopperLink} target="_blank">
-                    <TextLink icon>Install Product</TextLink>
-                  </a>
-                )}
+
+              <Grid item style={{ marginBottom: '20px' }}>
+                <Grid item className={classes.infoLabelValue}>
+                  {automated ? 'Automated' : 'Self'}
+                </Grid>
+                <Grid item xs={12} className={classes.infoLabel}>
+                  AUTOMATED
+                </Grid>
               </Grid>
+            </Grid>
+          )}
+
+          {full && (
+            <Grid container alignItems="flex-end" justify="flex-end">
+              {cryptoHopperLink && (
+                <a href={cryptoHopperLink} target="_blank">
+                  <TextLink icon>Install Product</TextLink>
+                </a>
+              )}
             </Grid>
           )}
 

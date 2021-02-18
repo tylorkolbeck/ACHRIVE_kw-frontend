@@ -9,7 +9,10 @@ const useStyles = makeStyles((theme) => {
     markdownStyling: {
       position: 'relative',
       '& img': {
-        maxWidth: '100%'
+        maxWidth: '100%',
+        padding: '20px',
+        paddingTop: '40px',
+        paddingBottom: '40px'
       },
 
       '& span': {
@@ -44,7 +47,11 @@ export default function Markdown({ source }) {
 
   const renderers = {
     paragraph: ({ children }) => {
-      return <BodyText>{children}</BodyText>
+      return (
+        <BodyText fontSize="20px" lineHeight="30px">
+          {children}
+        </BodyText>
+      )
     },
     link: ({ href, children }) => {
       return (

@@ -7,10 +7,10 @@ import { getStrapiMedia } from '../../lib/media'
 import { DateTime } from 'luxon'
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
   divider: {
     background: theme.palette.secondary.light,
-    marginTop: '20px'
+    marginTop: '20px',
+    height: '2px'
   }
 }))
 

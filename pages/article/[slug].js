@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => {
   return {
     root: {
       flexGrow: 1,
-      paddingTop: theme.custom.screen.navBarHeight
+      paddingTop: theme.custom.screen.navBarHeight,
+      maxWidth: '680px',
+      margin: '0 auto'
     },
     content: {
       maxWidth: theme.custom.screen.maxWidth,
@@ -41,11 +43,11 @@ const useStyles = makeStyles((theme) => {
     },
     postBody: {
       marginBottom: theme.spacing(5),
+      margin: '20px auto',
       '& img': {
         display: 'block',
         margin: '20px auto'
       },
-      fontSize: '20px',
       color: theme.palette.type === 'light' ? 'rgba(0,0,0,.8)' : 'white'
     },
     imageWrapper: {
@@ -84,7 +86,6 @@ export default function Article({ postData }) {
         <Grid item container>
           <Grid item className={classes.marginBottomMd}>
             <SectionHeader>{title}</SectionHeader>
-            <BodyText>{description}</BodyText>
           </Grid>
           <Grid item className={classes.imageWrapper}>
             <div
@@ -98,10 +99,16 @@ export default function Article({ postData }) {
           published={postData?.updated_at}
           divider
         />
+        <Grid item style={{ marginTop: '20px' }}>
+          <BodyText fontSize="22px" color="grey">
+            {description}
+          </BodyText>
+        </Grid>
+
         <div className={classes.postBody}>
           <Markdown source={postData?.content} />
         </div>
-        <Grid container>
+        <Grid container justify="center" style={{ marginTop: '100px' }}>
           <NewsLetterSignup />
         </Grid>
       </Grid>

@@ -43,7 +43,9 @@ export default function BodyText({
   return (
     <span onClick={onClick} onMouseDown={onMouseDown}>
       <Typography variant="body1" component="span" className={classes.root}>
-        {iconLeft && <FaArrowLeft className={classes.icon} />}
+        {iconLeft && (
+          <FaArrowLeft className={classes.icon} style={{ marginLeft: '0px' }} />
+        )}
 
         {children}
         {icon && <FaArrowRight className={classes.icon} />}

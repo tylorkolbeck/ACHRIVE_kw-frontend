@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles(({ palette, props }) => ({
+const useStyles = makeStyles(({ palette, fontSize }) => ({
   root: {
     color: ({ color }) => {
       if (color) {
@@ -12,12 +12,19 @@ const useStyles = makeStyles(({ palette, props }) => ({
       }
     },
     marginBottom: '10px',
-    fontSize: '16px'
+    fontSize: ({ fontSize }) => {
+      if (fontSize) {
+        return fontSize
+      } else {
+        return '16px'
+      }
+    },
+    lineHeight: ({ lineHeight }) => (lineHeight ? lineHeight : 'inherit')
   }
 }))
 
-export default function BodyText({ children, color }) {
-  const classes = useStyles({ color })
+export default function BodyText({ children, color, fontSize, lineHeight }) {
+  const classes = useStyles({ color, fontSize, lineHeight })
   return (
     <Typography variant="body1" className={classes.root}>
       {children}
