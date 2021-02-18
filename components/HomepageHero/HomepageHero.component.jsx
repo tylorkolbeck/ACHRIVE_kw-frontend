@@ -48,7 +48,7 @@ export default function HomepageHero() {
   const classes = useStyles()
   return (
     <Grid container className={classes.hero} spacing={5}>
-      <Grid item xs={12} sm={8}>
+      <Grid item xs={12} md={12} lg={8}>
         <Grid container direction="column">
           <Grid item>
             <Typography variant="h1" className={classes.heroTitle}>
@@ -63,7 +63,7 @@ export default function HomepageHero() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} md={12} lg={4}>
         <Grid
           container
           direction="column"
@@ -79,12 +79,22 @@ export default function HomepageHero() {
                   AI and expert chart analysis.
                 </BodyText>
               </Grid>
-              <Grid item className={classes.CTA}>
+              <Grid item xs={12} className={classes.CTA}>
                 <Link href="/products">
                   <div>
-                    <TextLink icon color="#52c4ed">
-                      View Strategies
-                    </TextLink>
+                    <Button
+                      variant="contained"
+                      style={{
+                        color: '#eee',
+                        background: '#52c4ed',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      View Products
+                    </Button>
+                    {/* <TextLink icon color="#52c4ed">
+                      View Products
+                    </TextLink> */}
                   </div>
                 </Link>
               </Grid>

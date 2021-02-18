@@ -7,6 +7,7 @@ import BulletItem from '../../components/Typography/BulletItem/BulletItem.compon
 const useStyles = makeStyles((theme) => {
   return {
     markdownStyling: {
+      position: 'relative',
       '& img': {
         maxWidth: '100%'
       },

@@ -3,7 +3,6 @@ import { getAllPostsIds, getPostData } from '../../lib/posts'
 import Seo from '../../components/seo/seo.component'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Image from '../../components/image/image.component'
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import BackButton from '../../components/BackButton/BackButton.component'
@@ -50,11 +49,14 @@ const useStyles = makeStyles((theme) => {
       color: theme.palette.type === 'light' ? 'rgba(0,0,0,.8)' : 'white'
     },
     imageWrapper: {
-      borderRadius: '4px',
-      '& img': {
-        maxWidth: '100%',
-        width: '100%'
-      }
+      width: '100%',
+      position: 'relative'
+    },
+    fixedRatio: {
+      paddingTop: '56.25%' /* 16:9 ratio */,
+      backgroundSize: 'cover',
+      '-moz-background-size': 'cover' /* Firefox 3.6 */,
+      backgroundPosition: 'center' /* Internet Explorer 7/8 */
     }
   }
 })
@@ -85,7 +87,10 @@ export default function Article({ postData }) {
             <BodyText>{description}</BodyText>
           </Grid>
           <Grid item className={classes.imageWrapper}>
-            <Image image={image} style={{ maxWidth: '100%' }}></Image>
+            <div
+              className={classes.fixedRatio}
+              style={{ backgroundImage: `url(${image?.url})` }}
+            ></div>
           </Grid>
         </Grid>
         <AuthorInfo

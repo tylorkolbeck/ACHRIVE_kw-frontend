@@ -4,7 +4,7 @@ import Carousel from 'react-material-ui-carousel'
 import { Paper, Grid, Typography } from '@material-ui/core'
 import withWidth from '@material-ui/core/withWidth'
 import Link from 'next/link'
-import Button from '../UI/Button.component'
+import TextLink from '../Typography/TextLink/TextLink.component'
 
 const breakpoints = {
   xs: 'xs',
@@ -142,16 +142,16 @@ function CarouselElement({ data, width, interval }) {
                       <div
                         style={{
                           display: 'flex',
-                          marginTop: '20px'
-
-                          // justifyContent: 'flex-end'
+                          marginTop: '20px',
+                          textShadow: '1px 1px #363636',
+                          fontWeight: 'bold',
+                          fontSize: '16px'
                         }}
                       >
-                        <Button>LEARN MORE</Button>
+                        <TextLink icon color="white">
+                          LEARN MORE
+                        </TextLink>
                       </div>
-                      {/* <Typography variant="caption" className={classes.link}>
-                        LEARN MORE
-                      </Typography> */}
                     </div>
                   </Paper>
                 </a>

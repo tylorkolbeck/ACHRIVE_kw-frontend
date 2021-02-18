@@ -39,6 +39,7 @@ export default function BodyText({
   color
 }) {
   const classes = useStyles({ color })
+
   return (
     <span onClick={onClick} onMouseDown={onMouseDown}>
       <Typography variant="body1" component="span" className={classes.root}>
