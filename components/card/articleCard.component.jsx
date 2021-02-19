@@ -70,9 +70,9 @@ const ArticleCard = ({ article, image, authorName, category, description }) => {
         <Grid container direction="column">
           <Grid item>
             {category && (
-              <Link href={`/category/${category}`}>
+              <Link href={`/category/${category.slug}`}>
                 <a>
-                  <CategoryChip>{category}</CategoryChip>
+                  <CategoryChip>{category.name}</CategoryChip>
                 </a>
               </Link>
             )}

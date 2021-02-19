@@ -48,7 +48,7 @@ export default function Category({ categoryData, authors, categories }) {
                     <ArticleCard
                       article={article}
                       noCategory
-                      category={category?.name}
+                      category={category}
                       image={article?.image}
                       description={article.description}
                       authorName={author?.name ? author?.name : 'Faceless Man'}
