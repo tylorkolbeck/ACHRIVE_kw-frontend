@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactPlayer from 'react-player'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import BackButton from '../../components/BackButton/BackButton.component'
@@ -18,17 +17,26 @@ const useStyles = makeStyles((theme) => {
     },
     content: {
       maxWidth: theme.custom.screen.maxWidth,
-      margin: '0px auto',
+      // margin: '0px auto',
       padding: theme.custom.screen.bodyPadding
     },
     marginBottomMd: {
       marginBottom: theme.spacing(3)
     },
     videoWrapper: {
-      position: 'relative'
-    },
-    videoPlayer: {
-      position: 'absolute'
+      position: 'relative',
+      overflow: 'hidden',
+      width: '100%',
+      paddingTop: '56.25%' /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */,
+      '& iframe': {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: '100%',
+        height: '100%'
+      }
     }
   }
 })
@@ -50,23 +58,17 @@ export default function Video({ videoData }) {
             <SectionHeader>{title}</SectionHeader>
             <BodyText>{description}</BodyText>
           </Grid>
-          <Grid item className={classes.videoWrapper} xs={12}>
-            <ReactPlayer
-              className={classes.videoPlayer}
-              controls={true}
-              width="100%"
-              height="100%"
-              style={{
-                maxHeight: '360px',
-                maxWidth: '640px'
-              }}
-              url={`${API_URL}${video.url}`}
-            />
+          <Grid item xs={12}>
+            <div className={classes.videoWrapper}>
+              <div dangerouslySetInnerHTML={{ __html: video }} />
+            </div>
           </Grid>
         </Grid>
-        {/* <Grid container>
+      </Grid>
+      <Grid container className={classes.content}>
+        <Grid item>
           <NewsLetterSignup />
-        </Grid> */}
+        </Grid>
       </Grid>
     </Grid>
   )
