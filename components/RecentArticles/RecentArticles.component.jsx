@@ -19,7 +19,7 @@ export default function RecentArticles({ articles }) {
               article={article}
               authorName={article?.author?.name}
               key={`article__link__${article.slug}`}
-              category={article?.category?.name}
+              category={article?.category}
               description={`${article?.description?.slice(0, 100)}...`}
             />
           </Grid>

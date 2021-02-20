@@ -50,12 +50,20 @@ export default function Articles({ articles }) {
       const categoryName = article?.category?.name
         ? article?.category?.name
         : 'Misc'
-      if (!categoryData.includes(categoryName)) {
-        categoryData.push(categoryName)
+      const categorySlug = article.category.slug
+
+      if (
+        !categoryData.some((category) => category.categoryName === categoryName)
+      ) {
+        categoryData.push({
+          categoryName: categoryName,
+          categorySlug: categorySlug
+        })
       }
+
       articleData.push({
         ...article,
-        category: categoryName
+        category: { name: categoryName, slug: categorySlug }
       })
     })
     setArticlesState(articleData)
@@ -72,10 +80,10 @@ export default function Articles({ articles }) {
           <Grid item xs={12} sm={12} md={2} className={classes.leftNav}>
             <SectionHeader>Categories</SectionHeader>
             {categoryState.map((category) => (
-              <div className={classes.categoryLink} key={category}>
-                <Link href={`/category/${category}`}>
+              <div className={classes.categoryLink} key={category.categoryName}>
+                <Link href={`/category/${category.categorySlug}`}>
                   <div>
-                    <TextLink>{category.toUpperCase()}</TextLink>
+                    <TextLink>{category.categoryName.toUpperCase()}</TextLink>
                   </div>
                 </Link>
               </div>
