@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => {
 export default function Video({ videoData }) {
   const classes = useStyles()
   const { title, category, description, content } = videoData
-  const oembed = videoData ? JSON.parse(videoData.oembed) : null
+  const oembed = videoData?.oembed ? JSON.parse(videoData.oembed) : {}
 
   return (
     <Grid container className={classes.root}>
@@ -60,7 +60,9 @@ export default function Video({ videoData }) {
           </Grid>
           <Grid item xs={12}>
             <div className={classes.videoWrapper}>
-              <div dangerouslySetInnerHTML={{ __html: oembed.rawData.html }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: oembed?.rawData?.html }}
+              />
             </div>
           </Grid>
           <Grid item style={{ marginTop: '20px' }} xs></Grid>
@@ -86,6 +88,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const videoData = await getVideoData(params.slug)
+  console.log('>>>>', videoData)
   return {
     props: {
       videoData
