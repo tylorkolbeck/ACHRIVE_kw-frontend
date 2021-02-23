@@ -88,7 +88,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const videoData = await getVideoData(params.slug)
-  console.log('>>>>', videoData)
+
   return {
     props: {
       videoData
