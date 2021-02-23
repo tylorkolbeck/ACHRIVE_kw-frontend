@@ -23,5 +23,6 @@
     "react-material-ui-carousel": "^2.1.2",
     "react-moment": "^1.1.1",
     "sass": "^1.32.5"
-  }
+  },
+  "devDependencies": {}
 }

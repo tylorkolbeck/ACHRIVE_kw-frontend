@@ -10,6 +10,7 @@ import CategoryChip from '../../components/Typography/CategoryChip/CategoryChip.
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import Markdown from '../../components/Markdown/Markdown.component'
+import Description from '../../components/Description/Description.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -99,10 +100,8 @@ export default function Article({ postData }) {
           published={postData?.updated_at}
           divider
         />
-        <Grid item style={{ marginTop: '20px' }}>
-          <BodyText fontSize="20px" color="grey">
-            {description}
-          </BodyText>
+        <Grid item>
+          <Description>{description}</Description>
         </Grid>
 
         <div className={classes.postBody}>

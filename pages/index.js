@@ -68,7 +68,8 @@ const Home = ({
   homepage,
   global,
   carouselData,
-  carouselTimer
+  carouselTimer,
+  videoData
 }) => {
   const classes = useStyles()
   const { userState } = userContext()
@@ -94,7 +95,12 @@ const Home = ({
                   <NewsLetterSignup />
                 </Grid>
               )}
-              <Videos />
+
+              {videoData?.length > 0 ? (
+                <Videos videoData={videoData} />
+              ) : (
+                'No Videos have been added...'
+              )}
             </Grid>
 
             <Grid item xs={12} sm={6} md={4}>
@@ -157,7 +163,8 @@ export async function getStaticProps() {
     categories,
     authors,
     carouselData,
-    carouselTimer
+    carouselTimer,
+    videoData
   ] = await Promise.all([
     getSortedPostsData(5),
     fetchAPI('/global'),
@@ -165,7 +172,8 @@ export async function getStaticProps() {
     fetchAPI('/categories'),
     fetchAPI('/writers'),
     fetchAPI('/carousels'),
-    fetchAPI('/carousel-timer')
+    fetchAPI('/carousel-timer'),
+    fetchAPI('/videos')
   ])
 
   return {
@@ -176,7 +184,8 @@ export async function getStaticProps() {
       categories,
       authors,
       carouselData,
-      carouselTimer
+      carouselTimer,
+      videoData
     },
     revalidate: 1
   }

@@ -15,8 +15,7 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
-  Divider
+  Button
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'

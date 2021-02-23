@@ -4,42 +4,7 @@ import { Grid, Typography } from '@material-ui/core'
 import { FaPlay } from 'react-icons/fa'
 import Link from 'next/link'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
-import CaptionText from '../Typography/CaptionText/CaptionText.component'
-
-const videos = [
-  {
-    id: 1,
-    image:
-      'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80',
-    title: 'Potential Outcomes For Bitcoin in 2021!',
-    author: 'Dylan Shively',
-    date: 'September 14, 2020'
-  },
-  {
-    id: 2,
-    image:
-      'https://images.unsplash.com/photo-1591994843349-f415893b3a6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80',
-    title: 'Potential Outcomes For Bitcoin in 2021!',
-    author: 'Dylan Shively',
-    date: 'September 14, 2020'
-  },
-  {
-    id: 3,
-    image:
-      'https://images.unsplash.com/photo-1516245834210-c4c142787335?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2549&q=80',
-    title: 'Potential Outcomes For Bitcoin in 2021!',
-    author: 'Dylan Shively',
-    date: 'September 14, 2020'
-  },
-  {
-    id: 4,
-    image:
-      'https://images.unsplash.com/photo-1600275411995-66b1d2a79fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80',
-    title: 'Potential Outcomes For Bitcoin in 2021!',
-    author: 'Dylan Shively',
-    date: 'September 14, 2020'
-  }
-]
+import BodyText from '../Typography/BodyText/BodyText.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,12 +16,24 @@ const useStyles = makeStyles((theme) => ({
 
   videoImage: {
     position: 'relative',
-    marginBottom: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      height: '25vw'
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: '50vw'
+    overflow: 'hidden',
+    width: '100%',
+    paddingTop: '56.25%' /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  },
+  videoBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: '100%',
+    height: '100%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+
+    '&:hover': {
+      cursor: 'pointer'
     }
   },
   videoAuthor: {
@@ -65,32 +42,22 @@ const useStyles = makeStyles((theme) => ({
   date: {
     marginLeft: theme.spacing(2)
   },
-  videoBackground: {
-    borderRadius: '4px',
-    '&:hover': {
-      cursor: 'pointer',
-      '&:after': {
-        background: 'none',
-        background: theme.palette.secondary.dark,
-        opacity: '0.3'
-      }
-    },
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: '100%',
-    width: '100%'
-  },
+
   playButton: {
-    padding: '20px',
-    paddingBottom: '15px',
+    lineHeight: '110px',
+    height: '100px',
+    width: '100px',
     background: theme.palette.secondary.main,
     color: 'white',
     position: 'absolute',
-    right: '0px',
-    bottom: '0px',
-    fontSize: '20px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: '40px',
     textAlign: 'center',
+    borderRadius: '10px',
+    boxShadow: '4px 4px 2px rgba(0,0,0,.5)',
+
     '&:hover': {
       cursor: 'pointer',
       background: theme.palette.secondary.light
@@ -98,31 +65,40 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Videos() {
+export default function Videos({ videoData }) {
   const classes = useStyles()
   return (
-    <Link href={`video/video-slug`}>
-      <div className={classes.root}>
-        {videos.map((video) => (
+    <div className={classes.root}>
+      {videoData.map((video) => {
+        const oembed = video.oembed ? JSON.parse(video.oembed) : null
+
+        return (
           <Grid
             container
             direction="column"
             className={classes.videoCard}
             key={video.id}
           >
-            <Grid item className={classes.videoImage}>
-              <div
-                className={classes.videoBackground}
-                style={{
-                  backgroundImage: `url(${video.image})`
-                }}
-              ></div>
-              <div className={classes.playButton}>
-                <FaPlay />
-              </div>
-            </Grid>
-            <Grid item>
-              <SectionHeader>{video.title}</SectionHeader>
+            <Link href={`/video/${video.slug}`}>
+              <Grid item className={classes.videoImage}>
+                <div
+                  className={classes.videoBackground}
+                  style={{
+                    backgroundImage: `url(${oembed.thumbnail})`
+                  }}
+                ></div>
+                <div className={classes.playButton}>
+                  <FaPlay />
+                </div>
+              </Grid>
+            </Link>
+            <Grid item style={{ marginTop: '20px' }}>
+              <Link href={`/video/${video.slug}`}>
+                <a>
+                  <SectionHeader>{video.title}</SectionHeader>
+                </a>
+              </Link>
+              <BodyText>{video.description}</BodyText>
             </Grid>
             <Grid item>
               <Grid
@@ -131,19 +107,16 @@ export default function Videos() {
                 justify="flex-start"
                 alignItems="flex-end"
               >
-                <Link href="/">
-                  <a>
-                    <CaptionText>{video.author}</CaptionText>
-                  </a>
-                </Link>
-                <Typography variant="caption" className={classes.date}>
-                  {video.date}
-                </Typography>
+                {video.date && (
+                  <Typography variant="caption" className={classes.date}>
+                    {video.date}
+                  </Typography>
+                )}
               </Grid>
             </Grid>
           </Grid>
-        ))}
-      </div>
-    </Link>
+        )
+      })}
+    </div>
   )
 }
