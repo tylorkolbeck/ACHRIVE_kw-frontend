@@ -34,10 +34,14 @@ const useStyles = makeStyles((theme) => {
         overflow: 'hidden',
         width: '100%',
         paddingTop: '56.25%' /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+      },
+      '& li': {
+        fontSize: '18px',
+        lineHeight: '34px'
       }
     },
     orderedList: {
-      fontSize: '1rem'
+      fontSize: '18px'
     }
   }
 })
@@ -48,14 +52,14 @@ export default function Markdown({ source }) {
   const renderers = {
     paragraph: ({ children }) => {
       return (
-        <BodyText fontSize="18px" lineHeight="30px">
+        <BodyText fontSize="18px" lineHeight="34px">
           {children}
         </BodyText>
       )
     },
     link: ({ href, children }) => {
       return (
-        <a href={href} style={{ color: 'dodgerblue' }}>
+        <a href={href} target="_blank" style={{ color: 'dodgerblue' }}>
           {children}
         </a>
       )
@@ -63,7 +67,10 @@ export default function Markdown({ source }) {
     list: ({ ordered, children }) => {
       if (!ordered) {
         return children.map((item, index) => (
-          <BulletItem style={{ paddingLeft: '20px' }} key={index}>
+          <BulletItem
+            style={{ paddingLeft: '20px', lineHeight: '34px' }}
+            key={index}
+          >
             {item}
           </BulletItem>
         ))

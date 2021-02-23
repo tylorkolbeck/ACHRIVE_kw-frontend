@@ -121,13 +121,13 @@ export default function GettingStarted({ productData, stepData }) {
                       {/* <BodyText>{step.instructions}</BodyText> */}
                       <Markdown source={step?.instructions} />
                       {step?.externalLink && (
-                        <Link href={step?.externalLink?.url}>
+                        <a href={step?.externalLink?.url} target="_blank">
                           <div>
                             <TextLink icon>
                               {step?.externalLink?.displayText}
                             </TextLink>
                           </div>
-                        </Link>
+                        </a>
                       )}
                     </Grid>
                   </Grid>
