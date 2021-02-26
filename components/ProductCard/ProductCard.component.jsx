@@ -162,7 +162,12 @@ export default function ProductCard({
             <SectionHeader>{name}</SectionHeader>
 
             <Grid item>
-              {price && <span className={classes.price}>${price}</span>}
+              {price ? price : null}
+              {/* {price ? (
+                <span className={classes.price}>${price}</span>
+              ) : (
+                <span className={classes.price}>Free</span>
+              )} */}
             </Grid>
           </Grid>
 

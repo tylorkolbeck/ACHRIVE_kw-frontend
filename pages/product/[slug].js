@@ -60,7 +60,11 @@ export default function Product({ productData }) {
             name={name}
             description={description?.slice(0, 250)}
             productType={productType}
-            price={price}
+            price={
+              <span style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                {price ? `$${price}` : 'Free'}
+              </span>
+            }
             recommendedBalance={recommendedBalance}
             automated={automated}
             riskLevel={riskLevel}

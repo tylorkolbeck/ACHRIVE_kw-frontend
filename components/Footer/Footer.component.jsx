@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { Grid, Typography } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
-import BodyText from '../../components/Typography/BodyText/BodyText.component'
-import TextLink from '../../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles((theme) => {
   return {
