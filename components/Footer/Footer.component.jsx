@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => {
     },
     link: {
       marginRight: theme.spacing(2),
-      color: theme.custom.color.teal
+      color: 'white'
     },
     caption: {
       marginTop: theme.spacing(10)
