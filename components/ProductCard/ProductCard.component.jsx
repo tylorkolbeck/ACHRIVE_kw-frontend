@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper } from '@material-ui/core'
 
 import Link from 'next/link'
@@ -10,9 +10,10 @@ import TextLink from '../Typography/TextLink/TextLink.component'
 const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
   const cardImageBackgrounds = {
     strategy: '#005079',
-    signal: '#415A63',
-    trend: '#4683A3',
-    template: '#53C4ED'
+    signal: '#004ea8',
+    trend: '#0089ff',
+    template: '#53c4ed',
+    aiconfiguration: '#5C9FEB'
   }
   return {
     root: {
@@ -46,8 +47,12 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       bottom: 0,
       right: 0,
       left: -40,
-      opacity: '.2',
-      background: 'url(/images/whale_white.png)'
+      opacity: '.1',
+      background: 'url(/images/kw_logo_white.png)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: '200px',
+      transform: 'rotate(-30deg)'
     },
     productImage: {
       borderRadius: '20px',
@@ -131,8 +136,14 @@ export default function ProductCard({
             className={classes.productImage}
           >
             <Grid item className={classes.productImage_header}>
-              <span className={classes.bold}>Killer</span>
-              <span>whale</span>
+              <div>
+                <img
+                  src="/images/kw_logo.png"
+                  style={{ height: '15px', marginRight: '10px' }}
+                ></img>
+                <span className={classes.bold}>Killer</span>
+                <span>whale</span>
+              </div>
             </Grid>
             <Grid item>
               <div className={classes.productImage_backgroundWhale}></div>
@@ -148,7 +159,7 @@ export default function ProductCard({
 
         <Grid item xs={12} sm={12} md className={classes.productInfo}>
           <Grid container justify="space-between">
-            <SectionHeader>{name} </SectionHeader>
+            <SectionHeader>{name}</SectionHeader>
 
             <Grid item>
               {price && <span className={classes.price}>${price}</span>}

@@ -215,7 +215,7 @@ export default function Nav({ toggleDarkMode }) {
               <Link href="/">
                 <div style={{ padding: '10px' }}>
                   <img
-                    src="/kw_logo_teal.png"
+                    src="/images/kw_logo.png"
                     width="100px"
                     className={classes.navLogo}
                   />
@@ -231,7 +231,7 @@ export default function Nav({ toggleDarkMode }) {
                   >
                     Killer
                   </span>
-                  <span style={{ fontWeight: '400' }}>whale</span>
+                  <span style={{ fontWeight: '400' }}>Whale</span>
                 </div>
               </Link>
             </div>
