@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(2)
     },
     IconRound: {
-      background: theme.custom.color.green,
+      background: theme.palette.secondary.main,
       borderRadius: '50%',
       height: '50px',
       width: '50px',

@@ -37,8 +37,6 @@ const useStyles = makeStyles((theme) => {
       backgroundPosition: 'center center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      // backgroundImage:
-      //   'linear-gradient(to right top, #0d46a0, #0a3c94, #073388, #03297d, #002071)',
       color: 'white'
     },
     Carousel: {
