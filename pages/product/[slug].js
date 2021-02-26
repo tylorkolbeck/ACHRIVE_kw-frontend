@@ -2,11 +2,9 @@ import React from 'react'
 import { getProductIds, getProductData } from '../../lib/products'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
-import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import Markdown from '../../components/Markdown/Markdown.component'
 
 const useStyles = makeStyles((theme) => {
@@ -16,7 +14,8 @@ const useStyles = makeStyles((theme) => {
       margin: '0px auto',
       padding: theme.spacing(3),
       position: 'relative',
-      marginBottom: '500px'
+      marginBottom: '500px',
+      paddingTop: 100
     },
     section: {
       marginBottom: theme.spacing(5),
@@ -49,10 +48,10 @@ export default function Product({ productData }) {
 
   return (
     <div>
-      <PageHeader
+      {/* <PageHeader
         title="Killer Whale Premium Signal"
         subTitle="The Easist way to invest in crypto, wth great returns"
-      />
+      /> */}
 
       <div className={classes.root}>
         <BackButton />
