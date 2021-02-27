@@ -12,6 +12,7 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "fuse.js": "^6.4.6",
+    "globby": "^11.0.2",
     "js-cookie": "^2.2.1",
     "luxon": "^1.25.0",
     "moment": "^2.29.1",
