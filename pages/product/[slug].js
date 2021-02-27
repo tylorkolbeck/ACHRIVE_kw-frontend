@@ -2,11 +2,9 @@ import React from 'react'
 import { getProductIds, getProductData } from '../../lib/products'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
-import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import Markdown from '../../components/Markdown/Markdown.component'
 
 const useStyles = makeStyles((theme) => {
@@ -16,7 +14,8 @@ const useStyles = makeStyles((theme) => {
       margin: '0px auto',
       padding: theme.spacing(3),
       position: 'relative',
-      marginBottom: '500px'
+      paddingTop: 100,
+      maxWidth: '800px'
     },
     section: {
       marginBottom: theme.spacing(5),
@@ -49,10 +48,10 @@ export default function Product({ productData }) {
 
   return (
     <div>
-      <PageHeader
+      {/* <PageHeader
         title="Killer Whale Premium Signal"
         subTitle="The Easist way to invest in crypto, wth great returns"
-      />
+      /> */}
 
       <div className={classes.root}>
         <BackButton />
@@ -61,7 +60,11 @@ export default function Product({ productData }) {
             name={name}
             description={description?.slice(0, 250)}
             productType={productType}
-            price={price}
+            price={
+              <span style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                {price ? `$${price}` : 'Free'}
+              </span>
+            }
             recommendedBalance={recommendedBalance}
             automated={automated}
             riskLevel={riskLevel}
@@ -73,11 +76,11 @@ export default function Product({ productData }) {
           {/* PRODUCT FEATURES */}
           {features && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Features</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={features} />
               </Grid>
             </Grid>
@@ -85,11 +88,11 @@ export default function Product({ productData }) {
           {/* PRODUCT REQUIREMENTS */}
           {productData?.requirements && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Requirements</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={requirements} />
               </Grid>
             </Grid>
@@ -97,11 +100,11 @@ export default function Product({ productData }) {
           {/* PRODUCT SETUP */}
           {productData?.setup && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Setup</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={setup} />
               </Grid>
             </Grid>

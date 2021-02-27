@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   menuButtonLink: {
     marginRight: theme.spacing(2),
     display: 'inline-block',
-    fontSize: '18px',
+    fontSize: '16px',
     '&:hover': {
       cursor: 'pointer',
       color: theme.custom.color.teal
@@ -76,10 +76,10 @@ const useStyles = makeStyles((theme) => ({
   navLogo: {
     height: ({ logoHeight }) => logoHeight,
     width: 'auto',
-    maxHeight: '60px'
+    maxHeight: '40px'
   },
   logoText: {
-    fontSize: '32px',
+    fontSize: '24px',
     [theme.breakpoints.down('sm')]: {
       fontSize: '24px'
     }
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Nav({ toggleDarkMode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [logoHeight, setLogoHeight] = React.useState(50)
+  const [logoHeight, setLogoHeight] = React.useState(40)
   const classes = useStyles({ logoHeight })
   const router = useRouter()
 
@@ -106,7 +106,7 @@ export default function Nav({ toggleDarkMode }) {
 
   function handleScroll() {
     let scrollTop = window.scrollY,
-      minHeight = 50,
+      minHeight = 40,
       logoHeight = Math.max(minHeight, 100 - scrollTop)
 
     setLogoHeight(logoHeight)
@@ -215,7 +215,7 @@ export default function Nav({ toggleDarkMode }) {
               <Link href="/">
                 <div style={{ padding: '10px' }}>
                   <img
-                    src="/kw_logo_teal.png"
+                    src="/images/kw_logo.png"
                     width="100px"
                     className={classes.navLogo}
                   />
@@ -231,7 +231,7 @@ export default function Nav({ toggleDarkMode }) {
                   >
                     Killer
                   </span>
-                  <span style={{ fontWeight: '400' }}>whale</span>
+                  <span style={{ fontWeight: '400' }}>Whale</span>
                 </div>
               </Link>
             </div>

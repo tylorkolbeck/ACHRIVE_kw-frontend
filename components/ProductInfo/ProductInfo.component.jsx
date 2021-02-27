@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => {
     root: {},
     IconRound: {
       // background: theme.palette.secondary.light,
-      background: '#14c07b',
+      background: theme.palette.secondary.main,
       borderRadius: '50%',
       height: '50px',
       width: '50px',

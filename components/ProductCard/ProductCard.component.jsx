@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper } from '@material-ui/core'
 
 import Link from 'next/link'
@@ -10,9 +10,19 @@ import TextLink from '../Typography/TextLink/TextLink.component'
 const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
   const cardImageBackgrounds = {
     strategy: '#005079',
-    signal: '#415A63',
-    trend: '#4683A3',
-    template: '#53C4ED'
+    signal: '#004ea8',
+    trend: '#0089ff',
+    template: '#53c4ed',
+    aiconfiguration: '#5C9FEB'
+  }
+
+  const cardDimensions = {
+    height: '150px',
+    width: '150px',
+    minHeight: '150px',
+    minWidth: '150px',
+    maxWidth: '150px',
+    maxHeight: '150px'
   }
   return {
     root: {
@@ -21,12 +31,7 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
     },
     productImage_wrapper: {
       position: 'relative',
-      width: '200px',
-      height: '200px',
-      minWidth: '200px',
-      minHeight: '200px',
-      maxWidth: '200px',
-      maxHeigt: '200px',
+      ...cardDimensions,
       background: '#53C4ED',
       background: ({ props }) => {
         const productType = props?.productType?.toLowerCase()
@@ -46,8 +51,12 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       bottom: 0,
       right: 0,
       left: -40,
-      opacity: '.2',
-      background: 'url(/images/whale_white.png)'
+      opacity: '.1',
+      background: 'url(/images/kw_logo_white.png)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: '150px',
+      transform: 'rotate(-30deg)'
     },
     productImage: {
       borderRadius: '20px',
@@ -59,7 +68,7 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       borderRadius: '20px 20px 0px 0px',
       padding: spacing(1),
       paddingLeft: spacing(2),
-      fontSize: '18px'
+      fontSize: '16px'
     },
     productImage_footer: {
       padding: spacing(1),
@@ -121,7 +130,7 @@ export default function ProductCard({
   })
 
   return (
-    <Paper className={classes.root}>
+    <Grid className={classes.root}>
       <Grid container>
         <Grid item xs={12} sm={12} md className={classes.productImage_wrapper}>
           <Grid
@@ -131,15 +140,23 @@ export default function ProductCard({
             className={classes.productImage}
           >
             <Grid item className={classes.productImage_header}>
-              <span className={classes.bold}>Killer</span>
-              <span>whale</span>
+              <div>
+                <img
+                  src="/images/kw_logo.png"
+                  style={{ height: '15px', marginRight: '10px' }}
+                ></img>
+                <span className={classes.bold}>Killer</span>
+                <span>whale</span>
+              </div>
             </Grid>
             <Grid item>
               <div className={classes.productImage_backgroundWhale}></div>
             </Grid>
             <Grid item className={classes.productImage_footer}>
-              <Grid item>{name}</Grid>
-              <Grid item style={{ fontSize: '14px' }}>
+              <Grid item style={{ fontSize: '16px' }}>
+                {name}
+              </Grid>
+              <Grid item style={{ fontSize: '14px', fontWeight: '400' }}>
                 {productType?.toUpperCase()}
               </Grid>
             </Grid>
@@ -148,10 +165,15 @@ export default function ProductCard({
 
         <Grid item xs={12} sm={12} md className={classes.productInfo}>
           <Grid container justify="space-between">
-            <SectionHeader>{name} </SectionHeader>
+            <SectionHeader>{name}</SectionHeader>
 
             <Grid item>
-              {price && <span className={classes.price}>${price}</span>}
+              {price ? price : null}
+              {/* {price ? (
+                <span className={classes.price}>${price}</span>
+              ) : (
+                <span className={classes.price}>Free</span>
+              )} */}
             </Grid>
           </Grid>
 
@@ -211,6 +233,6 @@ export default function ProductCard({
           )}
         </Grid>
       </Grid>
-    </Paper>
+    </Grid>
   )
 }

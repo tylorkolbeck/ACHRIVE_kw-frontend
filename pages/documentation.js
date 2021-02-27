@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { getAllCategoryNames, getArticlesByCategory } from '../../lib/category'
-import ArticleCard from '../../components/card/articleCard.component'
-import { fetchAPI } from '../../lib/api'
-import PageHeader from '../../components/Typography/PageHeader/PageHeader.component'
-import BackButton from '../../components/BackButton/BackButton.component'
+import { getAllCategoryNames, getArticlesByCategory } from '../lib/category'
+import ArticleCard from '../components/card/articleCard.component'
+import { fetchAPI } from '../lib/api'
+import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
+import BackButton from '../components/BackButton/BackButton.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +31,7 @@ export default function Category({ categoryData, authors, categories }) {
 
         <Grid container direction="column">
           {articles &&
-            articles.reverse().map((article) => {
+            articles.map((article) => {
               const author = authors.find(
                 (author) => author.id === article.author
               )
@@ -73,7 +73,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const categoryArticles = await getArticlesByCategory(params.category)
+  const categoryArticles = await getArticlesByCategory('documentation')
   const authors = await fetchAPI('/writers')
   const categories = await fetchAPI('/categories')
 
