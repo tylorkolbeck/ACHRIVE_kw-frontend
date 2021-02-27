@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import { fetchAPI } from '../lib/api'
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,6 +8,7 @@ import PageHeader from '../components/Typography/PageHeader/PageHeader.component
 import Link from 'next/link'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
+import Button from '../components/UI/Button.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,12 +42,18 @@ export default function Articles({ articles }) {
   const classes = useStyles()
   const [categoryState, setCategoryState] = useState([])
   const [articleState, setArticlesState] = useState([])
+  const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(false)
 
   React.useEffect(() => {
+    renderArticleData(articles)
+  }, [articles])
+
+  const renderArticleData = (articlesData) => {
     const categoryData = []
     const articleData = []
 
-    articles.forEach((article) => {
+    articlesData.forEach((article) => {
       const categoryName = article?.category?.name
         ? article?.category?.name
         : 'Misc'
@@ -68,7 +75,26 @@ export default function Articles({ articles }) {
     })
     setArticlesState(articleData)
     setCategoryState(categoryData)
-  }, [articles])
+  }
+
+  const handleSearchInput = (e) => {
+    const input = e.target.value
+    setSearch(input)
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const searchResults = await fetchAPI(`/articles?title_contains=${search}`)
+    if (searchResults.length < 0) {
+      setLoading(false)
+      alert('no results')
+    } else {
+      renderArticleData(searchResults)
+      setLoading(false)
+    }
+  }
+
   return (
     <div>
       <PageHeader
@@ -76,6 +102,29 @@ export default function Articles({ articles }) {
         subTitle="Browse articles for insight from our expert chart analysis and predictions"
       />
       <div className={classes.root}>
+        <form onSubmit={handleFormSubmit}>
+          <Grid item xs={12}>
+            <Grid container direction="row" wrap="nowrap" alignItems="center">
+              <TextField
+                variant="outlined"
+                label="Search Articles"
+                style={{ width: '100%' }}
+                value={search}
+                disabled={loading}
+                onChange={handleSearchInput}
+              />
+              <Button
+                type="button"
+                variant="contained"
+                size="large"
+                disabled={loading}
+                onClick={handleFormSubmit}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
         <Grid container direction="row" spacing={3}>
           <Grid item xs={12} sm={12} md={2} className={classes.leftNav}>
             <SectionHeader>Categories</SectionHeader>
