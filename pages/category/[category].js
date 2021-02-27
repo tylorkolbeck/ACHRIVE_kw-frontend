@@ -31,7 +31,7 @@ export default function Category({ categoryData, authors, categories }) {
 
         <Grid container direction="column">
           {articles &&
-            articles.map((article) => {
+            articles.reverse().map((article) => {
               const author = authors.find(
                 (author) => author.id === article.author
               )
