@@ -24,7 +24,7 @@ export default function Footer() {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <Grid container alignItems="space-between">
+      <Grid container>
         <Grid item sm={6}>
           <Grid container style={{ marginBottom: '20px' }}>
             <Grid item xs={12}>

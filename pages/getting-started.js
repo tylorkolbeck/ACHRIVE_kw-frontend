@@ -95,8 +95,7 @@ export default function GettingStarted({ productData, stepData }) {
     <>
       <PageHeader
         title="Getting Started Is Easy"
-        subTitle="Subtitle Information here, this is further teaser text or TLDR
-                info to keep the user interested."
+        subTitle="Follow these simple steps to get started on your journey"
       />
       <div className={classes.root}>
         <Grid container direction="row" spacing={3}>

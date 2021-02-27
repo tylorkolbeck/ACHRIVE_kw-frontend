@@ -71,6 +71,7 @@ const Home = ({
 }) => {
   const classes = useStyles()
   const { userState } = userContext()
+  console.log(homepage)
 
   return (
     <Grid container className={classes.root} direction="column">

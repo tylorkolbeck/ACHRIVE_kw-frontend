@@ -133,6 +133,9 @@ export default function Markdown({ source }) {
         return <ol className={classes.orderedList}>{children}</ol>
       }
     },
+    code: ({ value }) => {
+      return <BodyText className={classes.code}>{value}</BodyText>
+    },
     image: (props) => {
       return (
         <img

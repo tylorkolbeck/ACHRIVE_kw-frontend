@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => {
       margin: '0px auto',
       padding: theme.spacing(3),
       position: 'relative',
-      marginBottom: '500px',
-      paddingTop: 100
+      paddingTop: 100,
+      maxWidth: '800px'
     },
     section: {
       marginBottom: theme.spacing(5),
@@ -76,11 +76,11 @@ export default function Product({ productData }) {
           {/* PRODUCT FEATURES */}
           {features && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Features</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={features} />
               </Grid>
             </Grid>
@@ -88,11 +88,11 @@ export default function Product({ productData }) {
           {/* PRODUCT REQUIREMENTS */}
           {productData?.requirements && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Requirements</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={requirements} />
               </Grid>
             </Grid>
@@ -100,11 +100,11 @@ export default function Product({ productData }) {
           {/* PRODUCT SETUP */}
           {productData?.setup && (
             <Grid container className={classes.section}>
-              <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+              <Grid item xs={12} className={classes.columnOne}>
                 <SectionHeader>Setup</SectionHeader>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={9}>
+              <Grid item xs={12}>
                 <Markdown source={setup} />
               </Grid>
             </Grid>

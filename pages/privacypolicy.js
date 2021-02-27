@@ -386,7 +386,6 @@ This privacy policy was created using [Termly's Privacy Policy Generator](https:
 export default function PrivacyPolicy() {
   const renderers = {
     link: (props) => {
-      console.log(props)
       return <p>{props.children[0].props.children}</p>
     }
   }

@@ -17,6 +17,7 @@
     "moment": "^2.29.1",
     "next": "10.0.5",
     "react": "17.0.1",
+    "react-data-grid": "^5.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
     "react-markdown": "^5.0.3",

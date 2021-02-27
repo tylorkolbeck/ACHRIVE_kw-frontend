@@ -15,6 +15,15 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
     template: '#53c4ed',
     aiconfiguration: '#5C9FEB'
   }
+
+  const cardDimensions = {
+    height: '150px',
+    width: '150px',
+    minHeight: '150px',
+    minWidth: '150px',
+    maxWidth: '150px',
+    maxHeight: '150px'
+  }
   return {
     root: {
       padding: spacing(3),
@@ -22,12 +31,7 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
     },
     productImage_wrapper: {
       position: 'relative',
-      width: '200px',
-      height: '200px',
-      minWidth: '200px',
-      minHeight: '200px',
-      maxWidth: '200px',
-      maxHeigt: '200px',
+      ...cardDimensions,
       background: '#53C4ED',
       background: ({ props }) => {
         const productType = props?.productType?.toLowerCase()
@@ -51,7 +55,7 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       background: 'url(/images/kw_logo_white.png)',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundSize: '200px',
+      backgroundSize: '150px',
       transform: 'rotate(-30deg)'
     },
     productImage: {
@@ -64,7 +68,7 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       borderRadius: '20px 20px 0px 0px',
       padding: spacing(1),
       paddingLeft: spacing(2),
-      fontSize: '18px'
+      fontSize: '16px'
     },
     productImage_footer: {
       padding: spacing(1),
@@ -126,7 +130,7 @@ export default function ProductCard({
   })
 
   return (
-    <Paper className={classes.root}>
+    <Grid className={classes.root}>
       <Grid container>
         <Grid item xs={12} sm={12} md className={classes.productImage_wrapper}>
           <Grid
@@ -149,8 +153,10 @@ export default function ProductCard({
               <div className={classes.productImage_backgroundWhale}></div>
             </Grid>
             <Grid item className={classes.productImage_footer}>
-              <Grid item>{name}</Grid>
-              <Grid item style={{ fontSize: '14px' }}>
+              <Grid item style={{ fontSize: '16px' }}>
+                {name}
+              </Grid>
+              <Grid item style={{ fontSize: '14px', fontWeight: '400' }}>
                 {productType?.toUpperCase()}
               </Grid>
             </Grid>
@@ -227,6 +233,6 @@ export default function ProductCard({
           )}
         </Grid>
       </Grid>
-    </Paper>
+    </Grid>
   )
 }

@@ -27,7 +27,6 @@ There are risks associated with utilizing an Internet-based trading system inclu
 export default function PrivacyPolicy() {
   const renderers = {
     link: (props) => {
-      console.log(props)
       return <p>{props.children[0].props.children}</p>
     }
   }
