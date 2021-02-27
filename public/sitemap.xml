@@ -1,0 +1,58 @@
+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+          
+                      <url>
+                          <loc>http://127.0.0.1:1337/articles</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/change-log</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/faq</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/forgot-password</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/getting-started</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/login</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/our-story</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/premium</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/products</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/reset-password</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/signup</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>http://127.0.0.1:1337/videos</loc>
+                      </url>
+                  
+      </urlset>
+  
