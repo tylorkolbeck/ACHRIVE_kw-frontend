@@ -1,9 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
 import BodyText from '../Typography/BodyText/BodyText.component'
+import { useGetAffiliates } from '../../hooks/useRequest'
+import AffiliateLink from '../../components/AffiliateLink/AffiliateLink.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -21,45 +23,14 @@ const useStyles = makeStyles((theme) => {
 })
 
 export default function Footer() {
+  const { links, error } = useGetAffiliates('/affiliate-links')
+
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <Grid container>
-        <Grid item sm={6}>
-          <Grid container style={{ marginBottom: '20px' }}>
-            <Grid item xs={12}>
-              <BodyText
-                variant="caption"
-                color="white"
-                className={classes.caption}
-              >
-                View our{' '}
-                <a href="/privacypolicy" style={{ color: 'rgb(82, 196, 237)' }}>
-                  Privacy Policy
-                </a>{' '}
-              </BodyText>
-            </Grid>
-            <Grid item xs={12}>
-              <BodyText
-                variant="caption"
-                color="white"
-                className={classes.caption}
-              >
-                View our{' '}
-                <a
-                  href="/risk-disclosure"
-                  style={{ color: 'rgb(82, 196, 237)' }}
-                >
-                  Risk Disclosure
-                </a>{' '}
-              </BodyText>
-            </Grid>
-          </Grid>
-        </Grid>
-
+      <Grid container style={{ margin: '20px auto' }}>
         <Grid
           item
-          sm={6}
           style={{
             display: 'flex',
             justifyContent: 'flex-end'
@@ -74,10 +45,63 @@ export default function Footer() {
           ))}
         </Grid>
       </Grid>
+      <Grid container style={{ margin: '20px auto' }}>
+        <Grid item>
+          <Grid item>
+            {/* <Typography variant="h6">Our Affiliates</Typography> */}
+          </Grid>
+          <Grid item>
+            {error && <p>Error getting links</p>}
+            {!links && <p>Loading links...</p>}
+            {links?.Links && (
+              <Grid item>
+                {links.Links.map((l) => (
+                  <AffiliateLink
+                    key={l?.id}
+                    url={l?.link?.url}
+                    label={l?.link?.label}
+                    imageUrl={l?.link?.linkImage[0].url}
+                  />
+                ))}
+              </Grid>
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
 
-      <Grid container justify="space-between">
-        <Grid item>Copyright Killer Whale 2021</Grid>
-        <Grid item></Grid>
+      <Grid
+        container
+        justify="center"
+        alignItems="baseline"
+        style={{
+          textAlign: 'center',
+          fontSize: '12px',
+          textDecoration: 'italic'
+        }}
+      >
+        <Grid item>
+          View KillerWhale's{' '}
+          <a
+            href="/privacypolicy"
+            target="_blank"
+            style={{ color: 'rgb(82, 196, 237)' }}
+          >
+            Privacy Policy
+          </a>{' '}
+        </Grid>
+        {/* <Grid item>|</Grid> */}
+        <Grid item>
+          <a
+            href="/risk-disclosure"
+            target="_blank"
+            style={{ color: 'rgb(82, 196, 237)' }}
+          >
+            Risk Disclosure
+          </a>{' '}
+        </Grid>
+        <Grid item xs={12}>
+          Copyright Killer Whale 2021
+        </Grid>
       </Grid>
     </div>
   )
