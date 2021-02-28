@@ -63,15 +63,6 @@ export default function Category({ categoryData, authors, categories }) {
   )
 }
 
-export async function getStaticPaths() {
-  const paths = await getAllCategoryNames()
-
-  return {
-    paths,
-    fallback: true
-  }
-}
-
 export async function getStaticProps({ params }) {
   const categoryArticles = await getArticlesByCategory('documentation')
   const authors = await fetchAPI('/writers')
