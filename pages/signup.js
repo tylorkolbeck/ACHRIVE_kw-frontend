@@ -96,7 +96,7 @@ const Signup = () => {
 
   return (
     <div>
-      <PageHeader title="Sign up" subTitle="Join our Killer Whale pod" />
+      <PageHeader title="Sign up" subtitle="Join our Killer Whale pod" />
       <div style={{ minHeight: '50vh' }}>
         <Container component="main" maxWidth="xs" className={classes.container}>
           <CssBaseline />

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function PageHeader({ title, subTitle }) {
+export default function PageHeader({ title, subtitle }) {
   const classes = useStyles()
   return (
     <div className={classes.root}>
@@ -33,7 +33,7 @@ export default function PageHeader({ title, subTitle }) {
           {title}
         </Typography>
         <Typography variant="h5" className={classes.subTitle}>
-          {subTitle}
+          {subtitle}
         </Typography>
       </div>
     </div>

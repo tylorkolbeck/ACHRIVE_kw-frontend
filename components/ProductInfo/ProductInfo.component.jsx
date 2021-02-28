@@ -36,7 +36,7 @@ export default function ProductInfo() {
   const classes = useStyles()
   return (
     <Grid container direction="column" className={classes.root}>
-      <SectionHeader subTitle="Swing, Breakout, HODL, Scalp">
+      <SectionHeader subtitle="Swing, Breakout, HODL, Scalp">
         Trading Strategies
       </SectionHeader>
       <Grid item className={classes.Info}>

@@ -64,7 +64,7 @@ export default function Articles({ videoData }) {
 
   return (
     <div>
-      <PageHeader title="Videos" subTitle="Browse our collection of videos " />
+      <PageHeader title="Videos" subtitle="Browse our collection of videos " />
       <div className={classes.root}>
         {/* <Videos videoData={videos} /> */}
         <Grid container spacing={3}>

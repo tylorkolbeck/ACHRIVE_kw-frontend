@@ -26,7 +26,7 @@ export default function BodyText(props) {
   return (
     <div className={classes.root} onClick={props.onClick} {...props}>
       <Typography variant="h4">{props.children}</Typography>
-      {props.subTitle && <Typography variant="h6">{props.subTitle}</Typography>}
+      {props.subtitle && <Typography variant="h6">{props.subtitle}</Typography>}
     </div>
   )
 }

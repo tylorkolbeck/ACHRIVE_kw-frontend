@@ -73,7 +73,7 @@ export default function Articles({ articles }) {
     <div>
       <PageHeader
         title="Articles"
-        subTitle="Browse articles for insight from our expert chart analysis and predictions"
+        subtitle="Browse articles for insight from our expert chart analysis and predictions"
       />
       <div className={classes.root}>
         <Grid container direction="row" spacing={3}>

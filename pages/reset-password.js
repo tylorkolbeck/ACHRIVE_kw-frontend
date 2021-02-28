@@ -71,7 +71,7 @@ const Login = (props) => {
     <div>
       <PageHeader
         title="Reset Password"
-        subTitle="Enter your new password below"
+        subtitle="Enter your new password below"
       />
       <Container component="main" maxWidth="xs" className={classes.container}>
         <CssBaseline />

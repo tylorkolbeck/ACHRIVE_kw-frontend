@@ -29,7 +29,7 @@ export default function PremiumCommunityInfo() {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <SectionHeader subTitle="Be a part of the active Killer Whale Pod!">
+      <SectionHeader subtitle="Be a part of the active Killer Whale Pod!">
         Premium Community
       </SectionHeader>
       <div className={classes.info}>
