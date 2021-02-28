@@ -30,26 +30,29 @@ export default function PremiumCommunityInfo() {
   return (
     <div className={classes.root}>
       <SectionHeader subtitle="Be a part of the active Killer Whale Pod!">
-        Premium Community
+        Pod Membership
       </SectionHeader>
       <div className={classes.info}>
         <BodyText>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore,
-          laborum!
+          Killer Whale offers various levels of site membership from our free
+          Calf level up to the ultimate Blue Whale membership Each level offers
+          advanced materials, articles, education videos and guides, indepth
+          analysis and market insights and more Whether you are just getting
+          started and are a newborn calk in the world of automated trading or
+          are ready to rule the oceans as a mighty Blue Whale, Killer Whale
+          offers a membership level for you.
         </BodyText>
         <BodyText>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus
-          maiores quas neque minima ea ipsa. Mollitia tempora eum optio nisi!
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero,
-          maiores?
+          Come join our pod now and never be alone again in the dangerous waters
+          of crypto
         </BodyText>
       </div>
       <Grid container spacing={1}>
         {[
           'Members Only Chat',
           'Training and Education',
-          'PremiumSupport',
-          'Analysis Insights'
+          'Premium Support',
+          'Chart Insights'
         ].map((text) => (
           <Grid item xs={6} key={text}>
             <BulletItem key={text}>{text}</BulletItem>

@@ -20,9 +20,11 @@ export default function Category({ categoryData, authors, categories }) {
   const classes = useStyles()
   const { name, articles } = categoryData
 
-  const sortedArticles = articles.sort((a, b) => {
-    return new Date(b.published_at) - new Date(a.published_at)
-  })
+  const sortedArticles = articles
+    ? articles.sort(
+        (a, b) => new Date(b.published_at) - new Date(a.published_at)
+      )
+    : []
 
   return (
     <div>
