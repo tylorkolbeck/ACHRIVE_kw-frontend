@@ -49,10 +49,10 @@ export default function ProductTable({ productData }) {
     const productTypes = {}
 
     productData.forEach((product) => {
-      if (productTypes[product.productType]) {
-        productTypes[product.productType].push(product)
+      if (productTypes[product?.productType]) {
+        productTypes[product?.productType].push(product)
       } else {
-        productTypes[product.productType] = [product]
+        productTypes[product?.productType] = [product]
       }
     })
     return productTypes

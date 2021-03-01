@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '2px 2px 2px rgba(0,0,0,.3)',
     display: 'flex',
     position: 'fixed',
-    top: '25vh',
+    top: '50vh',
     right: '0',
     flexDirection: 'column',
     borderRadius: '4px 0px 0px 4px',

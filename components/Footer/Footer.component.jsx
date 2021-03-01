@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
       background: theme.palette.grey[900],
       color: 'white',
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
+      paddingBottom: '100px'
     },
     link: {
       marginRight: theme.spacing(2),
@@ -83,7 +84,8 @@ export default function Footer() {
         style={{
           textAlign: 'center',
           fontSize: '12px',
-          textDecoration: 'italic'
+          textDecoration: 'italic',
+          marginTop: '50px'
         }}
       >
         <Grid item>

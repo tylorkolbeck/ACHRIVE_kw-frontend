@@ -394,6 +394,7 @@ export default function PrivacyPolicy() {
       style={{
         maxWidth: '1200px',
         margin: '0 auto',
+        padding: '20px',
         paddingTop: '100px'
       }}
     >

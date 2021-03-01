@@ -16,11 +16,17 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   },
   title: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2rem'
+    }
   },
   subTitle: {
     marginTop: theme.spacing(2),
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.3rem'
+    }
   }
 }))
 
