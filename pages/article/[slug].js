@@ -7,10 +7,10 @@ import AuthorInfo from '../../components/AuthorInfo/AuthorInfo.component'
 import NewsLetterSignup from '../../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import BackButton from '../../components/BackButton/BackButton.component'
 import CategoryChip from '../../components/Typography/CategoryChip/CategoryChip.component'
-import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import Markdown from '../../components/Markdown/Markdown.component'
 import Description from '../../components/Description/Description.component'
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -81,9 +81,14 @@ export default function Article({ postData }) {
 
       <Grid item className={classes.content}>
         <BackButton />
-        <div>
-          <CategoryChip>{category?.name}</CategoryChip>
-        </div>
+        {category && (
+          <Link href={`/category/${category.slug}`}>
+            <a>
+              <CategoryChip>{category.name}</CategoryChip>
+            </a>
+          </Link>
+        )}
+
         <Grid item container>
           <Grid item className={classes.marginBottomMd}>
             <SectionHeader>{title}</SectionHeader>
@@ -108,7 +113,11 @@ export default function Article({ postData }) {
           <Markdown source={postData?.content} />
         </div>
       </Grid>
-      <Grid container justify="center" style={{ marginTop: '100px' }}>
+      <Grid
+        container
+        justify="center"
+        style={{ marginTop: '100px', marginBottom: '20px' }}
+      >
         <NewsLetterSignup />
       </Grid>
     </Grid>
@@ -126,7 +135,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.slug)
-  // const affiliateLinks = await
   return {
     props: {
       postData

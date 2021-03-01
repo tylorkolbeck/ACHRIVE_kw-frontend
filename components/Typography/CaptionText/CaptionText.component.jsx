@@ -5,14 +5,15 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles(({ palette }) => ({
   root: {
     fontSize: '14px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    display: 'block'
   }
 }))
 
-export default function BodyText({ children }) {
+export default function BodyText({ children, ...props }) {
   const classes = useStyles()
   return (
-    <Typography variant="caption" className={classes.root}>
+    <Typography variant="p" className={classes.root} {...props}>
       {children}
     </Typography>
   )

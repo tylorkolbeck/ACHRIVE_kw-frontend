@@ -41,15 +41,16 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       [breakpoints.down('md')]: {
         margin: '0 auto',
         marginBottom: spacing(2)
-      }
+      },
+      overflow: 'hidden'
     },
 
     productImage_backgroundWhale: {
       position: 'absolute',
-      zIndex: '100',
-      top: -20,
+      zIndex: '0',
+      top: 0,
       bottom: 0,
-      right: 0,
+      right: -10,
       left: -40,
       opacity: '.1',
       background: 'url(/images/kw_logo_white.png)',

@@ -33,10 +33,10 @@ export default function AuthorInfo({ author, published, divider }) {
                 {author?.name}
               </Typography>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <TwitterIcon fontSize="small" color="secondary" />
               <TelegramIcon fontSize="small" color="secondary" />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     zIndex: '10',
     fontSize: '2rem',
-    // padding: '10px',
     borderRadius: '50%',
     color: 'white',
     background: theme.palette.secondary.main,
@@ -39,7 +38,7 @@ function ScrollToTopButton() {
 
   return (
     <div className={classes.root} onClick={scrollToTop}>
-      <ArrowUpwardRoundedIcon />
+      <ArrowUpwardRoundedIcon style={{ marginBottom: '2px' }} />
     </div>
   )
 }

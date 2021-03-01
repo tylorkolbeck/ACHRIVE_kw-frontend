@@ -17,11 +17,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0px'
     },
     '& button': {
-      marginTop: '20px',
-      marginLeft: '20px',
-      [theme.breakpoints.down('md')]: {
-        marginLeft: '0px'
-      }
+      marginTop: '20px'
     }
   },
   inputLabel: {
@@ -39,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   privacyPolicy: {
     color: theme.palette.secondary.light
   },
+
   privacyPolicyLink: {
     color:
       theme.palette.type === 'light'

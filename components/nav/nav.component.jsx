@@ -156,7 +156,9 @@ export default function Nav({ toggleDarkMode }) {
         {appLinks.map(({ label, url }) => (
           <ListItem button key={label} onClick={toggleMobileMenu} key={label}>
             <Link href={url}>
-              <ListItemText primary={label} />
+              <a>
+                <ListItemText primary={label} />
+              </a>
             </Link>
           </ListItem>
         ))}
@@ -259,13 +261,17 @@ export default function Nav({ toggleDarkMode }) {
             {appLinks.map(({ label, url }) => {
               return (
                 <Link href={url} key={`drawer_${label}`}>
-                  <Typography
-                    variant="h6"
-                    className={classes.menuButtonLink}
-                    style={{ color: router.pathname === url ? '#52c4ed' : '' }}
-                  >
-                    <a>{label.toUpperCase()}</a>
-                  </Typography>
+                  <a>
+                    <Typography
+                      variant="h6"
+                      className={classes.menuButtonLink}
+                      style={{
+                        color: router.pathname === url ? '#52c4ed' : ''
+                      }}
+                    >
+                      {label.toUpperCase()}
+                    </Typography>
+                  </a>
                 </Link>
               )
             })}

@@ -49,7 +49,7 @@ const Layout = ({ children, seo, toggleDarkMode }) => {
         <Footer />
       </div>
 
-      {socialLinks && (
+      {/* {socialLinks && (
         <div className={classes.socialLinkContainer}>
           {socialLinks?.socialLinks.map((link) => {
             return (
@@ -59,7 +59,7 @@ const Layout = ({ children, seo, toggleDarkMode }) => {
             )
           })}
         </div>
-      )}
+      )} */}
     </div>
   )
 }

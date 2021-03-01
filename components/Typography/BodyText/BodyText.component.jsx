@@ -23,10 +23,16 @@ const useStyles = makeStyles(({ palette, fontSize }) => ({
   }
 }))
 
-export default function BodyText({ children, color, fontSize, lineHeight }) {
+export default function BodyText({
+  children,
+  color,
+  fontSize,
+  lineHeight,
+  style
+}) {
   const classes = useStyles({ color, fontSize, lineHeight })
   return (
-    <Typography variant="body1" className={classes.root}>
+    <Typography variant="body1" className={classes.root} style={style}>
       {children}
     </Typography>
   )

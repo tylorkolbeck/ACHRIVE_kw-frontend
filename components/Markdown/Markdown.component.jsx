@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => {
 
       '& .video': {
         position: 'relative',
-        zIndex: '-1',
+        zIndex: '1',
         overflow: 'hidden',
         width: '100%',
         paddingTop: '56.25%' /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */

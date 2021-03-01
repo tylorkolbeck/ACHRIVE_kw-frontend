@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => {
     socialIconContainer: {
       '& img': {
         background: 'white',
+        borderRadius: '4px',
         padding: '3px',
         margin: '8px',
         width: '24px',
@@ -50,7 +51,7 @@ export default function Footer() {
         </Grid>
         <Grid item className={classes.socialIconContainer}>
           {socialLinks &&
-            socialLinks?.socialLinks.map((link) => {
+            socialLinks?.socialLinks?.map((link) => {
               return (
                 <a href={link.link} key={`social_${link.link}`}>
                   <img src={link.icon.url} />
@@ -93,7 +94,7 @@ export default function Footer() {
           <a
             href="/privacypolicy"
             target="_blank"
-            style={{ color: 'rgb(82, 196, 237)' }}
+            style={{ color: 'rgb(82, 196, 237)', marginRight: '10px' }}
           >
             Privacy Policy
           </a>{' '}

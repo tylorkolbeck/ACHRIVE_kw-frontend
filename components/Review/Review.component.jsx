@@ -60,11 +60,18 @@ export default function Review() {
       <SectionHeader subtitle="Hear from our pod">Pulse</SectionHeader>
       {reviewData.map((review) => (
         <div className={classes.review} key={review.id}>
-          <BodyText>
+          <BodyText style={{ fontStyle: 'italic' }}>
             <FormatQuoteIcon className={classes.IconRound} />
-            {review.text.slice(0, 300)}...
+            {review.text.slice(0, 200)}...
           </BodyText>
-          <CaptionText>{review.author}</CaptionText>
+          <CaptionText
+            style={{
+              fontSize: '1.1rem',
+              textAlign: 'right'
+            }}
+          >
+            - {review.author}
+          </CaptionText>
         </div>
       ))}
     </div>

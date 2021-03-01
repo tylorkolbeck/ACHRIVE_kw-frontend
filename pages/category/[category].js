@@ -30,7 +30,7 @@ export default function Category({ categoryData, authors, categories }) {
     <div>
       <PageHeader
         title={name?.toUpperCase()}
-        subtitle={`Browse articles related to ${name}`}
+        subtitle={`Browse ${name} articles `}
       />
       <div className={classes.root}>
         <BackButton />
@@ -47,7 +47,7 @@ export default function Category({ categoryData, authors, categories }) {
               )
               return (
                 <Grid item xs={12} key={article.title}>
-                  <Paper
+                  <div
                     style={{ padding: '20px', marginBottom: '20px' }}
                     elevation={1}
                   >
@@ -59,7 +59,7 @@ export default function Category({ categoryData, authors, categories }) {
                       description={article.description}
                       authorName={author?.name ? author?.name : 'Faceless Man'}
                     />
-                  </Paper>
+                  </div>
                 </Grid>
               )
             })}

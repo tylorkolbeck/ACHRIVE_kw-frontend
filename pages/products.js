@@ -40,7 +40,12 @@ export default function Products({ productData }) {
           </a>
         </div>
         <ProductFilter products={productData} />
-        <div id="productTable">
+
+        <div style={{ position: 'relative' }}>
+          <span
+            id="productTable"
+            style={{ position: 'absolute', top: '-100px' }}
+          ></span>
           <ProductTable productData={productData} />
         </div>
       </div>

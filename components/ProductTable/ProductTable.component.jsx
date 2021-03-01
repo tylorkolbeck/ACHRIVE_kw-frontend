@@ -36,10 +36,17 @@ const useStyles = makeStyles((theme) => ({
       padding: '10px 20px'
     },
     '& th': {
-      background: theme.palette.grey[200],
+      background:
+        theme.palette.type === 'light'
+          ? theme.palette.grey[200]
+          : theme.palette.grey[800],
       padding: '10px 20px',
       textTransform: 'uppercase',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color:
+        theme.palette.type === 'light'
+          ? theme.palette.grey[900]
+          : theme.palette.grey[100]
     }
   }
 }))
