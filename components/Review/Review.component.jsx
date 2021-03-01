@@ -57,7 +57,7 @@ export default function Review() {
   ]
   return (
     <div className={classes.root}>
-      <SectionHeader subTitle="Hear from our pod">Pulse</SectionHeader>
+      <SectionHeader subtitle="Hear from our pod">Pulse</SectionHeader>
       {reviewData.map((review) => (
         <div className={classes.review} key={review.id}>
           <BodyText>

@@ -81,7 +81,7 @@ const Login = (props) => {
 
   return (
     <div>
-      <PageHeader title="Log in" subTitle="Log in with your email below" />
+      <PageHeader title="Log in" subtitle="Log in with your email below" />
       <Container component="main" maxWidth="xs" className={classes.container}>
         <CssBaseline />
         <div className={classes.paper}>

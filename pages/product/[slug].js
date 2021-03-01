@@ -50,7 +50,7 @@ export default function Product({ productData }) {
     <div>
       {/* <PageHeader
         title="Killer Whale Premium Signal"
-        subTitle="The Easist way to invest in crypto, wth great returns"
+        subtitle="The Easist way to invest in crypto, wth great returns"
       /> */}
 
       <div className={classes.root}>

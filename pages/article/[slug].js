@@ -126,6 +126,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.slug)
+  // const affiliateLinks = await
   return {
     props: {
       postData

@@ -136,7 +136,7 @@ export default function Faq({ faqs }) {
     <div>
       <PageHeader
         title="FAQs"
-        subTitle="Browse our list of the most commonly asked questions by our community"
+        subtitle="Browse our list of the most commonly asked questions by our community"
       />
       <div className={classes.root}>
         <Grid item className={classes.searchInputWrapper}>

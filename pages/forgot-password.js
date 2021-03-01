@@ -65,7 +65,7 @@ const ForgotMyPassword = (props) => {
 
   return (
     <div>
-      <PageHeader title="Forgot Password" subTitle="Enter your email below" />
+      <PageHeader title="Forgot Password" subtitle="Enter your email below" />
       <Container component="main" maxWidth="xs" className={classes.container}>
         <CssBaseline />
         <div className={classes.paper}>

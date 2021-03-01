@@ -36,7 +36,7 @@ export default function ProductInfo() {
   const classes = useStyles()
   return (
     <Grid container direction="column" className={classes.root}>
-      <SectionHeader subTitle="Swing, Breakout, HODL, Scalp">
+      <SectionHeader subtitle="Swing, Breakout, HODL, Scalp">
         Trading Strategies
       </SectionHeader>
       <Grid item className={classes.Info}>
@@ -51,8 +51,9 @@ export default function ProductInfo() {
               </Grid>
               <Grid item>
                 <BodyText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor
+                  Each Killer Whale strategy is constantly updated depending on
+                  market conditions and indicators. Never be behind the curve
+                  again
                 </BodyText>
               </Grid>
             </Grid>
@@ -72,8 +73,9 @@ export default function ProductInfo() {
               </Grid>
               <Grid item>
                 <BodyText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor
+                  Whether you are new to autoomated trading or an experienced
+                  veteran we offer a membership level that will help take your
+                  trading to the next level.
                 </BodyText>
               </Grid>
             </Grid>
@@ -93,8 +95,10 @@ export default function ProductInfo() {
               </Grid>
               <Grid item>
                 <BodyText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-                  numquam fugit dolor
+                  Never be alone again. We have a robust community of users that
+                  are extremely helpful and willing to share their ideas and
+                  knowledge to help guide you on your journey no matter what
+                  your experience level.
                 </BodyText>
               </Grid>
             </Grid>

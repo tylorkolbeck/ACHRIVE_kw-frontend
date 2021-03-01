@@ -22,7 +22,7 @@ export default function Products({ productData }) {
     <div>
       <PageHeader
         title="Choose Your Money Maker"
-        subTitle="Choose the strategy that fits your budget and trading style"
+        subtitle="Choose the strategy that fits your budget and trading style"
       />
 
       <div className={classes.root}>

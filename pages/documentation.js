@@ -24,7 +24,7 @@ export default function Category({ categoryData, authors, categories }) {
     <div>
       <PageHeader
         title={name?.toUpperCase()}
-        subTitle={`Browse articles related to ${name}`}
+        subtitle={`Browse articles related to ${name}`}
       />
       <div className={classes.root}>
         <BackButton />
@@ -61,15 +61,6 @@ export default function Category({ categoryData, authors, categories }) {
       </div>
     </div>
   )
-}
-
-export async function getStaticPaths() {
-  const paths = await getAllCategoryNames()
-
-  return {
-    paths,
-    fallback: true
-  }
 }
 
 export async function getStaticProps({ params }) {

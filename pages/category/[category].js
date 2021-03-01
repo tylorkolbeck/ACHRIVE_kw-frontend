@@ -20,18 +20,24 @@ export default function Category({ categoryData, authors, categories }) {
   const classes = useStyles()
   const { name, articles } = categoryData
 
+  const sortedArticles = articles
+    ? articles.sort(
+        (a, b) => new Date(b.published_at) - new Date(a.published_at)
+      )
+    : []
+
   return (
     <div>
       <PageHeader
         title={name?.toUpperCase()}
-        subTitle={`Browse articles related to ${name}`}
+        subtitle={`Browse articles related to ${name}`}
       />
       <div className={classes.root}>
         <BackButton />
 
         <Grid container direction="column">
-          {articles &&
-            articles.reverse().map((article) => {
+          {sortedArticles &&
+            sortedArticles.map((article) => {
               const author = authors.find(
                 (author) => author.id === article.author
               )
