@@ -25,15 +25,6 @@ const useStyles = makeStyles((theme) => {
         margin: '8px',
         width: '24px',
         height: '24px'
-      },
-      '& a': {
-        width: '24px',
-        marginRight: '10px',
-        padding: '6px',
-        background: 'white'
-      },
-      '& a:last-child img': {
-        marginRight: '-10px'
       }
     }
   }
@@ -65,7 +56,11 @@ export default function Footer() {
         <Grid item className={classes.socialIconContainer}>
           {socialLinks &&
             socialLinks?.socialLinks.map((link) => {
-              return <img src={link.icon.url} />
+              return (
+                <a href={link.link}>
+                  <img src={link.icon.url} />
+                </a>
+              )
             })}
         </Grid>
       </Grid>
