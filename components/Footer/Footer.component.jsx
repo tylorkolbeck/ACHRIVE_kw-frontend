@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
-import BodyText from '../Typography/BodyText/BodyText.component'
 import { useGetAffiliates } from '../../hooks/useRequest'
 import AffiliateLink from '../../components/AffiliateLink/AffiliateLink.component'
 
