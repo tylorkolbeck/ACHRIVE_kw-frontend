@@ -38,15 +38,7 @@ export default function Footer() {
   return (
     <div className={classes.root}>
       <Grid container justify="space-between" style={{ margin: '20px auto' }}>
-        <Grid
-          item
-          style={
-            {
-              // display: 'flex'
-              // justifyContent: 'flex-end'
-            }
-          }
-        >
+        <Grid item>
           {appLinks.map((link) => (
             <Link href={link.url} key={link.label}>
               <a className={classes.link} key={link.label}>
