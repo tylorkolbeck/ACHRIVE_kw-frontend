@@ -17,6 +17,24 @@ const useStyles = makeStyles((theme) => {
     link: {
       marginRight: theme.spacing(2),
       color: 'white'
+    },
+    socialIconContainer: {
+      '& img': {
+        background: 'white',
+        padding: '3px',
+        margin: '8px',
+        width: '24px',
+        height: '24px'
+      },
+      '& a': {
+        width: '24px',
+        marginRight: '10px',
+        padding: '6px',
+        background: 'white'
+      },
+      '& a:last-child img': {
+        marginRight: '-10px'
+      }
     }
   }
 })
@@ -44,26 +62,10 @@ export default function Footer() {
             </Link>
           ))}
         </Grid>
-        <Grid
-          item
-          style={{
-            display: 'flex',
-            background: 'white',
-            padding: '10px'
-          }}
-        >
+        <Grid item className={classes.socialIconContainer}>
           {socialLinks &&
             socialLinks?.socialLinks.map((link) => {
-              return (
-                <div>
-                  <a href={link.link} target="_blank">
-                    <img
-                      style={{ width: '24px', marginRight: '10px' }}
-                      src={link.icon.url}
-                    />
-                  </a>
-                </div>
-              )
+              return <img src={link.icon.url} />
             })}
         </Grid>
       </Grid>
