@@ -53,7 +53,7 @@ const Layout = ({ children, seo, toggleDarkMode }) => {
         <div className={classes.socialLinkContainer}>
           {socialLinks?.socialLinks.map((link) => {
             return (
-              <a href={link.link} target="_blank">
+              <a href={link.link} target="_blank" key={link.link}>
                 <img src={link.icon.url} />
               </a>
             )

@@ -41,7 +41,7 @@ export default function Footer() {
       <Grid container justify="space-between" style={{ margin: '20px auto' }}>
         <Grid item>
           {appLinks.map((link) => (
-            <Link href={link.url} key={link.label}>
+            <Link href={link.url} key={`nav_${link.label}`} key={link.label}>
               <a className={classes.link} key={link.label}>
                 {link?.label.toUpperCase()}
               </a>
@@ -52,7 +52,7 @@ export default function Footer() {
           {socialLinks &&
             socialLinks?.socialLinks.map((link) => {
               return (
-                <a href={link.link}>
+                <a href={link.link} key={`social_${link.link}`}>
                   <img src={link.icon.url} />
                 </a>
               )
@@ -67,7 +67,7 @@ export default function Footer() {
           <>
             {links.Links.map((l) => (
               <AffiliateLink
-                key={l?.id}
+                key={`aff${l.id}`}
                 url={l?.link?.url}
                 label={l?.link?.label}
                 imageUrl={l?.link?.linkImage[0].url}

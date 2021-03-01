@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       display: 'none'
     }
+  },
+  searchInput: {
+    width: '100%'
   }
 }))
 
@@ -152,11 +155,17 @@ export default function Articles({ articles }) {
         <Grid container direction="row" spacing={3}>
           <Grid item xs={12}>
             <form onSubmit={handleFormSubmit}>
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" style={{ width: '100%' }}>
                 <InputLabel htmlFor="outlined-adornment-password">
                   Search Articles
                 </InputLabel>
                 <OutlinedInput
+                  style={{
+                    width: '100%',
+                    marginBottom: '20px',
+                    maxWidth: '600px'
+                  }}
+                  className={classes.searchInput}
                   label="Search Articles"
                   id="outlined-adornment-password"
                   type="text"
@@ -243,19 +252,17 @@ export default function Articles({ articles }) {
             </>
           ) : (
             <Grid item>
-              <Typography align="center" variant="h4">
-                No Results Found
-              </Typography>
-              <Typography align="center" variant="subtitle1">
-                Try searching a different keyword
-              </Typography>
               {searchSummaryVisible && (
                 <SearchChip
                   chipLabel={chipLabel}
-                  length={articleState.length}
+                  length={0}
                   handleDelete={handleDelete}
                 />
               )}
+              <Typography variant="h4">No Results Found</Typography>
+              <Typography variant="subtitle1">
+                Try searching a different keyword
+              </Typography>
             </Grid>
           )}
         </Grid>
