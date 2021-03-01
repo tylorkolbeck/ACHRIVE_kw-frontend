@@ -14,3 +14,15 @@ export const useGetAffiliates = (path) => {
 
   return { links, error }
 }
+
+export const useGetSocialLinks = (path) => {
+  if (!path) {
+    throw new Error('Path is required')
+  }
+
+  const url = baseUrl + path
+
+  const { data: links, error } = useSWR(url, fetcher)
+
+  return { socialLinks: links, socialError: error }
+}

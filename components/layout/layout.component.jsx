@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from '../nav/nav.component'
 import Footer from '../Footer/Footer.component'
 import BackToTop from '../ScrollToTopButton/ScrollToTopButton.component'
-import { useGetAffiliates } from '../../hooks/useRequest'
+import { useGetSocialLinks } from '../../hooks/useRequest'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = ({ children, seo, toggleDarkMode }) => {
   const classes = useStyles()
-  const { links, error } = useGetAffiliates('/social-links')
+  const { socialLinks, socialError } = useGetSocialLinks('/social-links')
 
   return (
     <div className={classes.root}>
@@ -50,8 +50,8 @@ const Layout = ({ children, seo, toggleDarkMode }) => {
       </div>
 
       <div className={classes.socialLinkContainer}>
-        {links &&
-          links?.socialLinks.map((link) => {
+        {socialLinks &&
+          socialLinks?.socialLinks.map((link) => {
             return (
               <a href={link.link} target="_blank">
                 <img src={link.icon.url} />

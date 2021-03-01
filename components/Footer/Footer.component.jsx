@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { Grid } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
-import { useGetAffiliates } from '../../hooks/useRequest'
+import { useGetAffiliates, useGetSocialLinks } from '../../hooks/useRequest'
 import AffiliateLink from '../../components/AffiliateLink/AffiliateLink.component'
 
 const useStyles = makeStyles((theme) => {
@@ -23,11 +23,12 @@ const useStyles = makeStyles((theme) => {
 
 export default function Footer() {
   const { links, error } = useGetAffiliates('/affiliate-links')
+  const { socialLinks, socialError } = useGetSocialLinks('/social-links')
 
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <Grid container style={{ margin: '20px auto' }}>
+      <Grid container justify="space-between" style={{ margin: '20px auto' }}>
         <Grid
           item
           style={{
@@ -42,6 +43,28 @@ export default function Footer() {
               </a>
             </Link>
           ))}
+        </Grid>
+        <Grid
+          item
+          style={{
+            display: 'flex',
+            background: 'white',
+            padding: '10px'
+          }}
+        >
+          {socialLinks &&
+            socialLinks?.socialLinks.map((link) => {
+              return (
+                <div>
+                  <a href={link.link} target="_blank">
+                    <img
+                      style={{ width: '24px', marginRight: '10px' }}
+                      src={link.icon.url}
+                    />
+                  </a>
+                </div>
+              )
+            })}
         </Grid>
       </Grid>
       <Grid container style={{ margin: '20px auto' }}>
@@ -88,7 +111,6 @@ export default function Footer() {
             Privacy Policy
           </a>{' '}
         </Grid>
-        {/* <Grid item>|</Grid> */}
         <Grid item>
           <a
             href="/risk-disclosure"
