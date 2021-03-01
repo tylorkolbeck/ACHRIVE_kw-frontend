@@ -38,13 +38,7 @@ export default function Footer() {
   return (
     <div className={classes.root}>
       <Grid container justify="space-between" style={{ margin: '20px auto' }}>
-        <Grid
-          item
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}
-        >
+        <Grid item>
           {appLinks.map((link) => (
             <Link href={link.url} key={link.label}>
               <a className={classes.link} key={link.label}>
@@ -64,28 +58,22 @@ export default function Footer() {
             })}
         </Grid>
       </Grid>
-      <Grid container style={{ margin: '20px auto' }}>
-        <Grid item>
-          <Grid item>
-            {/* <Typography variant="h6">Our Affiliates</Typography> */}
-          </Grid>
-          <Grid item>
-            {error && <p>Error getting links</p>}
-            {!links && <p>Loading links...</p>}
-            {links?.Links && (
-              <Grid item>
-                {links.Links.map((l) => (
-                  <AffiliateLink
-                    key={l?.id}
-                    url={l?.link?.url}
-                    label={l?.link?.label}
-                    imageUrl={l?.link?.linkImage[0].url}
-                  />
-                ))}
-              </Grid>
-            )}
-          </Grid>
-        </Grid>
+
+      <Grid item>
+        {error && <p>Error getting links</p>}
+        {!links && <p>Loading links...</p>}
+        {links?.Links && (
+          <>
+            {links.Links.map((l) => (
+              <AffiliateLink
+                key={l?.id}
+                url={l?.link?.url}
+                label={l?.link?.label}
+                imageUrl={l?.link?.linkImage[0].url}
+              />
+            ))}
+          </>
+        )}
       </Grid>
 
       <Grid

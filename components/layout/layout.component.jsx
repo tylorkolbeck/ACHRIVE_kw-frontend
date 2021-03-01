@@ -49,16 +49,17 @@ const Layout = ({ children, seo, toggleDarkMode }) => {
         <Footer />
       </div>
 
-      <div className={classes.socialLinkContainer}>
-        {socialLinks &&
-          socialLinks?.socialLinks.map((link) => {
+      {socialLinks && (
+        <div className={classes.socialLinkContainer}>
+          {socialLinks?.socialLinks.map((link) => {
             return (
               <a href={link.link} target="_blank">
                 <img src={link.icon.url} />
               </a>
             )
           })}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

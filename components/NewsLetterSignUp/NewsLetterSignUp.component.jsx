@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0px'
     },
     '& button': {
+      marginTop: '20px',
       marginLeft: '20px',
       [theme.breakpoints.down('md')]: {
         marginLeft: '0px'
@@ -115,19 +116,19 @@ export default function NewsLetterSignUp() {
                     helperText={errorMsg && errorMsg}
                   />
                   <CaptionText>
-          {successMsg ? (
-            'Thanks for signing up!'
-          ) : (
-            <span style={{ fontWeight: 'normal', fontSize: '12px' }}>
-              * We do not spam or sell your info.{' '}
-              <span className={classes.privacyPolicyLink}>
-                <a href="/privacypolicy">Privacy Policy</a>
-              </span>
-            </span>
-          )}
-        </CaptionText>
+                    {successMsg ? (
+                      'Thanks for signing up!'
+                    ) : (
+                      <span style={{ fontWeight: 'normal', fontSize: '12px' }}>
+                        * We do not spam or sell your info.{' '}
+                        <span className={classes.privacyPolicyLink}>
+                          <a href="/privacypolicy">Privacy Policy</a>
+                        </span>
+                      </span>
+                    )}
+                  </CaptionText>
                 </Grid>
-                <Grid item xs={12} >
+                <Grid item xs={12}>
                   <Button
                     type="button"
                     variant="contained"
@@ -142,7 +143,6 @@ export default function NewsLetterSignUp() {
             </Grid>
           </form>
         )}
-        
       </Grid>
     </Paper>
   )
