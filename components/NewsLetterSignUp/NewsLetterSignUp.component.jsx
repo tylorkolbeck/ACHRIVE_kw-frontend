@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0px'
     },
     '& button': {
+      marginTop: '20px',
       marginLeft: '20px',
       [theme.breakpoints.down('md')]: {
         marginLeft: '0px'
@@ -28,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   emailInput: {
     width: '100%',
-
-    marginBottom: '20px',
     '& input': {
       background: 'white',
       borderRadius: '4px',
@@ -116,8 +115,20 @@ export default function NewsLetterSignUp() {
                     onChange={(event) => handleChange(event)}
                     helperText={errorMsg && errorMsg}
                   />
+                  <CaptionText>
+                    {successMsg ? (
+                      'Thanks for signing up!'
+                    ) : (
+                      <span style={{ fontWeight: 'normal', fontSize: '12px' }}>
+                        * We do not spam or sell your info.{' '}
+                        <span className={classes.privacyPolicyLink}>
+                          <a href="/privacypolicy">Privacy Policy</a>
+                        </span>
+                      </span>
+                    )}
+                  </CaptionText>
                 </Grid>
-                <Grid item xs={12} sm={12} md={2}>
+                <Grid item xs={12}>
                   <Button
                     type="button"
                     variant="contained"
@@ -132,18 +143,6 @@ export default function NewsLetterSignUp() {
             </Grid>
           </form>
         )}
-        <CaptionText>
-          {successMsg ? (
-            'Thanks for signing up!'
-          ) : (
-            <span style={{ fontWeight: 'normal', fontSize: '12px' }}>
-              * We do not spam or sell your info.{' '}
-              <span className={classes.privacyPolicyLink}>
-                <a href="/privacypolicy">Privacy Policy</a>
-              </span>
-            </span>
-          )}
-        </CaptionText>
       </Grid>
     </Paper>
   )

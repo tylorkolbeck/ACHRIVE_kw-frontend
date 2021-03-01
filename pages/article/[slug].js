@@ -107,9 +107,9 @@ export default function Article({ postData }) {
         <div className={classes.postBody}>
           <Markdown source={postData?.content} />
         </div>
-        <Grid container justify="center" style={{ marginTop: '100px' }}>
-          <NewsLetterSignup />
-        </Grid>
+      </Grid>
+      <Grid container justify="center" style={{ marginTop: '100px' }}>
+        <NewsLetterSignup />
       </Grid>
     </Grid>
   )
