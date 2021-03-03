@@ -50,10 +50,12 @@ export default function Footer() {
           ))}
         </Grid>
         <Grid item className={classes.socialIconContainer}>
+          <h4>Follow Us</h4>
+
           {socialLinks &&
             socialLinks?.socialLinks?.map((link) => {
               return (
-                <a href={link.link} key={`social_${link.link}`}>
+                <a href={link.link} key={`social_${link.link}`} target="_blank">
                   <img src={link.icon.url} />
                 </a>
               )

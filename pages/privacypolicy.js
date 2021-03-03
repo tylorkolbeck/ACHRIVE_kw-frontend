@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import BackButton from '../components/BackButton/BackButton.component'
 
 const policy = `**PRIVACY NOTICE**
 
@@ -398,7 +397,6 @@ export default function PrivacyPolicy() {
         paddingTop: '100px'
       }}
     >
-      <BackButton />
       <ReactMarkdown renderers={renderers} source={policy} />
     </div>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import BackButton from '../components/BackButton/BackButton.component'
 
 const riskDisclosure = `Content is for educational purposes only, not investment advice.
 Trading, investing, and entrepreneurship involves a high degree of risk.
@@ -39,7 +38,6 @@ export default function PrivacyPolicy() {
         paddingTop: '100px'
       }}
     >
-      <BackButton />
       <h2>Killer Whale Risk Disclosure</h2>
       <ReactMarkdown renderers={renderers} source={riskDisclosure} />
     </div>

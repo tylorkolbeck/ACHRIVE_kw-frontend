@@ -17,11 +17,10 @@ const useStyles = makeStyles((theme) => {
     root: {
       flexGrow: 1,
       paddingTop: theme.custom.screen.navBarHeight,
-      maxWidth: '680px',
+      maxWidth: '800px',
       margin: '0 auto'
     },
     content: {
-      maxWidth: theme.custom.screen.maxWidth,
       margin: '0px auto',
       padding: theme.custom.screen.bodyPadding
     },
