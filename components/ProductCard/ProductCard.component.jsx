@@ -167,7 +167,7 @@ export default function ProductCard({
           <BodyText>{description}</BodyText>
           <Divider light style={{ marginBottom: '20px' }} />
 
-          {full && (
+          {full && productDetails && (
             <Grid container>
               {Object.entries(productDetails).map(([detail, values]) => {
                 return (
