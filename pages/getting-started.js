@@ -34,7 +34,7 @@ const steps = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: theme.custom.screen.maxWidth,
+    maxWidth: '1200px',
     margin: '0px auto',
     padding: theme.spacing(4),
     paddingTop: theme.custom.screen.navBarHeight
@@ -99,13 +99,16 @@ export default function GettingStarted({ productData, stepData }) {
             })}
 
           <Grid container className={classes.step}>
-            <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
+            {/* <Grid item xs={12} sm={12} md={3} className={classes.columnOne}>
               <SectionHeader subtitle="Browse Killer Whale Products">
                 Products
               </SectionHeader>
-            </Grid>
-            <Grid item xs={12} sm={12} md={9}>
-              <ProductFilter products={productData} />
+            </Grid> */}
+            <Grid item xs={12} sm={12} md={12}>
+              <ProductFilter
+                products={productData}
+                productTableLink={'/products#productTable'}
+              />
             </Grid>
           </Grid>
         </Grid>

@@ -2,10 +2,8 @@ import React from 'react'
 import ProductFilter from '../components/ProductFilter/ProductFilter.component'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import { makeStyles } from '@material-ui/core/styles'
-import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
 import { fetchAPI } from '../lib/api'
 import ProductTable from '../components/ProductTable/ProductTable.component'
-import TextLink from '../components/Typography/TextLink/TextLink.component'
 
 const useStyles = makeStyles(({ spacing, custom }) => ({
   root: {
@@ -26,20 +24,12 @@ export default function Products({ productData }) {
       />
 
       <div className={classes.root}>
-        <div
-          style={{
-            marginBottom: '50px',
-            display: 'flex',
-            alignItems: 'baseline'
-          }}
-        >
-          <SectionHeader>Find the Right Product</SectionHeader>
-          <span style={{ width: '20px' }}></span>
-          <a href="#productTable">
-            <TextLink>Product Comparison Table</TextLink>
-          </a>
+        <div>
+          <ProductFilter
+            products={productData}
+            productTableLink={'#productTable'}
+          />
         </div>
-        <ProductFilter products={productData} />
 
         <div style={{ position: 'relative' }}>
           <span

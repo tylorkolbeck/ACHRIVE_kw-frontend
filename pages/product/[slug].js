@@ -1,6 +1,6 @@
 import React from 'react'
 import { getProductIds, getProductData } from '../../lib/products'
-import { Grid } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import SectionHeader from '../../components/Typography/SectionHeader/SectionHeader.component'
 import ProductCard from '../../components/ProductCard/ProductCard.component'
@@ -10,12 +10,10 @@ import Markdown from '../../components/Markdown/Markdown.component'
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      maxWidth: theme.custom.screen.maxWidth,
+      maxWidth: '820px',
       margin: '0px auto',
       padding: theme.spacing(3),
-      position: 'relative',
-      paddingTop: 100,
-      maxWidth: '800px'
+      position: 'relative'
     },
     section: {
       marginBottom: theme.spacing(5),
@@ -41,7 +39,8 @@ export default function Product({ productData }) {
     cryptoHopperLink,
     features,
     requirements,
-    setup
+    setup,
+    productDetails
   } = productData || {}
 
   const classes = useStyles()
@@ -52,10 +51,18 @@ export default function Product({ productData }) {
         title="Killer Whale Premium Signal"
         subtitle="The Easist way to invest in crypto, wth great returns"
       /> */}
-
-      <div className={classes.root}>
+      <Grid
+        container
+        style={{
+          maxWidth: '1200px',
+          paddingLeft: '20px',
+          paddingRight: '20px',
+          margin: '0 auto',
+          paddingTop: '100px'
+        }}
+      >
         <BackButton />
-        <Grid container className={classes.productCard}>
+        <Paper container className={classes.productCard}>
           <ProductCard
             name={name}
             description={description?.slice(0, 250)}
@@ -65,13 +72,14 @@ export default function Product({ productData }) {
                 {price ? `$${price}` : 'Free'}
               </span>
             }
-            recommendedBalance={recommendedBalance}
-            automated={automated}
-            riskLevel={riskLevel}
+            productDetails={productDetails}
             cryptoHopperLink={cryptoHopperLink}
             full
           />
-        </Grid>
+        </Paper>
+      </Grid>
+
+      <div className={classes.root}>
         <Grid container direction="row">
           {/* PRODUCT FEATURES */}
           {features && (

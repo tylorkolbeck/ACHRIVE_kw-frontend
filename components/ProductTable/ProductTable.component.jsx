@@ -86,16 +86,15 @@ export default function ProductTable({ productData }) {
                   <tbody>
                     <tr>
                       <th>{type}</th>
-                      <th>Starting Balance</th>
-                      <th>Risk Comfort</th>
-                      <th>Experience</th>
-                      <th>Trade Duration</th>
-                      <th>Trade Freq.</th>
+                      {products &&
+                        Object.entries(
+                          products[0].productDetails
+                        ).map(([detail]) => <th key={detail}>{detail}</th>)}
                     </tr>
 
                     {products.map((product) => {
                       return (
-                        <tr key={product?.id}>
+                        <tr key={`header_${product?.id}`}>
                           <td>
                             <Link href={`product/${product?.slug}`}>
                               <a>

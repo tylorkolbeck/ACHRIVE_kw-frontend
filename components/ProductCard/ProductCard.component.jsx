@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Paper } from '@material-ui/core'
+import { Divider, Grid, Paper } from '@material-ui/core'
 
 import Link from 'next/link'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
@@ -99,14 +99,9 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
       }
     },
     infoLabel: {
-      fontSize: '.8rem',
-      color: palette.type === 'light' ? 'rgba(0,0,0,.5)' : palette.grey[400],
-      fontWeight: 'bold',
-      marginRight: spacing(5)
-    },
-    infoLabelValue: {
-      fontWeight: 'bold',
       fontSize: '1rem',
+      color: palette.type === 'light' ? 'rgba(0,0,0,.9)' : palette.grey[100],
+      fontWeight: 'bold',
       marginRight: spacing(5)
     }
   }
@@ -117,12 +112,10 @@ export default function ProductCard({
   slug,
   productType,
   price,
-  recommendedBalance,
-  riskLevel,
-  automated,
   full,
   learnMore,
-  cryptoHopperLink
+  cryptoHopperLink,
+  productDetails
 }) {
   const classes = useStyles({
     props: {
@@ -168,50 +161,33 @@ export default function ProductCard({
           <Grid container justify="space-between">
             <SectionHeader>{name}</SectionHeader>
 
-            <Grid item>
-              {price ? price : null}
-              {/* {price ? (
-                <span className={classes.price}>${price}</span>
-              ) : (
-                <span className={classes.price}>Free</span>
-              )} */}
-            </Grid>
+            <Grid item>{price ? price : null}</Grid>
           </Grid>
 
-          <BodyText>{description}...</BodyText>
+          <BodyText>{description}</BodyText>
+          <Divider light style={{ marginBottom: '20px' }} />
+
           {full && (
-            <Grid
-              container
-              alignItems="flex-end"
-              justify="flex-start"
-              className={classes.infoWrapper}
-            >
-              <Grid item style={{ marginBottom: '20px' }}>
-                <Grid item className={classes.infoLabelValue}>
-                  {recommendedBalance}
-                </Grid>
-                <Grid item xs={12} className={classes.infoLabel}>
-                  STARTING BALANCE
-                </Grid>
-              </Grid>
+            <Grid container>
+              {Object.entries(productDetails).map(([detail, values]) => {
+                return (
+                  <Grid
+                    item
+                    xs={6}
+                    sm={4}
+                    md={4}
+                    style={{ padding: '20px', paddingTop: '0px' }}
+                  >
+                    <Grid item className={classes.infoLabel}>
+                      {detail.toUpperCase()}
+                    </Grid>
 
-              <Grid item style={{ marginBottom: '20px' }}>
-                <Grid item className={classes.infoLabelValue}>
-                  {riskLevel}
-                </Grid>
-                <Grid item xs={12} className={classes.infoLabel}>
-                  RISK LEVEL
-                </Grid>
-              </Grid>
-
-              <Grid item style={{ marginBottom: '20px' }}>
-                <Grid item className={classes.infoLabelValue}>
-                  {automated ? 'Automated' : 'Self'}
-                </Grid>
-                <Grid item xs={12} className={classes.infoLabel}>
-                  AUTOMATED
-                </Grid>
-              </Grid>
+                    {values.map((v) => (
+                      <p style={{ margin: '2px' }}>{v}</p>
+                    ))}
+                  </Grid>
+                )
+              })}
             </Grid>
           )}
 

@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ palette }) => ({
 export default function BodyText({ children, ...props }) {
   const classes = useStyles()
   return (
-    <Typography variant="p" className={classes.root} {...props}>
+    <Typography className={classes.root} {...props}>
       {children}
     </Typography>
   )
