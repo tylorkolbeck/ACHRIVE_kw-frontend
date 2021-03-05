@@ -69,26 +69,37 @@ function ProductFinder({
             </Grid>
           )
         })}
-        <Grid item sm={12} className={classes.column}>
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            onClick={handleFilterSubmit}
-            disabled={Object.entries(selectedFilters).length > 0 ? false : true}
-          >
-            Filter Products
-          </Button>
-          <Button
-            type="button"
-            onClick={resetFiltersHandler}
-            variant="contained"
-            color="secondary"
-            type="submit"
-            style={{ marginLeft: '10px' }}
-          >
-            Clear Filters
-          </Button>
+        <Grid
+          container
+          sm={12}
+          className={classes.column}
+          spacing={3}
+          style={{ padding: '10px' }}
+        >
+          <Grid item>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              onClick={handleFilterSubmit}
+              disabled={
+                Object.entries(selectedFilters).length > 0 ? false : true
+              }
+            >
+              Filter Products
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              type="button"
+              onClick={resetFiltersHandler}
+              variant="contained"
+              color="secondary"
+              type="submit"
+            >
+              Clear Filters
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </form>
