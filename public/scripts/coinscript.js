@@ -43,16 +43,24 @@ function fetchCoinList() {
   /******** Our main function ********/
   function main() {
     jQuery(document).ready(function ($) {
+      console.log('hello')
       // We can use jQuery here
-      $.get('http://localhost:1337/coin-list', (coinList) => {
-        let { coin } = coinList
-        var list = document.createElement('ul')
-        $.each(coin, (i) => {
-          var li = document.createElement('li')
-          li.appendChild(document.createTextNode(coin[i].coin))
-          list.appendChild(li)
-        })
-        document.getElementById('coin-list').appendChild(list)
+      $.get(
+        'https://killer-whale-backend-ro3qa.ondigitalocean.app/coin-list',
+        (coinList) => {
+          let { coin } = coinList
+          var list = document.createElement('ul')
+          list.setAttribute('style', 'list-style-type: none;')
+          $.each(coin, (i) => {
+            var li = document.createElement('li')
+
+            li.appendChild(document.createTextNode(coin[i].coin))
+            list.appendChild(li)
+          })
+          document.getElementById('coin-list').appendChild(list)
+        }
+      ).fail((error) => {
+        console.log('Error retrieving coin list: ', error.responseText)
       })
     })
   }
