@@ -1,6 +1,11 @@
 function fetchCoinList() {
+  console.log('Fetching coin list...')
   // Localize jQuery variable
   var jQuery
+
+  // ** HOW TO USE ** //
+  // <script src="/scripts/coinscript.js"></script>
+  // <div id="coin-list"></div>
 
   /******** Load jQuery if not present *********/
   if (window.jQuery === undefined) {
@@ -43,7 +48,6 @@ function fetchCoinList() {
   /******** Our main function ********/
   function main() {
     jQuery(document).ready(function ($) {
-      console.log('hello')
       // We can use jQuery here
       $.get(
         'https://killer-whale-backend-ro3qa.ondigitalocean.app/coin-list',
@@ -68,4 +72,5 @@ function fetchCoinList() {
 
 document.addEventListener('DOMContentLoaded', function () {
   fetchCoinList()
+  console.log('Test')
 })
