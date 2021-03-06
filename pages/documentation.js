@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { getAllCategoryNames, getArticlesByCategory } from '../lib/category'
+import { getArticlesByCategory } from '../lib/category'
 import ArticleCard from '../components/card/articleCard.component'
 import { fetchAPI } from '../lib/api'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Category({ categoryData, authors, categories }) {
   const classes = useStyles()
-  const { name, articles } = categoryData
+  const { name, articles = [] } = categoryData
 
   return (
     <div>
