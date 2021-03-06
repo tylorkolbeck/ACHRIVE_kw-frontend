@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       height: '60vw'
     },
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'left top',
     backgroundRepeat: 'no-repeat',
     '&:hover': {
       cursor: 'pointer'
