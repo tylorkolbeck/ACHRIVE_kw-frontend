@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+import { useRouter } from 'next/router'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { DateTime } from 'luxon'
@@ -39,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     backgroundPosition: 'center',
     backgroundSize: 'cover',
+    '&:hover': {
+      cursor: 'pointer'
+    },
     [theme.breakpoints.down('xs')]: {
       width: '100%',
       display: 'none'
@@ -55,11 +59,13 @@ const useStyles = makeStyles((theme) => ({
 
 const ArticleCard = ({ article, image, authorName, category, description }) => {
   const classes = useStyles()
+  const router = useRouter()
 
   return (
     <Grid container className={classes.root} direction="row">
       {image && (
         <Grid
+          onClick={() => router.push(`/article/${article.slug}`)}
           item
           className={classes.image}
           style={{ backgroundImage: `url(${getStrapiMedia(image)})` }}

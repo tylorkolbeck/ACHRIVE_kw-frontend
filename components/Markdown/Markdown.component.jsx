@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactMarkdown from 'react-markdown'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import BulletItem from '../../components/Typography/BulletItem/BulletItem.component'
 
