@@ -46,7 +46,6 @@ function ProductFinder({
                 </InputLabel>
                 <Select
                   label={label?.toUpperCase()}
-                  select
                   value={
                     selectedFilters[label] ? selectedFilters[label] : 'Any'
                   }
@@ -71,7 +70,6 @@ function ProductFinder({
         })}
         <Grid
           container
-          sm={12}
           className={classes.column}
           spacing={3}
           style={{ padding: '10px' }}

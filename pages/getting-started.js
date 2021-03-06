@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function GettingStarted({ productData, stepData }) {
+export default function GettingStarted({ productData, stepData, coinList }) {
   const classes = useStyles()
   return (
     <>
@@ -81,8 +81,10 @@ export default function GettingStarted({ productData, stepData }) {
                     </Grid>
 
                     <Grid item xs={12} sm={12} md={9}>
-                      {/* <BodyText>{step.instructions}</BodyText> */}
-                      <Markdown source={step?.instructions} />
+                      <Markdown
+                        source={step?.instructions}
+                        coinList={coinList?.coin}
+                      />
                       {step?.externalLink && (
                         <a href={step?.externalLink?.url} target="_blank">
                           <div>
@@ -119,15 +121,17 @@ export default function GettingStarted({ productData, stepData }) {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [productData, stepData] = await Promise.all([
+  const [productData, stepData, coin] = await Promise.all([
     fetchAPI('/products'),
-    fetchAPI('/getting-started-steps?_sort=order:ASC')
+    fetchAPI('/getting-started-steps?_sort=order:ASC'),
+    fetchAPI('/coin-list')
   ])
 
   return {
     props: {
       productData,
-      stepData
+      stepData,
+      coinList: coin
     },
     revalidate: 1
   }

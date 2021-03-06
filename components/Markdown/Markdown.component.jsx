@@ -92,7 +92,7 @@ export default function Markdown({ source, coinList }) {
     if (pageLoaded) {
       const coinContainer = document.getElementById('coin-list')
 
-      if (coinContainer) {
+      if (coinContainer && Array.isArray(coinList)) {
         const coinEls = coinList.map((c) => {
           return <BodyText key={c.coin}>{c.coin}</BodyText>
         })

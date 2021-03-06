@@ -176,6 +176,7 @@ export default function ProductCard({
                     xs={6}
                     sm={4}
                     md={4}
+                    key={detail}
                     style={{ padding: '20px', paddingTop: '0px' }}
                   >
                     <Grid item className={classes.infoLabel}>
@@ -183,7 +184,9 @@ export default function ProductCard({
                     </Grid>
 
                     {values.map((v) => (
-                      <p style={{ margin: '2px' }}>{v}</p>
+                      <p style={{ margin: '2px' }} key={v}>
+                        {v}
+                      </p>
                     ))}
                   </Grid>
                 )

@@ -2,3 +2,9 @@
   font-family: archiveFont;
   src: url('Archive-Regular.woff') format("woff");
 }
+
+@font-face {
+
+  font-family: URWDIN;
+  src: url('URWDIN-Regular.woff') format("woff")
+}

@@ -6,6 +6,7 @@ import SectionHeader from '../../components/Typography/SectionHeader/SectionHead
 import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
 import Markdown from '../../components/Markdown/Markdown.component'
+import { fetchAPI } from '../../lib/api'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -27,15 +28,12 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function Product({ productData }) {
+export default function Product({ productData, coinList }) {
   const {
     name,
     description,
     productType,
     price,
-    recommendedBalance,
-    riskLevel,
-    automated,
     cryptoHopperLink,
     features,
     requirements,
@@ -47,10 +45,6 @@ export default function Product({ productData }) {
 
   return (
     <div>
-      {/* <PageHeader
-        title="Killer Whale Premium Signal"
-        subtitle="The Easist way to invest in crypto, wth great returns"
-      /> */}
       <Grid
         container
         style={{
@@ -62,7 +56,7 @@ export default function Product({ productData }) {
         }}
       >
         <BackButton />
-        <Paper container className={classes.productCard}>
+        <Paper className={classes.productCard}>
           <ProductCard
             name={name}
             description={description?.slice(0, 250)}
@@ -113,7 +107,7 @@ export default function Product({ productData }) {
               </Grid>
 
               <Grid item xs={12}>
-                <Markdown source={setup} />
+                <Markdown source={setup} coinList={coinList} />
               </Grid>
             </Grid>
           )}
@@ -125,6 +119,7 @@ export default function Product({ productData }) {
 
 export async function getStaticPaths() {
   const paths = await getProductIds()
+  const { coin } = await fetchAPI('/coin-list')
 
   return {
     paths,
@@ -134,10 +129,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const productData = await getProductData(params.slug)
+  const { coin } = await fetchAPI('/coin-list')
 
   return {
     props: {
-      productData
+      productData,
+      coinList: coin
     },
     revalidate: 1
   }

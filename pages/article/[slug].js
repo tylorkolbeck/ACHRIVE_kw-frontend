@@ -136,7 +136,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.slug)
   const { coin } = await fetchAPI('/coin-list')
-  console.log(coin)
 
   return {
     props: {
