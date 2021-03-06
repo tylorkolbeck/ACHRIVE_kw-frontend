@@ -11,6 +11,7 @@ import SectionHeader from '../../components/Typography/SectionHeader/SectionHead
 import Markdown from '../../components/Markdown/Markdown.component'
 import Description from '../../components/Description/Description.component'
 import Link from 'next/link'
+import { fetchAPI } from '../../lib/api'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function Article({ postData }) {
+export default function Article({ postData, coinList }) {
   const classes = useStyles()
   const { title, category, image, description } = postData
 
@@ -109,7 +110,7 @@ export default function Article({ postData }) {
         </Grid>
 
         <div className={classes.postBody}>
-          <Markdown source={postData?.content} />
+          <Markdown source={postData?.content} coinList={coinList} />
         </div>
       </Grid>
       <Grid
@@ -134,9 +135,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.slug)
+  const { coin } = await fetchAPI('/coin-list')
+  console.log(coin)
+
   return {
     props: {
-      postData
+      postData,
+      coinList: coin
     },
     revalidate: 1
   }

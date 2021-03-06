@@ -1,9 +1,10 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import ReactMarkdown from 'react-markdown'
 import { makeStyles } from '@material-ui/core/styles'
+import { Grid } from '@material-ui/core'
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import BulletItem from '../../components/Typography/BulletItem/BulletItem.component'
-import { unmountComponentAtNode } from 'react-dom'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -77,15 +78,32 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function Markdown({ source }) {
+export default function Markdown({ source, coinList }) {
   const classes = useStyles()
   const [enlargedImage, setEnlargedImage] = React.useState(null)
+  const [pageLoaded, setPageLoaded] = React.useState(false)
 
   React.useEffect(() => {
     enlargedImage
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'auto')
   }, [enlargedImage])
+
+  React.useEffect(() => {
+    if (pageLoaded) {
+      const coinContainer = document.getElementById('coin-list')
+
+      if (coinContainer) {
+        const coinEls = coinList.map((c) => {
+          return <BodyText key={c.coin}>{c.coin}</BodyText>
+        })
+
+        ReactDOM.render(coinEls, coinContainer)
+      }
+    }
+
+    setPageLoaded(true)
+  }, [pageLoaded])
 
   function enlargeImageHandler(src) {
     const imageModal = (
@@ -134,7 +152,7 @@ export default function Markdown({ source }) {
       }
     },
     code: ({ value }) => {
-      return <BodyText className={classes.code}>{value}</BodyText>
+      return <div id={value}></div>
     },
     image: (props) => {
       return (
@@ -156,6 +174,7 @@ export default function Markdown({ source }) {
         ></div>
       ) : null}
       {enlargedImage ? enlargedImage : null}
+
       <ReactMarkdown renderers={renderers} source={source} escapeHtml={false} />
     </div>
   )
