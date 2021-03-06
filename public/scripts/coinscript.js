@@ -72,5 +72,4 @@ function fetchCoinList() {
 
 document.addEventListener('DOMContentLoaded', function () {
   fetchCoinList()
-  console.log('Test')
 })

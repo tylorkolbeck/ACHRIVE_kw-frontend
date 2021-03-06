@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
 import { getStrapiMedia } from '../../lib/media'
@@ -7,6 +7,7 @@ import { DateTime } from 'luxon'
 import BodyText from '../Typography/BodyText/BodyText.component'
 import CaptionText from '../Typography/CaptionText/CaptionText.component'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,17 +33,25 @@ const useStyles = makeStyles((theme) => ({
     },
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }))
 
 const MainArticle = ({ article }) => {
   const classes = useStyles(article)
+  const router = useRouter()
 
   return (
     <Grid container direction="column" className={classes.root}>
       <Grid item>
-        <Grid container className={classes.imageContainer}></Grid>
+        <Grid
+          container
+          className={classes.imageContainer}
+          onClick={() => router.push(`/article/${article.slug}`)}
+        ></Grid>
 
         <Link href={`/article/${article.slug}`}>
           <a>
