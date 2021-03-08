@@ -8,7 +8,9 @@ const useStyles = makeStyles(({ palette, fontSize }) => ({
       if (color) {
         return color
       } else {
-        return palette.type === 'light' ? 'rgba(0,0,0,.8)' : 'white'
+        return palette.type === 'light'
+          ? 'rgba(0,0,0,.8) !important'
+          : 'white !important'
       }
     },
     marginBottom: '10px',

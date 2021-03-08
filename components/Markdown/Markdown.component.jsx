@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import BodyText from '../../components/Typography/BodyText/BodyText.component'
 import BulletItem from '../../components/Typography/BulletItem/BulletItem.component'
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(({ palette }) => {
   return {
     markdownStyling: {
       position: 'relative',
@@ -72,6 +72,14 @@ const useStyles = makeStyles((theme) => {
       '& img': {
         width: '90vw',
         maxWidth: '1200px'
+      }
+    },
+    coinList: {
+      '& p': {
+        color:
+          palette.type === 'light'
+            ? 'rgba(0,0,0,.8) !important'
+            : 'white !important'
       }
     }
   }
@@ -151,7 +159,7 @@ export default function Markdown({ source, coinList }) {
       }
     },
     code: ({ value }) => {
-      return <div id={value}></div>
+      return <div id={value} className={classes.coinList}></div>
     },
     image: (props) => {
       return (
