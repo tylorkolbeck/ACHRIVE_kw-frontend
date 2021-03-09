@@ -14,8 +14,17 @@ export default class MyDocument extends Document {
           /> */}
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-VP3D22T1F4"
-          />
+            src="https://www.googletagmanager.com/gtag/js?id=G-7S6NV6Q910"
+          ></script>
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-7S6NV6Q910');`
+            }}
+          ></script>
 
           <script
             dangerouslySetInnerHTML={{
