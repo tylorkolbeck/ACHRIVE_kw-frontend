@@ -69,11 +69,10 @@ const Home = ({
   carouselData,
   carouselTimer,
   videoData,
-  googleFormUrl
+  managementPromotion
 }) => {
   const classes = useStyles()
   const { userState } = userContext()
-  console.log(googleFormUrl.Url)
 
   return (
     <Grid container className={classes.root} direction="column">
@@ -119,7 +118,7 @@ const Home = ({
                 }}
               >
                 <Grid item className={classes.section}>
-                  <ContactUsForm url={googleFormUrl.Url} />
+                  <ContactUsForm data={managementPromotion} />
                 </Grid>
               </Paper>
               {/* END GOOGLE FORM CTA */}
@@ -181,7 +180,7 @@ export async function getStaticProps() {
     carouselData,
     carouselTimer,
     videoData,
-    googleFormUrl
+    managementPromotion
   ] = await Promise.all([
     getSortedPostsData(5),
     fetchAPI('/global'),
@@ -191,7 +190,7 @@ export async function getStaticProps() {
     fetchAPI('/carousels'),
     fetchAPI('/carousel-timer'),
     fetchAPI('/videos'),
-    fetchAPI('/google-form-url')
+    fetchAPI('/management-card')
   ])
 
   return {
@@ -204,7 +203,7 @@ export async function getStaticProps() {
       carouselData,
       carouselTimer,
       videoData,
-      googleFormUrl
+      managementPromotion: managementPromotion ? managementPromotion : {}
     },
     revalidate: 1
   }

@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import BodyText from '../Typography/BodyText/BodyText.component'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import TextLink from '../Typography/TextLink/TextLink.component'
+import Markdown from '../../components/Markdown/Markdown.component'
+
 const useStyles = makeStyles((theme) => {
   return {
     root: {
@@ -16,19 +18,20 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function ContactUsForm({url}) {
+export default function ContactUsForm({ data }) {
+  const { contentBody, formUrl, heading, subtitle, linkLabel } = data
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <SectionHeader subtitle="Have your portfolio professionally managed by Killer Whale">
-        Account Management
-      </SectionHeader>
+      <SectionHeader subtitle={subtitle}>{heading}</SectionHeader>
       <div className={classes.info}>
-        <BodyText>
-          Killer Whale's talented team of investors are available to manage your 
-          portfolio and help you navigate the crypto landscape. 
-        </BodyText>
-        <TextLink icon><a href={url} target='_blank'>Complete this form to learn more</a></TextLink>
+        <Markdown source={contentBody} />
+
+        <TextLink icon>
+          <a href={formUrl} target="_blank">
+            {linkLabel}
+          </a>
+        </TextLink>
       </div>
     </div>
   )
