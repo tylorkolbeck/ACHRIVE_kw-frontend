@@ -109,18 +109,20 @@ const Home = ({
               </Grid>
 
               {/* GOOGLE FORM CTA */}
-              <Paper
-                elevation={1}
-                style={{
-                  padding: '20px',
-                  marginBottom: '40px',
-                  marginTop: '20px'
-                }}
-              >
-                <Grid item className={classes.section}>
-                  <ContactUsForm data={managementPromotion} />
-                </Grid>
-              </Paper>
+              {managementPromotion && (
+                <Paper
+                  elevation={1}
+                  style={{
+                    padding: '20px',
+                    marginBottom: '40px',
+                    marginTop: '20px'
+                  }}
+                >
+                  <Grid item className={classes.section}>
+                    <ContactUsForm data={managementPromotion} />
+                  </Grid>
+                </Paper>
+              )}
               {/* END GOOGLE FORM CTA */}
 
               {/* TRADING PRODUCTS */}
@@ -203,7 +205,7 @@ export async function getStaticProps() {
       carouselData,
       carouselTimer,
       videoData,
-      managementPromotion: managementPromotion ? managementPromotion : {}
+      managementPromotion: managementPromotion ? managementPromotion : null
     },
     revalidate: 1
   }
