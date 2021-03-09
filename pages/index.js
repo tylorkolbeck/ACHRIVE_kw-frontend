@@ -14,6 +14,7 @@ import PremiumCommunityInfo from '../components/PremiumCommunityInfo/PremiumComm
 import Reviews from '../components/Review/Review.component'
 import Videos from '../components/Videos/Video.component'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
+import ContactUsForm from '../components/ContactUsForm/ContactUsForm.component'
 
 const useStyles = makeStyles((theme) => {
   const contentPadding = theme.spacing(3)
@@ -67,7 +68,8 @@ const Home = ({
   global,
   carouselData,
   carouselTimer,
-  videoData
+  videoData,
+  managementPromotion
 }) => {
   const classes = useStyles()
   const { userState } = userContext()
@@ -105,6 +107,23 @@ const Home = ({
               <Grid item style={{ marginBottom: '50px' }}>
                 <RecentArticles articles={allPostsData.slice(1, 5)} />
               </Grid>
+
+              {/* GOOGLE FORM CTA */}
+              {managementPromotion && (
+                <Paper
+                  elevation={1}
+                  style={{
+                    padding: '20px',
+                    marginBottom: '40px',
+                    marginTop: '20px'
+                  }}
+                >
+                  <Grid item className={classes.section}>
+                    <ContactUsForm data={managementPromotion} />
+                  </Grid>
+                </Paper>
+              )}
+              {/* END GOOGLE FORM CTA */}
 
               {/* TRADING PRODUCTS */}
               <Paper
@@ -162,7 +181,8 @@ export async function getStaticProps() {
     authors,
     carouselData,
     carouselTimer,
-    videoData
+    videoData,
+    managementPromotion
   ] = await Promise.all([
     getSortedPostsData(5),
     fetchAPI('/global'),
@@ -171,7 +191,8 @@ export async function getStaticProps() {
     fetchAPI('/writers'),
     fetchAPI('/carousels'),
     fetchAPI('/carousel-timer'),
-    fetchAPI('/videos')
+    fetchAPI('/videos'),
+    fetchAPI('/management-card')
   ])
 
   return {
@@ -183,7 +204,8 @@ export async function getStaticProps() {
       authors,
       carouselData,
       carouselTimer,
-      videoData
+      videoData,
+      managementPromotion: managementPromotion ? managementPromotion : null
     },
     revalidate: 1
   }
