@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from '../nav/nav.component'
 import Footer from '../Footer/Footer.component'
 import BackToTop from '../ScrollToTopButton/ScrollToTopButton.component'
-import { useGetSocialLinks } from '../../hooks/useRequest'
+
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -36,15 +36,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Layout = ({ children, seo, toggleDarkMode }) => {
+const Layout = ({ children, toggleDarkMode }) => {
   const classes = useStyles()
-  const { socialLinks, socialError } = useGetSocialLinks('/social-links')
 
   return (
     <div className={classes.root}>
       <Nav toggleDarkMode={toggleDarkMode} />
       <div style={{ minHeight: '100vh' }}>{children}</div>
       <BackToTop />
+
       <div>
         <Footer />
       </div>
