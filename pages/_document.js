@@ -12,30 +12,6 @@ export default class MyDocument extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
           /> */}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-7S6NV6Q910"
-          ></script>
-
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-7S6NV6Q910');`
-            }}
-          ></script>
-
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '[Tracking ID]');
-        `
-            }}
-          />
         </Head>
         <body style={{ height: '100%', position: 'relative' }}>
           <Main />
