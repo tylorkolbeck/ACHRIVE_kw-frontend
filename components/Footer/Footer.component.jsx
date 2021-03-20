@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme) => {
     },
     affiliateLinkContainer: {
       '& img': {
-        background: 'rgba(255,255,255,0.25)',
+        background: '#444444',
         borderRadius: '4px',
         padding: '6px',
         margin: '8px',
-        height: '30px'
+        height: '50px'
       }
     }
   }
