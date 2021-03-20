@@ -7,7 +7,7 @@ import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
 import Markdown from '../../components/Markdown/Markdown.component'
 import { fetchAPI } from '../../lib/api'
-import Seo from '../../components/Seo/seo.component'
+import Seo from '../../components/seo/seo.component'
 
 const useStyles = makeStyles((theme) => {
   return {
