@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core'
 import { appLinks } from '../../lib/app.links'
 import { useGetAffiliates, useGetSocialLinks } from '../../hooks/useRequest'
 import AffiliateLink from '../../components/AffiliateLink/AffiliateLink.component'
+import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -73,6 +74,7 @@ export default function Footer() {
       </Grid>
 
       <Grid item className={classes.affiliateLinkContainer}>
+        <SectionHeader style={{marginLeft: '8px'}}>Our Partners</SectionHeader>
         {error && <p>Error getting links</p>}
         {!links && <p>Loading links...</p>}
         {links?.Links && (
