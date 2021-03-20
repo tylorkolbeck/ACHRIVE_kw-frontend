@@ -28,6 +28,15 @@ const useStyles = makeStyles((theme) => {
         width: '24px',
         height: '24px'
       }
+    },
+    affiliateLinkContainer: {
+      '& img': {
+        background: 'rgba(255,255,255,0.25)',
+        borderRadius: '4px',
+        padding: '6px',
+        margin: '8px',
+        height: '30px'
+      }
     }
   }
 })
@@ -63,7 +72,7 @@ export default function Footer() {
         </Grid>
       </Grid>
 
-      <Grid item>
+      <Grid item className={classes.affiliateLinkContainer}>
         {error && <p>Error getting links</p>}
         {!links && <p>Loading links...</p>}
         {links?.Links && (
