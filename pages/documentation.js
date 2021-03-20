@@ -6,6 +6,7 @@ import ArticleCard from '../components/card/articleCard.component'
 import { fetchAPI } from '../lib/api'
 import PageHeader from '../components/Typography/PageHeader/PageHeader.component'
 import BackButton from '../components/BackButton/BackButton.component'
+import Seo from '../components/seo/seo.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,13 @@ export default function Category({ categoryData, authors, categories }) {
 
   return (
     <div>
+      <Seo
+        title="Documentation"
+        seo={{
+          metaTitle: 'Documentation',
+          metaDescription: "Killer Whale Crypto's Documentation"
+        }}
+      />
       <PageHeader
         title={name?.toUpperCase()}
         subtitle={`Browse articles related to ${name}`}

@@ -4,6 +4,7 @@ import PageHeader from '../components/Typography/PageHeader/PageHeader.component
 import { makeStyles } from '@material-ui/core/styles'
 import { fetchAPI } from '../lib/api'
 import ProductTable from '../components/ProductTable/ProductTable.component'
+import Seo from '../components/seo/seo.component'
 
 const useStyles = makeStyles(({ spacing, custom }) => ({
   root: {
@@ -21,6 +22,14 @@ export default function Products({ productData }) {
       <PageHeader
         title="Choose Your Money Maker"
         subtitle="Choose the strategy that fits your budget and trading style"
+      />
+      <Seo
+        title="Killer Whale Products"
+        seo={{
+          metaTitle: 'Killer Whale Products',
+          metaDescription:
+            'Browse through all of Killer Whales products. You can filter based on your trading style or view our product comparison table. Rest assured you will find what fits your budget and trading style. '
+        }}
       />
 
       <div className={classes.root}>

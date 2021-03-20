@@ -18,6 +18,7 @@ import SearchField from '../components/SearchField/SearchField.component'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
 import BodyText from '../components/Typography/BodyText/BodyText.component'
+import Seo from '../components/seo/seo.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -137,6 +138,14 @@ export default function Faq({ faqs }) {
       <PageHeader
         title="FAQs"
         subtitle="Browse our list of the most commonly asked questions by our community"
+      />
+      <Seo
+        title="Frequently Asked Questions"
+        seo={{
+          metaTitle: 'Killer Whale FAQ',
+          metaDescription:
+            'Browse through our list of most commonly asked questions by the community.'
+        }}
       />
       <div className={classes.root}>
         <Grid item className={classes.searchInputWrapper}>

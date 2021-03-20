@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from '../nav/nav.component'
 import Footer from '../Footer/Footer.component'
 import BackToTop from '../ScrollToTopButton/ScrollToTopButton.component'
+import Head from 'next/head'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -36,11 +37,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Layout = ({ children, toggleDarkMode }) => {
+const Layout = ({
+  children,
+  toggleDarkMode,
+  title = 'Killer Whale Crypto'
+}) => {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
+      <Head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+      </Head>
       <Nav toggleDarkMode={toggleDarkMode} />
       <div style={{ minHeight: '100vh' }}>{children}</div>
       <BackToTop />

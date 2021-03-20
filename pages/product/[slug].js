@@ -7,6 +7,7 @@ import ProductCard from '../../components/ProductCard/ProductCard.component'
 import BackButton from '../../components/BackButton/BackButton.component'
 import Markdown from '../../components/Markdown/Markdown.component'
 import { fetchAPI } from '../../lib/api'
+import Seo from '../../components/Seo/seo.component'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -43,6 +44,11 @@ export default function Product({ productData, coinList }) {
 
   const classes = useStyles()
 
+  const seo = {
+    metaTitle: productData?.name,
+    metaDescription: productData.description
+  }
+
   return (
     <div>
       <Grid
@@ -55,6 +61,7 @@ export default function Product({ productData, coinList }) {
           paddingTop: '100px'
         }}
       >
+        <Seo seo={seo} title={productData.name} />
         <BackButton />
         <Paper className={classes.productCard}>
           <ProductCard

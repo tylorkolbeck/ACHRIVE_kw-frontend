@@ -8,6 +8,7 @@ import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.
 import ProductFilter from '../components/ProductFilter/ProductFilter.component'
 import { fetchAPI } from '../lib/api'
 import Markdown from '../components/Markdown/Markdown.component'
+import Seo from '../components/seo/seo.component'
 
 const steps = {
   1: 'One',
@@ -57,10 +58,19 @@ export default function GettingStarted({ productData, stepData, coinList }) {
   const classes = useStyles()
   return (
     <>
+      <Seo
+        title="Getting Started"
+        seo={{
+          metaTitle: 'Killer Whale Getting Started',
+          metaDescription:
+            'Getting started in Crypto trading is easy with Killer Whale Products, documentation, and through the large Killer Whale community.'
+        }}
+      />
       <PageHeader
         title="Getting Started Is Easy"
         subtitle="Follow these simple steps to get started on your journey"
       />
+
       <div className={classes.root}>
         <Grid container direction="row" spacing={3}>
           {stepData &&

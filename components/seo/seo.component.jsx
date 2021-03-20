@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import { getStrapiMedia } from '../../lib/media'
 
-const Seo = ({ seo, global }) => {
+const Seo = ({ seo, global, title }) => {
   const seoDefaults = {
     seo: seo ? seo : global
   }
@@ -21,7 +20,7 @@ const Seo = ({ seo, global }) => {
     <Head>
       {fullSeo.metaTitle && (
         <>
-          <title>{fullSeo.seo.metaTitle}</title>
+          <title>{title ? title : fullSeo.seo.metaTitle}</title>
           <meta property="og:title" content={fullSeo.metaTitle} />
           <meta name="twitter:title" content={fullSeo.metaTitle} />
           <meta propert="og:type" content="website" />

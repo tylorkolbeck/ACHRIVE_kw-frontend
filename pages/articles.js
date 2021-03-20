@@ -18,7 +18,7 @@ import PageHeader from '../components/Typography/PageHeader/PageHeader.component
 import Link from 'next/link'
 import TextLink from '../components/Typography/TextLink/TextLink.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
-import { FaRegArrowAltCircleDown } from 'react-icons/fa'
+import Seo from '../components/seo/seo.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,6 +147,14 @@ export default function Articles({ articles }) {
 
   return (
     <div>
+      <Seo
+        title="Articles"
+        seo={{
+          metaTitle: 'Killer Whale Articles',
+          metaDescription:
+            'Browse Killer Whales list of articles written by our Crypto experts to get insights and predictions'
+        }}
+      />
       <PageHeader
         title="Articles"
         subtitle="Browse articles for insight from our expert chart analysis and predictions"

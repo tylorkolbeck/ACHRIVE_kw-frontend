@@ -7,6 +7,7 @@ import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.
 import BodyText from '../components/Typography/BodyText/BodyText.component'
 import Link from 'next/link'
 import { FaPlay } from 'react-icons/fa'
+import Seo from '../components/seo/seo.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +66,14 @@ export default function Articles({ videoData }) {
   return (
     <div>
       <PageHeader title="Videos" subtitle="Browse our collection of videos " />
+      <Seo
+        title="Killer Whale Videos"
+        seo={{
+          metaTitle: 'Killer Whale Videos',
+          metaDescription:
+            'Browse our assortment of videos ranging from set up help, tutorials, chart analysis, and much more'
+        }}
+      />
       <div className={classes.root}>
         {/* <Videos videoData={videos} /> */}
         <Grid container spacing={3}>

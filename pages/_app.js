@@ -41,6 +41,14 @@ export default function App({ Component, pageProps }) {
   }
 
   useEffect(() => {
+    console.log(`Cookie state changed to ${cookieState}`)
+  }, [cookieState])
+
+  useEffect(() => {
+    console.log(`Cookie state is ${cookieState}`)
+  }, [])
+
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
@@ -48,10 +56,42 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
+  function getAnalyticsCookie(cname) {
+    if (typeof window !== 'undefined') {
+      let name = cname + '='
+      let decodedCookie = decodeURIComponent(document.cookie)
+      let ca = decodedCookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i]
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1)
+        }
+
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length)
+        }
+      }
+      return ''
+    } else {
+      return ''
+    }
+  }
+
+  // Check for tracking cookie and if it exsists set the gtag script
+  useEffect(() => {
+    if (getAnalyticsCookie('_ga_7S6NV6Q910')) {
+      setCookieState(true)
+    }
+  }, [])
+
   return (
     <>
       <Head>
         <link rel="shortcut icon" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7S6NV6Q910"
+        ></script>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
@@ -60,13 +100,8 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Staatliches"
         />
-        {cookieState && (
+        {cookieState ? (
           <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-7S6NV6Q910"
-            ></script>
-
             <script
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer = window.dataLayer || [];
@@ -76,7 +111,7 @@ export default function App({ Component, pageProps }) {
               }}
             ></script>
           </>
-        )}
+        ) : null}
       </Head>
 
       <CookieConsent
