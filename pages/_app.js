@@ -41,14 +41,6 @@ export default function App({ Component, pageProps }) {
   }
 
   useEffect(() => {
-    console.log(`Cookie state changed to ${cookieState}`)
-  }, [cookieState])
-
-  useEffect(() => {
-    console.log(`Cookie state is ${cookieState}`)
-  }, [])
-
-  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {

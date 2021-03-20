@@ -61,7 +61,7 @@ export default function Product({ productData, coinList }) {
           paddingTop: '100px'
         }}
       >
-        <Seo seo={seo} title={productData.name} />
+        <Seo seo={seo} title={productData?.name} />
         <BackButton />
         <Paper className={classes.productCard}>
           <ProductCard

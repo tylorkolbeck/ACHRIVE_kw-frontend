@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown'
 import { fetchAPI } from '../lib/api'
 
 export default function CookiePolicy({ cookiePolicy }) {
-  console.log(cookiePolicy)
   const renderers = {
     link: (props) => {
       return <p>{props.children[0].props.children}</p>

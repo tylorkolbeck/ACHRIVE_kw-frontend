@@ -1,5 +1,4 @@
 function fetchCoinList() {
-  console.log('Fetching coin list...')
   // Localize jQuery variable
   var jQuery
 
