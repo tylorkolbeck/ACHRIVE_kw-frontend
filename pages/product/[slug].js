@@ -46,7 +46,7 @@ export default function Product({ productData, coinList }) {
 
   const seo = {
     metaTitle: productData?.name,
-    metaDescription: productData.description
+    metaDescription: productData?.description
   }
 
   return (
