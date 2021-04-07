@@ -15,6 +15,7 @@ import Reviews from '../components/Review/Review.component'
 import Videos from '../components/Videos/Video.component'
 import NewsLetterSignup from '../components/NewsLetterSignUp/NewsLetterSignUp.component'
 import ContactUsForm from '../components/ContactUsForm/ContactUsForm.component'
+import DiscordCTA from '../components/DiscordCTA/DiscordCTA.component'
 
 const useStyles = makeStyles((theme) => {
   const contentPadding = theme.spacing(3)

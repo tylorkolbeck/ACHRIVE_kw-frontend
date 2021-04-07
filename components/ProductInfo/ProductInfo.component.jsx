@@ -73,7 +73,7 @@ export default function ProductInfo() {
               </Grid>
               <Grid item>
                 <BodyText>
-                  Whether you are new to autoomated trading or an experienced
+                  Whether you are new to automated trading or an experienced
                   veteran we offer a membership level that will help take your
                   trading to the next level.
                 </BodyText>
@@ -106,7 +106,9 @@ export default function ProductInfo() {
         </Grid>
       </Grid>
 
-      <TextLink icon>View All Products</TextLink>
+      <a href="/products">
+        <TextLink icon>View All Products</TextLink>
+      </a>
     </Grid>
   )
 }

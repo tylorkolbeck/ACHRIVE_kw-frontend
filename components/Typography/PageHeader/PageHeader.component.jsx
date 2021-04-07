@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
+import DiscordCTA from '../../DiscordCTA/DiscordCTA.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(10),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    color: 'white'
+    color: 'white',
+    paddingBottom: '0px'
   },
   title: {
     fontWeight: 'bold',
@@ -41,6 +43,7 @@ export default function PageHeader({ title, subtitle }) {
         <Typography variant="h5" className={classes.subTitle}>
           {subtitle}
         </Typography>
+        <DiscordCTA />
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import { appLinks } from '../../lib/app.links'
 import { makeStyles } from '@material-ui/core/styles'
 import { CgDarkMode } from 'react-icons/cg'
 import { useRouter } from 'next/router'
+// import { SiDiscord } from 'react-icons/si'
 
 import {
   List,
@@ -20,6 +21,7 @@ import {
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
+import BodyText from '../Typography/BodyText/BodyText.component'
 
 const drawerWidth = 240
 
@@ -299,6 +301,25 @@ export default function Nav({ toggleDarkMode }) {
           </IconButton>
         </Toolbar>
       </AppBar>
+      {/* <div
+        style={{
+          position: 'absolute',
+          top: '100px',
+          right: '0px',
+          // width: '100px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          background: 'white',
+          borderRadius: '8px 0px 0px 8px',
+          padding: '10px 20px',
+          flexDirection: 'column'
+        }}
+      >
+        <p style={{ margin: '0px', marginBottom: '10px' }}>Join Us!</p>
+        <SiDiscord size="3em" color="black" />
+      </div> */}
     </div>
   )
 }

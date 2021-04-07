@@ -4,7 +4,7 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import Link from 'next/link'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import BodyText from '../Typography/BodyText/BodyText.component'
-import TextLink from '../Typography/TextLink/TextLink.component'
+import DiscordCTA from '../DiscordCTA/DiscordCTA.component'
 // import BG from '../../public/bg.jpg'
 
 const useStyles = makeStyles((theme) => {
@@ -47,7 +47,12 @@ const useStyles = makeStyles((theme) => {
 export default function HomepageHero() {
   const classes = useStyles()
   return (
-    <Grid container className={classes.hero} spacing={5}>
+    <Grid
+      container
+      className={classes.hero}
+      spacing={5}
+      style={{ position: 'relative' }}
+    >
       <Grid item xs={12} md={12} lg={8}>
         <Grid container direction="column">
           <Grid item>
@@ -102,6 +107,9 @@ export default function HomepageHero() {
           </Grid>
         </Grid>
       </Grid>
+      <div style={{ width: '100%', marginBottom: '-50px' }}>
+        <DiscordCTA />
+      </div>
     </Grid>
   )
 }
