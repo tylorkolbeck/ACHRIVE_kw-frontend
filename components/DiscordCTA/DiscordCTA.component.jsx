@@ -29,7 +29,7 @@ export default function DiscordCTA() {
       }}
     >
       <div>
-        <a target="_blank" href="https://discord.gg/s8hYeSkq">
+        <a target="_blank" href="https://discord.gg/UNXZhFVnrA">
           <h3
             style={{
               margin: '0px',
@@ -42,7 +42,7 @@ export default function DiscordCTA() {
         </a>
       </div>
       <div className={classes.discordCTA}>
-        <a target="_blank" href="https://discord.gg/s8hYeSkq">
+        <a target="_blank" href="https://discord.gg/UNXZhFVnrA">
           <SiDiscord size="2.5em" color="#7289da" />
         </a>
       </div>
