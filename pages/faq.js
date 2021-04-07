@@ -19,6 +19,7 @@ import TextLink from '../components/Typography/TextLink/TextLink.component'
 import SectionHeader from '../components/Typography/SectionHeader/SectionHeader.component'
 import BodyText from '../components/Typography/BodyText/BodyText.component'
 import Seo from '../components/seo/seo.component'
+import Markdown from '../components/Markdown/Markdown.component'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -238,7 +239,8 @@ export default function Faq({ faqs }) {
                         </ListItem>
                         <Collapse in={q.expanded} timeout="auto" unmountOnExit>
                           <ListItem button>
-                            <BodyText>{q.answer}</BodyText>
+                            <Markdown source={q.answer} />
+                            {/* <BodyText>{q.answer}</BodyText> */}
                           </ListItem>
                         </Collapse>
                       </div>
