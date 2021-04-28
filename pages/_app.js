@@ -7,11 +7,15 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import '../styles/globals.css'
 import theme, { setTheme } from '../styles/theme'
 import CookieConsent from 'react-cookie-consent'
+import { useRouter } from 'next/router'
+import * as ga from '../lib/ga'
 
 export default function App({ Component, pageProps }) {
   const [colorMode, setColorMode] = useState('light')
   const [themeState, setThemeState] = useState(theme)
   const [cookieState, setCookieState] = useState(false)
+
+  const router = useRouter()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,6 +51,36 @@ export default function App({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
   }, [])
+
+  // Determine if this was a market refferal and wether or not it is an existing user
+  useEffect(() => {
+    const utm_source = router.query.utm_source
+
+    if (utm_source) {
+      const referralCookieExsists = ga.getCookie('utm_source')
+
+      if (referralCookieExsists) {
+        ga.event({
+          action: 'paid_lead',
+          params: {
+            newUser: 'false',
+            referrer: utm_source
+          }
+        })
+      }
+
+      if (!referralCookieExsists) {
+        ga.event({
+          action: 'paid_lead',
+          params: {
+            newUser: 'true',
+            referrer: utm_source
+          }
+        })
+        ga.setCookie('utm_source', utm_source)
+      }
+    }
+  }, [router.query])
 
   function getAnalyticsCookie(cname) {
     if (typeof window !== 'undefined') {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { SiDiscord } from 'react-icons/si'
-import { ClickAwayListener, makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import * as ga from '../../lib/ga'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles(() => ({
   discordCTA: {
@@ -14,10 +14,9 @@ const useStyles = makeStyles(() => ({
 }))
 
 export default function DiscordCTA() {
- 
   const classes = useStyles()
   const router = useRouter()
-  
+
   const click = () => {
     ga.event({
       action: 'discord_click',
@@ -43,7 +42,11 @@ export default function DiscordCTA() {
       }}
     >
       <div>
-        <a target="_blank" href="https://discord.gg/UNXZhFVnrA" onClick={() => click()}>
+        <a
+          target="_blank"
+          href="https://discord.gg/UNXZhFVnrA"
+          onClick={() => click()}
+        >
           <h3
             style={{
               margin: '0px',
@@ -56,7 +59,11 @@ export default function DiscordCTA() {
         </a>
       </div>
       <div className={classes.discordCTA}>
-        <a target="_blank" href="https://discord.gg/UNXZhFVnrA" onClick={() => click()}>
+        <a
+          target="_blank"
+          href="https://discord.gg/UNXZhFVnrA"
+          onClick={() => click()}
+        >
           <SiDiscord size="2.5em" color="#7289da" />
         </a>
       </div>
