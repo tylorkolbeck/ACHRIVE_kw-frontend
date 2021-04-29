@@ -185,7 +185,7 @@ export async function getStaticProps() {
     videoData,
     managementPromotion
   ] = await Promise.all([
-    getSortedPostsData(5),
+    getSortedPostsData(5, '&takeOverFeaturedArticle_eq=true'),
     fetchAPI('/global'),
     fetchAPI('/homepage'),
     fetchAPI('/categories'),
