@@ -215,7 +215,9 @@ export default function ProductFilter({ products, productTableLink }) {
                         <ProductCard
                           name={product.name}
                           productType={product.productType}
-                          description={product?.description?.slice(0, 120)}
+                          description={
+                            product?.description?.slice(0, 120) + '...'
+                          }
                           slug={product?.slug}
                           learnMore
                         />
