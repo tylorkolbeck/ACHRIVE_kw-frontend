@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 // SEARCH THE ANSWERS AS WELL
 
-export default function Faq({ faqs }) {
+export default function Faq({ faqs, coinList }) {
   const classes = useStyles()
   const router = useRouter()
   const [faqState, setFaqState] = React.useState([])
@@ -239,7 +239,7 @@ export default function Faq({ faqs }) {
                         </ListItem>
                         <Collapse in={q.expanded} timeout="auto" unmountOnExit>
                           <ListItem button>
-                            <Markdown source={q.answer} />
+                            <Markdown source={q.answer} coinList={coinList} />
                             {/* <BodyText>{q.answer}</BodyText> */}
                           </ListItem>
                         </Collapse>
@@ -256,9 +256,10 @@ export default function Faq({ faqs }) {
 
 export async function getStaticProps() {
   const faqs = await fetchAPI('/fa-qs')
+  const { coin } = await fetchAPI('/coin-list')
 
   return {
-    props: { faqs },
+    props: { faqs, coinList: coin },
     revalidate: 1
   }
 }
