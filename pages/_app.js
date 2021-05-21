@@ -113,6 +113,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        {/* <!-- Google Tag Manager --> */}
+
+        {/* <!-- End Google Tag Manager --> */}
         <link rel="shortcut icon" />
         <script
           async
