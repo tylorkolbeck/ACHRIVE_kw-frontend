@@ -152,7 +152,7 @@ export default function ProductCard({
                 {name}
               </Grid>
               <Grid item style={{ fontSize: '14px', fontWeight: '400' }}>
-                {productType?.toUpperCase()}
+                {productType?.toUpperCase().split('_').join(' ')}
               </Grid>
             </Grid>
           </Grid>
