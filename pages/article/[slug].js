@@ -12,6 +12,9 @@ import Markdown from '../../components/Markdown/Markdown.component'
 import Description from '../../components/Description/Description.component'
 import Link from 'next/link'
 import { fetchAPI } from '../../lib/api'
+import SocialMediaShare from '../../components/SocialMediaShare/SocialMediaShare.component'
+
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -65,6 +68,7 @@ const useStyles = makeStyles((theme) => {
 })
 
 export default function Article({ postData, coinList }) {
+  const router = useRouter()
   const classes = useStyles()
   const { title, category, image, description } = postData
 
@@ -100,11 +104,17 @@ export default function Article({ postData, coinList }) {
             ></div>
           </Grid>
         </Grid>
+
         <AuthorInfo
           author={postData?.author}
           published={postData?.updated_at}
           divider
         />
+
+        <SocialMediaShare
+          url={`https://killerwhalecrypto.com${router.asPath}`}
+        />
+
         <Grid item>
           <Description>{description}</Description>
         </Grid>
@@ -112,11 +122,20 @@ export default function Article({ postData, coinList }) {
         <div className={classes.postBody}>
           <Markdown source={postData?.content} coinList={coinList} />
         </div>
+        <SocialMediaShare
+          url={`https://killerwhalecrypto.com${router.asPath}`}
+        />
       </Grid>
+
       <Grid
         container
         justify="center"
-        style={{ marginTop: '100px', marginBottom: '20px' }}
+        style={{
+          marginTop: '100px',
+          marginBottom: '20px',
+          marginLeft: '10px',
+          marginRight: '10px'
+        }}
       >
         <NewsLetterSignup />
       </Grid>

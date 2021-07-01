@@ -25,8 +25,8 @@
     "react-markdown": "^5.0.3",
     "react-material-ui-carousel": "^2.1.2",
     "react-moment": "^1.1.1",
+    "react-share": "^4.4.0",
     "sass": "^1.32.5",
     "swr": "^0.4.2"
-  },
-  "devDependencies": {}
+  }
 }

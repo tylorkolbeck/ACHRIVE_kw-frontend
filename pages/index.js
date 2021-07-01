@@ -106,7 +106,9 @@ const Home = ({
 
             <Grid item xs={12} sm={6} md={4}>
               <Grid item style={{ marginBottom: '50px' }}>
-                <RecentArticles articles={allPostsData.slice(1, 5)} />
+                <RecentArticles
+                  articles={allPostsData.length && allPostsData.slice(1, 5)}
+                />
               </Grid>
 
               {/* GOOGLE FORM CTA */}
@@ -195,6 +197,8 @@ export async function getStaticProps() {
     fetchAPI('/videos'),
     fetchAPI('/management-card')
   ])
+
+  console.log('>>>>', allPostsData)
 
   return {
     props: {

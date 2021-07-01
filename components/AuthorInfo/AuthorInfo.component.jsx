@@ -7,10 +7,10 @@ import { getStrapiMedia } from '../../lib/media'
 import { DateTime } from 'luxon'
 
 const useStyles = makeStyles((theme) => ({
-  divider: {
-    background: theme.palette.secondary.light,
-    marginTop: '20px',
-    height: '2px'
+  authorCard: {
+    // borderLeft: `2px solid ${theme.palette.secondary.main}`,
+    // paddingLeft: '10px',
+    margin: '10px 0px'
   }
 }))
 
@@ -18,41 +18,35 @@ export default function AuthorInfo({ author, published, divider }) {
   const classes = useStyles()
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className={classes.authorCard}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          {divider && <Divider className={classes.divider} color="secondary" />}
-        </Grid>
-        <Grid item>
-          <Avatar alt={author?.name} src={getStrapiMedia(author?.picture)} />
-        </Grid>
-        <Grid item>
-          <Grid container direction="column">
-            <Grid item>
-              <Typography variant="subtitle2" className={classes.authorText}>
-                {author?.name}
-              </Typography>
-            </Grid>
-            {/* <Grid item>
-              <TwitterIcon fontSize="small" color="secondary" />
-              <TelegramIcon fontSize="small" color="secondary" />
-            </Grid> */}
+        <Grid item container>
+          <Grid item style={{ marginRight: '10px' }}>
+            <Avatar alt={author?.name} src={getStrapiMedia(author?.picture)} />
           </Grid>
+          <Grid item>
+            <Grid container direction="column">
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  style={{ fontWeight: 'bold' }}
+                  className={classes.authorText}
+                >
+                  {author?.name}
+                </Typography>
+                <Grid item xs={12}>
+                  <Typography variant="body1">
+                    {published &&
+                      DateTime.fromISO(published).toLocaleString(
+                        DateTime.DATETIME_FULL
+                      )}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid></Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="caption">
-          {published &&
-            DateTime.fromISO(published).toLocaleString(
-              DateTime.DATETIME_FULL
-            )}{' '}
-          {/* {updated && (
-            <>
-              <span className={classes.wingDing}>&#8226;</span> Updated{' '}
-              {DateTime.fromISO(updated).toLocaleString(DateTime.DATETIME_FULL)}
-            </>
-          )} */}
-        </Typography>
       </Grid>
     </Grid>
   )

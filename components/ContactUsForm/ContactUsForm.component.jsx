@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import BodyText from '../Typography/BodyText/BodyText.component'
 import SectionHeader from '../Typography/SectionHeader/SectionHeader.component'
 import TextLink from '../Typography/TextLink/TextLink.component'
 import Markdown from '../../components/Markdown/Markdown.component'
