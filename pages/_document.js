@@ -23,12 +23,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           /> */}
         </Head>
         <body style={{ height: '100%', position: 'relative' }}>
-          <noscript
-            dangerouslySetInnerHTML={{
-              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PTJXRF"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe>`
-            }}
-          />
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5PTJXRF"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+
           <Main />
           <NextScript />
         </body>

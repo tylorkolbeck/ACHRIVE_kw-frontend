@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 const useStyles = makeStyles(({ palette }) => ({
   NavButton: {
     marginRight: '10px',
+    color: palette.secondary.main,
 
     '&:hover': {
       background: palette.secondary.main,
@@ -112,7 +113,7 @@ export default function ProductFilter({ products, productTableLink }) {
   }
 
   function groupBy(productData, property) {
-    return productData.reduce((acc, obj) => {
+    const products = productData.reduce((acc, obj) => {
       let key = obj[property]
       if (!acc[key]) {
         acc[key] = []
@@ -120,6 +121,40 @@ export default function ProductFilter({ products, productTableLink }) {
       acc[key].push(obj)
       return acc
     }, {})
+
+    return products
+  }
+
+  function mapProductCards(filteredProducts) {
+    let productMap = {}
+    let strategiesTemp = {}
+    const products = Object.entries(filteredProducts).map(([key]) => {
+      if (key.toUpperCase() === navState || navState === 'ALL') {
+        const cards = filteredProducts[key].map((product) => (
+          <Grid item xs={12} sm={6} key={product.id}>
+            <ProductCard
+              name={product.name}
+              productType={product.productType}
+              description={product?.description?.slice(0, 120) + '...'}
+              slug={product?.slug}
+              learnMore
+            />
+          </Grid>
+        ))
+
+        // Does this so that the strategies are shown first when rendered
+        // A little hacky but it works.... atleast for now
+        if (key.toLowerCase() === 'strategy') {
+          strategiesTemp[key] = cards
+        } else {
+          productMap[key] = cards
+        }
+
+        return cards
+      }
+    })
+
+    return { ...strategiesTemp, ...productMap }
   }
 
   return (
@@ -197,7 +232,7 @@ export default function ProductFilter({ products, productTableLink }) {
                       onClick={() => setNavState(key.toUpperCase())}
                       key={key}
                     >
-                      {key}
+                      {key.toUpperCase().split('_').join(' ')}
                     </Button>
                   ))}
                 </Grid>
@@ -208,21 +243,14 @@ export default function ProductFilter({ products, productTableLink }) {
               ></span>
 
               {Object.entries(filteredProducts).length > 0 ? (
-                Object.entries(filteredProducts).map(([key]) => {
-                  if (key.toUpperCase() === navState || navState === 'ALL') {
-                    return filteredProducts[key].map((product) => (
-                      <Grid item xs={12} sm={6} key={product.id}>
-                        <ProductCard
-                          name={product.name}
-                          productType={product.productType}
-                          description={product?.description?.slice(0, 120)}
-                          slug={product?.slug}
-                          learnMore
-                        />
-                      </Grid>
-                    ))
-                  }
-                })
+                Object.entries(mapProductCards(filteredProducts)).map(
+                  ([key, value]) => (
+                    <React.Fragment key={key}>
+                      <h2>{key.toUpperCase().split('_').join(' ')}</h2>
+                      <Grid container>{value}</Grid>
+                    </React.Fragment>
+                  )
+                )
               ) : (
                 <div style={{ marginTop: '50px', padding: '20px' }}>
                   <SectionHeader subtitle="Try a less specific search">

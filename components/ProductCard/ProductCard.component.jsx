@@ -13,7 +13,8 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => {
     signal: '#004ea8',
     trend: '#0089ff',
     template: '#53c4ed',
-    aiconfiguration: '#5C9FEB'
+    aiconfiguration: '#5C9FEB',
+    sector_strategy: '#61767D'
   }
 
   const cardDimensions = {
@@ -151,7 +152,7 @@ export default function ProductCard({
                 {name}
               </Grid>
               <Grid item style={{ fontSize: '14px', fontWeight: '400' }}>
-                {productType?.toUpperCase()}
+                {productType?.toUpperCase().split('_').join(' ')}
               </Grid>
             </Grid>
           </Grid>
@@ -165,7 +166,7 @@ export default function ProductCard({
           </Grid>
 
           <BodyText>{description}</BodyText>
-          <Divider light style={{ marginBottom: '20px' }} />
+          {/* <Divider light style={{ marginBottom: '20px' }} /> */}
 
           {full && productDetails && (
             <Grid container>
