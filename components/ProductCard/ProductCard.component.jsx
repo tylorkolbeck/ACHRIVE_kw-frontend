@@ -141,7 +141,7 @@ export default function ProductCard({
                   style={{ height: '15px', marginRight: '10px' }}
                 ></img>
                 <span className={classes.bold}>Killer</span>
-                <span>whale</span>
+                <span>Whale</span>
               </div>
             </Grid>
             <Grid item>

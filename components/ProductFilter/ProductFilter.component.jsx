@@ -142,9 +142,9 @@ export default function ProductFilter({ products, productTableLink }) {
           </Grid>
         ))
 
-        // Does this so that the strategies are shown first when rendered
+        // Does this so that the signals are shown first when rendered
         // A little hacky but it works.... atleast for now
-        if (key.toLowerCase() === 'strategy') {
+        if (key.toLowerCase() === 'signal') {
           strategiesTemp[key] = cards
         } else {
           productMap[key] = cards
