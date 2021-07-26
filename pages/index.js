@@ -198,8 +198,6 @@ export async function getStaticProps() {
     fetchAPI('/management-card')
   ])
 
-  console.log('>>>>', allPostsData)
-
   return {
     props: {
       allPostsData,

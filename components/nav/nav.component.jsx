@@ -6,14 +6,22 @@ import { appLinks } from '../../lib/app.links'
 import { makeStyles } from '@material-ui/core/styles'
 import { CgDarkMode } from 'react-icons/cg'
 import { useRouter } from 'next/router'
-// import { SiDiscord } from 'react-icons/si'
+import { fetchAPI } from '../../lib/api'
+import Grid from '@material-ui/core/Grid'
+import { IoMdArrowDropdown } from 'react-icons/io'
+import Divider from '@material-ui/core/Divider'
+import useClickOutside from '../../components/SearchField/clickOutside'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Collapse from '@material-ui/core/Collapse'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import RootRef from '@material-ui/core/RootRef'
 
 import {
-  List,
   Drawer,
   IconButton,
-  ListItem,
-  ListItemText,
   AppBar,
   Toolbar,
   Typography,
@@ -21,7 +29,6 @@ import {
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
-import BodyText from '../Typography/BodyText/BodyText.component'
 
 const drawerWidth = 240
 
@@ -35,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
+  link: {
+    '&:hover': {
+      color: theme.custom.color.teal
+    }
+  },
+
   menuButton: {
     [theme.breakpoints.up('md')]: {
       display: 'none'
@@ -45,8 +58,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     fontSize: '16px',
     '&:hover': {
-      cursor: 'pointer',
-      color: theme.custom.color.teal
+      cursor: 'pointer'
     }
   },
   menuButtonUser: {
@@ -86,6 +98,25 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '24px'
     }
+  },
+  dropdownNavContainer: {
+    background: '#212121',
+    boxShadow: '3px 3px 3px rgba(0, 0, 0, .5)',
+    position: 'absolute',
+    top: '40px',
+    borderRadius: '4px',
+    '& ul': {
+      margin: 0,
+      padding: 4
+    },
+    '& li': {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      paddingLeft: 10,
+      paddingRight: 10,
+      marginBottom: '5px'
+    }
   }
 }))
 
@@ -94,6 +125,12 @@ export default function Nav({ toggleDarkMode }) {
   const [logoHeight, setLogoHeight] = React.useState(40)
   const classes = useStyles({ logoHeight })
   const router = useRouter()
+  const [navigationLinks, setNavigationLinks] = React.useState([])
+  const [mobileMenuVideosExpanded, setmobileMenuVideosExpanded] =
+    React.useState(false)
+
+  const [dropdownMenuState, setDropdownMenuState] = React.useState([])
+  const { ref, isVisible, setIsVisible } = useClickOutside(false)
 
   const { userState, setUserState } = userContext()
 
@@ -105,6 +142,13 @@ export default function Nav({ toggleDarkMode }) {
     ;() => {
       window.removeEventListener('scoll', handleScroll)
     }
+  }, [])
+
+  // Fetch video categories to build navigation
+  useEffect(() => {
+    fetchAPI('/video-categories').then((res) => {
+      setNavigationLinks(buildNavigation(res, appLinks))
+    })
   }, [])
 
   function handleScroll() {
@@ -119,6 +163,91 @@ export default function Nav({ toggleDarkMode }) {
     setUserState({ type: 'LOGOUT' })
     logout()
     setMobileMenuOpen(false)
+  }
+
+  function buildNavigation(videoCategoriesArray, appLinks) {
+    const categoryWithVideos = videoCategoriesArray.filter(
+      (cat) => cat.videos.length > 0
+    )
+
+    const newLinks = appLinks.map((navObj) => {
+      const subNavLinks = []
+
+      if (navObj.label === 'Videos') {
+        categoryWithVideos.forEach((subLink) => {
+          subNavLinks.push({
+            label: subLink.Category,
+            url: `/videos/${subLink?.slug?.toLowerCase()}`
+          })
+        })
+
+        navObj.subLinks = subNavLinks.length > 0 ? subNavLinks : null
+        return navObj
+      } else {
+        return navObj
+      }
+    })
+    return newLinks
+  }
+
+  function renderMobileVideoNav({ url, label, subLinks }) {
+    if (subLinks && subLinks.length > 0) {
+      return (
+        <>
+          <ListItem
+            button
+            onClick={() =>
+              setmobileMenuVideosExpanded(!mobileMenuVideosExpanded)
+            }
+          >
+            <ListItemText primary="Videos" />
+            {mobileMenuVideosExpanded ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+
+          <Collapse in={mobileMenuVideosExpanded} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              <ListItem
+                button
+                className={classes.nested}
+                style={{ paddingLeft: '30px' }}
+                onClick={toggleMobileMenu}
+              >
+                <Link href="/videos">
+                  <a>
+                    <ListItemText primary="All" />
+                  </a>
+                </Link>
+              </ListItem>
+              {subLinks.map((link) => (
+                <ListItem
+                  button
+                  className={classes.nested}
+                  style={{ paddingLeft: '30px' }}
+                  onClick={toggleMobileMenu}
+                  key={`mobile_${link.label}`}
+                >
+                  <Link href={link.url}>
+                    <a>
+                      <ListItemText primary={link.label} />
+                    </a>
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
+        </>
+      )
+    } else {
+      return (
+        <ListItem button className={classes.nested} onClick={toggleMobileMenu}>
+          <Link href={'/videos'}>
+            <a>
+              <ListItemText primary="Videos" />
+            </a>
+          </Link>
+        </ListItem>
+      )
+    }
   }
 
   const logoutLogin = (
@@ -150,34 +279,53 @@ export default function Nav({ toggleDarkMode }) {
 
   const drawer = (
     <div>
-      <List className={classes.DrawerLinks}>
+      <List component="nav">
         <ListItem button onClick={toggleMobileMenu}>
           <Link href="/">
-            <ListItemText primary="Home" />
+            <a>
+              <ListItemText primary="Home" />
+            </a>
           </Link>
         </ListItem>
-        {appLinks.map(({ label, url }) => (
-          <ListItem button key={label} onClick={toggleMobileMenu} key={label}>
-            <Link href={url}>
-              <a>
-                <ListItemText primary={label} />
-              </a>
-            </Link>
-          </ListItem>
-        ))}
+        {navigationLinks &&
+          navigationLinks.map(({ label, url, subLinks }) => (
+            <div key={label}>
+              {label === 'Videos' ? (
+                renderMobileVideoNav({ label, url, subLinks })
+              ) : (
+                <ListItem button onClick={toggleMobileMenu}>
+                  <Link href={url}>
+                    <a>
+                      <ListItemText primary={label} />
+                    </a>
+                  </Link>
+                </ListItem>
+              )}
+            </div>
+          ))}
 
         <ListItem button onClick={toggleDarkMode}>
           <ListItemText primary="Toggle Dark Mode" />
         </ListItem>
 
-        {/* <Divider />
-        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div> */}
+        <Divider />
+        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
       </List>
     </div>
   )
 
   function toggleMobileMenu() {
     setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  function toggleDropdown(label) {
+    setDropdownMenuState({
+      ...dropdownMenuState,
+      [label]: {
+        open: !dropdownMenuState[label].open,
+        subLinks: dropdownMenuState[label].subLinks
+      }
+    })
   }
 
   return (
@@ -240,20 +388,6 @@ export default function Nav({ toggleDarkMode }) {
                 </div>
               </Link>
             </div>
-
-            {/* <Typography variant="h6" className={classes.title}>
-              <Link href="/change-log">
-                <span
-                  style={{
-                    color: '#6270c3',
-                    fontSize: '12px',
-                    marginLeft: '150px'
-                  }}
-                >
-                  Beta 1.3
-                </span>
-              </Link>
-            </Typography> */}
           </div>
 
           <List
@@ -261,21 +395,77 @@ export default function Nav({ toggleDarkMode }) {
             aria-labelledby="main navigation"
             className={classes.menuLinks}
           >
-            {appLinks.map(({ label, url }) => {
+            {navigationLinks.map(({ label, url, subLinks }) => {
               return (
-                <Link href={url} key={`drawer_${label}`}>
-                  <a>
-                    <Typography
-                      variant="h6"
-                      className={classes.menuButtonLink}
-                      style={{
-                        color: router.pathname === url ? '#52c4ed' : ''
-                      }}
-                    >
-                      {label.toUpperCase()}
-                    </Typography>
-                  </a>
-                </Link>
+                <React.Fragment key={label}>
+                  {!subLinks ? (
+                    <Link href={url} key={`drawer_${label}`}>
+                      <Typography
+                        variant="h6"
+                        className={classes.menuButtonLink}
+                        style={{
+                          color: router.pathname === url ? '#52c4ed' : ''
+                        }}
+                      >
+                        <Grid container>
+                          <Grid item className={classes.link}>
+                            {label.toUpperCase()}
+                          </Grid>
+                          <Grid item></Grid>
+                        </Grid>
+                      </Typography>
+                    </Link>
+                  ) : (
+                    // These are nav items that have sub navigation links(dropdown navigation)
+                    <React.Fragment>
+                      <Typography
+                        variant="h6"
+                        className={classes.menuButtonLink}
+                      >
+                        <Grid container>
+                          <RootRef rootRef={ref}>
+                            <Grid
+                              item
+                              className={classes.link}
+                              style={{
+                                color: router.pathname === url ? '#52c4ed' : '',
+                                marginRight: '5px'
+                              }}
+                              // ref={ref}
+                              onClick={() => setIsVisible(!isVisible)}
+                            >
+                              {label.toUpperCase()}
+                            </Grid>
+                          </RootRef>
+                          {subLinks?.length > 0 && (
+                            <Grid item>
+                              <IoMdArrowDropdown
+                                style={{
+                                  marginBottom: '-2px'
+                                }}
+                              />
+                            </Grid>
+                          )}
+
+                          {isVisible && subLinks.length > 0 && (
+                            <div className={classes.dropdownNavContainer}>
+                              <ul>
+                                <a href={`/videos`}>
+                                  <li className={classes.link}>All Videos</li>
+                                </a>
+                                {subLinks?.map((link) => (
+                                  <li className={classes.link} key={link.label}>
+                                    <Link href={link.url}>{link.label}</Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </Grid>
+                      </Typography>
+                    </React.Fragment>
+                  )}
+                </React.Fragment>
               )
             })}
 
@@ -287,7 +477,7 @@ export default function Nav({ toggleDarkMode }) {
               <CgDarkMode style={{ marginBottom: '-3px' }} />
             </Typography>
 
-            {/* {logoutLogin} */}
+            {logoutLogin}
           </List>
 
           <IconButton
@@ -301,25 +491,6 @@ export default function Nav({ toggleDarkMode }) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      {/* <div
-        style={{
-          position: 'absolute',
-          top: '100px',
-          right: '0px',
-          // width: '100px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          background: 'white',
-          borderRadius: '8px 0px 0px 8px',
-          padding: '10px 20px',
-          flexDirection: 'column'
-        }}
-      >
-        <p style={{ margin: '0px', marginBottom: '10px' }}>Join Us!</p>
-        <SiDiscord size="3em" color="black" />
-      </div> */}
     </div>
   )
 }
