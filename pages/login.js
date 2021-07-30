@@ -55,7 +55,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (userState.isAuthenticated) {
-      router.push('/') // redirect if you're already logged in
+      router.back() // redirect if you're already logged in
     }
   }, [userState.isAuthenticated])
 
@@ -71,7 +71,10 @@ const Login = (props) => {
       .then((res) => {
         setLoading(false)
         // set authed User in user context to update header/app state
-        setUserState({ type: 'LOGIN', payload: res.data.user })
+        setUserState({
+          type: 'LOGIN',
+          payload: { ...res.data.user, token: res.data.jwt }
+        })
       })
       .catch((error) => {
         setError(error?.response?.data)
@@ -143,16 +146,12 @@ const Login = (props) => {
             <Grid container>
               <Grid item xs>
                 <Link href="/forgot-password" variant="body2">
-                  <a>
-                    <TextLink>Forgot password?</TextLink>
-                  </a>
+                  <TextLink>Forgot password?</TextLink>
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  <a>
-                    <TextLink>Don't have an account? Sign Up</TextLink>
-                  </a>
+                  <TextLink>Don't have an account? Sign Up</TextLink>
                 </Link>
               </Grid>
             </Grid>

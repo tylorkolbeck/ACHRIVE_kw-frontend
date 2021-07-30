@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 import Cookie from 'js-cookie'
-import theme, { setTheme } from '../styles/theme'
 
 const API_URL =
   process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'
@@ -15,7 +14,11 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { ...state, isAuthenticated: true, user: action.payload }
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload
+      }
     case 'LOGOUT':
       return initialState
   }
@@ -43,7 +46,7 @@ export function UserContextProvider({ children }) {
           return null
         }
         const user = await res.json()
-        dispatch({ type: 'LOGIN', payload: user })
+        dispatch({ type: 'LOGIN', payload: { ...user, token } })
       })
     }
   }, [])

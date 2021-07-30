@@ -139,7 +139,7 @@ export default function Nav({ toggleDarkMode }) {
       window.addEventListener('scroll', handleScroll)
     }
 
-    ;() => {
+    return () => {
       window.removeEventListener('scoll', handleScroll)
     }
   }, [])

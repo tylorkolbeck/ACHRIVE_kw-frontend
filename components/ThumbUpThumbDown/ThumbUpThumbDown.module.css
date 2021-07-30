@@ -1,0 +1,22 @@
+.container {
+  display: inline-block;
+  background: #eee;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.container:hover, .container:hover .icon {
+  background: rgb(231, 230, 230);
+  cursor: pointer;
+}
+
+.count {
+  padding: 4px;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.icon {
+  color: rgb(112, 112, 112);
+  margin-bottom: -10px;
+}
