@@ -141,6 +141,7 @@ export default function Article({ postData, coinList }) {
   }
 
   function doVote() {
+    console.log(userState)
     axios
       .post(
         `${API_URL}/votes`,
@@ -168,6 +169,10 @@ export default function Article({ postData, coinList }) {
   }
 
   function voteHandler() {
+    if (!userState.isAuthenticated) {
+      setAuthModalOpen(true)
+      return
+    }
     if (userState.isAuthenticated) {
       doVote()
     } else {

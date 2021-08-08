@@ -62,6 +62,36 @@ export default function AuthModal({ open, setOpen, afterLogin }) {
       })
   }
 
+  // if (open?.show === 'VERIFY') {
+  //   return (
+  //     <Dialog
+  //       open={open}
+  //       onClose={afterLogin}
+  //       aria-labelledby="form-dialog-title"
+  //     >
+  //       <DialogTitle id="form-dialog-title">Verify Account</DialogTitle>
+  //       <DialogContent>
+  //         <DialogContentText>
+  //           To show your support please verify your account by following the
+  //           link sent to your email first.
+  //         </DialogContentText>
+  //       </DialogContent>
+  //       <Grid container style={{ padding: '20px' }} justify="space-between">
+  //         <Grid item>
+  //           <Link href="/forgot-password" variant="body2">
+  //             <TextLink>Resend Link</TextLink>
+  //           </Link>
+  //         </Grid>
+  //         <Grid item>
+  //           {/* <Link href="/forgot-password" variant="body2"> */}
+  //           <TextLink>Close</TextLink>
+  //           {/* </Link> */}
+  //         </Grid>
+  //       </Grid>
+  //     </Dialog>
+  //   )
+  // }
+
   return (
     <Dialog
       open={open}

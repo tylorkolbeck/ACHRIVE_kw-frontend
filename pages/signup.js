@@ -49,7 +49,8 @@ const Signup = () => {
     email: '',
     password: '',
     passwordConfirmation: '',
-    subscribedToNewsletter: true
+    subscribedToNewsletter: true,
+    username: 'nousername'
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
@@ -80,7 +81,10 @@ const Signup = () => {
         .then((res) => {
           setConfirmationSent(true)
           // set authed user in global context object
-          setUserState({ type: 'LOGIN', payload: res.data.user })
+          // setUserState({
+          //   type: 'LOGIN',
+          //   payload: { ...res.data.user, token: res.data.jwt }
+          // })
           setLoading(false)
         })
         .catch((error) => {
@@ -177,7 +181,7 @@ const Signup = () => {
                           color="primary"
                         />
                       }
-                      label="Allow Killer Whale to slide in your DMs"
+                      label="Signup up for newsletters from Killer Whale Crypto"
                     />
                   </Grid>
                 </Grid>
@@ -208,9 +212,11 @@ const Signup = () => {
                 container
                 justify="center"
                 className={classes.successMessage}
+                spacing={3}
               >
                 <Grid item style={{ textAlign: 'center' }}>
-                  Thanks, check your email for a confirmation link!
+                  Thank you, check your email for a confirmation link to
+                  activate your account!
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2" onClick={handleResendClick}>
