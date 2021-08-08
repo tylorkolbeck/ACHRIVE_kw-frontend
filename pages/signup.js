@@ -79,6 +79,7 @@ const Signup = () => {
     } else {
       registerUser(data)
         .then((res) => {
+          console.log('REGISTERED', data)
           setConfirmationSent(true)
           // set authed user in global context object
           // setUserState({
@@ -88,7 +89,16 @@ const Signup = () => {
           setLoading(false)
         })
         .catch((error) => {
-          setError(error?.response?.data)
+          console.log('ERROR', error)
+
+          if (error?.response?.data?.message) {
+            setError(error?.response?.data)
+            console.log(error.response)
+          } else {
+            setError({ message: [] })
+            console.log(error)
+          }
+
           setLoading(false)
         })
     }
@@ -108,9 +118,20 @@ const Signup = () => {
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            {Object.entries(error).length !== 0 &&
+            {/* {Object.entries(error).length !== 0 &&
               error.constructor === Object &&
               error.message.map((error) => {
+                return (
+                  <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
+                    <small style={{ color: 'red' }}>
+                      {error.messages[0].message}
+                    </small>
+                  </div>
+                )
+              })} */}
+
+            {Array.isArray(error?.message) &&
+              error?.message?.map((error) => {
                 return (
                   <div key={error.messages[0].id} style={{ marginBottom: 10 }}>
                     <small style={{ color: 'red' }}>
