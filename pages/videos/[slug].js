@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Videos({ data }) {
-  const videoData = data.videoData[0].videos
+  const videoData = data?.videoData[0]?.videos
 
   const classes = useStyles()
 
@@ -88,55 +88,56 @@ export default function Videos({ data }) {
       <div className={classes.root}>
         {/* <Videos videoData={videos} /> */}
         <Grid container spacing={3}>
-          {videoData.map((video) => {
-            const oembed = video.oembed ? JSON.parse(video.oembed) : null
+          {videoData &&
+            videoData.map((video) => {
+              const oembed = video.oembed ? JSON.parse(video.oembed) : null
 
-            return (
-              <Grid
-                item
-                xs={12}
-                md={6}
-                className={classes.videoCard}
-                key={video.id}
-              >
-                <Link href={`/video/${video.slug}`}>
-                  <Grid item className={classes.videoImage}>
-                    <div
-                      className={classes.videoBackground}
-                      style={{
-                        backgroundImage: `url(${oembed.thumbnail})`
-                      }}
-                    ></div>
-                    <div className={classes.playButton}>
-                      <FaPlay />
-                    </div>
-                  </Grid>
-                </Link>
-                <Grid item style={{ marginTop: '20px' }}>
+              return (
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  className={classes.videoCard}
+                  key={video.id}
+                >
                   <Link href={`/video/${video.slug}`}>
-                    <a>
-                      <SectionHeader>{video.title}</SectionHeader>
-                    </a>
+                    <Grid item className={classes.videoImage}>
+                      <div
+                        className={classes.videoBackground}
+                        style={{
+                          backgroundImage: `url(${oembed.thumbnail})`
+                        }}
+                      ></div>
+                      <div className={classes.playButton}>
+                        <FaPlay />
+                      </div>
+                    </Grid>
                   </Link>
-                  <BodyText>{video.description}</BodyText>
-                </Grid>
-                <Grid item>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-end"
-                  >
-                    {video.date && (
-                      <Typography variant="caption" className={classes.date}>
-                        {video.date}
-                      </Typography>
-                    )}
+                  <Grid item style={{ marginTop: '20px' }}>
+                    <Link href={`/video/${video.slug}`}>
+                      <a>
+                        <SectionHeader>{video.title}</SectionHeader>
+                      </a>
+                    </Link>
+                    <BodyText>{video.description}</BodyText>
+                  </Grid>
+                  <Grid item>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="flex-end"
+                    >
+                      {video.date && (
+                        <Typography variant="caption" className={classes.date}>
+                          {video.date}
+                        </Typography>
+                      )}
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            )
-          })}
+              )
+            })}
         </Grid>
       </div>
     </div>
@@ -145,7 +146,6 @@ export default function Videos({ data }) {
 
 export async function getStaticPaths() {
   const paths = await getAllVideoCategoriesPaths()
-
   return {
     paths,
     fallback: true
