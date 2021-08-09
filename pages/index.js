@@ -194,7 +194,7 @@ export async function getStaticProps() {
     fetchAPI('/writers'),
     fetchAPI('/carousels'),
     fetchAPI('/carousel-timer'),
-    fetchAPI('/videos'),
+    fetchAPI('/videos?_sort=created_at:DESC&_limit=4'),
     fetchAPI('/management-card')
   ])
 
