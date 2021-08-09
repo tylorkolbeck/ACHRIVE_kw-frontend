@@ -75,6 +75,7 @@ const Login = (props) => {
           type: 'LOGIN',
           payload: { ...res.data.user, token: res.data.jwt }
         })
+        router.back()
       })
       .catch((error) => {
         setError(error?.response?.data)
