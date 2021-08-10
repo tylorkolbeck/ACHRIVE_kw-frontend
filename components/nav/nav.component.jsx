@@ -253,7 +253,6 @@ export default function Nav({ toggleDarkMode }) {
   const logoutLogin = (
     <>
       {userState.user ? (
-        <Link href="/">
           <Button
             variant="contained"
             color="secondary"
@@ -262,7 +261,6 @@ export default function Nav({ toggleDarkMode }) {
           >
             Logout
           </Button>
-        </Link>
       ) : (
         <Link href="/login">
           <Button
