@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button, Container, CssBaseline, Avatar, Grid } from '@material-ui/core'
 import Link from 'next/link'
@@ -37,16 +37,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const router = useRouter()
-  const { code } = router.query
   const classes = useStyles()
   const [data, setData] = useState({
-    code: code,
+    code: '',
     password: '',
     passwordConfirmation: ''
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [passwordReset, setPasswordReset] = useState(false)
+
+  useEffect(() => {
+    setData({ ...data, code: router.query.code })
+  }, [router.query])
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })

@@ -55,7 +55,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (userState.isAuthenticated) {
-      router.back() // redirect if you're already logged in
+      router.push('/') // redirect if you're already logged in
     }
   }, [userState.isAuthenticated])
 
@@ -75,7 +75,7 @@ const Login = (props) => {
           type: 'LOGIN',
           payload: { ...res.data.user, token: res.data.jwt }
         })
-        router.back()
+        router.push('/')
       })
       .catch((error) => {
         setError(error?.response?.data)

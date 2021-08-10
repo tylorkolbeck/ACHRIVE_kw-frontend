@@ -1,5 +1,12 @@
-import React, { useState } from 'react'
-import { Button, Container, CssBaseline, Avatar, Grid } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import {
+  Button,
+  Container,
+  CssBaseline,
+  Avatar,
+  Grid,
+  Divider
+} from '@material-ui/core'
 import Link from 'next/link'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { makeStyles } from '@material-ui/core/styles'
@@ -62,7 +69,9 @@ const ForgotMyPassword = (props) => {
         setLoading(false)
       })
   }
-
+  function resetForm() {
+    setEmailSent(false)
+  }
   return (
     <div>
       <PageHeader title="Forgot Password" subtitle="Enter your email below" />
@@ -125,11 +134,9 @@ const ForgotMyPassword = (props) => {
                 Thanks, check your email for a link to reset your password!
               </Grid>
               <Grid item>
-                <Link href="/forgot-password" variant="body2">
-                  <a>
-                    <TextLink>Didn't get an email?</TextLink>
-                  </a>
-                </Link>
+                <div onClick={resetForm}>
+                  <TextLink>Didn't get an email?</TextLink>
+                </div>
               </Grid>
             </Grid>
           )}
