@@ -250,30 +250,30 @@ export default function Nav({ toggleDarkMode }) {
     }
   }
 
-  const logoutLogin = (
-    <>
-      {userState.user ? (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={logoutHandler}
-            className={classes.menuButtonUser}
-          >
-            Logout
-          </Button>
-      ) : (
-        <Link href="/login">
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.menuButtonUser}
-          >
-            Login
-          </Button>
-        </Link>
-      )}
-    </>
-  )
+  // const logoutLogin = (
+  //   <>
+  //     {userState.user ? (
+  //         <Button
+  //           variant="contained"
+  //           color="secondary"
+  //           onClick={logoutHandler}
+  //           className={classes.menuButtonUser}
+  //         >
+  //           Logout
+  //         </Button>
+  //     ) : (
+  //       <Link href="/login">
+  //         <Button
+  //           variant="contained"
+  //           color="secondary"
+  //           className={classes.menuButtonUser}
+  //         >
+  //           Login
+  //         </Button>
+  //       </Link>
+  //     )}
+  //   </>
+  // )
 
   const drawer = (
     <div>
@@ -307,7 +307,7 @@ export default function Nav({ toggleDarkMode }) {
         </ListItem>
 
         <Divider />
-        <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div>
+        {/* <div className={classes.logoutLoginDrawerWrapper}>{logoutLogin}</div> */}
       </List>
     </div>
   )
@@ -475,7 +475,7 @@ export default function Nav({ toggleDarkMode }) {
               <CgDarkMode style={{ marginBottom: '-3px' }} />
             </Typography>
 
-            {logoutLogin}
+            {/* {logoutLogin} */}
           </List>
 
           <IconButton

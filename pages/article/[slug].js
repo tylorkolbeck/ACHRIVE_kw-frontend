@@ -224,13 +224,13 @@ export default function Article({ postData, coinList }) {
               divider
             />
           </Grid>
-          <Grid item style={{ marginTop: 10 }}>
+          {/* <Grid item style={{ marginTop: 10 }}>
             <ThumbUpThumbDown
               voteHandler={() => voteHandler()}
               voteCount={voteCount}
               voted={voted}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <SocialMediaShare
